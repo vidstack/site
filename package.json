@@ -18,13 +18,13 @@
     "@floating-ui/dom": "^1.4.4",
     "@leeoniya/ufuzzy": "^1.0.8",
     "@vercel/postgres": "^0.4.1",
-    "@vidstack/react": "^1.1.0",
+    "@vidstack/react": "^1.1.2",
     "astro": "^3.1.0",
     "clsx": "^1.2.0",
     "html-entities": "^2.3.3",
     "media-icons": "^1.0.0",
     "nprogress": "^0.2.0",
-    "vidstack": "^1.1.0"
+    "vidstack": "^1.1.2"
   },
   "devDependencies": {
     "@algolia/client-search": "^4.14.0",
