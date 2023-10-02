@@ -7,7 +7,7 @@
     "start": "astro dev",
     "build": "astro build",
     "build:vercel": "VERCEL=true astro build",
-    "preinstall": "npx only-allow pnpm",
+    "preinstall": "npx only-allow pnpm && pnpx simple-git-hooks",
     "preview": "astro preview",
     "deploy": "pnpm build:vercel && vercel deploy --prebuilt",
     "astro": "astro"
