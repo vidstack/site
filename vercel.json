@@ -1,0 +1,10 @@
+{
+  "github": { "silent": true },
+  "redirects": [
+    {
+      "source": "/docs/player/react/:path*",
+      "destination": "/docs/player/:path*",
+      "permanent": true
+    }
+  ]
+}
