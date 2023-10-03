@@ -7,6 +7,16 @@
   import 'vidstack/player';
   import 'vidstack/player/layouts';
   import 'vidstack/player/ui';
+
+  import { onMount } from 'svelte';
+
+  let player;
+
+  onMount(() => {
+    return () => {
+      player?.destroy();
+    };
+  });
 </script>
 
 <media-player
@@ -15,7 +25,9 @@
   class="aspect-video w-full min-w-[275px] max-w-[80%] @sm:max-w-[90%] border-0"
   playsinline
   crossorigin
+  keep-alive
   style="aspect-ratio: 16/9;"
+  bind:this={player}
 >
   <media-provider class="block">
     <media-poster
