@@ -1,5 +1,3 @@
-import { join } from 'node:path';
-
 import mdx from '@astrojs/mdx';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
@@ -80,37 +78,47 @@ export default defineConfig({
     ],
   },
   redirects: {
-    ...['', 'wc']
+    '/docs': '/docs/player',
+    '/docs/react': '/docs/player',
+    '/docs/wc': '/docs/wc/player',
+    ...['', 'react/']
       .flatMap((lib) => {
-        const docs = join('/docs', lib),
-          player = join(docs, 'player');
-        return Object.entries({
-          // Redirects for old links from the previous site.
-          [`${player}/providers/audio`]: `${player}/api/providers/audio`,
-          [`${player}/providers/video`]: `${player}/api/providers/video`,
-          [`${player}/providers/hls`]: `${player}/api/providers/hls`,
-          [`${player}/core-concepts/styling`]: `${player}/styling/introduction`,
-          [`${player}/core-concepts/tailwind`]: `${player}/styling/tailwind`,
-          [`${player}/core-concepts/skins`]: `${player}/styling/layouts`,
-          // New Redirects.
-          [docs]: player,
-        });
+        const base = `/docs/${lib}player`;
+        return {
+          // Old site provider links.
+          [`${base}/providers/audio`]: '/docs/player/api/providers/audio',
+          [`${base}/providers/video`]: '/docs/player/api/providers/video',
+          [`${base}/providers/hls`]: '/docs/player/api/providers/hls',
+          // Old site styling links.
+          [`${base}/core-concepts/styling`]: '/docs/player/styling/introduction',
+          [`${base}/core-concepts/tailwind`]: '/docs/player/styling/tailwind',
+          [`${base}/core-concepts/skins`]: '/docs/player/styling/layouts',
+          // Old site installation links.
+          [`${base}/getting-started/installation/audio`]:
+            '/docs/player/getting-started/installation/web-components?provider=audio',
+          [`${base}/getting-started/installation/hls`]:
+            '/docs/player/getting-started/installation/web-components?provider=hls',
+          [`${base}/getting-started/installation/react/audio`]:
+            '/docs/player/getting-started/installation/react?provider=audio',
+          [`${base}/getting-started/installation/react/video`]:
+            '/docs/player/getting-started/installation/react?provider=video',
+          [`${base}/getting-started/installation/cdn/audio`]:
+            '/docs/player/getting-started/installation/cdn?provider=audio',
+          [`${base}/getting-started/installation/cdn/video`]:
+            '/docs/player/getting-started/installation/cdn?provider=video',
+          [`${base}/getting-started/installation/cdn/hls`]:
+            '/docs/player/getting-started/installation/cdn?provider=hls',
+          // Old site component links.
+          [`${base}/components/media/player`]: '/docs/player/components/core/player',
+          [`${base}/components/media/outlet`]: '/docs/player/components/core/provider',
+          [`${base}/components/media/gesture`]: '/docs/player/components/display/gesture',
+          [`${base}/components/layout/controls`]: '/docs/player/components/display/controls',
+          [`${base}/components/layout/poster`]: '/docs/player/components/display/poster',
+          [`${base}/components/display/icon`]: '/docs/player/components/display/icons',
+          [`${base}/components/display/live-indicator`]:
+            '/docs/player/components/buttons/live-button',
+        };
       })
-      .reduce((current, [from, to]) => ({ ...current, [from]: to }), {}),
-    // Redirect old installation links.
-    '/docs/player/getting-started/installation/audio':
-      '/docs/player/getting-started/installation/web-components?provider=audio',
-    '/docs/player/getting-started/installation/hls':
-      '/docs/player/getting-started/installation/web-components?provider=hls',
-    '/docs/player/getting-started/installation/react/audio':
-      '/docs/player/getting-started/installation/react?provider=audio',
-    '/docs/player/getting-started/installation/react/video':
-      '/docs/player/getting-started/installation/react?provider=video',
-    '/docs/player/getting-started/installation/cdn/audio':
-      '/docs/player/getting-started/installation/cdn?provider=audio',
-    '/docs/player/getting-started/installation/cdn/video':
-      '/docs/player/getting-started/installation/cdn?provider=video',
-    '/docs/player/getting-started/installation/cdn/hls':
-      '/docs/player/getting-started/installation/cdn?provider=hls',
+      .reduce((p, c) => ({ ...p, ...c }), {}),
   },
 });
