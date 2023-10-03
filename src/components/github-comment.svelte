@@ -11,8 +11,8 @@
       <VidstackSymbol size={28} />
     </div>
   </div>
-  <div class="border border-border/90 ml-4 bg-body rounded-md flex-1 overflow-hidden shadow-md">
-    <div class="px-2.5 py-2 bg-elevate flex items-center border-b border-border/90">
+  <div class="border border-border/90 ml-4 bg-elevate rounded-md flex-1 overflow-hidden shadow-md">
+    <div class="px-2.5 py-2 flex items-center border-b border-border/90">
       <div class="font-semibold text-sm">vidstack</div>
       <div class="border rounded-full border-border/90 px-1.5 py-px text-soft ml-1.5 text-xs">
         bot
@@ -26,7 +26,7 @@
       <SmileIcon class="w-4 h-4 text-soft" />
       <MoreIcon class="w-4 h-4 text-soft ml-2" />
     </div>
-    <div class="p-4">
+    <div class="p-4 g">
       <slot />
     </div>
   </div>

@@ -27,6 +27,9 @@ module.exports = {
       'nav-lg': '825px',
     },
     extend: {
+      height: { screen: ['100vh', '100dvh'] },
+      minHeight: { screen: ['100vh', '100dvh'] },
+      maxHeight: { screen: ['100vh', '100dvh'] },
       colors: {
         brand: 'rgb(var(--color-brand) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',

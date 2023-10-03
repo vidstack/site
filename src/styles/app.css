@@ -36,6 +36,7 @@ body {
       var(--breadcrumb-bar-height, 0px)
   );
   --content-height: calc(100vh - var(--content-top));
+  --content-height: calc(100dvh - var(--content-top));
   --content-max-width: 1440px;
 
   --breadcrumb-bar-top: calc(var(--navbar-height, 0px) + var(--announcement-bar-height, 0px));

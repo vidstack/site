@@ -22,7 +22,7 @@
 }
 
 .arrow {
-  @apply border-r-body absolute border-b-8 border-r-8 border-t-8 border-b-transparent border-t-transparent;
+  @apply absolute border-b-8 border-r-8 border-t-8 border-b-transparent border-r-body border-t-transparent;
 }
 
 /*
@@ -98,7 +98,7 @@
  */
 
 .blur-bg {
-  @apply bg-body dark:bg-body backdrop-blur backdrop-filter;
+  @apply bg-body backdrop-blur backdrop-filter dark:bg-body;
 }
 
 @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
