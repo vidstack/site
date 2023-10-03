@@ -16,8 +16,17 @@ const updateLinks = animationFrameThrottle(() => {
       continue;
     }
 
-    url.pathname = url.pathname.replace(/docs\/(wc\/)?/, `docs/${jsLib === 'react' ? '' : 'wc/'}`);
-    url.searchParams.set('styling', cssLib);
+    if (url.pathname.includes('getting-started/installation')) {
+      if (!url.searchParams.has('styling')) {
+        url.searchParams.set('styling', 'default-layout');
+      }
+    } else {
+      url.pathname = url.pathname.replace(
+        /docs\/(wc\/)?/,
+        `docs/${jsLib === 'react' ? '' : 'wc/'}`,
+      );
+      url.searchParams.set('styling', cssLib);
+    }
 
     anchor.href = url.href;
   }

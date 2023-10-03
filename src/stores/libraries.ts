@@ -27,15 +27,10 @@ export const currentCSSLibrary = writable<CSSLibrary>(
 );
 
 export function getCSSLibraryFromPathname(pathname?: string): CSSLibrary {
-  if (!pathname) return 'css';
+  if (!pathname) return 'default-theme';
 
   const url = new URL(location.href),
     param = url.searchParams.get('styling');
 
-  return param?.startsWith('tailwind')
-    ? 'tailwind-css'
-    : // Can be default-theme or default-layout on installation page.
-    param?.startsWith('default')
-    ? 'default-theme'
-    : 'css';
+  return param?.startsWith('tailwind') ? 'tailwind-css' : param === 'css' ? 'css' : 'default-theme';
 }
