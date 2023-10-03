@@ -13,6 +13,8 @@
   let player;
 
   onMount(() => {
+    // Strange bug with Svelte renaming `playsinline` to `playsInline` when set via attr.
+    player.playsinline = true;
     return () => {
       player?.destroy();
     };
@@ -23,7 +25,6 @@
   title="Sprite Fight"
   src="https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8"
   class="aspect-video w-full min-w-[275px] max-w-[80%] @sm:max-w-[90%] border-0"
-  playsinline
   crossorigin
   keep-alive
   style="aspect-ratio: 16/9;"

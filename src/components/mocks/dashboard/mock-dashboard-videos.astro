@@ -70,12 +70,12 @@ const videoMenuItems = [
                 {tag}
               </div>
             ))}
-            <MockProgressBadge index={index} client:visible />
+            <MockProgressBadge index={index} client:load />
           </div>
         </div>
       );
     })
   }
 
-  <MockUploadPopper client:visible />
+  <MockUploadPopper client:load />
 </div>

@@ -22,8 +22,8 @@
   $: isButton = isUndefined($$restProps['href']);
 
   $: buttonClass = clsx(
-    'flex items-center rounded-md font-medium group px-5 py-2.5 1200:py-3 text-sm',
-    '768:px-6 768:text-base outline-none',
+    'flex items-center rounded-md font-medium group px-6 py-3 text-sm',
+    '768:text-base outline-none',
     !flat && 'shadow-sm',
     primary ? 'bg-inverse' : !flat && 'bg-elevate',
     gradient && 'bg-clip-padding border-2 border-transparent',

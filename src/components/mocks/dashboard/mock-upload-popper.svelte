@@ -4,7 +4,8 @@
   import CheckCircleIcon from '~astro-icons/lucide/check-circle-2';
   import ChevronDownIcon from '~astro-icons/lucide/chevron-down';
 
-  import { onDestroy, tick } from 'svelte';
+  import { listenEvent } from '~/utils/events';
+  import { onDestroy, onMount, tick } from 'svelte';
   import { get } from 'svelte/store';
 
   import { visible } from '../../../actions/visible';
@@ -14,15 +15,28 @@
   import ProgressCircle from '../../progress-circle.svelte';
   import { mockEncodeProgress, mockVideoTitles, type MockEncodeProgress } from './mock-encode';
 
-  let expanded = false,
+  let popper: HTMLElement,
+    gridEl: HTMLElement,
+    expanded = false,
     intervalId = -1,
     startEncoding: boolean[] = [],
     videoCount = mockVideoTitles.length;
+
+  const positionPopper = () => {
+    popper.style.transform = `translate3d(0px, ${gridEl.scrollTop - 24 + 'px'}, 0px)`;
+  };
+
+  onMount(() => {
+    gridEl = popper.parentElement!.parentElement as HTMLElement;
+    positionPopper();
+    return listenEvent(gridEl, 'scroll', positionPopper);
+  });
 
   onDestroy(() => IS_BROWSER && window.clearTimeout(intervalId));
 
   function onPress() {
     expanded = !expanded;
+    requestAnimationFrame(positionPopper);
   }
 
   function onVisible() {
@@ -30,7 +44,7 @@
       if (intervalId === -1) {
         intervalId = window.setInterval(onIntervalTick, 100);
       }
-    }, 2000);
+    }, 2500);
   }
 
   function startEncodingTimer(index: number) {
@@ -90,12 +104,14 @@
 
 <div
   class={clsx(
-    'flex flex-col fixed bottom-6 right-5 rounded-sm min-w-[240px] shadow-md z-20',
+    'flex flex-col absolute bottom-0 right-5 rounded-sm min-w-[240px] shadow-md z-20',
     'opacity-0 data-[visible]:opacity-100 transition-opacity ease-in duration-400',
   )}
   style="transition-delay: 750ms;"
+  bind:this={popper}
   use:visible={{
     once: true,
+    threshold: 0.1,
   }}
 >
   <button

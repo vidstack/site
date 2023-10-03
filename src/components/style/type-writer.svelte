@@ -54,7 +54,7 @@
   $: ended = typedText.length === text.length;
 </script>
 
-<span class={clsx('flex items-center', _class)} aria-live="polite">
+<span class={clsx('', _class)} aria-live="polite">
   {#if typedText}
     {typedText}
   {:else}
@@ -63,8 +63,8 @@
   {#if caret && !ended}
     <div
       class={clsx(
-        'w-2 h-[0.9em] ml-0.5 transition-opacity',
-        !typedText && '-translate-x-[0.7em]',
+        'w-2 h-[0.9em] transition-opacity inline-block translate-y-[0.1em]',
+        !typedText ? '-translate-x-[1em]' : '-translate-x-[0.1em]',
         typing ? 'opacity-80' : 'opacity-20 animate-pulse',
       )}
       style="background-color: var(--from-color, rgb(var(--color-brand)));"

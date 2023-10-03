@@ -80,7 +80,7 @@
     use:visible
   >
     <slot name="icon" />
-    {currentLabel}
+    {currentLabel || label}
   </span>
 
   <div class="flex-1"></div>

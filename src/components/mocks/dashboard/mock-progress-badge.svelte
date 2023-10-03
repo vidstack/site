@@ -12,6 +12,9 @@
 
 <script lang="ts">
   import clsx from 'clsx';
+
+  import { visible } from '~/actions/visible';
+
   import { mockEncodeProgress } from './mock-encode';
 
   export let index = 0;
@@ -24,8 +27,10 @@
 <div
   class={clsx(
     'text-inverse flex items-center px-1 rounded-sm text-[10px]',
+    'opacity-0 data-[visible]:opacity-100 transition-opacity',
     getMockProgressColor(percent),
   )}
+  use:visible={{ once: true, threshold: 0.1 }}
 >
   {#if isEncoding && percent < 100}
     <span class="font-medium mr-1">Encoding</span>

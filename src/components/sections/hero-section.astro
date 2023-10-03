@@ -5,10 +5,12 @@ import FadeInWhenVisible from '../style/fade-in-when-visible.astro';
 ---
 
 <FadeInWhenVisible>
-  <section class="w-full flex flex-col items-center justify-center mt-12 1200:mb-16 576:mt-24 px-4">
+  <section
+    class="w-full flex flex-col items-center justify-center mt-12 mb-24 992:mb-28 576:mt-24 px-4"
+  >
     <h1
       class={clsx(
-        'text-[48px] leading-[1.25] max-w-[375px] text-center font-bold',
+        'text-[40px] leading-[1.25] max-w-[375px] text-center font-bold',
         '576:text-[60px] 576:leading-[1.15] 576:max-w-[480px]',
         '768:text-[72px] 768:max-w-[580px]',
         '992:text-[86px] 992:max-w-[680px] 992:leading-[1.15]',
@@ -19,7 +21,7 @@ import FadeInWhenVisible from '../style/fade-in-when-visible.astro';
 
     <div
       class={clsx(
-        'text-soft mt-8 text-center text-lg 420:text-xl max-w-[375px] leading-relaxed',
+        'text-soft mt-6 text-center text-base 576:text-lg 576:mt-8 992:text-xl max-w-[375px] leading-relaxed',
         '576:max-w-[472px] 576:text-xl',
         '768:max-w-[680px] 768:text-2xl 768:leading-[1.5]',
       )}

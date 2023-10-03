@@ -48,4 +48,4 @@
   ];
 </script>
 
-<MockTerminal directory="next-app" {prompts} initialDelay={3400} />
+<MockTerminal directory="next-app" {prompts} initialDelay={2800} />

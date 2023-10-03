@@ -23,7 +23,7 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
       'px-4 768:px-6',
       'max-w-[var(--content-max-width)] mx-auto',
       align === 'start' ? '992:flex-row 992:items-center 992:justify-start' : 'justify-center',
-      !subtitle ? 'pb-32 992:pb-40' : 'py-32 1200:py-40',
+      !subtitle ? 'pb-32 992:pb-40' : 'py-20 992:py-28 1200:py-40',
     )}
   >
     <div
@@ -71,7 +71,9 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
       <h1
         class={clsx(
           'font-semibold mt-6 mx-auto 576:max-w-none 992:mx-0 leading-tight',
-          Astro.slots.has('subtitle') ? 'text-3xl 576:text-4xl ' : 'text-4xl 576:text-5xl ',
+          Astro.slots.has('subtitle')
+            ? 'text-3xl 420:text-4xl 576:text-4xl '
+            : 'text-4xl 576:text-5xl ',
         )}
       >
         {!noTextGradient ? <TextGradient>{title}</TextGradient> : title}
@@ -79,7 +81,14 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
           subtitle && (
             <>
               <br />
-              <span class="inline-block mt-3">
+              <span
+                class={clsx(
+                  'inline-block',
+                  Astro.slots.has('content')
+                    ? 'mt-2 576:mt-3 text-[2rem] 420:text-4xl 992:text-5xl'
+                    : 'mt-3',
+                )}
+              >
                 <TypeWriter text={subtitle} speed={65} delay={200} caret client:visible />
               </span>
             </>
@@ -89,7 +98,7 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
 
       {
         Astro.slots.has('description') && (
-          <div class="text-soft mt-4 max-w-md mx-auto 992:mx-0 992:max-w-lg 1200:max-w-xl 1200:text-lg">
+          <div class="text-soft mt-4 max-w-md mx-auto text-base 992:text-lg 992:mx-0 992:max-w-lg 1200:max-w-xl 1200:text-lg">
             <slot name="description" />
           </div>
         )
