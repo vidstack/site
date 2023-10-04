@@ -74,7 +74,7 @@ export const mainNavItems: NavItem[] = [
           {
             title: 'Layouts',
             description: 'Check out our fully customizable and production-ready player UIs.',
-            href: '/docs/player/styling/layouts',
+            href: '/docs/player/components/layouts/default-layout',
             Icon: WallpaperIcon,
           },
           {
