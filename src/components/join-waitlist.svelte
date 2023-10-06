@@ -58,11 +58,13 @@
   <div
     class="flex flex-col items-center w-full flex-1 px-4"
     style={clsx(
-      success && '--from-color: oklch(0.66 0.23 153.66); --to-color: oklch(0.66 0.15 203.58);',
-      failed && '--from-color: oklch(0.68 0.18 57.17); --to-color: oklch(0.58 0.17 51.15);',
+      success &&
+        '--from-color: var(--form-success-gradient-start); --to-color: var(--form-success-gradient-end);',
+      failed &&
+        '--from-color: var(--form-error-gradient-start); --to-color: var(--form-error-gradient-end);',
       !success &&
         !failed &&
-        '--from-color: oklch(0.51 0.23 276.97); --to-color: oklch(0.53 0.23 294.27);',
+        '--from-color: var(--form-neutral-gradient-start); --to-color: var(--form-neutral-gradient-end);',
     )}
     slot="content"
   >

@@ -45,11 +45,7 @@ const description =
     <span class="font-semibold">Player:</span> 1.0@next!
   </AnnouncementBar>
 
-  <Style
-    style="--from-color: oklch(0.61 0.19 44.84); --to-color: oklch(0.6 0.2 354.46);"
-    darkStyle="--from-color: oklch(0.7 0.19 47.31); --to-color: oklch(0.66 0.21 353.93);"
-    client:load
-  >
+  <Style style="--from-color: var(--next-gradient-start); --to-color: var(--next-gradient-end);">
     <HeroSection>
       <Fragment slot="title">
         Video Platform.
@@ -107,22 +103,9 @@ const description =
     </HeroSection>
   </Style>
 
-  <!-- <Style
-    style="--from-color: oklch(0.67 0.19 53.25); --to-color: oklch(0.76 0.17 65.51);"
-    client:load
+  <Style
+    style="--from-color: var(--manage-gradient-start); --to-color: var(--manage-gradient-end);"
   >
-    <FeatureSection title="" subtitle="" align="start">
-      <NetworkIcon class="w-full h-full" slot="icon" />
-
-      <p slot="description"></p>
-
-      <JoinWaitlist gradient slot="cta" client:load />
-
-      <ConnectSpinners slot="content" />
-    </FeatureSection>
-  </Style> -->
-
-  <Style style="--from-color: oklch(0.6 0.27 15.16); --to-color: oklch(0.62 0.28 352.63);">
     <FeatureSection title="Manage." subtitle="Built for video." align="start">
       <FileVideoIcon width="100%" height="100%" slot="icon" />
 
@@ -138,9 +121,7 @@ const description =
   </Style>
 
   <Style
-    style="--from-color: oklch(0.56 0.19 272.49); --to-color: oklch(0.81 0.15 217.11);"
-    darkStyle="--from-color: oklch(0.56 0.19 272.49); --to-color: oklch(0.63 0.13 217.76);"
-    client:load
+    style="--from-color: var(--player-gradient-start); --to-color: var(--player-gradient-end);"
   >
     <FeatureSection title="Player." subtitle="Built for React." align="center">
       <ReactIcon class="w-full h-full" slot="icon" />
@@ -186,10 +167,7 @@ const description =
     </FeatureSection>
   </Style>
 
-  <Style
-    style="--from-color: oklch(0.56 0.18 314.7); --to-color: oklch(0.56 0.26 294.47);"
-    client:load
-  >
+  <Style style="--from-color: var(--ship-gradient-start); --to-color: var(--ship-gradient-end);">
     <FeatureSection title="Ready." subtitle="Built to ship." align="center">
       <AnimatedPackageIcon class="w-full h-full" delay={3000} client:visible slot="icon" />
 
@@ -222,7 +200,7 @@ const description =
     </FeatureSection>
   </Style>
 
-  <Style style="--from-color: oklch(0.7 0.19 47.31); --to-color: oklch(0.66 0.21 353.93);">
+  <Style style="--from-color: var(--next-gradient-start); --to-color: var(--next-gradient-end);">
     <FeatureSection title="Next.js." subtitle="Built to be seamless." align="start">
       <NextIcon class="w-full h-full" slot="icon" />
 
@@ -287,11 +265,7 @@ const description =
     </FeatureSection>
   </Style>
 
-  <Style
-    style="--from-color: oklch(0.25 0 0); --to-color: oklch(0.4 0 0);"
-    darkStyle="--from-color: oklch(1 0 0); --to-color: oklch(0.7 0 0);"
-    client:load
-  >
+  <Style style="--from-color: var(--git-gradient-start); --to-color: var(--git-gradient-end);">
     <FeatureSection title="Git." subtitle="Built to commit." align="center">
       <AnimatedGithubIcon
         class="dark:text-black w-[110%] h-[110%]"
@@ -333,7 +307,7 @@ const description =
     </FeatureSection>
   </Style>
 
-  <Style style="--from-color: oklch(0.66 0.23 153.66); --to-color: oklch(0.66 0.15 203.58);">
+  <Style style="--from-color: var(--oss-gradient-start); --to-color: var(--oss-gradient-end);">
     <FeatureSection title="Open Source." subtitle="Built transparently." align="center">
       <AnimatedBookIcon class="w-full h-full" delay={1000} client:visible slot="icon" />
 
@@ -350,7 +324,9 @@ const description =
     </FeatureSection>
   </Style>
 
-  <Style style="--from-color: oklch(0.44 0.24 300.79); --to-color: oklch(0.54 0.27 325.91);">
+  <Style
+    style="--from-color: var(--community-gradient-start); --to-color: var(--community-gradient-end);"
+  >
     <FeatureSection title="Community." subtitle="Built for us." align="center">
       <AnimatedHeartHandshakeIcon class="w-full h-full" delay={2000} client:visible slot="icon" />
 

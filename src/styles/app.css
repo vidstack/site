@@ -75,6 +75,100 @@ body[data-breadcrumb-bar] {
   --color-code-fn: 179 146 240;
 }
 
+:root {
+  --next-gradient-start: #da5100;
+  --next-gradient-end: #d43b87;
+  --manage-gradient-start: #f70048;
+  --manage-gradient-end: #f40095;
+  --player-gradient-start: #5264e2;
+  --player-gradient-end: #009bbd;
+  --ship-gradient-start: #9a4bbc;
+  --ship-gradient-end: #8639f9;
+  --git-gradient-start: #222222;
+  --git-gradient-end: #484848;
+  --oss-gradient-start: #00b746;
+  --oss-gradient-end: #00abbb;
+  --community-gradient-start: #6d00be;
+  --community-gradient-end: #b600bf;
+  --form-success-gradient-start: #00b746;
+  --form-success-gradient-end: #00abbb;
+  --form-error-gradient-start: #e77400;
+  --form-error-gradient-end: #c55400;
+  --form-neutral-gradient-start: #4f46e5;
+  --form-neutral-gradient-end: #7a3ce0;
+  --js-red-gradient-start: #f22b32;
+  --js-red-gradient-end: #d6356e;
+  --js-blue-gradient-start: #4b7fe2;
+  --js-blue-gradient-end: #00d7ff;
+  --js-green-gradient-start: #00b746;
+  --js-green-gradient-end: #00abbb;
+  --js-orange-gradient-start: #e87833;
+  --js-orange-gradient-end: #d7333c;
+  --js-cyan-gradient-start: #00d7ff;
+  --js-cyan-gradient-end: #0090b8;
+}
+
+.dark,
+.prefers-dark-scheme {
+  --next-gradient-start: #f9700b;
+  --next-gradient-end: #ed4b9b;
+  --player-gradient-start: #5264e2;
+  --player-gradient-end: #00d7ff;
+  --git-gradient-start: #ffffff;
+  --git-gradient-end: #9e9e9e;
+  --js-blue-gradient-start: #4c75e1;
+  --js-blue-gradient-end: #009bbd;
+}
+
+@media (color-gamut: p3) {
+  @supports (color: oklch(0% 0 0)) {
+    :root {
+      --next-gradient-start: oklch(0.61 0.19 44.84);
+      --next-gradient-end: oklch(0.6 0.2 354.46);
+      --manage-gradient-start: oklch(0.6 0.27 15.16);
+      --manage-gradient-end: oklch(0.62 0.28 352.63);
+      --player-gradient-start: oklch(0.56 0.19 272.49);
+      --player-gradient-end: oklch(0.81 0.15 217.11);
+      --ship-gradient-start: oklch(0.56 0.18 314.7);
+      --ship-gradient-end: oklch(0.56 0.26 294.47);
+      --git-gradient-start: oklch(0.25 0 0);
+      --git-gradient-end: oklch(0.4 0 0);
+      --oss-gradient-start: oklch(0.66 0.23 153.66);
+      --oss-gradient-end: oklch(0.66 0.15 203.58);
+      --community-gradient-start: oklch(0.44 0.24 300.79);
+      --community-gradient-end: oklch(0.54 0.27 325.91);
+      --form-success-gradient-start: oklch(0.66 0.23 153.66);
+      --form-success-gradient-end: oklch(0.66 0.15 203.58);
+      --form-error-gradient-start: oklch(0.68 0.18 57.17);
+      --form-error-gradient-end: oklch(0.58 0.17 51.15);
+      --form-neutral-gradient-start: oklch(0.51 0.23 276.97);
+      --form-neutral-gradient-end: oklch(0.53 0.23 294.27);
+      --js-red-gradient-start: oklch(0.62 0.23 25.86);
+      --js-red-gradient-end: oklch(0.59 0.2 4.49);
+      --js-blue-gradient-start: oklch(0.61 0.16 262.01);
+      --js-blue-gradient-end: oklch(0.81 0.15 217.11);
+      --js-green-gradient-start: oklch(0.66 0.23 153.66);
+      --js-green-gradient-end: oklch(0.66 0.15 203.58);
+      --js-orange-gradient-start: oklch(0.69 0.16 48.76);
+      --js-orange-gradient-end: oklch(0.58 0.2 23.58);
+      --js-cyan-gradient-start: oklch(0.81 0.15 217.11);
+      --js-cyan-gradient-end: oklch(0.6 0.13 222.62);
+    }
+
+    .dark,
+    .prefers-dark-scheme {
+      --next-gradient-start: oklch(0.7 0.19 47.31);
+      --next-gradient-end: oklch(0.66 0.21 353.93);
+      --player-gradient-start: oklch(0.56 0.19 272.49);
+      --player-gradient-end: oklch(0.63 0.13 217.76);
+      --git-gradient-start: oklch(1 0 0);
+      --git-gradient-end: oklch(0.7 0 0);
+      --js-blue-gradient-start: oklch(0.59 0.17 265.72);
+      --js-blue-gradient-end: oklch(0.63 0.13 217.76);
+    }
+  }
+}
+
 .js-focus-visible :focus:not([data-focus-visible-added]):not([data-focus]) {
   @apply outline-none;
 }

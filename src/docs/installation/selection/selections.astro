@@ -9,25 +9,6 @@ import { isString } from '~/utils/unit';
 import SelectionManager from './selection-manager.svelte';
 import type { selections } from './selection-stores';
 
-const gradients = {
-  red: {
-    style: '--from-color: oklch(0.62 0.23 25.86); --to-color: oklch(0.59 0.2 4.49);',
-  },
-  blue: {
-    style: '--from-color: oklch(0.61 0.16 262.01); --to-color: oklch(0.81 0.15 217.11);',
-    darkStyle: '--from-color: oklch(0.59 0.17 265.72); --to-color: oklch(0.63 0.13 217.76);',
-  },
-  green: {
-    style: '--from-color: oklch(0.66 0.23 153.66); --to-color: oklch(0.66 0.15 203.58);',
-  },
-  orange: {
-    style: '--from-color: oklch(0.69 0.16 48.76); --to-color: oklch(0.58 0.2 23.58);',
-  },
-  cyan: {
-    style: '--from-color: oklch(0.81 0.15 217.11); --to-color: oklch(0.6 0.13 222.62);',
-  },
-};
-
 interface Props {
   type: keyof typeof selections;
   label: string;
@@ -37,7 +18,7 @@ interface Props {
     label: string;
     Info?: any;
     Icon: any;
-    color?: keyof typeof gradients;
+    color?: 'red' | 'blue' | 'green' | 'orange' | 'cyan';
   }[];
 }
 
@@ -100,7 +81,9 @@ const { pathname } = Astro.url,
         );
 
         return (
-          <Style {...(color ? gradients[color] : {})} client:load>
+          <Style
+            style={`--from-color: var(--js-${color}-gradient-start); --to-color: var(--js-${color}-gradient-end);`}
+          >
             {param ? (
               <div {...props}>
                 {contents}
