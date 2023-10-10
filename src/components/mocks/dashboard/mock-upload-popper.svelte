@@ -111,7 +111,7 @@
   bind:this={popper}
   use:visible={{
     once: true,
-    threshold: 0.1,
+    threshold: 0.5,
   }}
 >
   <button

@@ -30,7 +30,7 @@
     'opacity-0 data-[visible]:opacity-100 transition-opacity',
     getMockProgressColor(percent),
   )}
-  use:visible={{ once: true, threshold: 0.1 }}
+  use:visible={{ once: true, threshold: 0.5 }}
 >
   {#if isEncoding && percent < 100}
     <span class="font-medium mr-1">Encoding</span>
