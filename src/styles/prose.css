@@ -83,7 +83,7 @@
 }
 
 .prose h2:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply mb-[1.1em] mt-[1.3em] text-3xl font-[700] leading-[1.33] text-inverse;
+  @apply mb-[0.9em] mt-[1.3em] text-3xl font-[700] leading-[1.33] text-inverse;
 }
 
 .prose h2 strong {
@@ -91,7 +91,7 @@
 }
 
 .prose h3:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply mb-[1.1em] mt-[1.2em] text-2xl font-[600] leading-[1.6] text-inverse;
+  @apply mb-[0.9em] mt-[1.2em] text-2xl font-[600] leading-[1.6] text-inverse;
 }
 
 .prose h3 strong {
@@ -99,7 +99,7 @@
 }
 
 .prose h4:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply mb-[1em] mt-[1em] text-[20px] font-[500] leading-[1.5] text-inverse;
+  @apply mb-[0.8em] mt-[1em] text-[20px] font-[500] leading-[1.5] text-inverse;
 }
 
 .prose h4 strong {
