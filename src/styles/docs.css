@@ -6,6 +6,14 @@
   @apply -mt-3;
 }
 
+.docs .category + h1 + p {
+  @apply mb-1;
+}
+
+.docs .category + h1 + p + p {
+  @apply mt-10;
+}
+
 .DocSearch-Button-Key {
   @apply !ring-0;
 }
