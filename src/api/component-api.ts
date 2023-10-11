@@ -15,9 +15,10 @@ const parser = new MarkdownIt({ html: true }),
   SORTED = Symbol('SORTED');
 
 export const reactComponents = reactAnalysis.react.map((api) => {
-  const instance = api.instance
-    ? wcAnalysis.components.find((i) => i.name === api.instance)
-    : undefined;
+  const instanceName = api.instance?.replace(/Instance$/, ''),
+    instance = api.instance
+      ? wcAnalysis.components.find((i) => i.name === instanceName)
+      : undefined;
 
   parseDocs(api);
 

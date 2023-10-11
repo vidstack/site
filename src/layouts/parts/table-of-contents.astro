@@ -39,7 +39,7 @@ if (pathname.includes('components/')) {
 
         const hasInstance =
           component.instance &&
-          component.ref?.type.concise === component.instance.name &&
+          component.ref?.type.concise.replace(/Instance$/, '') === component.instance.name &&
           (component.instance.members?.props || component.instance.members?.methods);
 
         if (components.length > 1) {

@@ -26,7 +26,7 @@ const { pathname } = Astro.url,
         let propsType = component.propsType ? `, type ${component.propsType}` : '',
           importCode = '',
           refType = component.ref?.type.concise,
-          hasInstance = refType === component.instance?.name,
+          hasInstance = refType && refType.replace(/Instance$/, '') === component.instance?.name,
           fullComponentName = component.namespace
             ? `${component.namespace}.${component.name}`
             : component.name,
