@@ -1,8 +1,162 @@
 ---
-description: First look at the player library and we answer who this library is for and why it exists.
+description: Overview of the player library and all of it's features.
 slug: player
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon! For now you can get started with the [installation](./player/getting-started/installation)
-page and then check out the examples we put together.
+## Overview
+
+Vidstack Player is a framework and collection of UI components for building and managing custom
+media players on the web.
+
+❓ **_Why should I use this library?_**
+
+Creating a media player is a complex endeavor that may appear deceptively simple to the untrained eye. It involves much more than just a few pieces of state and some basic UI components. To develop a production-grade media player, you need to address a variety of challenges:
+
+- **State Management:** Managing the reading and updating of state across different providers,
+  browsers, stream types, and connecting it to the user interface is a demanding and tedious task.
+  Each piece of state may extend across various objects or events. For instance, consider tracking
+  simple things like 'playing' or 'buffering.' Doing this by mapping numerous states across multiple
+  events and resetting them upon source or provider changes is a fragile and error-prone process. In
+  React applications, this can quickly devolve into spaghetti code and lead to performance issues.
+- **Accessibility:** Ensuring accessibility at minimum involves setting correct ARIA roles and labels,
+  managing focus, adding keyboard controls and shortcuts, defining touch target zones, positioning
+  tooltips and menus, and rendering/styling captions consistently. Native captions often fall short,
+  as highlighted in [our motivation for not relying on native captions][media-captions-motivation].
+- **Styling:** Styling can be a challenge, primarily due to the need to manage and expose
+  media state in the DOM as attributes for CSS styling. Furthermore, some UI components may not
+  always be supported so they have to be hidden. Finally, each stream type (VOD/Live/Live DVR)
+  requires slightly varied styles and layouts.
+- **Provider Management:** Media providers offer distinct APIs. This includes
+  the basic API of the native media element and embedded media, as well as handling tracks
+  and playback quality for native HLS, HLS libraries, and DASH libraries. Furthermore, determining
+  when to load each provider can become a complex task. Questions like, "Is hls.js supported in
+  this environment? Is HLS natively supported? Can I seamlessly switch between MP4 and HLS as needed?"
+  can quickly become challenging to address.
+- **Cross-Browser Compatibility:** Ensuring that your media player functions consistently across
+  different web browsers adds another layer of complexity. Various browsers may have varying
+  levels of support or distinct APIs for certain media features such as fullscreen,
+  picture-in-picture, rendering captions, and streaming support.
+- **Tracking:** Implementing analytics and tracking functionalities to monitor user interactions,
+  video performance, and other relevant metrics is another crucial component of a robust media
+  player. We've carefully designed the right architecture and rich event system with triggers
+  to differentiate system/user events and to track internal state.
+
+Just as you wouldn't attempt to build an accessibility library like Radix UI from scratch, creating
+a media player from the ground up is not advisable. There are numerous areas where things can and
+will go wrong. It's far more efficient to leverage Vidstack Player to address the mentioned
+challenges for you.
+
+❓ **_Who is it for?_**
+
+Whether you're an individual developer creating a blog, podcast, or video-on-demand site, or
+you're working on an enterprise-level application like Reddit (where Vidstack Player was
+originally developed), Vidstack Player is a valuable tool for building rich media experiences. The
+library is designed for scalability, featuring a minimal core and the ability to selectively
+include components in your final bundle. It offers broad framework support through our
+Web Component (server-side rendering friendly) and a dedicated React library, compatible
+with Next.js 13 and ready for React Server Components (RSC).
+
+## Features
+
+The following is a comprehensive list of all features you will have access to when using Vidstack
+Player:
+
+- First-class TypeScript support for all frameworks.
+- Multiple framework support via our [Web Component][wc] and [React][react] libraries. JSX types
+  included out of the box for [Vue][vue], [Svelte][svelte], and [Solid][solid].
+- Multiple styling options: CSS, [Tailwind CSS][tw-plugin], and extending our Default Theme.
+- Multiple media provider support: Audio, Video, HLS, DASH (soon), YouTube (soon), and Vimeo (soon).
+- Single standard API across all providers.
+- Mature and battle-tested architecture which we integrated into Reddit at scale and used for analytics.
+- Production-ready layouts for when you don't have time to build your own UI.
+- Streaming support via HLS and DASH (soon).
+- Live streaming support.
+- Keyboard shortcuts.
+- Next.js 13 and RSC ready.
+- SSR-friendly for all frameworks.
+- Completely customizable headless components.
+- [30+ components](/docs/player/components/core/player) for you to build with and configure.
+- [18+ React hooks](/docs/player/api/hooks/use-media-state) for managing state and building UI.
+- State management solutions for reading and updating media state.
+- Rich event system.
+- Comprehensive player API: autoplay, audio tracks, fullscreen, picture-in-picture, live, keyboard,
+  text tracks, and video quality.
+- Resolve cross-browser differences for native APIs such as fullscreen, picture-in-picture,
+  tracks, streaming, and rendering/styling captions.
+- Screen orientation support.
+- Tons of styling hooks for components via data attributes.
+- Accessible. Following the WCAG 2.1 specification and adhering to FCC and CVAA guidelines.
+- Custom [media captions library][media-captions] with support for VTT, SRT, and SSA. We also include a
+  plugin to support `libass` via [`jassub`][jassub].
+- Tooltips and menus with animation support.
+- Support for media chapters inside sliders and menus.
+- Thumbnails/previews when user is interacting with time slider.
+- Gesture-support for handling direct user interaction with media such as tapping to seek and more.
+- Load strategies for determining when to load media (lazy by default).
+- Lightweight at `54kB` gzip for all core features and components. The library is also treeshakeable
+  to bring that down further.
+- Internationalization support on all components and our production-ready layouts.
+
+## Compare
+
+You might be curious about how this library stacks up against other well-known players
+like JW Player or Video.js. Here's how we're different:
+
+- **TypeScript:** Enjoy robust first-class TypeScript support for type-safe development.
+  Everything is typed including the player itself, core features, component props, state,
+  events, and hooks. All exported from our NPM package.
+- **Reactivity:** Our library is built with Signals which enable tracking and subscribing to
+  individual media state internally and externally. We take advantage of this to expose
+  a variety of props to configure components, manage tricky internal state, design a complex
+  production-ready default layout, and hooks such as `useMediaState` and `useMediaStore` in React.
+- **Components:** Our library offers a wide range of declarative components to enhance your media
+  player's functionality and appearance.
+- **Custom UI:** The other players are not built well for building a custom player UI. The
+  lack of any hooks and components makes it hard to do so.
+- **Production-ready UI:** The other players offer a limited player experience out of the box that's
+  not easy to customize. We provide a much higher-quality UI experience that supports a variety features
+  and stream types out of the box with props and over 150+ CSS variables to easily customize it all.
+- **Framework Support:** We support many JS frameworks, environments (Browser/SSR), and styling
+  options, making it easier to integrate and build with our player.
+- **Rich Events:** We include more events out of the box and include triggers to track where
+  and how they originated.
+- **Modernized:** We provide up-to-date APIs for the library, player, and all of our components. Some
+  examples include not supporting old and outdated browsers, providing ESM bundles and TS types, and
+  using `ReadableStream` to handle processing large captions.
+- **Features:** In general, you'll find we support many more features out of the box such as:
+  frameworks, hooks, providers, styling options, state management solutions, UI components,
+  chapters, thumbnails, tooltips, menus, animations, caption file types, customization options,
+  and much more.
+- **Bundle Size:** We've optimized our library to keep the bundle size minimal, ensuring
+  faster loading times. To compare, Video.js base size is `656kB` (`195kB` gzipped), whilst
+  Vidstack Player is `173kB` (`53.4kB` gzipped). In addition, our library can treeshake unused code
+  to further reduce the size, and most heavier parts are lazy loaded such as providers and captions.
+- **Licensing:** JW Player requires purchasing licenses for each individual player based on the
+  number of content plays. It's paid for above 100K plays. Vidstack Player is MIT licensed and
+  free to use without any limits.
+
+## Try Player
+
+You can find a comprehensive set of player examples at [`vidstack/examples`][vidstack-examples].
+Find the specific example you're interested in and click the "Open in StackBlitz" button in the
+respective README. This will launch the project on [StackBlitz][stackblitz] in a remote development
+environment for you to start playing.
+
+## Community
+
+If you have questions or need help, reach out to the community on [Discord][discord] or
+[GitHub Discussions][github-discussions].
+
+[wc]: /docs/player/getting-started/installation/web-components
+[react]: /docs/player/getting-started/installation/react
+[svelte]: /docs/player/getting-started/installation/svelte
+[solid]: /docs/player/getting-started/installation/solid
+[vue]: /docs/player/getting-started/installation/vue
+[tw-plugin]: /docs/player/styling/tailwind
+[discord]: https://discord.gg/QAjfh2gZE4
+[github-discussions]: https://github.com/vidstack/vidstack/discussions
+[stackblitz]: https://stackblitz.com
+[media-captions]: https://github.com/vidstack/media-captions
+[media-captions-motivation]: https://github.com/vidstack/media-captions#motivation
+[jassub]: https://github.com/ThaUnknown/jassub
+[vidstack-examples]: https://github.com/vidstack/examples

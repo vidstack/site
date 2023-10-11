@@ -53,7 +53,7 @@
     .map((v) => options.find(({ value }) => v === value)?.label)
     .filter(Boolean) as string[];
 
-  $: currentLabel = selectionLabel.join(', ') || label;
+  $: currentLabel = selectionLabel.join(', ').trim() || label;
 
   // Sort into groups.
   $: groups = options.reduce(

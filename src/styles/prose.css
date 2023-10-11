@@ -1,13 +1,13 @@
 .prose {
-  @apply text-soft text-base;
+  @apply text-base text-soft;
 }
 
 .prose hr {
-  @apply border-border my-3 h-px w-full border-t;
+  @apply my-3 h-px w-full border-t border-border;
 }
 
 .prose strong {
-  @apply text-inverse font-semibold;
+  @apply font-semibold text-inverse;
 }
 
 .prose br {
@@ -21,7 +21,7 @@
 }
 
 .prose a:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply hocus:text-inverse border-0 text-[0.95em] font-medium underline;
+  @apply border-0 text-[0.95em] font-medium underline hocus:text-inverse;
 }
 
 .prose a .external-link-icon {
@@ -29,7 +29,7 @@
 }
 
 .prose blockquote {
-  @apply text-inverse border-soft my-[1.6em] border-l-4 py-1.5 pl-3 font-medium italic;
+  @apply my-[1.6em] border-l-4 border-soft py-1.5 pl-3 font-medium italic text-inverse;
 }
 
 .prose blockquote > p:first-child {
@@ -55,11 +55,11 @@
 
 .prose ol > li::marker,
 .prose ul > li::marker {
-  @apply text-inverse font-normal;
+  @apply font-normal text-inverse;
 }
 
 .prose li:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply my-0.5;
+  @apply my-1.5;
 }
 
 .prose ol > li:not(:where([class~='not-prose'], [class~='not-prose'] *)),
@@ -75,7 +75,7 @@
 }
 
 .prose h1:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply text-inverse mb-[0.88em] mt-0 text-4xl font-[800] leading-[1.1];
+  @apply mb-[0.88em] mt-0 text-4xl font-[800] leading-[1.1] text-inverse;
 }
 
 .prose h1 strong {
@@ -83,7 +83,7 @@
 }
 
 .prose h2:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply text-inverse mb-[1.1em] mt-[1.3em] text-3xl font-[700] leading-[1.33];
+  @apply mb-[1.1em] mt-[1.3em] text-3xl font-[700] leading-[1.33] text-inverse;
 }
 
 .prose h2 strong {
@@ -91,7 +91,7 @@
 }
 
 .prose h3:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply text-inverse mb-[1.1em] mt-[1.2em] text-2xl font-[600] leading-[1.6];
+  @apply mb-[1.1em] mt-[1.2em] text-2xl font-[600] leading-[1.6] text-inverse;
 }
 
 .prose h3 strong {
@@ -99,7 +99,7 @@
 }
 
 .prose h4:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply text-inverse mb-[1em] mt-[1em] text-[20px] font-[500] leading-[1.5];
+  @apply mb-[1em] mt-[1em] text-[20px] font-[500] leading-[1.5] text-inverse;
 }
 
 .prose h4 strong {
@@ -107,7 +107,7 @@
 }
 
 .prose img {
-  @apply border-border/90 mx-auto border shadow-sm;
+  @apply mx-auto border border-border/90 shadow-sm;
 }
 
 .prose img,
@@ -121,7 +121,7 @@
 }
 
 .prose code:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply text-inverse mx-px rounded-[3px] border-0 font-mono text-[0.84em] font-semibold;
+  @apply mx-px rounded-[3px] border-0 font-mono text-[0.84em] font-semibold text-inverse;
   font-variant-ligatures: none;
 }
 
@@ -150,7 +150,7 @@
 }
 
 .prose thead {
-  @apply text-inverse bg-border/10 dark:bg-border/30 sticky left-0 top-0 w-full font-medium;
+  @apply sticky left-0 top-0 w-full bg-border/10 font-medium text-inverse dark:bg-border/30;
   backdrop-filter: blur(8px);
 }
 
@@ -163,7 +163,7 @@
 }
 
 .prose tr {
-  @apply border-border/60 w-full border-b;
+  @apply w-full border-b border-border/60;
 }
 
 .prose td {
@@ -171,7 +171,7 @@
 }
 
 .prose tbody td:not(:first-child) code {
-  @apply text-soft border-0 bg-transparent text-xs font-normal shadow-none;
+  @apply border-0 bg-transparent text-xs font-normal text-soft shadow-none;
 }
 
 .prose tbody .empty {
@@ -179,7 +179,7 @@
 }
 
 .prose tbody tr td:first-child code {
-  @apply text-code-fn/90 border-0 bg-transparent px-1 py-0.5 font-medium !shadow-transparent;
+  @apply border-0 bg-transparent px-1 py-0.5 font-medium text-code-fn/90 !shadow-transparent;
 }
 
 .prose figure {
@@ -195,7 +195,7 @@
 }
 
 .prose p > img {
-  @apply border-border/50 mx-10 my-auto max-w-[600px] rounded-sm border;
+  @apply mx-10 my-auto max-w-[600px] rounded-sm border border-border/50;
 }
 
 .prose pre {
@@ -258,7 +258,7 @@
 }
 
 .prose .heading-wrapper > .anchor-link {
-  @apply text-soft relative ml-1.5 inline-flex justify-center rounded-[1px] border-0 align-baseline opacity-0;
+  @apply relative ml-1.5 inline-flex justify-center rounded-[1px] border-0 align-baseline text-soft opacity-0;
   width: var(--icon-size);
   height: var(--icon-size);
   text-decoration: none;
