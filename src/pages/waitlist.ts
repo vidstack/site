@@ -7,7 +7,7 @@ if (import.meta.env.DEV) {
   process.env.POSTGRES_URL = import.meta.env.POSTGRES_URL;
 }
 
-export const post: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request }) => {
   const isAPIRequest = request.headers.get('Content-Type') === 'application/json';
 
   if (isAPIRequest) {

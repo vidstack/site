@@ -1,5 +1,6 @@
 ---
 import { currentJSLibrary } from '~/stores/libraries';
+import { kebabToTitleCase, uppercaseFirstLetter } from '~/utils/string';
 import { get } from 'svelte/store';
 
 interface Props {
@@ -10,8 +11,31 @@ interface Props {
 const { title, description } = Astro.props,
   { pathname } = Astro.url,
   socialCardImg = pathname.startsWith('/docs')
-    ? `${Astro.site}docs-social-card-large.png`
+    ? resolveDocsOgImage(pathname)
     : `${Astro.site}social-card-large.png`;
+
+function resolveDocsOgImage(pathname: string) {
+  pathname = pathname.replace('/docs/wc', '/docs').replace(/\/$/, '');
+
+  const isIntroPage = pathname === '/docs/player',
+    isInstallationPage = pathname.startsWith('/docs/player/getting-started/installation'),
+    isAgnosticPage = isIntroPage || isInstallationPage,
+    lib = !isAgnosticPage && get(currentJSLibrary),
+    cardTitle = title.split('|')[0].trim(),
+    category = isAgnosticPage ? 'Getting Started' : pathname.split('/')[3],
+    cardCategory = kebabToTitleCase(category).replace('Api', 'API');
+
+  const searchParams = new URLSearchParams();
+  if (lib) searchParams.set('lib', lib);
+  searchParams.set('category', cardCategory);
+  searchParams.set(
+    'title',
+    cardTitle.startsWith(cardCategory) ? cardTitle.split(':')[1] : cardTitle,
+  );
+  searchParams.set('description', description);
+
+  return `${Astro.site}og?${searchParams}`;
+}
 ---
 
 <title>{title}</title>
