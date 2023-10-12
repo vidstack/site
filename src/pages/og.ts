@@ -31,7 +31,10 @@ export const GET: APIRoute = async ({ request }) => {
       'div',
       {
         style: {
-          padding: '140px',
+          paddingTop: '140px',
+          paddingBottom: '180px',
+          paddingLeft: '140px',
+          paddingRight: '140px',
           background: '#050505',
           width: '100%',
           height: '100%',
@@ -87,7 +90,7 @@ export const GET: APIRoute = async ({ request }) => {
             category,
           ),
         ),
-        h('span', { style: { color: 'white', fontSize: '140px', marginTop: '24px' } }, title),
+        h('span', { style: { color: 'white', fontSize: '132px', marginTop: '24px' } }, title),
         h(
           'span',
           {
