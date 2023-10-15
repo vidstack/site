@@ -87,7 +87,7 @@ export const mainNavItems: NavItem[] = [
             title: 'Releases',
             description: "Catch up on the latest player releases and see what's new.",
             Icon: NewspaperIcon,
-            href: 'https://github.com/vidstack/vidstack/discussions/categories/releases?discussions_q=is%3Aopen+category%3AReleases+label%3Aplayer',
+            href: 'https://github.com/vidstack/player/discussions/categories/releases?discussions_q=is%3Aopen+category%3AReleases+label%3Aplayer',
           },
         ],
       },
@@ -112,6 +112,6 @@ export const mainNavItems: NavItem[] = [
   { title: 'Icons', href: '/media-icons' },
   {
     title: 'Releases',
-    href: 'https://github.com/vidstack/vidstack/discussions/categories/releases',
+    href: 'https://github.com/vidstack/player/discussions/categories/releases',
   },
 ];
