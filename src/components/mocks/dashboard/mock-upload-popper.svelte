@@ -107,7 +107,7 @@
     'flex flex-col absolute bottom-0 right-5 rounded-sm min-w-[240px] shadow-md z-20',
     'opacity-0 data-[visible]:opacity-100 transition-opacity ease-in duration-400',
   )}
-  style="transition-delay: 750ms;"
+  style="transition-delay: 1500ms;"
   bind:this={popper}
   use:visible={{
     once: true,
@@ -127,7 +127,10 @@
     aria-label="Active Uploads"
     use:visible={{
       once: true,
-      onChange: onVisible,
+      threshold: 0.5,
+      onChange(isVisible) {
+        if (isVisible) onVisible();
+      },
     }}
     on:pointerup={onPress}
     on:keydown={(e) => isKeyboardPress(e) && onPress()}
