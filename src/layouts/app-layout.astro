@@ -38,17 +38,23 @@ const { title, description, announcementBar, breadcrumbBar, theme } = Astro.prop
     <script src="../scripts/docs-link.ts"></script>
 
     <script is:inline>
-      const key = 'vidstack::color-scheme',
-        scheme = localStorage[key],
-        prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches,
-        schemeRoot = document.documentElement;
-      if (scheme === 'dark' || (scheme !== 'light' && prefersDark)) {
-        schemeRoot.classList.add('dark');
-        schemeRoot.classList.remove('light');
-      } else {
-        schemeRoot.classList.remove('dark');
-        schemeRoot.classList.add('light');
+      function init() {
+        const key = 'vidstack::color-scheme',
+          scheme = localStorage[key],
+          prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches,
+          root = document.documentElement;
+
+        if (scheme === 'dark' || (scheme !== 'light' && prefersDark)) {
+          root.classList.add('dark');
+          root.classList.remove('light');
+        } else {
+          root.classList.remove('dark');
+          root.classList.add('light');
+        }
       }
+
+      init();
+      document.addEventListener('astro:after-swap', init);
     </script>
   </head>
   <body

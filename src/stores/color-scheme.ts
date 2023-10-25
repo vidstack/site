@@ -1,4 +1,5 @@
 import { derived, get, writable } from 'svelte/store';
+
 import { IS_BROWSER } from '../utils/env.js';
 import { mediaQuery } from './media-query.js';
 
