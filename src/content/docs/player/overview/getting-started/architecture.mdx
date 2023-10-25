@@ -2,5 +2,186 @@
 description: An overview of the player architecture to understand how media playback and updates are handled.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+import PlayerArchitectureDiagram from '~/diagrams/player-architecture.astro';
+
+## Overview
+
+Vidstack Player is designed around a request and response model, similar to the client-server model
+or HTTP. State is stored as [signals][maverick-signals] and pushed down via context to consumers
+such as UI components who subscribe to updates via effects, DOM events are dispatched up to
+the player for requesting state changes, and the current media provider will asynchronously
+respond to the request by satisfying or rejecting it.
+
+<PlayerArchitectureDiagram />
+
+Anything we "ask" the player (more precisely the current provider) to do is simply a
+request as we can't guarantee success or failure, at least from the requestors perspective.
+Requests are dispatched from child player components via DOM events to the `MediaRequestManager` which
+performs the appropriate actions on the current media provider. The `MediaProviderAdapter` ensures we can
+speak a common language across various providers as the API might differ. After the
+`MediaRequestManager` performs it's tasks, a request is now pending and put into queue. The
+media provider will asynchronously notify the `MediaStateManager` that the request was either satisfied
+or rejected. Finally, the state manager will satisfy the request by attaching
+it as a trigger to the media event (e.g., `media-play-request` will be attached to the media `play`
+or `play-fail` event), release it from the queue, and update the media store. This completes
+the request/response lifecycle. In the rest of this guide, we'll briefly unpack each of these
+core architectural components and processes.
+
+## Source Selection
+
+[See source code][source-select].
+
+The source selection process determines which [provider loader](#media-provider-loader) is
+active and consequently which provider to load and render. The selection process is as follows:
+
+1. Detect `src` attr or prop change.
+2. Normalize `src` into an array of `MediaSrc` objects (`{src, type}`). If a source object is provided
+   (e.g., `MediaStream` or `MediaSource`), the type will default to `video/object`, otherwise `unknown`.
+3. The `sources-change` event is fired.
+4. Walk through each source at a time in given order and attempt to find a provider who can play it.
+   The `canPlay` method on each provider loader will check if the media extension or type can be played.
+   The first loader to return true will be promoted to active.
+5. The `source-change` event is fired. The current source will be `null` if no provider was matched.
+6. Start the provider loading process.
+
+[source-select]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/components/provider/source-select.ts
+
+## Media Provider Loader
+
+See [interface][media-provider-loader] and [reference][media-provider-loader-ref].
+
+Media provider loaders are responsible for determining whether the underlying provider can play a
+given source, dynamically loading and initializing the provider, and rendering content inside
+the media provider component. Rendered output includes `<audio>`, `<video>`, and `<iframe>` elements.
+
+When a loader becomes active via the [source selection process](#source-selection), it will go
+through the following setup process:
+
+1. Destroy the old provider if no longer active and fire the `provider-change` event with detail
+   set to `null`.
+2. The loader will attempt to preconnect any URLs for the current provider or source.
+3. The `provider-loader-change` event is fired.
+4. Wait for the new media provider loader to render so the underlying element (e.g., `<video>`) is ready.
+5. The loader will dynamically import and initialize the provider instance.
+6. The `provider-change` event is fired. This is the best time to configure the provider before it runs
+   through setup.
+7. Once the specified player loading strategy has resolved, the provider `setup` method is called.
+   This step generally involves loading required libraries and attaching event listeners.
+8. The `provider-setup` event is fired.
+9. Finally, the `loadSource` method is called on the provider with the selected source.
+
+If the provider has not changed during a source change, then the setup process will be skipped and
+only the new source will be loaded (step 9).
+
+[media-provider-loader]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/providers/types.ts#L17
+[media-provider-loader-ref]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/providers/video/loader.ts
+
+## Media Provider
+
+See [interface][media-provider-adapter] and [reference][media-provider-ref].
+
+In general, media provider's are responsible for rendering the underlying media element or iframe,
+determining the media and view types, loading sources, managing tracks, setting properties,
+performing media requests, attaching event listeners, and notifying the [`MediaStateManager`](#media-state-manager)
+of state changes. In addition, each provider will implement the `MediaProviderAdapter` interface to
+ensure they have a consistent API.
+
+[media-provider-adapter]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/providers/types.ts#L25
+[media-provider-ref]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/providers/video/provider.ts
+
+## Media Context
+
+[See interface][media-context].
+
+The media context is a singleton object passed down from each player instance to all consumers. It
+contains important objects such as the player itself, [remote control](#media-remote-control) for
+dispatching requests, player delegate for notifying the [state manager](#media-state-manager) of
+updates, [media store](#media-store) for UI to subscribe to state changes, and the current media
+provider.
+
+[media-context]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/api/media-context.ts
+
+## Media Store
+
+[See source code][media-state].
+
+The media store is a collection of signals which store and track individual pieces of state. The
+[`MediaStateManger`](#media-state-manager) is responsible for updating the store when the
+[media provider](#media-provider) notifies it of any changes. Player components will
+subscribe to media state via effects to handle rendering attributes, managing the DOM, and
+performing operations.
+
+Signals are way for us to create reactive observables to store state, create computed properties,
+and subscribe to updates as its value changes via effects. We created our own signals library called
+[Maverick Signals][maverick-signals] which handles the scoping and reactivity complexity. See the
+link for more information, and you can also read about [the evolution of signals by Ryan Carniato][evolution-of-signals]
+if you'd like to dive deeper.
+
+[maverick-signals]: https://github.com/maverick-js/signals
+[media-state]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/api/player-state.ts
+[evolution-of-signals]: https://dev.to/this-is-learning/the-evolution-of-signals-in-javascript-8ob
+
+## UI Components
+
+See example: [Base Component][play-button], [Custom Element][play-button-element], and [React Component][play-button-react].
+
+UI components are abstracted to avoid rewriting complex logic across Custom Elements and React.
+They're built on top of our component library called [Maverick][maverick]. Thanks to Signals
+being our reactivie primitive of choice, we can adapt reactivity to work with any framework easily.
+The component lifecycle has been simplified down to `onSetup` (initial setup),
+`onAttach` (attached to a DOM or server element), `onConnect` (connected to the DOM), and
+`onDestroy` (end of life). These lifecycle hooks are pure as they can run more than once in React,
+and they can be individually disposed of.
+
+The base component defines the general contract for the component across props, state, and events.
+They have no rendered UI out of the box and are responsible for: accessibility, setting data attributes
+and CSS variables for styling purposes, managing props and internal state, subscribing to media
+state via the [media context](#media-context), attaching DOM event listeners, dispatching DOM
+events, and exposing methods.
+
+The mixin `Host(Component, HTMLElement)` is used to create a Custom Element and attach the base
+component to it, and `createReactComponent(Component)` is used to create a client/server React
+Component and attach to it.
+
+[play-button]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/components/ui/buttons/play-button.ts
+[play-button-element]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/elements/define/buttons/play-button-element.ts
+[play-button-react]: https://github.com/vidstack/player/blob/main/packages/react/src/components/ui/buttons/play-button.tsx
+[maverick]: https://github.com/maverick-js/maverick
+
+## Media Remote Control
+
+[See source code][media-remote-control].
+
+The `MediaRemoteControl` is a simple facade for dispatching [media request events][media-request-events]
+to the nearest player component in the DOM. It helps consumers avoid creating and dispatching an
+event such as `el.dispatchEvent(new DOMEvent('media-play-request'))`, and instead just
+call `remote.play()`.
+
+[media-remote-control]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/state/remote-control.ts
+[media-request-events]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/api/media-request-events.ts
+
+## Media Request Manager
+
+[See source code][media-request-manager].
+
+The `MediaRequestManager` routes [media request events][media-request-events] to the current media
+provider by calling the appropriate actions on it. In addition, it queues the request event so the
+[`MediaStateManager`](#media-state-manager) can satisfy it by attaching it to the correct [media event][media-events].
+Important to note, the manager can speak with any provider because of the [`MediaProviderAdapter`](#media-provider)
+interface. The interface ensures each provider has the same API for performing operations such as
+play, pause, seek, etc.
+
+[media-events]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/api/media-events.ts
+[media-request-manager]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/state/media-request-manager.ts
+
+## Media State Manager
+
+[See source code][media-state-manager].
+
+The `MediaStateManager` is responsible for handling media state changes as they're delegated
+from the [media provider](#media-provider) to it, satisfying [media request events][media-request-events]
+by attaching them as triggers on the respective success/failure media event and releasing them from
+the queue, dispatching [media events][media-events], and updating the media store to ensure it's
+in-sync with the currently playing media and provider.
+
+[media-state-manager]: https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/state/media-state-manager.ts
