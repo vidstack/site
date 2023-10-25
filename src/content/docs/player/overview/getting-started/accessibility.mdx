@@ -2,12 +2,142 @@
 description: An overview of the accessibility guidelines and principles we adhere to.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Overview
 
-This page will cover:
+Getting accessibility right is an ongoing process that is difficult but incredibly
+important to ensure everyone can use the player and enjoy the content being played. We try to provide
+as many building blocks as possible, and set sensible defaults out of the box to ensure an
+accessible media experience, but where you take that is still on you.
 
-- WCAG 2.1
-- FCC & CVAA
-- ACA & AODA
-- Partnerships
+We currently consider the following when trying to build and provide users an accessible
+media experience:
+
+- Provide clear ARIA roles and labels.
+- Provide alternative text descriptions for images and videos.
+- Ensure [proper color contrast][color-contrast] for all text and controls.
+- Manage focus sensibly with clear indicators.
+- Add keyboard controls and shortcuts.
+- Define adequate touch target zones.
+- Ensure tooltips and menus are positioned correctly and visible.
+- Offer captions and/or subtitles for multimedia content.
+- Render, style, and customize captions consistently.
+- Ensure caption text is readable and doesn't overlap with other elements.
+- Allow users to customize the playback experience (e.g., volume, speed, and captions).
+- Provide the correct language in both spoken and text form.
+- Test with screen readers like JAWS, NVDA, or VoiceOver.
+- Document all accessibility features.
+- Conduct user testing with people who have disabilities.
+
+Important to keep in mind that providing an accessible experience requires effort from your
+end too. You should strive to review and implement the list above, follow the guidelines listed below,
+test, speak to your users, and help us improve. We should hold each other to high standards.
+
+[color-contrast]: https://webaim.org/resources/contrastchecker/
+
+## Guidelines
+
+We're committed to respecting and adhering to the following guidelines and specifications:
+
+- **[WAI-ARIA][wai-aria]**: A set of technical specifications and guidelines created by the
+  World Wide Web Consortium (W3C). It provides a framework for making web content and web applications
+  more accessible to people with disabilities, particularly those who use assistive technologies
+  like screen readers. WAI-ARIA defines roles, states, and properties that can be added to HTML
+  elements to convey information and improve the interaction of web content, enhancing
+  accessibility for all users.
+- **[WCAG 2.2][wcag]**: A set of standards and guidelines that provide recommendations for making
+  web content, including websites and web applications, more accessible to people with disabilities.
+  It offers specific criteria and success criteria that content developers can follow to ensure
+  web content is usable by a wide range of users, regardless of their abilities or disabilities.
+- **[CVAA][cvaa]**: A U.S. federal law enacted in 2010. It focuses on ensuring that people with
+  disabilities have access to modern communication and video technologies. The CVAA mandates
+  accessibility features in communication services, such as telecommunications and the internet,
+  as well as in video programming. It requires closed captioning for video content on television
+  and the internet, making telecommunications services accessible for individuals with hearing or
+  vision impairments, and addressing other accessibility needs. The CVAA plays a crucial role in
+  promoting equal access to digital communication and video content for all citizens, including
+  those with disabilities. It is heavily governed by the Federal Communications Commission (FCC).
+- **[ADA][ada]**: A civil rights law, designed to eliminate discrimination based on disability and
+  aims to guarantee equal opportunities for individuals with disabilities. Among its provisions is
+  the requirement that websites need to be accessible to those with hearing, vision, or physical
+  impairments.
+
+[ada]: https://www.ada.gov
+[cvaa]: https://www.fcc.gov/consumers/guides/21st-century-communications-and-video-accessibility-act-cvaa
+[wai-aria]: https://www.w3.org/TR/wai-aria-1.2
+[wcag]: https://www.w3.org/TR/WCAG22
+
+## Labels
+
+We consider the following with respect to ARIA labelling:
+
+- Descriptions for the player content and posters.
+- Labelled control elements with `aria-label`, `aria-labelledby`, or `aria-describedby`.
+- Labels are in the correct language.
+- Established relationships with `aria-controls`.
+- Hide irrelevant content with `aria-hidden="true"`.
+- Assigned appropriate ARIA roles.
+- Utilize ARIA states and properties.
+- Validate with accessibility tools.
+
+We provide sensible defaults but it's still on you to ensure they're contextually valid and that
+your users understand them. A simple example is verifying that the labels are in the correct
+language.
+
+## Captions
+
+:::info
+Did you know closed-captions are governed by the Federal Communications Commission (FCC)
+under the Communications and Video Accessibility Act (CVA)? Not providing captions and adequate
+customization options on the web for content that was shown on TV doesn't meet guidelines 😱
+Filed law suits have dramatically increased in recent years! See the amazing
+[Caption Me If You Can][caption-talk] talk at Demuxed by Dan Sparacio to learn more.
+:::
+
+Native captions fall short, as highlighted in [our motivation for not relying on
+native captions][media-captions-motivation]. We've integrated our custom
+[media captions library][media-captions] to ensure consistent and customizable captions/subtitles
+across browsers and providers. We also provide support for additional formats beyond VTT such as
+text, SRT, SSA, and JSON.
+
+[media-captions]: https://github.com/vidstack/media-captions
+[caption-talk]: https://www.youtube.com/watch?v=Z0HqYQqdErE
+[media-captions-motivation]: https://github.com/vidstack/media-captions#motivation
+
+## Keyboard Navigation
+
+All components including buttons, sliders, and menus come with expectations on how they should
+respond to keyboard interactions. We provide sensible and well-known defaults that adhere to
+the [guidelines](#guidelines) listed above.
+
+Good keyboard navigation generally includes:
+
+- Ensuring keyboard operability for all controls with clear focus indicators.
+- Implementing keyboard shortcuts for all key player functions.
+- Allowing users to control the player with screen readers and keyboard navigation.
+- Ensuring all interactive elements are keyboard accessible.
+
+## Focus Management
+
+When users interact with an element and something changes, it's beneficial to redirect focus to the
+logical next step in the new context. This focus adjustment aids in conveying the updated situation,
+especially for screen reader users. We always try to shift focus to where it logically makes most
+sense. For example, when opening a submenu with radio options, we will always focus the
+currently selected choice.
+
+Good focus management generally includes:
+
+- Ensuring all interactive elements can be navigated and activated using keyboard alone.
+- Maintaining a logical tab order and providing visible focus indicators.
+- Supporting well-known and standardized keyboard focus navigation shortcuts.
+- Testing keyboard navigation for all functions and elements, including sliders and menus.
+
+## Partnerships
+
+We're actively looking for organizations to partner with that will help us improve our accessibility
+standards throughout the player. We have a soft agreement at the moment to work closely with the
+Dutch Government to audit and improve accessibility. If you'd like to partner with us on this
+front and help us improve then consider joining our [Discord][vds-discord] server or
+sending us a DM on [Twitter][vds-twitter].
+
+[vds-discord]: https://discord.gg/QAjfh2gZE4
+[vds-twitter]: https://twitter.com/vidstackjs
