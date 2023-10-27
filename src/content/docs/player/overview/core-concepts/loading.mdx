@@ -347,7 +347,12 @@ Video streaming platforms such as [Cloudflare Stream][cf-stream] and [Mux][mux] 
 video file (e.g., awesome-video.mp4) and create multiple renditions out of the box for you,
 with multiple resolutions (width/height) and bit rates:
 
-<img src={hlsManifestImage.src} alt="" decoding="async" loading="lazy" />
+<img
+  src={hlsManifestImage.src}
+  alt="HLS manifest with multiple child resolution manifests."
+  decoding="async"
+  loading="lazy"
+/>
 
 By default, the best quality is automatically selected by the streaming engine such as [hls.js][hlsjs].
 You'll usually see this as an "Auto" option in the player quality menu. It can also be manually set
