@@ -12,13 +12,14 @@ interface Props extends HTMLAttributes<'div'> {
   id: string;
   domId?: string | null;
   title?: string;
+  ext?: boolean;
   copy?: boolean;
   flat?: boolean;
   numbered?: boolean;
   highlights?: string;
 }
 
-const { id, highlights: propHighlights, copy, ...restProps } = Astro.props,
+const { id, highlights: propHighlights, copy, ext, ...restProps } = Astro.props,
   { pathname } = Astro.url,
   isRelativeId = id.startsWith('./') || id.startsWith('../'),
   snippet = findCodeSnippet(id.replace(/^\.\.?\//, ''), id.startsWith('../')),
@@ -65,7 +66,7 @@ if (!snippet) {
 }
 
 const defaultTitle =
-  copy && snippet ? (snippet.ext === 'bash' ? 'terminal' : snippet.ext) : undefined;
+  (copy || ext) && snippet ? (snippet.ext === 'bash' ? 'terminal' : snippet.ext) : undefined;
 ---
 
 {
@@ -82,7 +83,7 @@ const defaultTitle =
         <CodeSnippetLoader id={snippet.id} client:visible />
       </CodeBlock>
     ) : (
-      <CodeBlock {...codeBlockProps}>
+      <CodeBlock title={defaultTitle} {...codeBlockProps}>
         <CodeSnippetLoader id={snippet.id} client:visible />
       </CodeBlock>
     ))

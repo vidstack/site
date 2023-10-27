@@ -1,0 +1,4 @@
+{
+  "regions": [{ "id": "0", "lines": 3, "scroll": "up" }],
+  "cues": [{ "region": { "id": "0" }, "startTime": 0, "endTime": 5, "text": "Hello!" }]
+}

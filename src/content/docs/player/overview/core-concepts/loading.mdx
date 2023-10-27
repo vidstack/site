@@ -1,6 +1,371 @@
 ---
-description: A guide on loading strategies and how to load various media sources.
+description: A guide on how to handle loading various media resources.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+import hlsManifestImage from '~/images/hls-manifest.png';
+
+## Avoiding Layout Shifts
+
+By default, the browser will use the [intrinsic size][intrinsic-size] of the loaded media to
+set the dimensions of the provider. As media loads over the network, the element will jump
+from the default size to the intrinsic media size, triggering a layout shift which is a [poor
+user experience indicator][cumulative-layout-shift] for both your users and search
+engines (i.e., Google).
+
+**Aspect Ratio**
+
+To avoid a layout shift, we recommend setting the aspect ratio like so:
+
+::code[./layout-shift]{ext=true}
+
+Ideally the ratio set should match the ratio of the media content itself (i.e., intrinsic aspect ratio)
+otherwise you'll end up with a letterbox template (empty black bars on the left/right of the media).
+
+**Specify Dimensions**
+
+If you'd like to be more specific for any reason, you can specify the `width` and `height` of the
+player simply using CSS like so:
+
+::code[./dimensions]
+
+[intrinsic-size]: https://developer.mozilla.org/en-US/docs/Glossary/Intrinsic_Size
+[cumulative-layout-shift]: https://web.dev/articles/cls
+
+## Load Strategies
+
+A loading strategy specifies when media should begin loading. Loading media too early
+can effectively slow down your entire application, so choose wisely. The following media loading
+strategies are available:
+
+- `eager`: Load media immediately - use when media needs to be interactive as soon as possible.
+- `idle`: Load media once the page has loaded and the `requestIdleCallback` is fired - use when
+  media is lower priority and doesn't need to be interactive immediately.
+- `visible`: Load media once it has entered the visual viewport - use when media is below the fold
+  and you prefer delaying loading until it's required.
+- `custom`: Load media when the `startLoading()` method is called or the `media-start-loading` event
+  is dispatched - use when you need fine control of when media should begin loading.
+
+::code[./load-strategy]
+
+### Custom Load Strategy
+
+A custom load strategy lets you control when media should begin loading:
+
+::code[./load-custom-strategy]
+
+## View Type
+
+The view type suggests what type of media layout will be displayed. It can be either `audio` or
+`video`. This is mostly to inform layouts, whether your own or the defaults, how to appropriately
+display the controls and general UI. By default, the view type is inferred from the provider and
+media type. You can specify the desired type like so:
+
+::code[./view-type]
+
+## Stream Type
+
+The stream type refers to the mode in which content is delivered through the video player. The
+player will use the type to determine how to manage state/internals such as duration updates,
+seeking, and how to appropriately present UI components and layouts. The stream type can be one of
+the following values:
+
+- `vod`: Video on Demand (VOD) Content that is pre-recorded and can be accessed and played at any
+  time. VOD streams allow viewers to control playback, pause, rewind, and fast forward.
+- `live`: Live streaming delivers real-time content as it happens. Viewers join the stream and
+  watch the content as it's being broadcast, with limited control over playback.
+- `live:dvr`: Live DVR (Live Digital Video Recording) combines the features of both live and VOD.
+  Viewers can join a live stream and simultaneously pause, rewind, and fast forward, offering more
+  flexibility in watching live events.
+- `ll-live`: A live streaming mode optimized for reduced latency, providing a near-real-time
+  viewing experience with minimal delay between the live event and the viewer.
+- `ll-live:dvr`: Similar to low-latency live, this mode enables viewers to experience live content
+  with minimal delay while enjoying the benefits of DVR features (same as `live:dvr`).
+
+If the value is not set, it will be inferred by the player which can be less accurate (e.g., at
+identifying DVR support). When possible, prefer specifying it like so:
+
+::code[./stream-type]
+
+## Sources
+
+The player can accept one or more media sources which can be a `string` URL of the media resource
+to load, or any of the following objects: `MediaStream`, `MediaSource`, `Blob`, or `File`.
+
+**Single Source**
+
+::code[./single-source]
+
+**Multiple Sources**
+
+The list of [supported media formats](#supported-codecs) varies from one browser to the other. You should
+either provide your source in a single format that all relevant browsers support, or provide multiple
+sources in enough different formats that all the browsers you need to support are covered.
+
+::code[./multiple-sources]
+
+### Source Objects
+
+The player accepts both audio and video source objects. This includes [MediaStream][media-stream],
+[MediaSource][media-source], [Blob][blob], and [File][file].
+
+::code[./source-object]
+
+[media-stream]: https://developer.mozilla.org/en-US/docs/Web/API/MediaStream
+[media-source]: https://developer.mozilla.org/en-US/docs/Web/API/MediaSource
+[blob]: https://developer.mozilla.org/en-US/docs/Web/API/Blob
+[file]: https://developer.mozilla.org/en-US/docs/Web/API/File
+
+### Changing Source
+
+The player supports changing the source dynamically. Simply update the `src` property when you
+want to load new media. You can also set it to an empty string `""` to unload media.
+
+::code[./source-management]
+
+### Source Types
+
+The player [source selection][source-selection] process relies on file extensions, object types,
+and type hints to determine which provider to load and how to play a given source. The following
+is a table of supported media file extensions and types for each provider:
+
+| Media     | Extensions                                                               | Types                                                                                                                                     |
+| --------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Audio** | m4a, m4b, mp4a, mpga, mp2, mp2a, mp3, m2a, m3a, wav, weba, aac, oga, spx | audio/mpeg, audio/ogg, audio/3gp, audio/mp4, audio/webm, audio/flac, audio/object                                                         |
+| **Video** | mp4, ogg, ogv, webm, mov, m4v                                            | video/mp4, video/webm, video/3gp, video/ogg, video/avi, video/mpeg                                                                        |
+| **HLS**   | m3u8                                                                     | application/vnd.apple.mpegurl, audio/mpegurl, audio/x-mpegurl, application/x-mpegurl, video/x-mpegurl, video/mpegurl, application/mpegurl |
+
+:::yes
+The following are valid as they have a file extension (e.g, `video.mp4`) or type
+hint (e.g., `video/mp4`):
+:::
+
+- `src="https://example.com/video.mp4"`
+- `src="https://example.com/hls.m3u8"`
+- `src = { src: "https://example.com/video", type: "video/mp4"  }`
+- `src = { src: "https://example.com/hls", type: "application/x-mpegurl"  }`
+
+:::no
+The following are invalid as they are missing a file extension and type hint:
+:::
+
+- `src="https://example.com/video"`
+- `src="https://example.com/hls"`
+
+[source-selection]: /docs/player/getting-started/architecture#source-selection
+
+### Source Sizes
+
+We do not currently support providing multiple static source sizes such as
+`[{ src: "...", size: 480 }, { src: "...", size: 720 }, ...]`. We will most likely add support
+for this feature but only for the initial load similar to the `<picture>` element. The sources will
+not show up in the video quality API. Please use an adaptive streaming protocol such as HLS as
+explained in the [Video Qualities](#video-qualities) section below.
+
+### Supported Codecs
+
+Vidstack Player relies on the native browser runtime to handle media playback, hence it's
+important you review what containers and codecs are supported by them. This also applies to
+libraries like [`hls.js`][hlsjs] which we use for HLS playback in browsers that don't support
+it natively.
+
+While there are a vast number of media container formats, the ones listed below are the ones
+you are most likely to encounter. Some support only audio while others support both audio and
+video. The most commonly used containers for media on the web are probably MPEG-4 (MP4), Web Media
+File (WEBM), and MPEG Audio Layer III (MP3).
+
+**It's important that both the media container and codecs are supported by the native runtime.**
+Please review the following links for what's supported and where:
+
+- [Media Containers][media-containers]
+- [Audio Codecs][audio-codecs]
+- [Video Codecs][video-codecs]
+
+[hlsjs]: https://github.com/video-dev/hls.js
+[media-containers]: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers
+[audio-codecs]: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs
+[video-codecs]: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs
+
+## Providers
+
+Providers are auto-selected during the [source selection][source-selection] process and
+dynamically loaded via a provider loader (e.g., `VideoProviderLoader`). The following providers
+are supported at this time:
+
+- [Audio][audio-provider]
+- [Video][video-provider]
+- [HLS][hls-provider]
+- Dash: coming soon.
+- YouTube: coming soon.
+- Vimeo: coming soon.
+
+:::info
+See [source types](#source-types) for how to ensure the correct media provider is loaded.
+:::
+
+[audio-provider]: /docs/wc/player/api/providers/audio
+[video-provider]: /docs/wc/player/api/providers/video
+[hls-provider]: /docs/wc/player/api/providers/hls
+
+### Provider Events
+
+The following events will fire as providers change or setup:
+
+::code[./provider-events]
+
+### Provider Types
+
+The following utilities can be useful for narrowing the type of a media provider:
+
+::code[./provider-types]
+
+## Audio Tracks
+
+Audio tracks are loaded from your HLS playlist. You can not manually add audio tracks to the
+player at this time. See the [Audio Tracks API][audio-tracks-api] guide for how to interact
+with audio track programmatically.
+
+[audio-tracks-api]: /docs/player/api/audio-tracks
+
+## Text Tracks
+
+Text tracks allow you to provide text-based information or content associated with video
+or audio. These text tracks can be used to enhance the accessibility and user experience of
+media content in various ways. You can provide multiple text tracks dynamically like so:
+
+::code[./text-tracks]
+
+:::info
+See the [Text Tracks API][text-tracks-api] guide for how to interact with text tracks programmatically.
+:::
+
+[text-tracks-api]: /docs/player/api/text-tracks
+
+### Text Track Default
+
+When `default` is set on a text track it will set the mode of that track to showing immediately. In
+other words, this track is immediately active. Only one default is allowed
+per [track kind](#text-track-kinds).
+
+::code[./text-track-default]
+
+### Text Track Formats
+
+The [vidstack/media-captions][media-captions] library handles loading, parsing, and rendering
+captions inside of the player. The following caption formats are supported:
+
+- [VTT][captions-vtt]
+- [SRT][captions-srt]
+- [SSA/ASS][captions-ssa]
+- [JSON](#json-tracks)
+
+See the links provided for more information and any limitations. Do note, all caption formats
+are mapped to VTT which is extended to support custom styles. In addition, browsers or
+providers may also support loading additional text tracks. For example, Safari and the HLS provider
+will load captions embedded in HLS playlists.
+
+You can specify the desired text track format like so:
+
+::code[./text-track-type]
+
+[media-captions]: https://github.com/vidstack/media-captions
+[captions-vtt]: https://github.com/vidstack/media-captions#vtt
+[captions-srt]: https://github.com/vidstack/media-captions#srt
+[captions-ssa]: https://github.com/vidstack/media-captions#ssaass
+
+### Text Track Kinds
+
+The following text track kinds are supported:
+
+- `subtitles`: Provides a written version of the audio for non-native speakers.
+- `captions`: Includes dialog and descriptions of important audio elements, like music
+  or sound effects.
+- `chapters`: Contains information (e.g, title and start times) about the different
+  chapters or sections of the media file.
+- `descriptions`: Provides information about the visual content to assist individuals who are
+  blind or visually impaired.
+- `metadata`: Additional information or descriptive data within a media file. This metadata can
+  be used for various purposes, like providing descriptions, comments, or annotations related to the
+  media content. It is not displayed as subtitles or captions but serves as background information
+  that can be used for various purposes, including search engine optimization, accessibility enhancements,
+  or supplementary details for the audience.
+
+::code[./text-track-kind]
+
+### JSON Tracks
+
+Text tracks also support the `json` type. The resource at the given src should return a
+JSON object with:
+
+- An optional `regions` array of partial [`VTTRegion`][vtt-region] objects
+- An optional `cues` array of partial [`VTTCue`][vtt-cue] objects.
+
+::code[./json-captions]
+
+The type can be specified on the text track like so:
+
+::code[./text-track-json]
+
+Example JSON file with cues:
+
+::code[./json-cues]{title=cues.json}
+
+Example JSON file with regions:
+
+::code[./json-regions]{title=regions.json}
+
+[vtt-region]: https://github.com/vidstack/media-captions/blob/main/src/vtt/vtt-region.ts
+[vtt-cue]: https://github.com/vidstack/media-captions/blob/main/src/vtt/vtt-cue.ts
+
+### LibASS
+
+We provide a direct integration for a [WASM port of libass][jassub] if you'd like to use advanced
+ASS features that are [not supported][captions-ssa].
+
+1. `npm i jassub`
+
+2. Copy the `node_modules/jassub/dist` directory to your public directory (e.g, `public/jassub`)
+
+3. Add the `LibASSTextRenderer` to the player like so:
+
+::code[./libass]{copy=true}
+
+:::info
+See the [JASSUB options][jassub-options] for how to further configure the LibASS renderer.
+:::
+
+[jassub]: https://github.com/ThaUnknown/jassub
+[jassub-options]: https://github.com/ThaUnknown/jassub#options
+
+## Video Qualities
+
+Adaptive streaming protocols like [HLS][hls-wiki] not only enable streaming media in chunks, but
+also have the ability adapt playback quality based on the device size, network conditions, and
+other information. Adaptive qualities is important for speeding up initial delivery and to
+avoid loading excessive amounts of data which cause painful buffering delays.
+
+Video streaming platforms such as [Cloudflare Stream][cf-stream] and [Mux][mux] will take an input
+video file (e.g., awesome-video.mp4) and create multiple renditions out of the box for you,
+with multiple resolutions (width/height) and bit rates:
+
+<img src={hlsManifestImage.src} alt="" decoding="async" loading="lazy" />
+
+By default, the best quality is automatically selected by the streaming engine such as [hls.js][hlsjs].
+You'll usually see this as an "Auto" option in the player quality menu. It can also be manually set
+if the engine is not making optimal decisions, as they're generally more conservative to avoid
+excessive bandwidth usage.
+
+Once you have your HLS playlist by either creating it yourself using [FFMPEG][ffmpeg] or using
+a streaming provider, you can pass it to the player like so:
+
+::code[./play-hls]
+
+:::info
+See the [Video Qualities API][video-quality-api] guide for how to interact with renditions
+programmatically.
+:::
+
+[ffmpeg]: https://www.ffmpeg.org
+[video-quality-api]: /docs/player/api/video-quality
+[hls-wiki]: https://en.wikipedia.org/wiki/HTTP_Live_Streaming
+[cf-stream]: https://www.cloudflare.com/products/cloudflare-stream
+[mux]: https://www.mux.com

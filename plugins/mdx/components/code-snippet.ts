@@ -27,7 +27,7 @@ function createPlugin(): unified.Plugin<[], mdast.Root> {
       const type = node.name;
       if (type !== 'code') return;
 
-      let { title, copy, numbered } = node.attributes,
+      let { title, ext, copy, numbered } = node.attributes,
         id: string | undefined;
 
       remove(node, (child: any) => {
@@ -42,7 +42,7 @@ function createPlugin(): unified.Plugin<[], mdast.Root> {
       }
 
       parent.children[index!] = createComponentNode(CodeSnippetTagName, {
-        attributes: { type, title, copy: !!copy, numbered: !!numbered, id },
+        attributes: { type, title, copy: !!copy, ext: !!ext, numbered: !!numbered, id },
       });
     });
   };

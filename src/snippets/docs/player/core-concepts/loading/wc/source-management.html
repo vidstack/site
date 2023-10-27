@@ -1,0 +1,23 @@
+<script>
+  let player = document.querySelector('media-player'),
+    sources = ['/video-a.mp4', '/video-b.mp4', './video-c.mp4'],
+    currentSrc = 0;
+
+  function prevVideo() {
+    currentSrc = Math.max(0, currentSrc - 1);
+    updateSource();
+  }
+
+  function nextVideo() {
+    currentSrc = Math.min(sources.length - 1, currentSrc + 1);
+    updateSource();
+  }
+
+  function updateSource() {
+    player.src = sources[currentSrc];
+  }
+</script>
+
+<media-player>
+  <!-- ... -->
+</media-player>

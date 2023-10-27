@@ -1,0 +1,25 @@
+<script>
+  import { LibASSTextRenderer } from 'vidstack';
+
+  const player = document.querySelector('media-player');
+
+  const renderer = new LibASSTextRenderer(() => import('jassub'), {
+    workerUrl: '/jassub/jassub-worker.js',
+    legacyWorkerUrl: '/jassub/jassub-worker-legacy.js',
+  });
+
+  player.textRenderers.add(renderer);
+</script>
+
+<media-player>
+  <media-provider>
+    <track
+      src="/english.ass"
+      kind="subtitles"
+      label="English"
+      srclang="en-US"
+      default
+      data-type="ass"
+    />
+  </media-provider>
+</media-player>
