@@ -32,7 +32,7 @@
           &nbsp;
         </div>
       {:else}
-        <br class="h-[var(--leading)]" />
+        <div class="h-[var(--leading)]" />
       {/if}
     {/each}
   </div>

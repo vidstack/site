@@ -25,7 +25,8 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     // Core Concepts
     'player/overview/core-concepts/loading.mdx',
     'player/overview/core-concepts/events.mdx',
-    'player/overview/core-concepts/state-management.mdx',
+    'player/overview/core-concepts/wc/state-management.mdx',
+    'player/overview/core-concepts/react/state-management.mdx',
     // Styling
     'player/overview/styling/introduction.mdx',
     'player/overview/styling/layouts.mdx',

@@ -1,0 +1,66 @@
+---
+description: A guide on how to read, update, and subscribe to media state.
+---
+
+## Reading
+
+The `useMediaState` and `useMediaStore` hooks enable you to subscribe directly to specific
+media state changes, rather than listening to potentially multiple DOM events and binding it
+yourself.
+
+:::no
+Tracking media state via events is error prone and tedious:
+:::
+
+::code[./bad-state-tracking]
+
+:::yes
+Tracking media state via hooks:
+:::
+
+::code[./good-state-tracking]
+
+You can omit the ref if you're calling the hooks inside a player child component as the
+media context is available:
+
+::code[./good-state-tracking-child]
+
+:::info
+You can find a complete list of all media states available in the [Player State Reference][player-state].
+:::
+
+[player-state]: /docs/player/components/core/player#mediaplayer.state
+
+### Avoiding Renders
+
+The `useMediaState` and `useMediaStore` hook will trigger re-renders. For some media state this
+may be too expensive or unnecessary. You can subscribe to state updates directly on the player
+instance to avoid triggering renders:
+
+::code[./avoid-renders]
+
+When inside a player child component you can get a player instance reference with
+`useMediaPlayer`:
+
+::code[./avoid-renders-child]
+
+## Updating
+
+The `useMediaRemote` hook creates and returns a `MediaRemoteControl` object. The returned
+class provides a simple facade for dispatching [media request events][request-events].
+This can be used to request media playback to play/pause, change the current volume level, seek
+to a different time position, and other actions that change media state.
+
+::code[./media-remote]
+
+The example above shows that event triggers can be provided to all methods on the `MediaRemoteControl`
+class. Trigger events enable connecting media events back to their origin event. This can be
+useful when trying to understand how a media event was triggered, or when analyzing data such as
+the time difference between the request and when it was performed.
+
+:::info
+See the [`useMediaRemote`][use-media-remote-api] API docs for more information.
+:::
+
+[request-events]: /docs/player/core-concepts/events#media-request-events
+[use-media-remote-api]: /docs/player/api/hooks/use-media-remote
