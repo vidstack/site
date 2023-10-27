@@ -2,5 +2,78 @@
 description: A guide on how events and tracking works inside the library.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+import eventChainImage from '~/images/event-chain.png';
+
+## Media Events
+
+You can find a complete list of media events fired in the **[Player API Reference][player-api]**. The
+player smoothes out any unexpected behavior across browsers, attaches additional metadata to the
+event detail, and rich information such as the request event that triggered it or the origin event
+that kicked it off.
+
+::code[./media-events]
+
+## Media Request Events
+
+Vidstack Player is built upon a [request and response model][player-architecture] for updating
+media state. Requests are dispatched as events to the player component. The player attempts
+to satisfy requests by performing operations on the provider based on the given request, and
+then attaching it to the corresponding media event.
+
+For example, the `media-play-request` event is a request to begin/resume playback, and as a
+consequence it'll trigger a `play()` call on the provider. The provider will respond with a
+`play` or `play-fail` event to confirm the request was satisfied. You can find a complete list
+of media request events fired in the [Player API Reference][player-api].
+
+::code[./request-events]
+
+**When are request events fired?**
+
+Media request events are fired by Vidstack components generally in response to user actions. Most
+actions are a direct consequence to UI events such as pressing a button or dragging a slider.
+However, some actions may be indirect such as scrolling the player out of view, switching
+browser tabs, or the device going to sleep.
+
+**How are request events fired?**
+
+Request events are standard DOM events which can be dispatched like any other, however, they're
+generally dispatched by using the [`MediaRemoteControl`][remote-control] as it's simpler. A
+good practice is to always attach [event triggers](#event-triggers) to ensure requests can be
+traced back to their origin. This is the same way all Vidstack components dispatch requests
+internally.
+
+[player-architecture]: /docs/player/getting-started/architecture
+[remote-control]: /docs/player/core-concepts/state-management#updating
+
+## Event Triggers
+
+All events in the library keep a history of **trigger events** which are stored as a chain. Each
+event points to the event that came before it all the way up to the **origin event**. The following
+is an example of a chain that is created when the play button is clicked and media begins playing:
+
+<img
+  src={eventChainImage.src}
+  alt="Media playing event chain diagram"
+  decoding="async"
+  loading="lazy"
+/>
+
+::code[./event-triggers]
+
+### Walking Triggers
+
+The event trigger chain can be walked through to discover additional information about how the
+event was triggered. For example, you could detect whether a playing event is resuming from a
+buffering event like so:
+
+::code[./walking-triggers]
+
+## Event Types
+
+All event types are named using _PascalCase_ and suffixed with the word _Event_
+(e.g., `SliderDragStartEvent`). Furthermore, media events are all prefixed with the word _Media_ as
+seen in the examples below. Refer to each component's docs page to see what events are fired.
+
+::code[./event-types]
+
+[player-api]: /docs/player/components/core/player#api-reference
