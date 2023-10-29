@@ -13,8 +13,8 @@
   let player;
 
   onMount(() => {
-    // Strange bug with Svelte renaming `playsinline` to `playsInline` when set via attr.
-    player.playsinline = true;
+    // Strange bug with Svelte, not sure yet.
+    // player.playsinline = true;
     return () => {
       player?.destroy();
     };
@@ -27,6 +27,7 @@
   class="aspect-video w-full min-w-[275px] max-w-[80%] @sm:max-w-[90%] border-0"
   crossorigin
   keep-alive
+  playsinline
   style="aspect-ratio: 16/9;"
   bind:this={player}
 >
