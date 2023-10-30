@@ -336,6 +336,65 @@ See the [JASSUB options][jassub-options] for how to further configure the LibASS
 [jassub]: https://github.com/ThaUnknown/jassub
 [jassub-options]: https://github.com/ThaUnknown/jassub#options
 
+## Thumbnails
+
+Thumbnails are small, static images or frames extracted from the video or audio content. These
+images serve as a visual preview or representation of the media content, allowing users to quickly
+identify and navigate to specific points within the video or audio. Thumbnails are often displayed
+in the time slider or chapters menu; enabling users to visually browse and select the part of
+the content they want to play.
+
+Thumbnails can be loaded using the [Thumbnail][thumbnail] component or [`useThumbnails`][use-thumbnails] hook.
+They're also supported out the box by the [Default Layout][default-layout-thumbnails].
+
+General notes:
+
+- The image URLs specified can be absolute `https://example.com/media/thumbnail-1.jpg`
+  or relative `/media/thumbnail-1.jpg`.
+- The width and height of each thumbnail image should be kept the same. If sizes differ, the
+  aspect ratio should remain the same to avoid jumping when previewing.
+
+### VTT
+
+Thumbnails are generally provided in the [Web Video Text Tracks][webvtt] (WebVTT) format. The WebVTT file
+specifies the time ranges of when to display images, with the respective image URL and coordinates
+(only required if using a sprite). You can refer to our [thumbnails example][thumbnails-example] to
+get a better idea of how this file looks.
+
+**Sprite**
+
+Sprites are [large storyboard images][storyboard] that contain multiple small tiled thumbnails.
+They're preferred over loading multiple images because:
+
+- Sprites reduce total file size due to compression.
+- Avoid loading delays for each thumbnail.
+- Reduce the number of server requests.
+
+The WebVTT file must append the coordinates of each thumbnail like so:
+
+::code[./thumbnail-sprite-vtt]
+
+**Multiple Images**
+
+Sprites should generally be preferred but in the case you only have multiple individual
+thumbnail images, they can be specified like so:
+
+::code[./thumbnail-multiple-images]
+
+### JSON
+
+Thumbnails can also be loaded as a JSON file. First, make sure the `Content-Type` header is
+set to `application/json` on the response, and then return the cues as a JSON array like so:
+
+::code[./thumbnail-json]
+
+[webvtt]: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API
+[thumbnail]: /docs/player/components/display/thumbnail
+[storyboard]: https://media-files.vidstack.io/storyboard.jpg
+[thumbnails-example]: https://media-files.vidstack.io/thumbnails.vtt
+[use-thumbnails]: /docs/player/api/hooks/use-thumbnails
+[default-layout-thumbnails]: /docs/player/components/layouts/default-layout#thumbnails
+
 ## Video Qualities
 
 Adaptive streaming protocols like [HLS][hls-wiki] not only enable streaming media in chunks, but

@@ -39,19 +39,20 @@ so:
 ## Thumbnails
 
 You can provide thumbnails which will be used to display preview images when interacting with
-the time slider and in the chapters menu. The `thumbnails` property must be an absolute or
-relative URL to a WebVTT file resource ([example][thumbnails-example]).
-
-- The image URLs specified in the WebVTT file can be absolute
-  `https://foo.com/media/thumbnail-1.jpg` or relative `/media/thumbnail-1.jpg`.
-- The width and height of each thumbnail image should be kept the same. If sizes differ, the
-  aspect ratio should remain the same to avoid jumping when previewing.
-- You can specify multiple images or use a sprite (recommended) which is a large storyboard image
-  as shown in the linked example.
+the time slider and in the chapters menu. See the [loading thumbnails][loading-thumbnails] guide
+for more information.
 
 ::code[./thumbnails]
 
-[thumbnails-example]: https://media-files.vidstack.io/thumbnails.vtt
+[loading-thumbnails]: /docs/player/core-concepts/loading#thumbnails
+
+## Language
+
+Both the audio and video layout support internationalization by accepting custom language
+translations. You can dynamically set the `translations` property to update the language like so:
+
+::code[./language]{copy=true}
+::code[./provide-language]
 
 ## CSS Variables
 
@@ -75,14 +76,6 @@ The following variables can be used to specifically customize the video layout. 
 ### Components
 
 ::code[./component-vars]{copy=true}
-
-## Language
-
-Both the audio and video layout support internationalization by accepting custom language
-translations. You can dynamically set the `translations` property to update the language like so:
-
-::code[./language]{copy=true}
-::code[./provide-language]
 
 ## Previews
 
