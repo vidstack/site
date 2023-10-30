@@ -1,6 +1,4 @@
-{
-  "cues": [
-    { "startTime": 0, "endTime": 5, "text": "Cue One!" },
-    { "startTime": 5, "endTime": 10, "text": "Cue Two!" }
-  ]
-}
+[
+  { "startTime": 0, "endTime": 5, "text": "Cue One!" },
+  { "startTime": 5, "endTime": 10, "text": "Cue Two!" }
+]
