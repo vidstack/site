@@ -16,15 +16,19 @@
     return [...document.querySelectorAll(`#table-of-contents a`)] as HTMLAnchorElement[];
   }
 
+  function getAnchors(links: HTMLAnchorElement[]) {
+    return [...document.querySelectorAll<HTMLAnchorElement>('.anchor-link')].filter((anchor) =>
+      links.some((link) => {
+        return link.hash === anchor.hash;
+      }),
+    );
+  }
+
   function onScroll() {
     scrollOffset = document.querySelector('main')!.offsetTop;
 
     const links = getLinks(),
-      anchors = [...document.querySelectorAll<HTMLAnchorElement>('.anchor-link')].filter((anchor) =>
-        links.some((link) => {
-          return link.hash === anchor.hash;
-        }),
-      );
+      anchors = getAnchors(links);
 
     const scrollY = window.scrollY,
       innerHeight = window.innerHeight,

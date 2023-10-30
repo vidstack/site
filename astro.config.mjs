@@ -92,7 +92,7 @@ export default defineConfig({
           // Old site styling links.
           [`${base}/core-concepts/styling`]: '/docs/player/styling/introduction',
           [`${base}/core-concepts/tailwind`]: '/docs/player/styling/tailwind',
-          [`${base}/core-concepts/skins`]: '/docs/player/styling/layouts',
+          [`${base}/core-concepts/skins`]: '/docs/player/styling/responsive-design',
           // Old site installation links.
           [`${base}/getting-started/installation/audio`]:
             '/docs/player/getting-started/installation/web-components?provider=audio',

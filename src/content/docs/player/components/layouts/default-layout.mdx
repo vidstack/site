@@ -2,8 +2,10 @@
 description: A guide on how to setup the default audio/video layout and available customization options.
 ---
 
-The Default Layout ships with support for audio and video. You can include both layouts at the
-same time, only one will be matched depending on the view type.
+import MediaPlayer from '~/components/players/lazy-media-player.svelte';
+
+The Default Layout ships with support for audio, video, and live streams. You can include both
+layouts at the same time, only one will be matched depending on the view type.
 
 ::code[./usage]
 
@@ -81,5 +83,19 @@ translations. You can dynamically set the `translations` property to update the 
 
 ::code[./language]{copy=true}
 ::code[./provide-language]
+
+## Previews
+
+### Audio
+
+<MediaPlayer type="audio" client:load />
+
+### Video
+
+<MediaPlayer type="video" client:load />
+
+### Live
+
+<MediaPlayer type="live" client:load />
 
 ::component_api

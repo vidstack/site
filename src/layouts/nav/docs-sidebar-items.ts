@@ -29,7 +29,6 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/overview/core-concepts/react/state-management.mdx',
     // Styling
     'player/overview/styling/introduction.mdx',
-    'player/overview/styling/layouts.mdx',
     'player/overview/styling/responsive-design.mdx',
     'player/overview/styling/tailwind.mdx',
   ],
