@@ -1,0 +1,10 @@
+/* AND conditional style. */
+/* Apply styles when media playback has ended and controls are hidden. */
+.player[data-ended]:not([data-controls]) {
+}
+
+/* OR conditional style. */
+/* Apply styles if media is not ready for playback or it's playing. */
+.player:not([data-can-play]),
+.player[data-playing] {
+}

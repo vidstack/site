@@ -1,0 +1,10 @@
+/* AND conditional style. */
+/* Apply styles when media playback has ended and user is idle. */
+media-player[data-user-idle][data-ended] {
+}
+
+/* OR conditional style. */
+/* Apply styles if media is not ready for playback or it's buffering. */
+media-player:not([data-can-play]),
+media-player[data-waiting] {
+}

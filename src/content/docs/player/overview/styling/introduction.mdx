@@ -2,5 +2,87 @@
 description: An introduction to styling media elements and components using CSS.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Styling Elements
+
+Vidstack Player enables styling _any child element_ of the player with CSS based on the current
+media state. This is made possible by exposing media state as data attributes on the player
+DOM element. You can use the presence and/or absence of these media data attributes to style
+children of the player element with CSS. Here's a few simple examples:
+
+::code[./styling-elements]{title="examples.css"}
+
+:::info
+See the [Media Player Data Attributes][player-data-attrs] reference table.
+:::
+
+The `[attr]` selector will select elements based on the presence or value of an attribute, and
+the `:not()` pseudo-class represents elements that do not match a list of selectors. You can
+combine attributes and selectors to express newer and more powerful conditional selectors like so:
+
+::code[./styling-elements-complex]{title="examples.css"}
+
+[player-data-attrs]: /docs/player/components/core/player#mediaplayer.attrs
+
+## Styling Components
+
+Similarly to styling player elements, components also expose data attributes and CSS variables for
+styling with CSS:
+
+::code[./styled-components]
+::code[./styling-components]
+
+:::info
+Refer to the Data Attributes and CSS Variables section on each [component's][components] page.
+:::
+
+[components]: /docs/player/components/core/player
+
+### Default Theme
+
+To speed up development, we provide default styles out of the box for all components. The
+[installation][default-theme-install] guide can get you set up. You're free to override CSS properties
+and use CSS variables to further customize components as desired. The default theme is applied via
+classes like so:
+
+::code[./default-theme]{title="examples.tsx"}
+
+You can see our [player examples][examples] to see how to apply the default theme to a variety
+of components. You can also find code examples and CSS variables on each [component][components] page.
+
+[examples]: https://github.com/vidstack/examples/tree/main/player
+[default-theme-install]: /docs/player/getting-started/installation?styling=default-theme&provider=video
+
+### Animations
+
+Some components such as [Tooltips][tooltip] and [Menus][menu] are hidden (i.e., `display: none`)
+when they're inactive to prevent ARIA and focus issues, and to not appear on initial mount. You can
+add animations to the mentioned components using CSS. The library will wait for the animation to
+end before performing any operations such as focusing the first interactive element, or forcefully
+hiding the component.
+
+::code[./animation]
+
+[tooltip]: /docs/player/components/buttons/tooltip
+[menu]: /docs/player/components/menus/menu
+
+## Where to start?
+
+Now that you've familiarized yourself with how styling elements and components works, you can
+start building! The best place is to start with styling any of the following:
+
+- The [player][player] is responsive by default but you might want to set a specific width or
+  aspect ratio to [prevent layout shifts][avoid-layout-shifts].
+- The [provider][provider] can generally be left as-is, but it's important you understand what role
+  it plays in your design.
+- The [controls][controls] is a great place to start as most media components are generally
+  grouped and shown/hidden together.
+
+From there you're free to start exploring all of our components by scrolling down through the
+[components][components] sidebar. They're organized into categories by their role (e.g., display,
+buttons, sliders, etc.) and each contains docs on everything you need for using and customizing
+them. Enjoy!
+
+[player]: /docs/player/components/core/player
+[provider]: /docs/player/components/core/provider
+[controls]: /docs/player/components/display/controls
+[avoid-layout-shifts]: /docs/player/core-concepts/loading#avoiding-layout-shifts

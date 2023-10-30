@@ -1,0 +1,21 @@
+/* Examples of component data attrs and CSS vars. */
+
+.poster[data-visible] {
+  /* ... */
+}
+
+.play-button[data-paused] {
+  /* ... */
+}
+
+.slider[data-dragging] {
+  /* ... */
+}
+
+.slider-track-fill {
+  width: var(--slider-fill, 0%);
+}
+
+.menu[data-open] {
+  /* ... */
+}

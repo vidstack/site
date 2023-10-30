@@ -1,0 +1,7 @@
+/* Apply styles to `foo` class when media is paused. */
+media-player[data-paused] .foo {
+}
+
+/* Apply styles to `bar` class when media is _not_ paused. */
+media-player:not([data-paused]) .bar {
+}

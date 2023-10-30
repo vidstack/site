@@ -1,0 +1,29 @@
+/* Simple fade in/out animation example. */
+
+/* Enter animation. */
+.menu[data-open] {
+  animation: menu-fade-in 300ms ease-out;
+}
+
+/* Exit animation. */
+.menu:not([data-open]) {
+  animation: menu-fade-out 300ms ease-in;
+}
+
+@keyframes menu-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
