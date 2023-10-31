@@ -46,6 +46,10 @@ if (pathname.includes('components/')) {
           addHeading(component.name, 3, fullName);
         }
 
+        if ((component.props || []).filter((prop) => !prop.internal)) {
+          addHeading('Props', tableHeadingLevel, fullName + '.props');
+        }
+
         if (hasInstance && component.instance?.state) {
           addHeading('State', tableHeadingLevel, fullName + '.state');
         }

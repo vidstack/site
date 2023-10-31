@@ -28,6 +28,12 @@ const updateLinks = animationFrameThrottle(() => {
       url.searchParams.set('styling', cssLib);
     }
 
+    if (jsLib === 'web-components') {
+      url.hash = url.hash.replace(/#(?:media)?(.*?)\.(.*?)/, '#$1.$2');
+    } else {
+      url.hash = url.hash.replace(/#(?:media)?(.*?)\.(.*?)/, '#media$1.$2');
+    }
+
     anchor.href = url.href;
   }
 });

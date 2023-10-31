@@ -1,0 +1,28 @@
+.player {
+  container-name: media-player;
+  container-type: inline-size;
+}
+
+/* The following are example container breakpoints. */
+
+/* X-Small. */
+@container (inline-size < 576px) {
+  .controls {
+  }
+}
+
+/* Small */
+@container (576px <= inline-size < 768px) {
+}
+
+/* Medium */
+@container (768px <= inline-size < 992px) {
+}
+
+/* Large */
+@container (992px <= inline-size < 1200px) {
+}
+
+/* X-Large */
+@container (min-width: 1200px) {
+}

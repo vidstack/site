@@ -2,15 +2,87 @@
 description: A guide on the primitive building blocks available when creating responsive media designs.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Sizing
 
-This page will cover:
+Refer to the ["avoiding layout shifts"][avoiding-layout-shifts] section for how to ensure
+the player doesn't jump between it's default size and intrinsic size. This is important to avoid
+the page and your player layout shifting as content is loaded over the network.
 
-- Aspect Ratio
-- View Type
-- Container Queries
-- Media Queries
-- Player Queries
-- CSS Variables
-- Layouts
+## Layouts
+
+A media player layout refers to the arrangement and presentation of various elements and
+controls within a media player interface. It determines how these components are organized and
+displayed to the user while playing audio or video content. A well-designed media player layout
+enhances the user experience and provides easy access to essential functionalities.
+
+The arrangement and appearance of these elements can vary, but a well-structured media player
+layout ensures that users can easily control and enjoy the content, whether it's video, audio, live
+streaming, or other forms of multimedia. The layout design should consider user-friendliness,
+accessibility, and aesthetics to create a seamless and engaging media playback experience.
+
+Our library comes with pre-built production-ready layouts such as the [Default Layout][default-layout] and
+[Plyr Layout][plyr-layout]. However, if you prefer you can build your own custom layout. A
+custom layout is preferrable when you want more control over how the player UI is arranged and
+presented. You can easily build your own layout by composing and styling various
+[player components][components].
+
+::code[./custom-layout]{copy=true}
+
+[default-layout]: /docs/player/components/layouts/default-layout
+[plyr-layout]: /docs/player/components/layouts/plyr-layout
+[components]: /docs/player/components/core/player
+
+## Queries
+
+[CSS Media Queries][media-queries] are a CSS feature used to apply styles based on the
+characteristics of the viewing device, such as screen size, orientation, or resolution. While
+media queries are widely used for responsive web design, they have limitations when styling a
+media player, particularly in scenarios where the player's size and layout need to adapt
+dynamically to its container element, [view type][view-type], or [stream type][stream-type].
+This is where [container queries](#container-queries) and [player queries](#player-queries) are
+preferable.
+
+[view-type]: /docs/player/core-concepts/loading#view-type
+[stream-type]: /docs/player/core-concepts/loading#stream-type
+[media-queries]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
+[avoiding-layout-shifts]: /docs/player/core-concepts/loading#avoiding-layout-shifts
+
+### Container Queries
+
+[CSS Container Queries][container-queries] are a web development feature that allows styles to
+adapt based on the dimensions and characteristics of a specific container element, rather than
+the overall viewport. When designing a media player, container queries are useful for creating
+responsive and adaptive layouts within the player's container. They enable precise control over
+the player's appearance, ensuring it adjusts seamlessly to changes in the container's size and
+context.
+
+::code[./container-queries]{copy=true}
+
+:::info
+See the [Container Queries support table][caniuse-container-queries] as they're a relatively
+new feature added to browsers.
+:::
+
+[container-queries]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_container_queries
+[caniuse-container-queries]: https://caniuse.com/css-container-queries
+
+### Player Queries
+
+Player Queries are a feature we ship to enable matching against the current media state using
+strings which support CSS media-query-like syntax. They are generally used when working with
+layouts.
+
+Player Queries support the following syntax:
+
+- Comparators: `(width < 576) or (height <= 380)`
+- And: `(view-type: video) and (stream-type: on-demand)`
+- Or: `(fullscreen: true) or (orientation: landscape)`
+- Media Queries: `(fullscreen: true) and @media (min-width: 992px)`
+
+Do note, all **[media player state][player-state]** properties are available when writing queries.
+
+:::danger
+Player Queries use `eval` under the hood. **DO NOT** inject unsanitized content into query strings.
+:::
+
+[player-state]: /docs/player/components/core/player#mediaplayer.state
