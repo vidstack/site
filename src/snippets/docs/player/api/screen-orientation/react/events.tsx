@@ -2,8 +2,6 @@ import {
   MediaPlayer,
   type MediaOrientationChangeEvent,
   type ScreenOrientationChangeEventDetail,
-  type ScreenOrientationLockType,
-  type ScreenOrientationType,
 } from '@vidstack/react';
 
 function Player() {
@@ -11,6 +9,7 @@ function Player() {
     { orientation, lock }: ScreenOrientationChangeEventDetail,
     nativeEvent: MediaOrientationChangeEvent,
   ) {
+    const requestEvent = nativeEvent.request;
     // ...
   }
 

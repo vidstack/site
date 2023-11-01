@@ -2,5 +2,63 @@
 description: An overview on requesting and tracking screen orientation changes.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Requesting
+
+The player uses the native [Screen Orientation API][screen-orientation-api] to lock and unlock
+the document's orientation. You can request screen orientation changes by using the
+[remote control](#remote-control) or via [methods](#methods) on the player instance.
+
+:::info
+All [Screen Orientation API][caniuse-screen-orientation] methods are not available in all
+browsers. For example, iOS Safari does not support `lock` and `unlock`.
+:::
+
+### Remote
+
+The [media remote][media-remote] provides methods for dispatching `media-orientation-lock-request`
+and `media-orientation-unlock-request` events like so:
+
+::code[./remote-control]
+
+:::info
+Learn more about the [screen orientation lock types][screen-orientation-types] available.
+:::
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+### Methods
+
+The `lock()` and `unlock()` methods on the `ScreenOrientationController` can be used to change the
+orientation like so:
+
+::code[./methods]
+
+[screen-orientation-api]: https://developer.mozilla.org/en-US/docs/Web/API/Screen_Orientation_API
+[screen-orientation-types]: https://developer.mozilla.org/en-US/docs/Web/API/ScreenOrientation/lock#parameters
+
+## State
+
+The following screen orientation properties are available on the media store:
+
+- `canOrientScreen`: Whether the [Screen Orientation API][caniuse-screen-orientation] and required
+  methods are available.
+- `orientation`: The current screen orientation.
+
+::code[./state]
+
+[caniuse-screen-orientation]: https://caniuse.com/screen-orientation
+
+## Styling
+
+The following [media data attributes][player-data-attrs] are available for styling based on the
+current screen orientation state:
+
+::code[./styling]
+
+[player-data-attrs]: /docs/player/components/core/player#mediaplayer.attrs
+
+## Events
+
+The following events are available for detecting screen orientation changes:
+
+::code[./events]
