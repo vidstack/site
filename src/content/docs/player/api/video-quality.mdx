@@ -2,5 +2,115 @@
 description: An overview of using and configuring video playback quality.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+:::info
+Video quality tracking and selection is currently only supported by the [HLS Provider][hls-provider].
+:::
+
+[hls-provider]: /docs/player/api/providers/hls
+
+## Loading
+
+The [Loading Video Qualities][loading-qualities] guide covers how to create multiple resolutions
+and why you should consider adaptive streaming protocols such as HLS.
+
+[loading-qualities]: /docs/player/core-concepts/loading#video-qualities
+
+## Quality List
+
+The read-only `qualities` property on the player returns a `VideoQualityList` object that
+contains `VideoQuality` objects. Each video quality represents a currently available
+video rendition.
+
+Similar to text tracks or audio tracks, the returned list is live; that is, as qualities are
+added to and removed from the player, the list's contents change dynamically. Once you have a
+reference to the list, you can monitor it for changes to detect when new qualities are added
+or existing ones are removed by listening to [list events](#list-events).
+
+::code[./quality-list]
+
+The `VideoQuality` interface contains the following shape:
+
+::code[./video-quality]
+
+### Selecting
+
+The `selected` property can be used to set the current video quality like so:
+
+::code[./select]
+
+Once set, the underlying provider will update the playback quality setting. Two things to keep
+in mind is: (1) if the list is read only, setting selected will do nothing (use `qualities.readonly`
+to check), and (2) if the list not read only, setting selected will remove auto quality selection.
+
+### Switch
+
+The quality switching behavior can be configured using the switch property on the
+`VideoQualityList` object. The following options are available:
+
+- `current` (default): Trigger an immediate quality level switch. This will abort the current
+  fragment request if any, flush the whole buffer, and fetch fragment matching with current position
+  and requested quality level.
+- `next`: Trigger a quality level switch for next fragment. This could eventually flush already
+  buffered next fragment.
+- `load`: Set quality level for next loaded fragment.
+
+::code[./switch]
+
+### Auto Select
+
+You can request the engine to handle automatic quality selection using the `autoSelect` method
+on the `VideoQualityList` object like so:
+
+::code[./auto-select]
+
+Keep in mind, manually setting qualities will disable auto selection, you will need to
+call `autoSelect()` to enable it again.
+
+### List Events
+
+The `VideoQualityList` object is an [`EventTarget`][event-target] which dispatches the
+following events:
+
+- `add`: Fired when a video quality has been added to the list.
+- `remove`: Fired when a video quality has been removed from the list.
+- `change`: Fired when the selected video quality changes.
+- `auto-change`: Fired when the auto-quality selection mode changes.
+- `readonly-change`: Fired when the read-only mode changes.
+
+::code[./list-events]
+
+[event-target]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
+## Media State
+
+The following video quality properties are available on the media store:
+
+- `qualities`: An array containing the current list of `VideoQuality[]` objects.
+- `quality`: The current `VideoQuality` object or `null` if none is available.
+- `autoQuality`: Whether automatic quality selection is enabled.
+- `canSetQuality`: Whether qualities can be manually selected, in other words whether the
+  quality list is not read-only.
+
+::code[./state]
+
+:::info
+If you're using React check out the [`useVideoQualityOptions`][use-quality-options] hook for
+building menus.
+:::
+
+[use-quality-options]: /docs/player/api/hooks/use-video-quality-options
+
+## Remote Control
+
+The `changeQuality` method on the [media remote][media-remote] can be used to dispatch
+`media-quality-change-request` request events to update the current video quality like so:
+
+::code[./remote]
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+## Media Events
+
+The following video quality events are available on the player:
+
+::code[./media-events]
