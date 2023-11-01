@@ -1,0 +1,15 @@
+/* stream is live. */
+media-player[data-live] {
+}
+
+/* stream is at the live edge. */
+media-player[data-live-edge] {
+}
+
+/* stream is at the live edge and playing. */
+media-player[data-live-edge][data-playing] {
+}
+
+/* seeking is permitted for live DVR stream. */
+media-player[data-live][data-can-seek] {
+}
