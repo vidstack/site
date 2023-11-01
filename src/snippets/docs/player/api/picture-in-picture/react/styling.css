@@ -1,0 +1,15 @@
+.player[data-can-pip] {
+  /* PIP API is available. */
+}
+
+.player:not([data-can-pip]) {
+  /* PIP API is _not_ available. */
+}
+
+.player[data-pip] {
+  /* PIP is active. */
+}
+
+.player:not([data-pip]) {
+  /* PIP is _not_ active. */
+}

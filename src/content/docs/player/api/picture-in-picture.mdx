@@ -2,5 +2,53 @@
 description: An overview on requesting and tracking picture-in-picture changes.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Requesting
+
+The player will use the [Picture In Picture][pip-api] (PIP) on supported browsers and
+[WebKit Presentation API][presentation-api] on iOS Safari for entering and exiting PIP mode. You can
+request PIP changes by using the [remote control](#remote-control) or via [methods](#methods)
+on the player instance.
+
+[pip-api]: https://developer.mozilla.org/en-US/docs/Web/API/Picture-in-Picture_API
+[presentation-api]: https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1631913-webkitpresentationmode
+
+### Remote Control
+
+The [media remote][media-remote] provides methods for dispatching `media-enter-pip-request` and
+`media-exit-pip-request` request events like so:
+
+::code[./remote-control]
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+### Methods
+
+The following `enterPictureInPicture()` and `exitPictureInPicture()` methods are available on the
+player component instance for requesting PIP mode changes:
+
+::code[./enter-method]
+::code[./exit-method]
+
+## State
+
+The following PIP properties are available on the media store:
+
+- `canPictureInPicture`: Whether PIP is supported by the current browser or provider.
+- `pictureInPicture`: Whether the PIP mode is active.
+
+::code[./state]
+
+## Styling
+
+The following [media data attributes][player-data-attrs] are available for styling based on the
+current PIP state:
+
+::code[./styling]
+
+[player-data-attrs]: /docs/player/components/core/player#mediaplayer.attrs
+
+## Events
+
+The following events are available for detecting PIP mode changes or errors:
+
+::code[./events]

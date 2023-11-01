@@ -1,0 +1,15 @@
+media-player[data-can-pip] {
+  /* PIP API is available. */
+}
+
+media-player:not([data-can-pip]) {
+  /* PIP API is _not_ available. */
+}
+
+media-player[data-pip] {
+  /* PIP is active. */
+}
+
+media-player:not([data-pip]) {
+  /* PIP is _not_ active. */
+}
