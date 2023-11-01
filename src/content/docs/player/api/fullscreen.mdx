@@ -2,5 +2,85 @@
 description: An overview on requesting and tracking fullscreen mode changes.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Requesting
+
+Requesting fullscreen has similar requirements to [autoplay policies][autoplay-policy]. In
+general, it will not work programatically until the user has interacted with the document first,
+or the request is in response to a user interaction like clicking or tapping a button. You can
+request fullscreen changes by using the [remote control](#remote-control) or via [methods](#methods)
+on the player instance.
+
+[autoplay-policy]: /docs/player/api/autoplay#autoplay-policy
+
+### Remote Control
+
+The [media remote][media-remote] provides methods for dispatching `media-enter-fullscreen-request`
+and `media-exit-fullscreen-request` request events like so:
+
+::code[./remote-control]
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+### Methods
+
+The following `enterFullscreen()` and `exitFullscreen()` methods are available on the player
+component instance for requesting fullscreen changes:
+
+::code[./enter-method]{copy=true}
+::code[./exit-method]{copy=true}
+
+### Target
+
+By default, calling the `enterFullscreen()` method will first attempt to use the
+[Fullscreen API][fullscreen-api] so the custom media UI is displayed, otherwise it'll fallback to
+the current media provider.
+
+You can specify that you only want to display the provider in fullscreen and not the entire
+media by specifying the fullscreen target like so:
+
+::code[./target]
+
+:::warning
+By setting the target to `provider`, the player will only request fullscreen on the media provider,
+meaning your custom UI will not be displayed when in fullscreen.
+:::
+
+[fullscreen-api]: https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+
+## State
+
+The following fullscreen properties are available on the media store:
+
+- `canFullscreen`: Whether fullscreen is currently available.
+- `fullscreen`: Whether the player is currently in fullscreen mode.
+
+::code[./state]
+
+## Styling
+
+The following [media data attributes][player-data-attrs] are available for styling based on the
+current fullscreen state:
+
+::code[./styling]
+
+[player-data-attrs]: /docs/player/components/core/player#mediaplayer.attrs
+
+## Events
+
+The following events are available for detecting fullscreen changes or errors:
+
+::code[./events]
+
+## Screen Orientation
+
+You can specify the preferred fullscreen orientation like so:
+
+::code[./orientation]
+
+This will lock the screen orientation as specified by `fullscreenOrientation` while the media
+enters fullscreen, and it will be unlocked while exiting. Keep in mind that this will only work
+when the [Screen Orientation API][screen-orientation-api] is available. See the
+[screen orientation][screen-orientation] page for more information.
+
+[screen-orientation]: /docs/player/api/screen-orientation
+[screen-orientation-api]: https://caniuse.com/screen-orientation

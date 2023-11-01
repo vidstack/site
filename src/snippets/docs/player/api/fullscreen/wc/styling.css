@@ -1,0 +1,15 @@
+media-player[data-can-fullscreen] {
+  /* fullscreen API is available. */
+}
+
+media-player:not([data-can-fullscreen]) {
+  /* fullscreen API is _not_ available. */
+}
+
+media-player[data-fullscreen] {
+  /* fullscreen is active. */
+}
+
+media-player:not([data-fullscreen]) {
+  /* fullscreen is _not_ active. */
+}

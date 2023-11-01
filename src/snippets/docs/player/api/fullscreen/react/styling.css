@@ -1,0 +1,15 @@
+.player[data-can-fullscreen] {
+  /* fullscreen API is available. */
+}
+
+.player:not([data-can-fullscreen]) {
+  /* fullscreen API is _not_ available. */
+}
+
+.player[data-fullscreen] {
+  /* fullscreen is active. */
+}
+
+.player:not([data-fullscreen]) {
+  /* fullscreen is _not_ active. */
+}
