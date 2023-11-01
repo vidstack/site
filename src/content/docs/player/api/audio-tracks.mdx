@@ -2,5 +2,76 @@
 description: An overview of using and configuring audio tracks.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+:::info
+Audio tracks are currently only supported by the [HLS Provider][hls-provider] and must be
+included the HLS playlist. They can not be added programatically.
+:::
+
+## Tracks List
+
+The read-only `audioTracks` property on the player returns an `AudioTrackList` object that
+contains `AudioTrack` objects
+
+Similar to text tracks, the returned list is live; that is, as tracks are added to and
+removed from the player, the list's contents change dynamically. Once you have a reference to
+the list, you can monitor it for changes to detect when new tracks are added or existing ones
+are removed by [listening to list events](#list-events).
+
+::code[./tracks-list]
+
+The `AudioTrack` interface contains the following shape:
+
+::code[./audio-track]
+
+[hls-provider]: /docs/player/api/providers/hls
+
+### Selecting
+
+The `selected` property can be used to set the current audio track like so:
+
+::code[./select]
+
+Once set, the underlying provider will update the audio track.
+
+### List Events
+
+The `AudioTrackList` object is an `EventTarget` which dispatches the following events:
+
+- `add`: Fired when an audio track has been added to the list.
+- `remove`: Fired when an audio track has been removed from the list.
+- `change`: Fired when the selected audio track changes.
+
+::code[./list-events]
+
+## State
+
+The following audio track related properties are available on the media store:
+
+- `audioTracks`: An array containing the current list of AudioTrack objects.
+- `audioTrack`: The current AudioTrack object or null if none is available.
+
+::code[./state]
+
+:::info
+If you're using React check out the [`useAudioOptions`][use-audio-options] hook for building menus.
+:::
+
+[use-audio-options]: /docs/player/api/hooks/use-audio-options
+
+## Remote Control
+
+The `changeAudioTrack` method on the [media remote][media-remote] can be used to dispatch
+`media-audio-track-change-request` request events to update the current audio track like so:
+
+::code[./remote]
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+## Media Events
+
+The following audio track related events are available on the player:
+
+- `audio-tracks-change`: Fired when the available list of audio tracks has changed.
+- `audio-track-change`: Fired when the selected audio track has changed.
+
+::code[./media-events]

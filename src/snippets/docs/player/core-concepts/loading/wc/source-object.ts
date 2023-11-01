@@ -1,5 +1,3 @@
-const player = document.querySelector('media-player');
-
 // Example 1: Audio
 const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 player.src = { src: audioStream, type: 'audio/object' };

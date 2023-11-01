@@ -1,5 +1,3 @@
-const player = document.querySelector('media-player')!;
-
 player.addEventListener('playing', (event) => {
   // the event that triggered the media play request
   const origin = event.originEvent; // e.g., PointerEvent

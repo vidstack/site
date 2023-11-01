@@ -8,8 +8,6 @@ import {
   type VideoProvider,
 } from 'vidstack';
 
-const player = document.querySelector('media-player');
-
 player.addEventListener('provider-change', (event) => {
   const provider = event.detail;
 

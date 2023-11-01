@@ -1,5 +1,3 @@
-const player = document.querySelector('media-player');
-
 // This is queued and called when media is ready.
 player.paused = false;
 

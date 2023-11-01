@@ -1,5 +1,3 @@
-const player = document.querySelector('media-player');
-
 // 1. request was made
 player.addEventListener('media-play–request', () => {
   // ...

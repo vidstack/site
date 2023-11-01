@@ -1,7 +1,5 @@
 import { type MediaFullscreenChangeEvent, type MediaFullscreenErrorEvent } from 'vidstack';
 
-const player = document.querySelector('media-player');
-
 player.addEventListener('fullscreen-change', (event: MediaFullscreenChangeEvent) => {
   const requestEvent = event.request;
   const isFullscreen = event.detail;

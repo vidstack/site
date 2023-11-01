@@ -1,7 +1,5 @@
 import { isHLSProvider } from 'vidstack';
 
-const player = document.querySelector('media-player');
-
 // This is where you should configure providers.
 player.addEventListener('provider-change', (event) => {
   const provider = event.detail;

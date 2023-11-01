@@ -1,5 +1,3 @@
-const player = document.querySelector('media-player');
-
 let paused = true;
 
 player.addEventListener('pause', () => {

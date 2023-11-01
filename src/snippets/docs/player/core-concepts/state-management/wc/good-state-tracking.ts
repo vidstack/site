@@ -1,5 +1,3 @@
-const player = document.querySelector('media-player');
-
 // Any media state accessed will create a dependency.
 // The given callback will re-run as `paused` or `playing` state changes.
 const unsubscribe = player.subscribe(({ paused, playing }) => {

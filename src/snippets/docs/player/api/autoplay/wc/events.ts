@@ -1,7 +1,5 @@
 import { type MediaAutoplayEvent, type MediaAutoplayFailEvent } from 'vidstack';
 
-const player = document.querySelector('media-player');
-
 // autoplay has successfully started.
 player.addEventListener('autoplay', (event: MediaAutoplayEvent) => {
   const requestEvent = event.request;
