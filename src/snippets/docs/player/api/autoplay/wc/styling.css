@@ -1,0 +1,7 @@
+media-player[autoplay][data-started] {
+  /** autoplay has successfully started. */
+}
+
+.player[data-autoplay-error]:not([data-started]) {
+  /** autoplay has failed - show fallback controls? */
+}

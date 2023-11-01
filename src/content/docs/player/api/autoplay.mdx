@@ -2,5 +2,56 @@
 description: An overview of using and configuring autoplay.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Usage
+
+You can request to have playback immediately begin when it's ready by setting the `autoplay` prop:
+
+::code[./usage]
+
+[chrome-dev-autoplay]: https://developer.chrome.com/blog/autoplay/
+
+### Autoplay Policy
+
+Autoplay policy in web browsers refers to the rules and restrictions governing when and how media
+content, such as audio or video, can automatically play without user interaction on websites.
+Autoplay policies were introduced to improve the user experience by preventing annoying and
+intrusive autoplay of media.
+
+Key points about autoplay policy:
+
+- **Muted Autoplay**: Most modern browsers allow muted autoplay by default. This means that videos
+  or audio content can start playing automatically, but with the sound muted. Users can then choose
+  to enable the sound if they wish.
+- **Unmuted Autoplay**: Autoplay with sound (unmuted autoplay) is typically restricted. Browsers
+  often require user interaction, like clicking or tapping, to allow media to play with sound. This
+  prevents unexpected noise and distractions.
+- **User Gesture**: Autoplay with sound may be allowed if it's initiated by a user gesture, such
+  as clicking a play button. Once a user interacts with the page, media can autoplay with sound.
+- **Exceptions:** Some websites and media elements can be granted exceptions to autoplay policies,
+  often based on user behavior and preferences. For example, if a user frequently interacts with
+  media on a site, the browser might remember this preference.
+- **Developer Considerations:** Web developers should be aware of and adhere to autoplay policies
+  when designing websites. They can use the autoplay attribute and JavaScript API with user
+  interaction to control media autoplay.
+
+:::info
+See the article ["Autoplay policy in Chrome"][chrome-dev-autoplay] by Chrome for Developers for
+more context. In short, the best chance you have for autoplay working on a site where a user is
+visiting for the first time, or irregularly is by muting the media. Try to encourage the user to
+either play or unmute the media themselves to avoid a poor experience.
+:::
+
+## Styling
+
+The following [media data attributes][player-data-attrs] are available for styling based on the
+current autoplay state:
+
+::code[./styling]
+
+[player-data-attrs]: /docs/player/components/core/player#mediaplayer.attrs
+
+## Events
+
+The following media events are available for detecting whether autoplay succeeds or fails:
+
+::code[./events]

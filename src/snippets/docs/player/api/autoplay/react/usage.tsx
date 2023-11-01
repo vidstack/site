@@ -1,0 +1,4 @@
+<MediaPlayer autoplay>
+  <MediaProvider />
+  {/* ... */}
+</MediaPlayer>;
