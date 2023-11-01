@@ -1,0 +1,1 @@
+player.textTracks.remove(track);

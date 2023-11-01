@@ -35,7 +35,7 @@ Once set, the underlying provider will update the audio track.
 
 ### List Events
 
-The `AudioTrackList` object is an `EventTarget` which dispatches the following events:
+The `AudioTrackList` object is an [`EventTarget`][event-target] which dispatches the following events:
 
 - `add`: Fired when an audio track has been added to the list.
 - `remove`: Fired when an audio track has been removed from the list.
@@ -43,7 +43,9 @@ The `AudioTrackList` object is an `EventTarget` which dispatches the following e
 
 ::code[./list-events]
 
-## State
+[event-target]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
+## Media State
 
 The following audio track related properties are available on the media store:
 
@@ -70,8 +72,5 @@ The `changeAudioTrack` method on the [media remote][media-remote] can be used to
 ## Media Events
 
 The following audio track related events are available on the player:
-
-- `audio-tracks-change`: Fired when the available list of audio tracks has changed.
-- `audio-track-change`: Fired when the selected audio track has changed.
 
 ::code[./media-events]

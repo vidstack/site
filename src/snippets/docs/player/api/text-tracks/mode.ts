@@ -1,0 +1,1 @@
+textTrack.mode = 'showing';

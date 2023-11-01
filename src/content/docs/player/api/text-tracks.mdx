@@ -2,5 +2,115 @@
 description: An overview of using and configuring text tracks (captions/subtitles).
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Loading
+
+The [Loading Text Tracks][loading-tracks] guide covers how to initialize tracks and supported
+formats/kinds.
+
+[loading-tracks]: /docs/wc/player/core-concepts/loading#text-tracks
+
+## Tracks List
+
+The read-only `textTracks` property on the player returns a `TextTrackList` object that
+contains `TextTrack` objects. Keep in mind the mentioned objects are custom implementations and
+not the browser's native classes.
+
+The returned list is live; that is, as tracks are added to and removed from the player, the
+list's contents change dynamically. Once you have a reference to the list, you can monitor it
+for changes to detect when new tracks are added or existing ones are removed by
+[listening to list events](#list-events).
+
+::code[./tracks-list]
+
+### List Events
+
+The `TextTrackList` object is an [`EventTarget`][event-target] which dispatches the following events:
+
+- `add`: Fired when a text track has been added to the list.
+- `remove`: Fired when a text track has been removed from the list.
+- `mode-change`: Fired when the mode of any text track has changed.
+
+::code[./list-events]
+
+[event-target]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
+## Managing Tracks
+
+### Add Tracks
+
+Text tracks can be dynamically added and removed like so:
+
+::code[./add-track]
+
+You can also create tracks and add them programtically like so:
+
+::code[./add-track-manual]
+
+### Remove Tracks
+
+Text tracks can be removed programtically like so:
+
+::code[./remove-track]
+
+All text tracks can be removed by calling `clear()`:
+
+::code[./clear-tracks]
+
+### Track Mode
+
+The `mode` property of a text track accepts the following values:
+
+- `showing`: Track will load, receive cue updates, and is visible on-screen.
+- `hidden`: Track will load, receive cue updates, but is not visible on-screen.
+- `disabled`: Track will not load and it will not receive cue updates.
+
+::code[./mode]
+
+Only one track per kind can have a mode of `showing`. Other tracks of the same kind that are
+specifically showing will have their mode set to `disabled` on change.
+
+### Track Events
+
+The `TextTrack` object is an [`EventTarget`][event-target] which dispatches the following events:
+
+- `load-start`: Fired when the track begins loading.
+- `load`: Fired when the track has finished loading and parsing.
+- `error`: Fired when there is a critical error loading or parsing the track.
+- `add-cue`: Fired when a new cue has been added.
+- `remove-cue`: Fired when a cue has been removed.
+- `cue-change`: Fired when the active cues has changed.
+- `mode-change`: Fired when the mode has been changed.
+
+::code[./track-events]
+
+[event-target]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
+## Media State
+
+The following text track related properties are available on the media store:
+
+- `textTracks`: An array containing the current list of TextTrack objects.
+- `textTrack`: The current captions/subtitles TextTrack object or null if none is showing.
+
+::code[./state]
+
+:::info
+If you're using React check out the [`useCaptionOptions`][use-caption-options] hook for building menus.
+:::
+
+[use-caption-options]: /docs/player/api/hooks/use-caption-options
+
+## Remote Control
+
+The `changeTextTrack` method on the [media remote][media-remote] can be used to dispatch
+`media-text-track-change-request` request events to update the current audio track like so:
+
+::code[./remote]
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+## Media Events
+
+The following text track related events are available on the player:
+
+::code[./media-events]
