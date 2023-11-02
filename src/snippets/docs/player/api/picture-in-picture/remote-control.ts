@@ -1,6 +1,6 @@
 // Toggle
-remote.togglePictureInPicture(nativeEvent);
+remote.togglePictureInPicture();
 
 // Individual methods:
-remote.enterPictureInPicture(nativeEvent);
-remote.exitPictureInPicture(nativeEvent);
+remote.enterPictureInPicture();
+remote.exitPictureInPicture();

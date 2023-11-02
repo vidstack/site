@@ -1,5 +1,5 @@
 // Lock.
-remote.lockScreenOrientation('landscape', nativeEvent);
+remote.lockScreenOrientation('landscape');
 
 // Unlock to allow user to regain control.
-remote.unlockScreenOrientation(nativeEvent);
+remote.unlockScreenOrientation();
