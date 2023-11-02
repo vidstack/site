@@ -1,12 +1,12 @@
 import {
-  isVideoProvider,
+  isHLSProvider,
   MediaPlayer,
   type MediaProviderAdapter,
   type MediaProviderSetupEvent,
 } from '@vidstack/react';
 
 function onProviderSetup(provider: MediaProviderAdapter, nativeEvent: MediaProviderSetupEvent) {
-  if (isVideoProvider(provider)) {
+  if (isHLSProvider(provider)) {
     const element = provider.video; // `HTMLVideoElement`
   }
 }

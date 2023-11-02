@@ -3,5 +3,114 @@ title: HLS
 description: This provider enables streaming media using the HTTP Live Streaming (HLS) protocol.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+This provider is used to embed streamable video content into documents using the
+native `<video>` element, and supports streaming media using the HTTP Live Streaming (HLS) protocol.
+The provider will prefer using [`hls.js`][hlsjs] over the native engine when supported to enable a
+consistent and configurable experience across vendors.
+
+[hlsjs]: https://github.com/video-dev/hls.js
+
+## Install
+
+You'll need to install [`hls.js`][hlsjs] if you're using the HLS provider
+locally (e.g., not over a CDN):
+
+::code[./install]{copy=true}
+
+## Source
+
+You can set a HLS source on the player like so:
+
+::code[./source]
+
+### Source Types
+
+The HLS source URL should include the `.m3u8` file extension.
+
+If the source URL **does not** contain a file extension, you must provide one of the following
+type hints: **application/vnd.apple.mpegurl, audio/mpegurl, audio/x-mpegurl, application/x-mpegurl,
+video/x-mpegurl, video/mpegurl, application/mpegurl.**
+
+:::yes
+The following are valid as they have a file extension or type hint:
+:::
+
+- `src="https://example.com/hls.m3u8"`
+- `src = { src: "https://example.com/hls", type: "application/x-mpegurl" }`
+
+## Loading
+
+The HLS provider will default to loading `hls.js` from [JSDelivr][jsdelivr]. We load the default
+bundle in development, and the minified version in production:
+
+::code[./loading]
+
+:::info
+You can point library at any URL that re-exports `hls.js@^1.0`. This means you can use your own
+server or CDN if desired.
+:::
+
+[jsdelivr]: https://www.jsdelivr.com
+
+### Importing
+
+You can also load `hls.js` by statically, or dynamically importing it and setting the `library`
+property on the provider like so:
+
+::code[./importing]
+
+### Load Events
+
+Regardless how you decide to load `hls.js` (NPM/CDN), the provider will fire the following
+events on the [player][player] while loading hls.js:
+
+::code[./load-events]
+
+[player]: /docs/player/components/core/player
+
+## Configuring
+
+You can configure `hls.js` using the `config` property on the provider like so:
+
+::code[./configure]
+
+:::info
+See the [`hls.js fine tuning`][hls-fine-tuning] guide on how to configure the library.
+:::
+
+[hls-fine-tuning]: https://github.com/video-dev/hls.js/blob/master/docs/API.md#fine-tuning
+
+## Instance
+
+You can obtain a reference to the `hls.js` instance like so:
+
+::code[./instance]
+
+## Events
+
+All [hls.js events][hlsjs-events] can be listened to directly off the [player][player] component:
+
+::code[./events]
+
+All HLS event types are prefixed with `HLS` and end with `Event` like so:
+
+::code[./event-types]
+
+:::info
+You can find a complete list of [player events][player-events] in the component API reference.
+:::
+
+[player-events]: /docs/player/components/core/player#mediaplayer.callbacks
+[hlsjs-events]: https://github.com/video-dev/hls.js/blob/master/docs/API.md#runtime-events
+
+## Element
+
+You can obtain a reference to the underlying `HTMLVideoElement` element like so:
+
+::code[./element]
+
+### Event Target
+
+The `HTMLVideoElement` can also be referenced on all media events like so:
+
+::code[./event-target]

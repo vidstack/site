@@ -32,9 +32,13 @@ const updateLinks = animationFrameThrottle(() => {
     }
 
     if (jsLib === 'web-components') {
-      url.hash = url.hash.replace(/#(?:media)?(.*?)\.(.*?)/, '#$1.$2');
+      url.hash = url.hash
+        .replace(/#(?:media)?(.*?)\.(.*?)/, '#$1.$2')
+        .replace('.callbacks', '.events');
     } else {
-      url.hash = url.hash.replace(/#(?:media)?(.*?)\.(.*?)/, '#media$1.$2');
+      url.hash = url.hash
+        .replace(/#(?:media)?(.*?)\.(.*?)/, '#media$1.$2')
+        .replace('.events', '.callbacks');
     }
 
     anchor.href = url.href;

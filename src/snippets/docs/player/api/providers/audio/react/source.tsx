@@ -1,1 +1,1 @@
-<MediaPlayer src="https://media-files.vidstack.io/audio.mp3">
+<MediaPlayer src="https://media-files.vidstack.io/audio.mp3" />;
