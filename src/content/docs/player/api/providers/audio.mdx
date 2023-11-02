@@ -2,5 +2,60 @@
 description: This provider enables playing audio files via the HTML5 audio element.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Usage
+
+The audio provider is used to embed sound content into documents via the native
+[`<audio>`][audio-element] element.
+
+:::info
+Please refer to the [Player component][player] if you're looking for props, methods, and events.
+:::
+
+[player]: /docs/wc/player/components/core/player
+
+### Sources
+
+**Single Source**
+
+::code[./source]
+
+**Multiple Sources**
+
+::code[./multiple-sources]
+
+[audio-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
+
+**Source Object**
+
+The src property on the player accepts any of the following source objects: `MediaStream`, `MediaSource`,
+`Blob`, and `File`. You can optionally specify it's an audio object by setting the
+source `type` to `audio/object`.
+
+::code[./source-object]
+
+### Source Types
+
+The audio source URL should include on the following file extensions: **m4a, m4b, mp4a, mpga, mp2, mp2a,
+mp3, m2a, m3a, wav, weba, aac, oga, spx.**
+
+If the source URL **does not** contain a file extension, you must provide one of the following
+type hints: **audio/mpeg, audio/ogg, audio/3gp, audio/mp4, audio/webm, audio/flac, audio/object.**
+
+:::yes
+The following are valid as they have a file extension (e.g, .mp3) or type hint (e.g., audio/mp3):
+:::
+
+- `src="https://example.com/audio.mp3"`
+- `src = { src: "https://example.com/audio", type: "audio/mp3" }`
+
+## Element
+
+You can obtain a reference to the underlying `HTMLAudioElement` element like so:
+
+::code[./element]
+
+### Event Target
+
+The `HTMLAudioElement` can also be referenced on all media events like so:
+
+::code[./event-target]
