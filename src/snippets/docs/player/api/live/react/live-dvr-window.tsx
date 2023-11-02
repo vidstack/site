@@ -1,1 +1,1 @@
-<MediaPlayer minLiveDVRWindow={60} />;
+<MediaPlayer streamType="live:dvr" minLiveDVRWindow={60} />;

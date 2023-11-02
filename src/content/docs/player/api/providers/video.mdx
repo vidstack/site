@@ -2,5 +2,58 @@
 description: This provider enables playing video files via the HTML5 video element.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## Usage
+
+The video provider is used to embed video content into documents via the native
+[`<video>`][video-element] element.
+
+:::info
+Please refer to the [Player component][player] if you're looking for props, methods, and events.
+:::
+
+[player]: /docs/wc/player/components/core/player
+[video-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video
+
+### Sources
+
+**Single Source**
+
+::code[./source]
+
+**Multiple Sources**
+
+::code[./multiple-sources]
+
+**Source Object**
+
+The src property on the player accepts any of the following source objects: `MediaStream`,
+`MediaSource`, `Blob`, and `File`. You can optionally specify it's a video object by setting the
+source `type` to `video/object`.
+
+::code[./source-object]
+
+### Source Types
+
+The video source URL should include on the following file extensions: **mp4, ogg, ogv, webm, mov, m4v.**
+
+If the source URL **does not** contain a file extension, you must provide one of the following
+type hints: **video/mp4, video/webm, video/3gp, video/ogg, video/avi, video/mpeg.**
+
+:::yes
+The following are valid as they have a file extension (e.g, .mp4) or type hint (e.g., video/mp4):
+:::
+
+- `src="https://example.com/video.mp4"`
+- `src = { src: "https://example.com/video", type: "video/mp4" }`
+
+## Element
+
+You can obtain a reference to the underlying `HTMLVideoElement` element like so:
+
+::code[./element]
+
+### Event Target
+
+The `HTMLVideoElement` can also be referenced on all media events like so:
+
+::code[./event-target]
