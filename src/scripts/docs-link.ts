@@ -7,6 +7,9 @@ const updateLinks = animationFrameThrottle(() => {
     cssLib = get(currentCSSLibrary);
 
   for (const anchor of document.querySelectorAll('a')) {
+    // Do not mess with hashes.
+    if (anchor.getAttribute('href')?.startsWith('#')) continue;
+
     const url = new URL(anchor.href);
 
     if (

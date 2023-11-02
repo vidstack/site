@@ -47,10 +47,8 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/providers/audio.mdx',
     'player/api/providers/video.mdx',
     'player/api/providers/hls.mdx',
-    // WC Classes
-    'player/api/wc/classes/media-remote-control.mdx',
-    // WC Utils
-    'player/api/wc/utils/event-triggers.mdx',
+    // Classes
+    'player/api/classes/media-remote-control.mdx',
     // React Hooks
     'player/api/react/hooks/use-state.mdx',
     'player/api/react/hooks/use-store.mdx',
@@ -70,6 +68,8 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/react/hooks/use-chapter-options.mdx',
     'player/api/react/hooks/use-playback-rate-options.mdx',
     'player/api/react/hooks/use-video-quality-options.mdx',
+    // Helpers
+    'player/api/helpers/event-triggers.mdx',
   ],
   Components: [
     // Core
