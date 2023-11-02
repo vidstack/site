@@ -1,0 +1,1 @@
+remote.disableCaptions(triggerEvent);

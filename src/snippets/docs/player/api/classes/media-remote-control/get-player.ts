@@ -1,0 +1,1 @@
+const player = remote.getPlayer();

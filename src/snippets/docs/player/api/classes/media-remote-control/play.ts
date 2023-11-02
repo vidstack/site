@@ -1,0 +1,1 @@
+remote.play(triggerEvent);

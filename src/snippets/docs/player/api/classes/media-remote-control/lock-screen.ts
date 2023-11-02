@@ -1,0 +1,1 @@
+remote.lockScreenOrientation('landscape', triggerEvent);

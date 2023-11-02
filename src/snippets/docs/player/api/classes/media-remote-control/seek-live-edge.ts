@@ -1,0 +1,1 @@
+remote.seekToLiveEdge(triggerEvent);

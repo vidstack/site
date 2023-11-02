@@ -4,5 +4,215 @@ description: A simple facade for dispatching media requests to the nearest media
 sidebar_title: MediaRemoteControl
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+::code[./constructor]
+
+## `setTarget`
+
+Set the event target from which to dispatch media requests events from. The events should bubble
+up from this target to the player element.
+
+::code[./set-target]
+
+## `getPlayer`
+
+Returns the current player instance. This method will attempt to find the player by
+searching up from either the given `target` or default target set via [`setTarget`](#settarget).
+
+::code[./get-player]
+
+## `startLoading`
+
+Dispatch a `media-start-loading-request` event to start the media loading process. This will
+only work if the media player has been initialized with a custom [loading strategy][load-strategy].
+
+::code[./start-loading]
+
+[load-strategy]: /docs/player/core-concepts/loading#load-strategies
+
+## `play`
+
+Dispatch a `media-play-request` event to begin/resume media playback.
+
+::code[./play]
+
+## `pause`
+
+Dispatch a `media-pause-request` event to pause media playback.
+
+::code[./pause]
+
+## `mute`
+
+Dispatch a `media-mute-request` event to set the media volume to mute (0).
+
+::code[./mute]
+
+## `unmute`
+
+Dispatch a `media-unmute-request` event to unmute the media volume and set it back to it's
+previous state.
+
+::code[./unmute]
+
+## `enterFullscreen`
+
+Dispatch a `media-enter-fullscreen-request` event to enter fullscreen on the given [target][fs-target].
+
+::code[./enter-fs]
+
+[fs-target]: /docs/player/api/fullscreen#target
+
+## `exitFullscreen`
+
+Dispatch a `media-exit-fullscreen-request` event to exit fullscreen on the given [target][fs-target].
+
+::code[./exit-fs]
+
+## `enterPictureInPicture`
+
+Dispatch a `media-enter-pip-request` event to enter picture-in-picture mode.
+
+::code[./enter-pip]
+
+## `exitPictureInPicture`
+
+Dispatch a `media-exit-pip-request` event to exit picture-in-picture mode.
+
+::code[./exit-pip]
+
+## `lockScreenOrientation`
+
+Dispatch a `media-orientation-lock-request` event to lock the screen orientation to the given
+[lock type][screen-lock-type].
+
+::code[./lock-screen]
+
+[screen-lock-type]: https://developer.mozilla.org/en-US/docs/Web/API/ScreenOrientation/lock#parameters
+
+## `unlockScreenOrientation`
+
+Dispatch a `media-orientation-unlock-request` event to unlock the screen orientation.
+
+::code[./unlock-screen]
+
+## `seeking`
+
+Dispatch a `media-seeking-request` event to notify the media player that a seeking process is
+happening to the given time. This method will not update the current time, complete the process
+by calling [seek](#seek).
+
+::code[./seeking]
+
+## `seek`
+
+Dispatch a `media-seek-request` event to notify the media player that a seeking operation has
+completed and to seek to the given time. This is generally called after a series
+of [seeking](#seeking) calls.
+
+::code[./seek]
+
+## `seekToLiveEdge`
+
+Dispatch a `media-live-edge-request` event to seek to the [live edge][live-edge].
+
+::code[./seek-live-edge]
+
+[live-edge]: /docs/player/api/live#live-edge
+
+## `changeVolume`
+
+Dispatch a `media-volume-change-request` event to update the media volume to the given level which
+is a value between 0 and 1.
+
+::code[./change-vol]
+
+## `changeAudioTrack`
+
+Dispatch a `media-audio-track-change-request` event change to the audio track at the given index.
+
+::code[./change-audio]
+
+## `changeQuality`
+
+Dispatch a `media-quality-change-request` event to change to the video quality at the given index.
+The special value `-1` represents auto quality selection.
+
+::code[./change-quality]
+
+## `requestAutoQuality`
+
+Request auto quality selection. This is simply shorthand for `remote.changeQuality(-1)`.
+
+::code[./request-auto]
+
+## `changeTextTrackMode`
+
+Dispatch a `media-text-track-change` event to change the mode of the text track at the given index.
+
+::code[./change-track]
+
+## `changePlaybackRate`
+
+Dispatch a `media-rate-change-request` event to change the media playback rate.
+
+::code[./change-rate]
+
+## `pauseControls`
+
+Dispatch a `media-pause-controls-request` event to pause controls idle tracking. Pausing
+tracking will result in the controls being visible until [`remote.resumeControls()`](#resumecontrols)
+is called. This method is generally used when building custom controls and you'd like to prevent
+the UI from disappearing.
+
+::code[./pause-controls]
+
+## `resumeControls`
+
+Dispatch a `media-resume-controls-request` event to resume idle tracking on controls. See
+[`pauseControls`](#pausecontrols) for more information.
+
+::code[./resume-controls]
+
+## `togglePaused`
+
+Dispatch requests to toggle the media playback state.
+
+::code[./toggle-paused]
+
+## `toggleControls`
+
+Dispatch requests to toggle the controls visibility.
+
+::code[./toggle-controls]
+
+## `toggleMuted`
+
+Dispatch requests to toggle the media muted state.
+
+::code[./toggle-muted]
+
+## `toggleFullscreen`
+
+Dispatch requests to toggle the media fullscreen state on the given [target][fs-target].
+
+::code[./toggle-fs]
+
+## `togglePictureInPicture`
+
+Dispatch requests to toggle the media picture-in-picture mode.
+
+::code[./toggle-pip]
+
+## `toggleCaptions`
+
+Dispatch requests to toggle the current media captions text track [mode][track-mode].
+
+::code[./toggle-captions]
+
+[track-mode]: /docs/player/api/text-tracks#track-mode
+
+## `disableCaptions`
+
+Turn captions off.
+
+::code[./disable-captions]
