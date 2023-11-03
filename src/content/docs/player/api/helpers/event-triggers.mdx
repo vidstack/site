@@ -1,6 +1,29 @@
 ---
-description: Utilities for walking event trigger chains.
+description: Utilities for working with event trigger chains.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon!
+## `findTriggerEvent`
+
+Whether a trigger event with the given event `type` exists in the chain.
+
+::code[./find]
+
+## `hasTriggerEvent`
+
+Whether a trigger event with the given event `type` exists in the chain.
+
+::code[./has]
+
+## `walkTriggerEventChain`
+
+Walks an event chain on a given event, and invokes the given callback for each trigger event.
+If a value is returned by the callback, the walk will end and `[event, value]` will be returned.
+
+::code[./walk]
+
+## `appendTriggerEvent`
+
+Appends the given trigger event to the chain. The origin of the appended event will become the
+new origin.
+
+::code[./append]
