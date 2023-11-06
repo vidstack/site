@@ -93,6 +93,15 @@ export function createSelect<T extends string = string>({
           _openDisposal.add(listenEvent(_menuEl, 'pointerup', (e) => e.stopPropagation()));
         }
 
+        let menu = _triggerEl.closest('[role="menu"]');
+        if (menu && menu.contains(_triggerEl)) {
+          _openDisposal.add(
+            listenEvent(menu, 'click', (e) => {
+              onClose(e);
+            }),
+          );
+        }
+
         _openDisposal.add(
           listenEvent(document.body, 'pointerup', (e) => {
             onClose(e);
@@ -279,7 +288,7 @@ export function createSelect<T extends string = string>({
           _activeDescendant.set(id);
 
           const index = [..._options.values()].indexOf(value);
-          if (!multiple || (all && index === 0)) onClose(event);
+          if (!multiple || (all && index === 0 && values.includes(value))) onClose(event);
         }),
       );
 
