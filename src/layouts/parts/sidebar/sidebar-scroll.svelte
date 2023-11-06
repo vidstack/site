@@ -8,7 +8,7 @@
       const container = document.getElementById('main-sidebar')!.firstChild as HTMLElement,
         activeItem = container.querySelector('[data-active]');
       if (activeItem) {
-        scrollIntoCenter(container, activeItem, { behaviour: 'smooth' });
+        scrollIntoCenter(container, activeItem);
       }
     }, 0);
   });
