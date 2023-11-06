@@ -1,0 +1,16 @@
+import Skip from './skip-video.svelte';
+
+<Skip client:load>
+
+The `playsinline` property will indicate that video content should be played inline, rather than
+launching the video in fullscreen mode on play. In addition, setting this property will also
+ensure custom player UI is displayed on iPhone when playing inline (hidden in fullscreen mode as
+native controls are forcefully displayed by the browser).
+
+Important to note, we normalize the playing inline behaviour across all mobile browsers. If you
+do not set `playsinline`, the video will launch in fullscreen on play in all mobile browsers, not
+just iOS Safari where the attribute is accepted.
+
+::code[../playsinline/playsinline]{highlights="1"}
+
+</Skip>
