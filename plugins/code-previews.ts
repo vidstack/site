@@ -38,7 +38,9 @@ export default (): Plugin => {
     handleHotUpdate({ file, server }) {
       if (file.includes('[preview]')) {
         const mod = server.moduleGraph.getModuleById(PREVIEWS_REQ_ID);
-        if (mod) return [mod];
+        if (mod) {
+          server.moduleGraph.invalidateModule(mod);
+        }
       }
     },
   };

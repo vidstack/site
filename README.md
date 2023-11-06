@@ -74,9 +74,12 @@ the snippet via the `::code` directive in an MDX file like so:
 ::code[docs/main]{title="Main Page" numbers=true copy=true flat=true highlights="1-3,5-8"}
 ```
 
-Important to note that snippet files in the same directory cannot have the same name because we
-ignore the file extension in the ID. For example, you cannot have `main.ts` and `main.css` in
-the same directory.
+You will need to provide the file extension if there are two snippets with the same name:
+
+```mdx
+::code[docs/main.ts]
+::code[docs/main.css]
+```
 
 #### Relative Code Snippet ID
 
@@ -90,6 +93,9 @@ snippet at the URL path `/docs/player/installation`, then a code file can be pla
 
 // You can also walk up a directory from current URL
 ::code[../bar/foo]
+
+// With extension
+::code[../bar/foo.css]
 ```
 
 #### Code Snippet Framework Filter

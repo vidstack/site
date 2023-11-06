@@ -9,6 +9,7 @@
   export let style = '';
   export let copy = false;
   export let showTopBar = false;
+  export let indent = false;
 
   const hasTopBar = title || showTopBar;
 </script>
@@ -40,8 +41,9 @@
 
   <div
     class={clsx(
-      'flex scrollbar scrollbar-square overflow-auto',
+      'flex scrollbar scrollbar-square overflow-auto flex-1',
       !flat && (title || showTopBar ? 'px-2 pb-2.5' : 'p-4'),
+      flat && indent && 'px-4',
     )}
   >
     <slot />

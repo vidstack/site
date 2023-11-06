@@ -53,6 +53,7 @@ const showTopBar = !!title || Astro.slots.has('top-bar'),
   {flat}
   {style}
   {showTopBar}
+  indent={!!highlights}
 >
   <slot name="top-bar" slot="top-bar" />
   {

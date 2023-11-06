@@ -10,8 +10,8 @@ const snippetsRE = /src\/snippets\//;
 const SNIPPETS_ID = ':code_snippets',
   SNIPPETS_REQ_ID = `/${SNIPPETS_ID}`;
 
-const startHighlightRE = /\/\/\s\@hl-start/,
-  stripHighlightsRE = /[ ]*?\/\/\s\@hl-(start|end)(\n|\r)/g,
+const startHighlightRE = /\@hl-start/,
+  stripHighlightsRE = /[ ]*?(\/\/|\{\/\*|<!--)\s\@hl-(start|end)(.*?)(\n|\r)/g,
   prettierRE = /[ ]*?\/\/\sprettier.*?(\n|\r)/g;
 
 interface CodeSnippet {
@@ -90,10 +90,12 @@ async function getSnippets() {
           source = source.slice(0, -1);
         }
 
-        const id = filePath.replace(/^src\/snippets\//, '').replace(ext, ''),
-          loaderId = `:code_snippet/${id}`;
+        const basePath = filePath.replace(/^src\/snippets\//, ''),
+          id = basePath.replace(ext, ''),
+          // Replace . with ~ to prevent Vite trying to transform files.
+          loaderId = `:code_snippet/${id}${ext.replace('.', '~')}`;
 
-        snippetsMap.set(id, {
+        snippetsMap.set(basePath, {
           filePath,
           ext,
           source,
@@ -133,11 +135,11 @@ export function resolveCodeHighlights(filePath: string, content: string): string
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (start !== -1) {
-      if (line.includes('// @hl-end')) {
+      if (line.includes('@hl-end')) {
         highlights.push(`${start}-${i - 1}`);
         start = -1;
       }
-    } else if (line.includes('// @hl-start')) {
+    } else if (line.includes('@hl-start')) {
       start = i + 1;
     }
   }

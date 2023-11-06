@@ -2,7 +2,6 @@
   import clsx from 'clsx';
 
   import type { CodeSnippet, LazyCodeSnippet } from ':code_snippets';
-  import { get } from 'svelte/store';
 
   import { codeSnippets } from '../../stores/code-snippets';
   import { isDarkColorScheme } from '../../stores/color-scheme';
@@ -38,8 +37,8 @@
   }
 
   if (import.meta.hot) {
-    import.meta.hot.on(':invalidate_code_snippet', async ({ id, imports }) => {
-      if (loader?.id !== id) return;
+    import.meta.hot.on(':invalidate_code_snippet', async ({ id, ext, imports }) => {
+      if (loader?.id !== baseId || (extName && extName !== ext)) return;
 
       if (snippet) {
         Object.assign(snippet.code, {
@@ -52,7 +51,11 @@
     });
   }
 
-  $: loader = $codeSnippets.find((snippet) => snippet.id === id);
+  $: baseId = id.includes('.') ? id.split('.')[0] : id;
+  $: extName = id.split('.')[1];
+  $: loader = $codeSnippets.find(
+    (snippet) => snippet.id === baseId && (!extName || extName === snippet.ext),
+  );
   $: if (loader) loadSnippet(loader);
 
   $: if (snippet) loadCode(snippet, $isDarkColorScheme);

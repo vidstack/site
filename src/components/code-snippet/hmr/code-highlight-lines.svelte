@@ -27,7 +27,7 @@
     {#each lineNumbers as lineNumber}
       {#if isHighlightLine(highlightedLines, lineNumber)}
         <div
-          class="w-full border-l-[5px] h-[var(--leading)] font-mono text-transparent bg-brand/10 border-brand/20"
+          class="w-full border-l-[4px] h-[var(--leading)] font-mono text-transparent bg-brand/10 border-brand/20"
         >
           &nbsp;
         </div>

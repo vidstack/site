@@ -54,10 +54,11 @@ export default (): Plugin => {
 
         const filePath = path.relative(process.cwd(), resolvedFilePath.id),
           ext = path.extname(filePath),
-          snippetId = `:code_snippet/${filePath.replace(ext, '')}`,
+          // Replace . with ~ to prevent Vite trying to transform files.
+          snippetId = `:code_snippet/${filePath.replace(ext, ext.replace('.', '~'))}`,
           content = await readFile(filePath, 'utf-8');
 
-        snippetsMap.set(snippetId, {
+        snippetsMap.set(filePath, {
           filePath,
           ext,
           source: stripComments(content),
@@ -73,7 +74,9 @@ export default (): Plugin => {
         const theme = id.endsWith('?dark') ? 'dark' : 'light';
         id = id.replace(/\?dark$/, '');
 
-        const snippet = snippetsMap.get(id);
+        const snippetId = id.replace('~', '.'),
+          snippet = snippetsMap.get(snippetId);
+
         if (!snippet) return;
 
         const { ext, source } = snippet;
@@ -83,11 +86,12 @@ export default (): Plugin => {
       if (id.startsWith(':code_snippet/')) {
         id = id.replace(':code_snippet/', '');
 
-        const snippet = snippetsMap.get(id);
+        const snippetId = id.replace('~', '.'),
+          snippet = snippetsMap.get(snippetId);
+
         if (!snippet) return;
 
         const { filePath, ext, source } = snippet;
-
         fileToId.set(filePath, `:code_snippet/${id}`);
 
         return `export default { ${[
@@ -108,7 +112,8 @@ export default (): Plugin => {
       if (fileToId.has(relativeFilePath)) {
         const id = fileToId.get(relativeFilePath),
           baseId = id.replace(`:code_snippet/`, ''),
-          tokensId = `:code_tokens/${baseId}`;
+          tokensId = `:code_tokens/${baseId}`,
+          ext = path.extname(relativeFilePath);
 
         const content = await readFile(file, 'utf8'),
           lines = stripComments(content).split(/\n|\r/g).length - 1,
@@ -125,6 +130,7 @@ export default (): Plugin => {
           event: ':invalidate_code_snippet',
           data: {
             id: baseId,
+            ext,
             lines,
             highlights,
             imports: {

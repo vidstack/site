@@ -98,7 +98,11 @@ const { id, depth, path = '', items } = Astro.props;
         </ul>
       );
     } else {
-      const Icon = item.type && Icons[item.type];
+      const Icon = item.type && Icons[item.type],
+        styling =
+          'snippet' in item && item.snippet.includes('examples/')
+            ? item.snippet.match(/css|default-theme|tailwind-css/)?.[0]
+            : null;
       return (
         <li
           class={clsx(
@@ -113,6 +117,7 @@ const { id, depth, path = '', items } = Astro.props;
           aria-selected={ariaBool(item.selected)}
           data-popup={getFileId(id, item.index)}
           data-path={`${path}/${item.name}`}
+          data-styling={styling}
           style={`margin-left: ${depth * 0.375}rem;`}
         >
           {Icon && (

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { currentCSSLibrary, type CSSLibrary } from '~/stores/libraries';
   import { onMount } from 'svelte';
 
   import { createFocusTrap } from '../../../aria/focus-trap';
@@ -59,20 +60,15 @@
   }
 
   function selectFile(target: HTMLElement) {
-    const prevPopupId = activeItem?.getAttribute('data-popup'),
-      nextPopupId = target.getAttribute('data-popup');
+    deselectFile(activeItem);
 
-    if (prevPopupId) {
-      const popup = document.getElementById(prevPopupId);
-      if (popup) popup.style.display = 'none';
-    }
+    const popupId = target.getAttribute('data-popup');
 
-    if (nextPopupId) {
-      const popup = document.getElementById(nextPopupId);
+    if (popupId) {
+      const popup = document.getElementById(popupId);
       if (popup) popup.style.display = '';
     }
 
-    activeItem?.setAttribute('aria-selected', 'false');
     target.setAttribute('aria-selected', 'true');
 
     if (storageKey) {
@@ -81,6 +77,19 @@
     }
 
     activeItem = target;
+  }
+
+  function deselectFile(target: HTMLElement | null) {
+    if (!target) return;
+
+    const popupId = target.getAttribute('data-popup');
+
+    if (popupId) {
+      const popup = document.getElementById(popupId);
+      if (popup) popup.style.display = 'none';
+    }
+
+    target.setAttribute('aria-selected', 'false');
   }
 
   function onSelect(event: Event) {
@@ -97,6 +106,34 @@
       selectFile(target);
     }
   }
+
+  function toggleExamples(cssLib: CSSLibrary) {
+    let elements = [...root.querySelectorAll<HTMLElement>('li[role="treeitem"][data-styling]')],
+      selectedNewFile = false;
+
+    for (const el of elements) {
+      const isHidden = el.getAttribute('data-styling') !== cssLib;
+
+      deselectFile(el);
+      el.style.display = isHidden ? 'none' : '';
+
+      if (!isHidden && !selectedNewFile) {
+        selectFile(el);
+        selectedNewFile = true;
+      }
+    }
+
+    if (selectedNewFile) {
+      const sidebar = root.closest<HTMLElement>('.code-editor-sidebar');
+      if (sidebar)
+        sidebar.style.display =
+          elements.filter((el) => el.getAttribute('data-styling') === cssLib).length <= 1
+            ? 'none'
+            : '';
+    }
+  }
+
+  $: root && toggleExamples($currentCSSLibrary);
 </script>
 
 <ul

@@ -22,16 +22,22 @@ interface Props extends HTMLAttributes<'div'> {
 const { id, highlights: propHighlights, copy, ext, ...restProps } = Astro.props,
   { pathname } = Astro.url,
   isRelativeId = id.startsWith('./') || id.startsWith('../'),
-  snippet = findCodeSnippet(id.replace(/^\.\.?\//, ''), id.startsWith('../')),
+  baseId = id.replace(/^\.\.?\//, ''), // strip relative path
+  snippet = findCodeSnippet(
+    baseId.replace(/\..*?$/, ''), // strip ext
+    baseId.split('.')[1],
+    id.startsWith('../'),
+  ),
   highlights = propHighlights ?? snippet?.highlights,
+  snippetId = (snippet?.id ?? id) + (baseId.includes('.') && snippet ? `.${snippet.ext}` : ''),
   codeBlockProps = {
-    id: snippet?.id ?? id,
+    id: snippetId,
     highlights,
     lines: snippet?.lines,
     ...restProps,
   } as any;
 
-function findCodeSnippet(id: string, up?: boolean) {
+function findCodeSnippet(id: string, ext?: string, up?: boolean) {
   if (isRelativeId) {
     let jsLibDir = get(currentJSLibrary) === 'web-components' ? 'wc' : get(currentJSLibrary),
       pathId = pathname.slice(1).replace(/\/$/, '').replace(`/${jsLibDir}/`, '/');
@@ -49,7 +55,8 @@ function findCodeSnippet(id: string, up?: boolean) {
       matches = get(codeSnippets).filter(
         (snippet) =>
           snippet.id.startsWith(pathId) &&
-          snippet.id.replace(`/${jsLibDir}`, '').endsWith(`/${id}`),
+          snippet.id.replace(`/${jsLibDir}`, '').endsWith(`/${id}`) &&
+          (!ext || snippet.ext === ext),
       );
 
     return (
@@ -58,7 +65,7 @@ function findCodeSnippet(id: string, up?: boolean) {
     );
   }
 
-  return get(codeSnippets).find((snippet) => snippet.id === id);
+  return get(codeSnippets).find((snippet) => snippet.id === id && (!ext || snippet.ext === ext));
 }
 
 if (!snippet) {
@@ -73,18 +80,12 @@ const defaultTitle =
   snippet &&
     (copy ? (
       <CodeBlock title={defaultTitle} {...codeBlockProps} copy>
-        <CopyCodeButton
-          id={snippet.id}
-          {highlights}
-          class="ml-auto"
-          slot="top-bar"
-          client:visible
-        />
-        <CodeSnippetLoader id={snippet.id} client:visible />
+        <CopyCodeButton id={snippetId} {highlights} class="ml-auto" slot="top-bar" client:visible />
+        <CodeSnippetLoader id={snippetId} client:visible />
       </CodeBlock>
     ) : (
       <CodeBlock title={defaultTitle} {...codeBlockProps}>
-        <CodeSnippetLoader id={snippet.id} client:visible />
+        <CodeSnippetLoader id={snippetId} client:visible />
       </CodeBlock>
     ))
 }

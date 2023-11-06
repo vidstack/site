@@ -21,6 +21,8 @@
     PANE_SPLIT_PREF_KEY = 'vidstack::code-pane-split-pref',
     SEEN_PANE_SWITCH_KEY = 'vidstack::code-pane-switch-seen';
 
+  export let hidePreview = false;
+
   let orientation: string = 'horizontal',
     defaultPaneType = (IS_BROWSER && localStorage[PANE_TYPE_PREF_KEY]) || 'split',
     sizes: number[] = [20, 80],
@@ -130,7 +132,9 @@
     on:orientation-change={onOrientationChange}
   >
     <slot name="left" />
-    <SplitPaneGutter />
-    <slot name="right" />
+    {#if !hidePreview}
+      <SplitPaneGutter />
+      <slot name="right" />
+    {/if}
   </SplitPane>
 </div>

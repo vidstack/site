@@ -47,6 +47,7 @@ export type EditorTreeFile = EditorFile & {
   name: string;
   index: number;
   selected: boolean;
+  css?: string;
 };
 
 export type EditorTreeItem = EditorTreeFolder | EditorTreeFile;
@@ -111,6 +112,7 @@ export function buildTreeItems(files: EditorFile[], openFile?: EditorFile): Edit
   return root.sort(sortFiles);
 }
 
+const stripExt = /\..*?$/;
 function sortFiles(fileA: EditorTreeItem, fileB: EditorTreeItem) {
   if ('children' in fileA && !('children' in fileB)) {
     return -1;
@@ -119,6 +121,11 @@ function sortFiles(fileA: EditorTreeItem, fileB: EditorTreeItem) {
   } else if ('type' in fileA && fileA.type && /png|webp|mp4/.test(fileA.type)) {
     return 1;
   } else if ('type' in fileB && fileB.type && /png|webp|mp4/.test(fileB.type)) {
+    return -1;
+  } else if (
+    fileA.name.replace(stripExt, '') === fileB.name.replace(stripExt, '') &&
+    fileB.name.includes('.css')
+  ) {
     return -1;
   } else if (fileA.name < fileB.name) {
     return -1;
