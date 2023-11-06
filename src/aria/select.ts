@@ -16,6 +16,7 @@ export interface AriaSelectOptions<T extends string> extends PopperOptions {
   disabled?: boolean;
   required?: boolean;
   readonly?: boolean;
+  all?: boolean;
   onSelect?(value: T, event: Event): void;
 }
 
@@ -28,6 +29,7 @@ export function createSelect<T extends string = string>({
   multiple,
   required,
   disabled,
+  all,
   ...options
 }: AriaSelectOptions<T>) {
   let _id = ++id,
@@ -275,7 +277,9 @@ export function createSelect<T extends string = string>({
 
           options.onSelect?.(value, event);
           _activeDescendant.set(id);
-          if (!multiple) onClose(event);
+
+          const index = [..._options.values()].indexOf(value);
+          if (!multiple || (all && index === 0)) onClose(event);
         }),
       );
 

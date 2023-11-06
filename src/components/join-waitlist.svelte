@@ -121,6 +121,7 @@
         ]}
         multiple
         required
+        all
         disabled={readonly}
         on:change={({ detail: values }) => {
           products = values.join(',');

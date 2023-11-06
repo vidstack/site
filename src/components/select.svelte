@@ -30,6 +30,7 @@
   export let required = false;
   export let multiple = false;
   export let disabled = false;
+  export let all = false;
   export let state: 'default' | 'readonly' | 'error' = 'default';
 
   const { selectTrigger, selectMenu, selectOption, selectedValues, isSelectOpen, isSelectVisible } =
@@ -37,6 +38,7 @@
       defaultValue: defaultValue ?? value,
       required,
       multiple,
+      all,
       get disabled() {
         return disabled;
       },
