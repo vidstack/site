@@ -1,0 +1,12 @@
+By default, the player and all components will destroy themselves if they're removed from the
+DOM and not reattached after an animation frame tick (i.e., `requestAnimationFrame`). If your or
+your router are moving player components around the DOM for unknown amounts of time, consider
+keeping the player and all children alive, and manually destroying all component instances.
+
+::code[./keep-alive]
+
+:::info
+The `keep-alive` attribute can be set on any media element, not just the player. Important to note
+that it's forwarded to all children. Any root component with `keep-alive` must be destroyed
+by calling the `destroy()` method on the element instance as shown above.
+:::

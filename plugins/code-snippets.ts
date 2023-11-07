@@ -130,17 +130,20 @@ export function resolveCodeHighlights(filePath: string, content: string): string
 
   let lines = content.split(/\n|\r/g),
     start = -1,
+    removedLines = 0,
     highlights = [];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+
     if (start !== -1) {
       if (line.includes('@hl-end')) {
-        highlights.push(`${start}-${i - 1}`);
+        highlights.push(`${start}-${i - removedLines - 1}`);
+        removedLines += 2;
         start = -1;
       }
     } else if (line.includes('@hl-start')) {
-      start = i + 1;
+      start = i - removedLines + 1;
     }
   }
 
