@@ -97,6 +97,8 @@
 >
   <!-- Top Bar -->
   <div class="flex items-center w-full sticky top-0 left-0 border-b border-border/90">
+    <slot name="toolbar" />
+
     <div class="flex-1"></div>
 
     <div class="relative">

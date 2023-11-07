@@ -24,5 +24,7 @@
         <slot name="preview" />
       </div>
     </div>
+
+    <slot name="toolbar" slot="toolbar" />
   </SplitCodePane>
 {/if}

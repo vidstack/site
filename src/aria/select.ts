@@ -57,9 +57,15 @@ export function createSelect<T extends string = string>({
       },
       {
         strategy: 'fixed',
-        placement: 'bottom',
+        placement: 'bottom-start',
         middleware: [
-          offset(options.offset ?? 6),
+          offset(
+            options.offset ??
+              ((state) => ({
+                mainAxis: state.rects.floating.y - state.rects.reference.height,
+                crossAxis: 0,
+              })),
+          ),
           flip(),
           shift({ padding: options.offset ?? 6 }),
           ...(options.middleware || []),
@@ -93,20 +99,23 @@ export function createSelect<T extends string = string>({
           _openDisposal.add(listenEvent(_menuEl, 'pointerup', (e) => e.stopPropagation()));
         }
 
-        let menu = _triggerEl.closest('[role="menu"]');
-        if (menu && menu.contains(_triggerEl)) {
+        let modal = _triggerEl.closest('[role="menu"]');
+        if (modal && modal.contains(_triggerEl)) {
+          _openDisposal.add(listenEvent(modal, 'mousedown', (e) => onClose(e)));
+          _openDisposal.add(listenEvent(modal, 'touchstart', (e) => onClose(e)));
+        }
+
+        const closeTarget = _menuEl?.querySelector('[data-close-target]');
+        if (closeTarget) {
           _openDisposal.add(
-            listenEvent(menu, 'click', (e) => {
+            onPress(closeTarget, (e) => {
+              e.stopPropagation();
               onClose(e);
             }),
           );
         }
 
-        _openDisposal.add(
-          listenEvent(document.body, 'pointerup', (e) => {
-            onClose(e);
-          }),
-        );
+        _openDisposal.add(listenEvent(document.body, 'pointerup', (e) => onClose(e)));
 
         _triggerEl.setAttribute('aria-expanded', 'true');
       }
@@ -211,7 +220,7 @@ export function createSelect<T extends string = string>({
       if (_triggerEl) {
         function onResize() {
           if (!_triggerEl) return;
-          el.style.width = _triggerEl.offsetWidth + 'px';
+          el.style.minWidth = _triggerEl.offsetWidth + 'px';
         }
 
         onResize();

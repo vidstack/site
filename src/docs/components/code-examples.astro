@@ -7,6 +7,7 @@ import { currentJSLibrary } from '~/stores/libraries';
 import { get } from 'svelte/store';
 
 import CodePreviewLoader from './code-preview-loader.svelte';
+import StylingSelect from './styling-select.svelte';
 
 const { pathname } = Astro.url,
   jsLibDir = get(currentJSLibrary) === 'web-components' ? 'wc' : get(currentJSLibrary),
@@ -38,5 +39,6 @@ function resolveFiles(snippets: LazyCodeSnippet[]) {
 ---
 
 <MockCodeEditor {files} title copy openFile={files[0]?.path} localStorage hidePreview={!preview}>
+  <StylingSelect slot="toolbar" client:visible />
   {preview ? <CodePreviewLoader id={preview.id} client:visible slot="preview" /> : null}
 </MockCodeEditor>

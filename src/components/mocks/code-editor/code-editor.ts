@@ -122,11 +122,14 @@ function sortFiles(fileA: EditorTreeItem, fileB: EditorTreeItem) {
     return 1;
   } else if ('type' in fileB && fileB.type && /png|webp|mp4/.test(fileB.type)) {
     return -1;
-  } else if (
-    fileA.name.replace(stripExt, '') === fileB.name.replace(stripExt, '') &&
-    fileB.name.includes('.css')
-  ) {
+  }
+
+  const isSameName = fileA.name.replace(stripExt, '') === fileB.name.replace(stripExt, '');
+
+  if (isSameName && fileB.name.includes('.css')) {
     return -1;
+  } else if (isSameName && fileA.name.includes('.css')) {
+    return 1;
   } else if (fileA.name < fileB.name) {
     return -1;
   } else if (fileA.name > fileB.name) {

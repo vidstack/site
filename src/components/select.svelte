@@ -30,6 +30,7 @@
   export let required = false;
   export let multiple = false;
   export let disabled = false;
+  export let size: 'sm' | 'lg' = 'lg';
   export let all = false;
   export let state: 'default' | 'readonly' | 'error' = 'default';
 
@@ -68,8 +69,9 @@
   type="button"
   {...$$restProps}
   class={clsx(
-    'relative flex items-center px-2.5 py-2',
-    'rounded-sm shadow-sm max-w-full text-sm',
+    'relative flex items-center',
+    'rounded-sm shadow-sm max-w-full',
+    size === 'lg' ? 'px-2.5 py-2 text-sm' : 'px-[10px] py-1 text-xs',
     state === 'error' ? 'border-2 border-red-600 dark:border-red-400' : 'border border-border/90',
     !disabled ? 'hocus:border-brand/90 hocus:bg-elevate' : 'cursor-default',
     currentLabel === label ? 'text-soft' : 'text-inverse',
@@ -84,14 +86,13 @@
     <slot name="icon" />
     {currentLabel || label}
   </span>
-
   <div class="flex-1"></div>
-  <ChevronDownIcon class="w-5 h-5 shrink-0 ml-2" />
+  <ChevronDownIcon class={clsx('shrink-0', size === 'lg' ? 'w-5 h-5 ml-2' : 'w-4 h-4 ml-1.5')} />
 </button>
 
 <div
   class={clsx(
-    'z-50 rounded-md border border-border/90 bg-elevate text-xs p-2',
+    'z-50 rounded-sm border border-border/90 bg-elevate p-2',
     'outline-none shadow-md fixed',
     $isSelectOpen
       ? 'animate-in fade-in slide-in-from-top-4'
@@ -102,7 +103,10 @@
 >
   {#if $isSelectVisible}
     {#each Object.keys(groups) as group}
-      <svelte:element this={group ? 'section' : 'div'} class="flex flex-col pt-2.5">
+      <svelte:element
+        this={group ? 'section' : 'div'}
+        class={clsx('flex flex-col', size === 'lg' ? 'pt-2.5' : 'pt-1')}
+      >
         {#if group}
           <h1 class="text-xs font-medium text-soft mb-2 ml-0.5">{group}</h1>
         {/if}
@@ -112,14 +116,20 @@
           <button
             type="button"
             class={clsx(
-              'relative flex items-center pl-8 py-2 w-full text-sm',
+              'relative flex items-center pr-2 py-2 w-full',
+              size === 'lg' ? 'text-sm pl-8' : 'text-xs pl-5',
               isSelected ? 'text-inverse' : 'text-soft hocus:bg-brand/10 hocus:text-inverse ',
             )}
             data-group={group}
             use:selectOption={value}
           >
             {#if isSelected}
-              <CheckIcon class="w-4 h-4 absolute left-2 text-brand shrink-0" />
+              <CheckIcon
+                class={clsx(
+                  'absolute text-brand shrink-0',
+                  size === 'lg' ? 'w-4 h-4 left-2' : 'w-3 h-3 left-0',
+                )}
+              />
             {/if}
             {label}
           </button>
