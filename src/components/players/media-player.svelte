@@ -16,8 +16,6 @@
   let player: MediaPlayerElement;
 
   onMount(() => {
-    // Strange bug with Svelte, not sure yet.
-    // player.playsinline = true;
     return () => {
       player?.destroy();
     };
