@@ -1,3 +1,20 @@
 <media-player>
   <media-provider></media-provider>
+  <!-- @hl-start -->
+  <media-controls
+    class="pointer-events-none absolute inset-0 z-10 flex h-full w-full flex-col bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity data-[visible]:opacity-100"
+  >
+    <media-controls-group class="pointer-events-auto flex w-full items-center px-2">
+      Top Controls Group
+    </media-controls-group>
+    <div class="flex-1"></div>
+    <media-controls-group class="pointer-events-auto flex w-full items-center px-2">
+      Center Controls Group
+    </media-controls-group>
+    <div class="flex-1"></div>
+    <media-controls-group class="pointer-events-auto flex w-full items-center px-2">
+      Bottom Controls Group
+    </media-controls-group>
+  </media-controls>
+  <!-- @hl-end -->
 </media-player>

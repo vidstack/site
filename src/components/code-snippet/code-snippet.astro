@@ -81,11 +81,11 @@ const defaultTitle =
     (copy ? (
       <CodeBlock title={defaultTitle} {...codeBlockProps} copy>
         <CopyCodeButton id={snippetId} {highlights} class="ml-auto" slot="top-bar" client:visible />
-        <CodeSnippetLoader id={snippetId} client:visible />
+        <CodeSnippetLoader id={snippetId} {highlights} client:visible />
       </CodeBlock>
     ) : (
       <CodeBlock title={defaultTitle} {...codeBlockProps}>
-        <CodeSnippetLoader id={snippetId} client:visible />
+        <CodeSnippetLoader id={snippetId} {highlights} client:visible />
       </CodeBlock>
     ))
 }

@@ -4,8 +4,6 @@ import clsx from 'clsx';
 import type { HTMLAttributes } from 'astro/types';
 
 import CodeBlockWrapper from './code-block-wrapper.svelte';
-import CodeHighlightLines from './code-highlight-lines.astro';
-import HMRCodeHighlightLines from './hmr/code-highlight-lines.svelte';
 import HMRLineNumbers from './hmr/code-line-numbers.svelte';
 
 interface Props extends Omit<HTMLAttributes<'div'>, 'style'> {
@@ -56,13 +54,6 @@ const showTopBar = !!title || Astro.slots.has('top-bar'),
   indent={!!highlights}
 >
   <slot name="top-bar" slot="top-bar" />
-  {
-    import.meta.env.DEV ? (
-      <HMRCodeHighlightLines {id} {lines} {highlights} client:load />
-    ) : (
-      <CodeHighlightLines {lines} {highlights} />
-    )
-  }
   {
     numbered &&
       (import.meta.env.DEV ? (

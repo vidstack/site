@@ -35,6 +35,19 @@
   margin-block: 0;
 }
 
+.docs .code-display,
+.docs .code-display code {
+  @apply w-full min-w-[fit-content];
+}
+
+.docs .code-display .line {
+  @apply inline-block w-full;
+}
+
+.docs .code-display .line.highlighted {
+  @apply rounded-[1px] bg-soft/[12%];
+}
+
 .github-light,
 .github-dark {
   background-color: unset !important;

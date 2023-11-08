@@ -1,4 +1,4 @@
-.media-poster {
+media-poster {
   display: block;
   position: absolute;
   top: 0;
@@ -8,12 +8,12 @@
   height: 100%;
 }
 
-.media-poster img {
+media-poster img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.media-poster[data-visible] {
+media-poster[data-visible] {
   opacity: 1;
 }

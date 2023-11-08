@@ -10,7 +10,7 @@
   </div>
 {:else}
   <SplitCodePane class="flex-1 flex w-full flex-col @4xl:flex-row" {hidePreview}>
-    <div class="flex pl-3 pr-1 py-2.5 overflow-auto" style="display: none" data-pane slot="left">
+    <div class="flex pl-3 pr-1 py-2.5 overflow-hidden" style="display: none" data-pane slot="left">
       <slot name="editor" />
     </div>
 

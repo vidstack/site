@@ -2,7 +2,6 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { globby } from 'globby';
-import { LRUCache } from 'lru-cache';
 import type { Plugin } from 'vite';
 
 const snippetsRE = /src\/snippets\//;
@@ -29,12 +28,7 @@ interface CodeSnippetMeta {
   ext: string;
 }
 
-export const snippetsMap = new LRUCache<string, CodeSnippetMeta>({
-  maxSize: 512,
-  sizeCalculation(value) {
-    return 1;
-  },
-});
+export const snippetsMap = new Map<string, CodeSnippetMeta>();
 
 export default (): Plugin => {
   return {

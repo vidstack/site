@@ -2,14 +2,20 @@
   import clsx from 'clsx';
 
   import type { CodeSnippet, LazyCodeSnippet } from ':code_snippets';
+  import { IS_BROWSER } from '~/utils/env';
+  import { tick } from 'svelte';
 
   import { codeSnippets } from '../../stores/code-snippets';
   import { isDarkColorScheme } from '../../stores/color-scheme';
   import IndeterminateLoadingSpinner from '../style/indeterminate-loading-spinner.svelte';
+  import { isHighlightLine, resolveHighlightedLines } from './highlight';
   import { getLoadedCodeSnippet, registerCodeSnippet } from './registry';
+
+  let root: HTMLElement;
 
   export let id: string;
   export let transform: (code: string) => string = (s) => s;
+  export let highlights: string | undefined = undefined;
 
   let _class: string | undefined = undefined;
   export { _class as class };
@@ -34,6 +40,16 @@
 
   async function loadCode(snippet: CodeSnippet, darkTheme: boolean) {
     code = (await snippet.code[darkTheme ? 'dark' : 'light']()).default;
+
+    await tick();
+
+    if (highlights) {
+      const lines = root.querySelectorAll<HTMLElement>('.line'),
+        highlightedLines = resolveHighlightedLines(lines.length, highlights);
+      for (let i = 0; i < lines.length; i++) {
+        lines[i].classList.toggle('highlighted', isHighlightLine(highlightedLines, i + 1));
+      }
+    }
   }
 
   if (import.meta.hot) {
@@ -56,12 +72,13 @@
   $: loader = $codeSnippets.find(
     (snippet) => snippet.id === baseId && (!extName || extName === snippet.ext),
   );
-  $: if (loader) loadSnippet(loader);
 
-  $: if (snippet) loadCode(snippet, $isDarkColorScheme);
+  $: if (loader && IS_BROWSER) loadSnippet(loader);
+
+  $: if (snippet && IS_BROWSER) loadCode(snippet, $isDarkColorScheme);
 </script>
 
-<pre class={clsx('min-h-full inline-flex not-prose', _class)}>
+<pre class={clsx('code-display min-h-full inline-flex not-prose', _class)} bind:this={root}>
   {#if loader && !code}
     <IndeterminateLoadingSpinner class="absolute top-2 right-4" />
     <code

@@ -18,6 +18,7 @@ export default (): Plugin => {
 
     const theme = `github-${colorScheme}`,
       tokens = shiki.codeToThemedTokens(code, lang, theme);
+
     return renderToHtml(tokens, {
       fg: shiki.getForegroundColor(theme),
       // bg: shiki.getBackgroundColor(theme),

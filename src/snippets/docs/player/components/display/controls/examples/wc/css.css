@@ -1,0 +1,35 @@
+media-controls {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+media-controls[data-visible] {
+  opacity: 1;
+  background-image: linear-gradient(
+    to top,
+    rgb(0 0 0 / 0.5),
+    10%,
+    transparent,
+    95%,
+    rgb(0 0 0 / 0.3)
+  );
+}
+
+media-controls-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-inline: 8px;
+}
+
+.media-controls-spacer {
+  flex: 1 1 0%;
+  pointer-events: none;
+}
