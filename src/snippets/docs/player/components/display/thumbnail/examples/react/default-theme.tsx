@@ -1,0 +1,3 @@
+<MediaPlayer>
+  <MediaProvider />
+</MediaPlayer>;
