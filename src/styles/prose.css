@@ -106,13 +106,13 @@
   @apply font-[700] text-inherit;
 }
 
-.prose img {
+.prose img:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   @apply mx-auto border border-border/90 shadow-sm;
 }
 
-.prose img,
-.prose picture,
-.prose video {
+.prose img:not(:where([class~='not-prose'], [class~='not-prose'] *)),
+.prose picture:not(:where([class~='not-prose'], [class~='not-prose'] *)),
+.prose video:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   @apply my-[2em];
 }
 
@@ -235,7 +235,7 @@
   @apply m-0 p-0;
 }
 
-.prose .code-block + .code-block:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+.prose .code-block + .code-block {
   @apply mt-2;
 }
 

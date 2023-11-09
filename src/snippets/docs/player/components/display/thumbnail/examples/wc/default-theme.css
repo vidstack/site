@@ -1,0 +1,15 @@
+.vds-thumbnail {
+  /* CSS variables available for customization (defaults shown). */
+  --media-thumbnail-bg: black;
+  --media-thumbnail-border: 1px solid white;
+  /* Applies when scaling thumbnails up. */
+  --media-thumbnail-min-width: 120px;
+  --media-thumbnail-min-height: 80px;
+  /* Applies when scaling thumbnails down. */
+  --media-thumbnail-max-width: 180px;
+  --media-thumbnail-max-height: 160px;
+}
+
+/* Customize image element. */
+.vds-thumbnail img {
+}
