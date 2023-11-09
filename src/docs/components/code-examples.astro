@@ -29,7 +29,10 @@ function resolveFiles(snippets: LazyCodeSnippet[]) {
 
   for (const snippet of snippets) {
     paths.push({
-      path: `example.${snippet.ext}`,
+      path:
+        snippet.id.includes('tailwind-css') && snippet.ext === 'js'
+          ? 'tailwind.config'
+          : `example.${snippet.ext}`,
       snippet: snippet.id + `.${snippet.ext}`,
     });
   }

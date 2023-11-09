@@ -1,35 +1,25 @@
-media-gesture {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-media-gesture[action='seek:-10'],
-media-gesture[action='seek:10'] {
+.vds-gesture[action='seek:-10'],
+.vds-gesture[action='seek:10'] {
   width: 20%;
   /* Higher z-index means this gesture will override any below it. */
   z-index: 1;
 }
 
-media-gesture[action='seek:10'] {
+.vds-gesture[action='seek:10'] {
   left: unset;
   right: 0;
 }
 
 /* Remove toggle to pause on touch. */
 @media (pointer: coarse) {
-  media-gesture[action='toggle:paused'] {
+  .vds-gesture[action='toggle:paused'] {
     display: none;
   }
 }
 
 /* Remove toggle controls on mouse. */
 @media not (pointer: coarse) {
-  media-gesture[action='toggle:controls'] {
+  .vds-gesture[action='toggle:controls'] {
     display: none;
   }
 }

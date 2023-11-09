@@ -96,34 +96,41 @@
   style={clsx(orientation === 'vertical' && '--code-block-gutters: 10px;')}
 >
   <!-- Top Bar -->
-  <div class="flex items-center w-full sticky top-0 left-0 border-b border-border/90">
+  <div
+    class={clsx(
+      'flex items-center w-full sticky top-0 left-0 border-b border-border/90',
+      hidePreview && 'py-0.5',
+    )}
+  >
     <slot name="toolbar" />
 
     <div class="flex-1"></div>
 
-    <div class="relative">
-      <Switch
-        label="Editor Pane Setting"
-        defaultValue={defaultPaneType}
-        value={openPane}
-        options={splitOptions}
-        square
-        compact
-        on:select={(e) => onSelect(e.detail)}
-      />
+    {#if !hidePreview}
+      <div class="relative">
+        <Switch
+          label="Editor Pane Setting"
+          defaultValue={defaultPaneType}
+          value={openPane}
+          options={splitOptions}
+          square
+          compact
+          on:select={(e) => onSelect(e.detail)}
+        />
 
-      <div
-        class={clsx(
-          'fixed top-6 right-[78px] z-50 pointer-events-none',
-          userHasNotSeenPaneSwitch && 'hidden',
-        )}
-      >
-        <span class="relative flex h-6 w-6">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand/70"
-          ></span>
-        </span>
+        <div
+          class={clsx(
+            'fixed top-6 right-[78px] z-50 pointer-events-none',
+            userHasNotSeenPaneSwitch && 'hidden',
+          )}
+        >
+          <span class="relative flex h-6 w-6">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand/70"
+            ></span>
+          </span>
+        </div>
       </div>
-    </div>
+    {/if}
   </div>
 
   <SplitPane

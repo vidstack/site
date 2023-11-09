@@ -1,3 +1,5 @@
+import { Controls } from '@vidstack/react';
+
 <MediaPlayer>
   <MediaProvider />
   {/* @hl-start */}

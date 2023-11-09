@@ -2,7 +2,22 @@
 description: This component enables actions to be performed on the media based on user gestures.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon! In the meantime, feel free to use the API reference tables below.
+::examples
+
+## Events
+
+The `event` property seen in the snippets above can be any valid DOM event type
+(e.g., `touchstart`, `mouseleave`, etc.). An event listener is attached to the given event
+type on the media provider, and when fired, it will trigger the action on the media provider.
+
+In addition, any event can be prefixed with `dbl` (e.g., `dblpointerup`) to ensure it's fired twice
+in succession (within 200ms) before the gesture action is triggered.
+
+## Cancelling
+
+Any gesture can be prevented from triggering by calling `event.preventDefault()` on the
+will trigger event like so:
+
+::code[./cancel]
 
 ::component_api
