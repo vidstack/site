@@ -1,0 +1,33 @@
+media-captions {
+  z-index: 10;
+  bottom: 0;
+  transition: bottom 0.15s linear;
+
+  /* CSS variables available for customization. */
+  /* Remove any you don't need, default values are shown below. */
+  --media-captions-padding: 1%;
+  --media-cue-backdrop: blur(8px);
+  --media-cue-bg: rgba(0, 0, 0, 0.7);
+  --media-cue-border-radius: 2px;
+  --media-cue-border: unset;
+  --media-cue-box-shadow: var(--cue-box-shadow);
+  --media-cue-color: white;
+  --media-cue-display-bg: unset;
+  --media-cue-display-border-radius: unset;
+  --media-cue-display-padding: unset;
+  --media-cue-font-size: calc(var(--overlay-height) / 100 * 4.5);
+  --media-cue-line-height: calc(var(--cue-font-size) * 1.2);
+  --media-cue-padding-x: calc(var(--cue-font-size) * 0.4);
+  --media-cue-padding-x: calc(var(--cue-font-size) * 0.6);
+  --media-lg-fullscreen-cue-font-size: calc(var(--overlay-height) / 100 * 3);
+}
+
+/* Pull captions up when controls are visible. */
+media-player[data-controls] media-captions {
+  bottom: 80px;
+}
+
+/* Hide captions when interacting with time slider. */
+media-player[data-preview] media-captions {
+  opacity: 0;
+}

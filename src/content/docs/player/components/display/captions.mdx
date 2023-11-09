@@ -2,7 +2,28 @@
 description: This component is used to render and display captions/subtitles.
 ---
 
-This page is not ready yet, we're working on getting it done for the 1.0 release. It should be
-available soon! In the meantime, feel free to use the API reference tables below.
+The captions component renders and displays captions/subtitles. It will be rendered as an
+overlay when the player [view type][view-type] is `video`, and as a simple captions box when the
+type is `audio`.
+
+- See the [loading text tracks][loading-text-tracks] guide for how to load and manage
+  captions/subtitles.
+- Rendering is handled by the [media-captions][media-captions] library, see the repo for more information.
+- See the [media-captions motivation section][motivation] for why native captions are not good enough.
+- The player will dynamically switch to native captions when custom captions cannot
+  be displayed (e.g., iOS Safari on iPhone).
+
+[view-type]: /docs/player/core-concepts/loading#view-type
+[loading-text-tracks]: /docs/player/core-concepts/loading#text-tracks
+[media-captions]: https://github.com/vidstack/media-captions
+[motivation]: https://github.com/vidstack/media-captions#motivation
+
+::examples
+
+## Styling Parts
+
+You can style cues, voices, timed cues (past/future), and regions like so:
+
+::code[./styling-parts]
 
 ::component_api

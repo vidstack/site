@@ -1,0 +1,29 @@
+.captions [data-part='cue'] {
+}
+
+.captions [data-part='cue'][data-id='...'] {
+}
+
+.captions [data-part='voice'] {
+}
+
+.captions [data-part='voice'][title='Joe'] {
+}
+
+.captions [data-part='timed'] {
+}
+
+.captions [data-part='timed'][data-past] {
+}
+
+.captions [data-part='timed'][data-future] {
+}
+
+.captions [data-part='region'] {
+}
+
+.captions [data-part='region'][data-active] {
+}
+
+.captions [data-part='region'][data-scroll='up'] {
+}

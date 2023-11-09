@@ -1,5 +1,6 @@
 .vds-controls {
   /* CSS variables available for customizing this component. */
+  /* Remove any you don't need, default values are shown below. */
   --media-controls-padding: 0px;
   --media-controls-in-transition: opacity 0.2s ease-in;
   --media-controls-out-transition: opacity 0.2s ease-out;

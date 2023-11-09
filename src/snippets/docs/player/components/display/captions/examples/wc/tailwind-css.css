@@ -10,18 +10,7 @@ media-captions {
   --cue-line-height: calc(var(--cue-font-size) * 1.2);
   --cue-padding-x: calc(var(--cue-font-size) * 0.6);
   --cue-padding-y: calc(var(--cue-font-size) * 0.4);
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  contain: layout style;
-  margin: var(--overlay-padding);
   font-size: var(--cue-font-size);
-  pointer-events: none;
-  user-select: none;
-  word-spacing: normal;
-  word-break: break-word;
-  bottom: 8px;
-  transition: bottom 0.15s linear;
 }
 
 media-captions[aria-hidden='true'] {
@@ -78,15 +67,4 @@ media-captions [data-part='cue'] {
 
 media-captions [data-part='cue-display'][data-vertical] [data-part='cue'] {
   padding: var(--cue-padding-x) var(--cue-padding-y);
-}
-
-/* Hide captions when interacting with time slider. */
-media-player[data-preview] media-captions {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Push captions up when controls are visible. */
-media-player[data-controls] media-captions {
-  bottom: 78px;
 }
