@@ -1,0 +1,9 @@
+.vds-chapter-title {
+  /* CSS variables available for customization (defaults shown). */
+  --media-chapter-title-color: rgba(255 255 255 / 0.64);
+  --media-chapter-title-font-size: 14px;
+  --media-chapter-title-font-weight: 500;
+  --media-chapter-title-separator: '\2022';
+  --media-chapter-title-separator-gap: 6px;
+  --media-chapter-title-separator-color: var(--color);
+}
