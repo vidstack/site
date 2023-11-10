@@ -67,7 +67,7 @@ const { pathname } = Astro.url,
           ? [
               `import { ${
                 component.namespace ?? component.name
-              }, type ${instanceName} } from "@vidstack/react"`,
+              }, ${instanceName} } from "@vidstack/react"`,
               '',
               `const ref = useRef<${instanceName}>(null),`,
               `  { /* state props */ } = useStore(${instanceName}, ref);`,

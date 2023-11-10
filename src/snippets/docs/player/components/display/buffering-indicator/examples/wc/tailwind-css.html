@@ -1,3 +1,30 @@
-<media-player>
-  <media-provider></media-provider>
-</media-player>
+<div
+  class="pointer-events-none absolute inset-0 z-50 flex h-full w-full items-center justify-center"
+>
+  <svg
+    class="h-20 w-20 text-white opacity-0 transition-opacity duration-200 ease-linear media-buffering:animate-spin media-buffering:opacity-100"
+    fill="none"
+    viewBox="0 0 120 120"
+    aria-hidden="true"
+  >
+    <circle
+      class="opacity-25"
+      cx="60"
+      cy="60"
+      r="54"
+      stroke="currentColor"
+      stroke-width="8"
+    ></circle>
+    <circle
+      class="opacity-75"
+      cx="60"
+      cy="60"
+      r="54"
+      pathLength="100"
+      stroke="currentColor"
+      stroke-width="10"
+      stroke-dasharray="100"
+      stroke-dashoffset="50"
+    ></circle>
+  </svg>
+</div>
