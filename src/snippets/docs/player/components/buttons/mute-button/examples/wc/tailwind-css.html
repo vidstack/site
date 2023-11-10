@@ -1,3 +1,11 @@
-<media-player>
-  <media-provider></media-provider>
-</media-player>
+<media-mute-button
+  class="group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset ring-sky-400 hover:bg-white/20 data-[focus]:ring-4"
+>
+  <!-- See "Icons" component page for setup before using the following: -->
+  <media-icon type="mute" class="hidden h-8 w-8 group-data-[state='muted']:block"></media-icon>
+  <media-icon type="volume-low" class="hidden h-8 w-8 group-data-[state='low']:block"></media-icon>
+  <media-icon
+    type="volume-high"
+    class="hidden h-8 w-8 group-data-[state='high']:block"
+  ></media-icon>
+</media-mute-button>
