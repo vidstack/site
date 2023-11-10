@@ -41,3 +41,7 @@
 .media-button:not([data-active]) .pip-exit-icon {
   display: none;
 }
+
+.media-button:not([data-supported]) {
+  display: none;
+}

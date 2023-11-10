@@ -21,14 +21,14 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.media-button > media-icon {
+.media-button > svg {
   width: 80%;
   height: 80%;
   border-radius: 2px;
 }
 
-.media-button[data-focus] > media-icon {
-  box-shadow: var(--media-focus-ring);
+.media-button[data-focus] > svg {
+  box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -37,8 +37,8 @@
   }
 }
 
-.media-button[data-active] .pip-enter-icon,
-.media-button:not([data-active]) .pip-exit-icon {
+.media-button[data-active] .fs-enter-icon,
+.media-button:not([data-active]) .fs-exit-icon {
   display: none;
 }
 
