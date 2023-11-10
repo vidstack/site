@@ -37,8 +37,16 @@ const { title, description, announcementBar, breadcrumbBar, theme } = Astro.prop
     <script src="../scripts/focus-visible.js"></script>
     <script src="../scripts/docs-link.ts"></script>
 
-    <script src="https://cdn.usefathom.com/script.js" data-spa="auto" data-site="QZDYXYVK" defer
-    ></script>
+    {
+      import.meta.env.PROD ? (
+        <script
+          src="https://cdn.usefathom.com/script.js"
+          data-spa="auto"
+          data-site="QZDYXYVK"
+          defer
+        />
+      ) : null
+    }
 
     <script is:inline>
       function init() {

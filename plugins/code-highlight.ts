@@ -17,7 +17,11 @@ export default (): Plugin => {
     if (lang === 'cjs' || lang === 'mjs') lang = 'js';
 
     const theme = `github-${colorScheme}`,
-      tokens = shiki.codeToThemedTokens(code, lang, theme);
+      tokens = shiki.codeToThemedTokens(
+        /(j|t)sx/.test(lang) ? code.replace(/>;$/, '>') : code,
+        lang,
+        theme,
+      );
 
     return renderToHtml(tokens, {
       fg: shiki.getForegroundColor(theme),

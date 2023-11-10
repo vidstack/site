@@ -45,7 +45,7 @@
               .join('\n')
           : decoded;
 
-      await navigator.clipboard.writeText(filtered);
+      await navigator.clipboard.writeText(filtered.replace(/>;$/, '>'));
     } catch (e) {
       // no-op
     }
