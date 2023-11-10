@@ -7,4 +7,6 @@
   import 'vidstack/player';
   import 'vidstack/player/layouts';
   import 'vidstack/player/ui';
+  // Icons
+  import 'vidstack/icons';
 </script>

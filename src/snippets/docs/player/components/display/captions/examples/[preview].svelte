@@ -1,10 +1,10 @@
 <media-player
   src="https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8"
-  class="not-prose flex-col w-[375px] max-w-[375px] aspect-video bg-transparent border-none"
+  class="not-prose flex-col bg-transparent border-none"
   crossorigin
   muted
 >
-  <media-provider>
+  <media-provider class="border border-inverse w-[400px] max-w-[400px] aspect-video">
     <media-captions class="vds-captions" />
     <track
       src="https://media-files.vidstack.io/sprite-fight/subs/english.vtt"

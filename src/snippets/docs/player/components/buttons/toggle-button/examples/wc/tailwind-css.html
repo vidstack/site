@@ -1,3 +1,8 @@
-<media-player>
-  <media-provider></media-provider>
-</media-player>
+<media-toggle-button
+  class="ring-media-focus group relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset hover:bg-white/20 data-[focus]:ring-4"
+  aria-label="Like video"
+>
+  <!-- See "Icons" component page for setup before using the following: -->
+  <media-icon type="thumbs-up" class="hidden h-8 w-8 group-data-[pressed]:block"></media-icon>
+  <media-icon type="thumbs-down" class="h-8 w-8 group-data-[pressed]:hidden"></media-icon>
+</media-toggle-button>
