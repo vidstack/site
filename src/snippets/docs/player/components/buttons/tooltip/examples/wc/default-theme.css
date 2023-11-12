@@ -1,0 +1,17 @@
+media-player {
+  /* Player CSS variables (defaults shown). */
+  --media-font-family: sans-serif;
+}
+
+.vds-tooltip-content {
+  /* CSS variables available for customization (defaults shown). */
+  --media-tooltip-color: hsl(0, 0%, 80%);
+  --media-tooltip-bg-color: black;
+  --media-tooltip-font-size: 13px;
+  --media-tooltip-font-weight: 500;
+  --media-tooltip-border-radius: 4px;
+  --media-tooltip-padding: 2px 8px;
+  --media-tooltip-border: 1px solid rgb(255 255 255 / 0.1);
+  --media-tooltip-enter-animation: vds-tooltip-enter 0.2s ease-in;
+  --media-tooltip-exit-animation: vds-tooltip-exit 0.2s ease-out;
+}
