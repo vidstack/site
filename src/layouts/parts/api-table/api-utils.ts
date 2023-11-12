@@ -5,7 +5,7 @@ import type {
   ReactCallbackMeta,
   ReactPropMeta,
 } from '@maverick-js/cli/analyze';
-import { LRUCache } from 'lru-cache/min';
+import { LRUCache } from 'lru-cache';
 
 import { reactComponents, webComponents } from '../../../api/component-api';
 import { pascalToKebabCase } from '../../../utils/string';
