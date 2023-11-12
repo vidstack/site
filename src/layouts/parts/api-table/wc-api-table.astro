@@ -151,13 +151,7 @@ const { pathname } = Astro.url,
 
             {props.length ? (
               <div>
-                {components.length === 1 ? (
-                  <Heading
-                    title="Props"
-                    slug={`${componentName}.props`}
-                    level={tableHeadingLevel}
-                  />
-                ) : null}
+                <Heading title="Props" slug={`${componentName}.props`} level={tableHeadingLevel} />
                 <Table cols={['Prop', 'Type', 'Default']} rows={props} />{' '}
               </div>
             ) : null}

@@ -79,7 +79,9 @@ if (pathname.includes('components/')) {
 
       if (components.length > 1) {
         addHeading(name, 3);
-      } else if (component.instance?.props) {
+      }
+
+      if (component.instance?.props) {
         addHeading('Props', tableHeadingLevel, name + '.props');
       }
 
