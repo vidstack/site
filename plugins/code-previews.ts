@@ -48,7 +48,7 @@ export default (): Plugin => {
 
 async function getPreviews() {
   const previews: CodePreview[] = [],
-    files = await globby('src/snippets/**/examples/*preview*');
+    files = await globby('src/snippets/**/*preview*');
 
   await Promise.all(
     files

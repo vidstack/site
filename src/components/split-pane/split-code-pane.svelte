@@ -29,7 +29,9 @@
     openPane = writable<CodePane>(defaultPaneType),
     userHasNotSeenPaneSwitch = !IS_BROWSER || localStorage[SEEN_PANE_SWITCH_KEY];
 
-  if (defaultPaneType === 'code') {
+  if (hidePreview) {
+    sizes = [100, 0];
+  } else if (defaultPaneType === 'code') {
     sizes = [100, 0];
   } else if (defaultPaneType === 'preview') {
     sizes = [0, 100];

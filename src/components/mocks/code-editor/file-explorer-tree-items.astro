@@ -70,6 +70,11 @@ const { id, depth, path = '', items } = Astro.props;
 {
   items.map((item) => {
     if ('children' in item) {
+      // Ignore filtered folder names ([css]).
+      if (item.name.startsWith('[') && item.name.endsWith(']')) {
+        return <Astro.self {id} {depth} items={item.children} path={`${path}/${item.name}`} />;
+      }
+
       return (
         <ul
           class={clsx(

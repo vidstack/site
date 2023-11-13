@@ -40,17 +40,22 @@
   }
 
   function togglePath(path: string, isOpen: boolean) {
-    let currentPath = '/',
-      folders = path.split('/').slice(0, -1);
+    let currentPath = '',
+      folders = path.split('/').slice(1, -1);
 
     for (const folder of folders) {
-      currentPath += folder;
+      currentPath += '/' + folder;
+
       const el = root.querySelector<HTMLElement>(`[data-path="${currentPath}"]`);
       if (el) toggleFolder(el, isOpen);
     }
 
     const fileEl = root.querySelector<HTMLElement>(`[data-path="${path}"]`);
-    if (fileEl) selectFile(fileEl);
+
+    if (fileEl) {
+      if (isOpen) selectFile(fileEl);
+      else deselectFile(fileEl);
+    }
   }
 
   function toggleFolder(target: HTMLElement, force?: boolean) {
@@ -77,6 +82,15 @@
     }
 
     activeItem = target;
+
+    window.dispatchEvent(
+      new CustomEvent('code-editor-change', {
+        detail: {
+          path: target.getAttribute('data-path'),
+        },
+        bubbles: true,
+      }),
+    );
   }
 
   function deselectFile(target: HTMLElement | null) {
@@ -90,6 +104,7 @@
     }
 
     target.setAttribute('aria-selected', 'false');
+    if (target === activeItem) activeItem = null;
   }
 
   function onSelect(event: Event) {
@@ -107,29 +122,40 @@
     }
   }
 
+  function getFolderPath(target: HTMLElement) {
+    return target.getAttribute('data-path')!.split('/').slice(0, -1).join('/');
+  }
+
   function toggleExamples(cssLib: CSSLibrary) {
     let elements = [...root.querySelectorAll<HTMLElement>('li[role="treeitem"][data-styling]')],
-      selectedNewFile = false;
+      activeElements = elements.filter((el) => el.getAttribute('data-styling') === cssLib);
+
+    const prevActive = activeItem;
 
     for (const el of elements) {
       const isHidden = el.getAttribute('data-styling') !== cssLib;
-
-      deselectFile(el);
+      if (isHidden) deselectFile(el);
       el.style.display = isHidden ? 'none' : '';
+    }
 
-      if (!isHidden && !selectedNewFile) {
-        selectFile(el);
-        selectedNewFile = true;
+    if (!activeItem) {
+      const basePath = prevActive && getFolderPath(prevActive).replace(/\/\[.*?\]/, '');
+
+      const el =
+        (basePath &&
+          root.querySelector<HTMLElement>(
+            `[data-path^="${basePath}"][data-styling="${cssLib}"]`,
+          )) ||
+        activeElements[0];
+
+      if (el) {
+        togglePath(el.getAttribute('data-path')!, true);
       }
     }
 
-    if (selectedNewFile) {
-      const sidebar = root.closest<HTMLElement>('.code-editor-sidebar');
-      if (sidebar)
-        sidebar.style.display =
-          elements.filter((el) => el.getAttribute('data-styling') === cssLib).length <= 1
-            ? 'none'
-            : '';
+    const sidebar = root.closest<HTMLElement>('.code-editor-sidebar');
+    if (sidebar && elements.length) {
+      sidebar.style.display = activeElements.length === 1 ? 'none' : '';
     }
   }
 

@@ -1,0 +1,31 @@
+.vds-slider {
+  /* CSS variables available for customization (defaults shown). */
+  --media-slider-width: 100%;
+  --media-slider-height: 48px;
+
+  --media-slider-track-width: 100%;
+  --media-slider-track-height: 5px;
+  --media-slider-track-bg: rgb(255 255 255 / 0.3);
+  --media-slider-track-fill-bg: var(--media-brand, #f5f5f5);
+  --media-slider-track-border-radius: 2px;
+  --media-slider-focused-track-width: var(--media-slider-track-width);
+  --media-slider-focused-track-height: calc(var(--media-slider-track-height) * 1.25);
+
+  --media-slider-thumb-size: 15px;
+  --media-slider-thumb-border: 1px solid #cacaca;
+  --media-slider-thumb-border-radius: 9999px;
+  --media-slider-thumb-bg: #fff;
+  --media-slider-thumb-transition: opacity 0.2s ease-in, box-shadow 0.2s ease;
+  --media-slider-focused-thumb-size: calc(var(--media-slider-thumb-size) * 1.1);
+  --media-slider-focused-thumb-shadow: 0 0 0 4px hsla(0, 0%, 100%, 0.4);
+
+  --media-slider-preview-bg: unset;
+  --media-slider-preview-border-radius: 2px;
+
+  --media-slider-value-gap: 0px;
+  --media-slider-value-color: white;
+  --media-slider-value-bg: black;
+  --media-slider-value-border: unset;
+  --media-slider-value-border-radius: 2px;
+  --media-slider-value-padding: 1px 10px;
+}

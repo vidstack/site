@@ -13,26 +13,32 @@ const { pathname } = Astro.url,
   jsLibDir = get(currentJSLibrary) === 'web-components' ? 'wc' : get(currentJSLibrary),
   id = pathname.slice(1).replace(`docs/${jsLibDir}`, 'docs').replace(/\/$/, ''),
   frameworkId = `${id}/examples/${jsLibDir}`,
-  preview = findCodePreview(id),
+  previews = findCodePreviews(id),
   files = resolveFiles(findCodeSnippets(frameworkId));
 
 function findCodeSnippets(id: string) {
   return get(codeSnippets).filter((snippet) => snippet.id.includes(id));
 }
 
-function findCodePreview(id: string) {
-  return get(codePreviews).find((preview) => preview.id === id);
+function findCodePreviews(id: string) {
+  return get(codePreviews).filter((preview) => preview.id.startsWith(id));
 }
 
 function resolveFiles(snippets: LazyCodeSnippet[]) {
   const paths: { path: string; snippet: string }[] = [];
 
   for (const snippet of snippets) {
+    const path = snippet.id
+      .replace(frameworkId, '')
+      .replace(/\/(css|tailwind-css|default-theme)/, '/[$1]/example')
+      .slice(1)
+      .replace(/^\//, '');
+
     paths.push({
       path:
         snippet.id.includes('tailwind-css') && snippet.ext === 'js'
           ? 'tailwind.config'
-          : `example.${snippet.ext}`,
+          : `${path}.${snippet.ext}`,
       snippet: snippet.id + `.${snippet.ext}`,
     });
   }
@@ -41,7 +47,27 @@ function resolveFiles(snippets: LazyCodeSnippet[]) {
 }
 ---
 
-<MockCodeEditor {files} title copy openFile={files[0]?.path} localStorage hidePreview={!preview}>
+<MockCodeEditor {files} title copy localStorage hidePreview={!previews.length}>
   <StylingSelect slot="toolbar" client:visible />
-  {preview ? <CodePreviewLoader id={preview.id} client:visible slot="preview" /> : null}
+  {
+    previews.length >= 1 ? (
+      <Fragment slot="preview">
+        {previews.map((preview) => (
+          <CodePreviewLoader
+            id={preview.id}
+            path={
+              previews.length > 1
+                ? preview.id
+                    .replace(id, '')
+                    .replace(frameworkId, '')
+                    .replace('/previews', '')
+                    .replace(/\/\[preview\].*$/, '')
+                : undefined
+            }
+            client:idle
+          />
+        ))}
+      </Fragment>
+    ) : null
+  }
 </MockCodeEditor>

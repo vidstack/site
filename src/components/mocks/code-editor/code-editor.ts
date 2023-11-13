@@ -117,7 +117,7 @@ function sortFiles(fileA: EditorTreeItem, fileB: EditorTreeItem) {
   if ('children' in fileA && !('children' in fileB)) {
     return -1;
   } else if ('children' in fileB) {
-    return 1;
+    // return 1;
   } else if ('type' in fileA && fileA.type && /png|webp|mp4/.test(fileA.type)) {
     return 1;
   } else if ('type' in fileB && fileB.type && /png|webp|mp4/.test(fileB.type)) {
