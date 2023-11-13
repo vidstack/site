@@ -1,0 +1,36 @@
+<media-time-slider
+  class="group relative mx-[7.5px] inline-flex h-10 w-full max-w-[80px] cursor-pointer touch-none select-none items-center outline-none aria-hidden:hidden"
+>
+  <!-- Track -->
+  <div
+    class="relative z-0 h-[5px] w-full rounded-sm bg-white/30 ring-sky-400 group-data-[focus]:ring-[3px]"
+  >
+    <!-- Track Fill -->
+    <div
+      class="absolute h-full w-[var(--slider-fill)] rounded-sm bg-indigo-400 will-change-[width]"
+    ></div>
+    <!-- Progress -->
+    <div
+      class="absolute z-10 h-full w-[var(--slider-progress)] rounded-sm bg-white/50 will-change-[width]"
+    ></div>
+  </div>
+
+  <!-- Preview -->
+  <media-slider-preview
+    class="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100"
+    noClamp
+  >
+    <media-slider-thumbnail
+      class="block h-[var(--thumbnail-height)] max-h-[160px] min-h-[80px] w-[var(--thumbnail-width)] min-w-[120px] max-w-[180px] overflow-hidden border border-white bg-black"
+      src="/your_thumbnails.vtt"
+    ></media-slider-thumbnail>
+    <media-slider-value
+      class="rounded-sm bg-black px-2 py-px text-[13px] font-medium"
+    ></media-slider-value>
+  </media-slider-preview>
+
+  <!-- Thumb -->
+  <div
+    class="absolute left-[var(--slider-fill)] top-1/2 z-20 h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#cacaca] bg-white opacity-0 ring-white/40 transition-opacity will-change-[left] group-data-[active]:opacity-100 group-data-[dragging]:ring-4"
+  ></div>
+</media-time-slider>

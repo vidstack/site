@@ -8,6 +8,7 @@ import { Slider } from '@vidstack/react';
   <Slider.Track className="relative ring-sky-400 z-0 w-[5px] h-full rounded-sm bg-white/30 group-data-[focus]:ring-[3px]">
     <Slider.TrackFill className="bg-indigo-400 absolute w-full h-[var(--slider-fill)] rounded-sm will-change-[height]" />
   </Slider.Track>
+
   <Slider.Preview
     className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100"
     noClamp
@@ -17,6 +18,7 @@ import { Slider } from '@vidstack/react';
       format="percent"
     />
   </Slider.Preview>
+
   <Slider.Thumb className="absolute left-1/2 bottom-[var(--slider-fill)] z-20 h-[15px] w-[15px] -translate-x-1/2 translate-y-1/2 rounded-full border border-[#cacaca] bg-white opacity-0 ring-white/40 transition-opacity group-data-[active]:opacity-100 group-data-[dragging]:ring-4 will-change-[bottom]" />
 </Slider.Root>;
 // @hl-end

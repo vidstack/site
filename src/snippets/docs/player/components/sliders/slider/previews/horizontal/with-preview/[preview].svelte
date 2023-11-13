@@ -2,10 +2,12 @@
   <media-slider class="vds-slider w-[400px]" value="50">
     <div class="vds-slider-track" />
     <div class="vds-slider-track-fill vds-slider-track" />
-    <div class="vds-slider-thumb" />
+
     <media-slider-preview class="vds-slider-preview">
       <media-slider-value class="vds-slider-value" format="percent"></media-slider-value>
     </media-slider-preview>
+
+    <div class="vds-slider-thumb" />
   </media-slider>
 </media-player>
 

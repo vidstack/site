@@ -35,7 +35,7 @@
 }
 
 .media-slider-track-fill {
-  z-index: 2; /** above track and track progress. */
+  z-index: 2; /** above track. */
   background-color: #f5f5f5;
   width: var(--slider-fill, 0%);
   will-change: width;
