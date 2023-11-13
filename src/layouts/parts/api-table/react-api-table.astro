@@ -49,7 +49,12 @@ const { pathname } = Astro.url,
         const props = (component.props || [])
           .filter((prop) => !prop.internal)
           .map((prop) => [
-            <NameCell name={prop.name} docs={prop.docs} mdnLink={findMDNLink(getLinks(prop))} />,
+            <NameCell
+              id={`${fullComponentName}.props.${prop.name}`.toLowerCase()}
+              name={prop.name}
+              docs={prop.docs}
+              mdnLink={findMDNLink(getLinks(prop))}
+            />,
             <TypeCell
               concise={prop.type.concise.includes(' ') ? prop.type.primitive : prop.type.concise}
               full={prop.type.full}
@@ -58,7 +63,12 @@ const { pathname } = Astro.url,
           ]);
 
         const state = ((hasInstance && component?.instance?.state) || []).map((prop) => [
-          <NameCell name={prop.name} docs={prop.docs} mdnLink={findMDNLink(getLinks(prop))} />,
+          <NameCell
+            id={`${fullComponentName}.state.${prop.name}`.toLowerCase()}
+            name={prop.name}
+            docs={prop.docs}
+            mdnLink={findMDNLink(getLinks(prop))}
+          />,
           <TypeCell concise={prop.type.primitive} full={prop.type.full} />,
           <code>{prop.default ?? 'undefined'}</code>,
         ]);
@@ -79,7 +89,12 @@ const { pathname } = Astro.url,
         const callbacks = (component.callbacks || [])
           .filter((cb) => !cb.internal)
           .map((cb) => [
-            <NameCell name={cb.name} docs={cb.docs} mdnLink={findMDNLink(getLinks(cb))} />,
+            <NameCell
+              id={`${fullComponentName}.callbacks.${cb.name}`.toLowerCase()}
+              name={cb.name}
+              docs={cb.docs}
+              mdnLink={findMDNLink(getLinks(cb))}
+            />,
             <TypeCell concise="function" full={cb.type.full} />,
           ]);
 
@@ -91,6 +106,7 @@ const { pathname } = Astro.url,
           .filter((prop) => !prop.internal && !component.props?.some((p) => p.name === prop.name))
           .map((prop) => [
             <NameCell
+              id={`${fullComponentName}.instance.props.${prop.name}`.toLowerCase()}
               name={prop.name}
               docs={prop.docs}
               badges={[prop.readonly && 'readonly']}
@@ -106,6 +122,7 @@ const { pathname } = Astro.url,
           .filter((prop) => !prop.internal)
           .map((method) => [
             <NameCell
+              id={`${fullComponentName}.instance.methods.${method.name}`.toLowerCase()}
               name={method.name}
               docs={method.docs}
               mdnLink={findMDNLink(getLinks(method))}
@@ -130,7 +147,21 @@ const { pathname } = Astro.url,
         const dataAttrs = [...(component.instance?.doctags || []), ...(component.doctags || [])]
           ?.filter((tag) => tag.name === 'attr' && tag.text)
           .map((tag) => tag.text!.split(/\s+-\s+/))
-          .map(([name, desc]) => [<code>{name}</code>, desc]);
+          .map(([name, desc]) => [
+            <h6 id={`${fullComponentName}.dataattrs.${name}`.toLowerCase()}>
+              <code>{name}</code>
+            </h6>,
+            desc,
+          ]);
+
+        const cssVars = component.instance?.cssvars?.map((cssvar) => [
+          <NameCell
+            id={`${fullComponentName}.cssvars.${cssvar.name}`.toLowerCase()}
+            name={`--${cssvar.name}`}
+            badges={[cssvar.readonly && 'readonly']}
+          />,
+          cssvar.docs?.replace('<p>', '').replace('</p>', '').trim(),
+        ]);
 
         return (
           <div>
@@ -192,6 +223,17 @@ const { pathname } = Astro.url,
                   <Code code={instanceUsageCode} lang="tsx" theme="github-light" />
                 </CodeBlockWrapper>
                 <Table cols={['Prop', 'Type']} rows={[...instanceProps, ...instanceMethods]} />
+              </div>
+            ) : null}
+
+            {cssVars?.length ? (
+              <div>
+                <Heading
+                  title="CSS Variables"
+                  slug={`${fullComponentName}.cssvars`}
+                  level={tableHeadingLevel}
+                />
+                <Table cols={['Name', 'Description']} rows={cssVars} />
               </div>
             ) : null}
 

@@ -62,6 +62,10 @@ if (pathname.includes('components/')) {
           addHeading('Instance', tableHeadingLevel, fullName + '.instance');
         }
 
+        if (component.instance?.cssvars?.length) {
+          addHeading('CSS Variables', tableHeadingLevel, fullName + '.cssvars');
+        }
+
         const tags = [...(component.instance?.doctags || []), ...(component.doctags || [])];
         if (tags.some((tag) => tag.name === 'attr' && tag.text)) {
           addHeading('Data Attributes', tableHeadingLevel, fullName + '.attrs');
@@ -91,6 +95,10 @@ if (pathname.includes('components/')) {
 
       if (component.instance?.members?.props || component.instance?.members?.methods) {
         addHeading('Instance', tableHeadingLevel, name + '.instance');
+      }
+
+      if (component.instance?.cssvars?.length) {
+        addHeading('CSS Variables', tableHeadingLevel, name + '.cssvars');
       }
 
       if (component.instance?.doctags?.some((tag) => tag.name === 'attr' && tag.text)) {

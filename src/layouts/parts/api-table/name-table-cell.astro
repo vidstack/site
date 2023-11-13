@@ -5,19 +5,22 @@ import Badge from '../../../components/badge.svelte';
 import InfoPopup from '../../../components/info-popup.astro';
 
 interface Props {
+  id?: string;
   name: string;
   badges?: (string | null | undefined | false)[];
   mdnLink?: string;
   docs?: string;
 }
 
-const { name, docs, badges, mdnLink } = Astro.props;
+const { id, name, docs, badges, mdnLink } = Astro.props;
 
 const badgeColors = ['green', 'purple', 'blue'] as const;
 ---
 
 <div class="inline-flex items-center">
-  <code>{name}</code>
+  <h6 {id}>
+    <code>{name}</code>
+  </h6>
   {
     docs && (
       <InfoPopup class="ml-px" label={`Show ${name} description`} contain>

@@ -4,6 +4,7 @@ import Table from '~/components/table.astro';
 import Heading from '~/docs/components/heading.svelte';
 import { camelToKebabCase } from '~/utils/string';
 import { Code } from 'astro:components';
+import { H } from 'vidstack/dist/types/vidstack-9f0b9c4c.js';
 
 import { findMDNLink, findWebComponents, getLinks } from './api-utils';
 import NameCell from './name-table-cell.astro';
@@ -47,6 +48,7 @@ const { pathname } = Astro.url,
 
             return [
               <NameCell
+                id={`${componentName}.props.${prop.name}`.toLowerCase()}
                 name={prop.name}
                 docs={prop.docs}
                 badges={[attr && `Attribute: ${attr}`]}
@@ -58,7 +60,12 @@ const { pathname } = Astro.url,
           });
 
         const state = (component?.instance?.state || []).map((prop) => [
-          <NameCell name={prop.name} docs={prop.docs} mdnLink={findMDNLink(getLinks(prop))} />,
+          <NameCell
+            id={`${componentName}.state.${prop.name}`.toLowerCase()}
+            name={prop.name}
+            docs={prop.docs}
+            mdnLink={findMDNLink(getLinks(prop))}
+          />,
           <TypeCell concise={prop.type.primitive} full={prop.type.full} />,
           <code>{prop.default ?? 'undefined'}</code>,
         ]);
@@ -80,6 +87,7 @@ const { pathname } = Astro.url,
           .filter((event) => !event.internal)
           .map((event) => [
             <NameCell
+              id={`${componentName}.events.${event.name}`.toLowerCase()}
               name={event.name}
               docs={event.docs}
               badges={[`Detail: ${event.detail.concise}`]}
@@ -92,6 +100,7 @@ const { pathname } = Astro.url,
           .filter((prop) => !prop.internal)
           .map((prop) => [
             <NameCell
+              id={`${componentName}.instance.props.${prop.name}`.toLowerCase()}
               name={prop.name}
               docs={prop.docs}
               badges={[prop.readonly && 'readonly']}
@@ -107,6 +116,7 @@ const { pathname } = Astro.url,
           .filter((prop) => !prop.internal)
           .map((method) => [
             <NameCell
+              id={`${componentName}.instance.methods.${method.name}`.toLowerCase()}
               name={method.name}
               docs={method.docs}
               mdnLink={findMDNLink(getLinks(method))}
@@ -117,7 +127,12 @@ const { pathname } = Astro.url,
         const dataAttrs = component.instance?.doctags
           ?.filter((tag) => tag.name === 'attr' && tag.text)
           .map((tag) => tag.text!.split(/\s+-\s+/))
-          .map(([name, desc]) => [<code>{name}</code>, desc]);
+          .map(([name, desc]) => [
+            <h6 id={`${componentName}.dataattrs.${name}`.toLowerCase()}>
+              <code>{name}</code>
+            </h6>,
+            desc,
+          ]);
 
         const dataAttrsUsageCode = dataAttrs
           ? ['/* Example. */', `${component.tag.name}[data-foo] {}`].join('\n')
@@ -126,11 +141,25 @@ const { pathname } = Astro.url,
         const dataParts = component.doctags
           ?.filter((tag) => tag.name === 'part' && tag.text)
           .map((tag) => tag.text!.split(/\s+-\s+/))
-          .map(([name, desc]) => [<code>{name}</code>, desc]);
+          .map(([name, desc]) => [
+            <h6 id={`${componentName}.dataparts.${name}`.toLowerCase()}>
+              <code>{name}</code>
+            </h6>,
+            desc,
+          ]);
 
         const dataPartUsageCode = dataParts
           ? ['<!-- Example -->', `<div data-part="${dataParts[0]?.[0]}"></div>`].join('\n')
           : '';
+
+        const cssVars = component.instance?.cssvars?.map((cssvar) => [
+          <NameCell
+            id={`${componentName}.cssvars.${cssvar.name}`.toLowerCase()}
+            name={`--${cssvar.name}`}
+            badges={[cssvar.readonly && 'readonly']}
+          />,
+          cssvar.docs?.replace('<p>', '').replace('</p>', '').trim(),
+        ]);
 
         return (
           <div>
@@ -190,6 +219,17 @@ const { pathname } = Astro.url,
                   <Code code={instanceCode} lang="ts" theme="github-light" />
                 </CodeBlockWrapper>
                 <Table cols={['Prop', 'Type']} rows={[...instanceProps, ...instanceMethods]} />
+              </div>
+            ) : null}
+
+            {cssVars?.length ? (
+              <div>
+                <Heading
+                  title="CSS Variables"
+                  slug={`${componentName}.cssvars`}
+                  level={tableHeadingLevel}
+                />
+                <Table cols={['Name', 'Description']} rows={cssVars} />
               </div>
             ) : null}
 
