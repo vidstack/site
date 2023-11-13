@@ -1,4 +1,4 @@
-<media-slider
+<media-volume-slider
   class="group relative my-[7.5px] inline-flex h-full max-h-[80px] w-10 cursor-pointer touch-none select-none items-center outline-none aria-hidden:hidden"
   orientation="vertical"
 >
@@ -18,11 +18,10 @@
   >
     <media-slider-value
       class="rounded-sm bg-black px-2 py-px text-[13px] font-medium"
-      format="percent"
     ></media-slider-value>
   </media-slider-preview>
   <!-- Thumb -->
   <div
     class="absolute bottom-[var(--slider-fill)] left-1/2 z-20 h-[15px] w-[15px] -translate-x-1/2 translate-y-1/2 rounded-full border border-[#cacaca] bg-white opacity-0 ring-white/40 transition-opacity will-change-[bottom] group-data-[active]:opacity-100 group-data-[dragging]:ring-4"
   ></div>
-</media-slider>
+</media-volume-slider>

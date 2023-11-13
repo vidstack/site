@@ -9,7 +9,10 @@ import { Slider } from '@vidstack/react';
     className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100"
     noClamp
   >
-    <Slider.Value className="rounded-sm bg-black px-2 py-px text-[13px] font-medium" />
+    <Slider.Value
+      className="rounded-sm bg-black px-2 py-px text-[13px] font-medium"
+      format="percent"
+    />
   </Slider.Preview>
   <Slider.Thumb className="absolute left-[var(--slider-fill)] top-1/2 z-20 h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#cacaca] bg-white opacity-0 ring-white/40 transition-opacity group-data-[active]:opacity-100 group-data-[dragging]:ring-4 will-change-[left]" />
 </Slider.Root>;
