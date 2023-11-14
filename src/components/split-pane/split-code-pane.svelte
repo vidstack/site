@@ -103,6 +103,7 @@
       'flex items-center w-full sticky top-0 left-0 border-b border-border/90',
       hidePreview && 'py-0.5',
     )}
+    on:pointerup|stopPropagation
   >
     <slot name="toolbar" />
 

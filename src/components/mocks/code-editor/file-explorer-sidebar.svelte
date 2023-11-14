@@ -34,6 +34,7 @@
     'bg-elevate',
     isOpen ? 'w-[200px]' : 'w-[44px] justify-center',
   )}
+  on:pointerup|stopPropagation
 >
   <div class="flex items-center w-full pt-2 bg-elevate">
     <span
