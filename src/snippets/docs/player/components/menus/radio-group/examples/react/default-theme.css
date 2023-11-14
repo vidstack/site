@@ -1,0 +1,7 @@
+.vds-radio {
+  /* CSS variables available for customization (defaults shown). */
+  --media-menu-radio-check-size: 9px;
+  --media-menu-radio-check-inner-size: 4px;
+  --media-menu-radio-check-border: 2px solid rgb(245 245 245 / 0.5);
+  --media-menu-radio-check-active-color: var(--media-brand, #f5f5f5);
+}

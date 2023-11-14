@@ -1,3 +1,16 @@
-<media-player>
-  <media-provider></media-provider>
-</media-player>
+<media-radio-group class="flex w-full flex-col" aria-label="Custom Options">
+  <media-radio
+    class="group relative flex w-full cursor-pointer select-none items-center justify-start rounded-sm p-2.5 outline-none ring-sky-400 data-[hocus]:bg-white/10 data-[focus]:ring-[3px]"
+    value="value_one"
+  >
+    <media-icon
+      type="radio-button"
+      className="h-4 w-4 text-white group-data-[checked]:hidden"
+    ></media-icon>
+    <media-icon
+      type="radio-button-selected"
+      className="text-indigo-400 hidden h-4 w-4 group-data-[checked]:block"
+    ></media-icon>
+    <span>Option 1</span>
+  </media-radio>
+</media-radio-group>
