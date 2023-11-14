@@ -27,8 +27,8 @@ dependencies:
     specifier: ^1.5.6
     version: 1.5.6(@types/react@18.2.37)(react@18.2.0)
   astro:
-    specifier: ^3.3.4
-    version: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+    specifier: ^3.5.3
+    version: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
   clsx:
     specifier: ^1.2.0
     version: 1.2.1
@@ -51,22 +51,22 @@ devDependencies:
     version: 4.20.0
   '@astrojs/mdx':
     specifier: ^1.1.0
-    version: 1.1.4(astro@3.5.2)
+    version: 1.1.4(astro@3.5.3)
   '@astrojs/node':
     specifier: ^6.0.0
-    version: 6.0.3(astro@3.5.2)
+    version: 6.0.3(astro@3.5.3)
   '@astrojs/sitemap':
     specifier: ^3.0.0
     version: 3.0.3
   '@astrojs/svelte':
     specifier: ^4.0.2
-    version: 4.0.3(astro@3.5.2)(svelte@4.2.3)(typescript@5.2.2)(vite@4.5.0)
+    version: 4.0.3(astro@3.5.3)(svelte@4.2.3)(typescript@5.2.2)(vite@4.5.0)
   '@astrojs/tailwind':
     specifier: ^5.0.0
-    version: 5.0.2(astro@3.5.2)(tailwindcss@3.3.5)
+    version: 5.0.2(astro@3.5.3)(tailwindcss@3.3.5)
   '@astrojs/vercel':
     specifier: ^5.0.0
-    version: 5.2.0(astro@3.5.2)
+    version: 5.2.0(astro@3.5.3)
   '@ianvs/prettier-plugin-sort-imports':
     specifier: ^4.1.0
     version: 4.1.1(prettier@3.0.3)
@@ -93,7 +93,7 @@ devDependencies:
     version: 18.2.37
   astro-auto-import:
     specifier: ^0.3.1
-    version: 0.3.1(astro@3.5.2)
+    version: 0.3.1(astro@3.5.3)
   globby:
     specifier: ^13.2.2
     version: 13.2.2
@@ -446,7 +446,7 @@ packages:
         integrity: sha512-06DD2ZnItMwUnH81LBLco3tWjcZ1lGU9rLCCBaeUCGYe9cI0wKyY2W3kDyoW1I6GmcWgt1fu+D1CTvz+FIKf8A==,
       }
 
-  /@astrojs/markdown-remark@3.4.0(astro@3.5.2):
+  /@astrojs/markdown-remark@3.4.0(astro@3.5.3):
     resolution:
       {
         integrity: sha512-uzLSKBQ4e70aH8gEbBHZ2pnv/KOJKB3WrXFBOF0U5Uwjcr2LNWeIBLjPRQjA4tbtteELh84YPBHny21mhvBGVA==,
@@ -455,7 +455,7 @@ packages:
       astro: ^3.0.0
     dependencies:
       '@astrojs/prism': 3.0.0
-      astro: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+      astro: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
       github-slugger: 2.0.0
       import-meta-resolve: 3.1.1
       mdast-util-definitions: 6.0.0
@@ -472,7 +472,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/mdx@1.1.4(astro@3.5.2):
+  /@astrojs/mdx@1.1.4(astro@3.5.3):
     resolution:
       {
         integrity: sha512-yP5O3TuSx/vKTyrw4ZPuRH/sXIKj5zDN03AZQt4Rlv8W7mUCpQnYC3bTOrnhBvNxLRCmB1WL2cip9RUmvd4MQw==,
@@ -481,10 +481,10 @@ packages:
     peerDependencies:
       astro: ^3.0.0
     dependencies:
-      '@astrojs/markdown-remark': 3.4.0(astro@3.5.2)
+      '@astrojs/markdown-remark': 3.4.0(astro@3.5.3)
       '@mdx-js/mdx': 2.3.0
       acorn: 8.11.2
-      astro: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+      astro: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
       es-module-lexer: 1.4.1
       estree-util-visit: 1.2.1
       github-slugger: 2.0.0
@@ -501,7 +501,7 @@ packages:
       - supports-color
     dev: true
 
-  /@astrojs/node@6.0.3(astro@3.5.2):
+  /@astrojs/node@6.0.3(astro@3.5.3):
     resolution:
       {
         integrity: sha512-3isB8ETX3WabAh8pY1HMnbt4e8HV9noVP4X52SlF+GycIt7YOXsUSzditjROZkrZOSfWhzsTaHh7EqbdVXqzrw==,
@@ -509,7 +509,7 @@ packages:
     peerDependencies:
       astro: ^3.2.3
     dependencies:
-      astro: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+      astro: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
       send: 0.18.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -535,7 +535,7 @@ packages:
       zod: 3.22.4
     dev: true
 
-  /@astrojs/svelte@4.0.3(astro@3.5.2)(svelte@4.2.3)(typescript@5.2.2)(vite@4.5.0):
+  /@astrojs/svelte@4.0.3(astro@3.5.3)(svelte@4.2.3)(typescript@5.2.2)(vite@4.5.0):
     resolution:
       {
         integrity: sha512-3toH/mkNFqMdmnMXh4XcksZfuOAwWVXdRrISyoRgNn1HalG6WBACFT+RwxAwpH7eXW/zUfrpfyZdcxYnVucHTg==,
@@ -546,7 +546,7 @@ packages:
       svelte: ^3.55.0 || ^4.0.0
     dependencies:
       '@sveltejs/vite-plugin-svelte': 2.5.2(svelte@4.2.3)(vite@4.5.0)
-      astro: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+      astro: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
       svelte: 4.2.3
       svelte2tsx: 0.6.25(svelte@4.2.3)(typescript@5.2.2)
     transitivePeerDependencies:
@@ -555,7 +555,7 @@ packages:
       - vite
     dev: true
 
-  /@astrojs/tailwind@5.0.2(astro@3.5.2)(tailwindcss@3.3.5):
+  /@astrojs/tailwind@5.0.2(astro@3.5.3)(tailwindcss@3.3.5):
     resolution:
       {
         integrity: sha512-oXqeqmBlkQmsltrsU9nEWeXOtrZIAHW8dcmX7BCdrjzPnU6dPwWzAwhddNQ9ihKiWwsLnlbwQZIo2CDigcZlIA==,
@@ -564,7 +564,7 @@ packages:
       astro: ^3.2.4
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+      astro: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
       autoprefixer: 10.4.16(postcss@8.4.31)
       postcss: 8.4.31
       postcss-load-config: 4.0.1(postcss@8.4.31)
@@ -590,7 +590,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/vercel@5.2.0(astro@3.5.2):
+  /@astrojs/vercel@5.2.0(astro@3.5.3):
     resolution:
       {
         integrity: sha512-WUMgiVLbDsh2uRaMcjqx3Br7lWNvKSvDqbLwDeR21lJ4UIBB+1PYbQ3cLYLXl6GiksxPx8rg9dry9CDsPcA0nA==,
@@ -601,7 +601,7 @@ packages:
       '@astrojs/internal-helpers': 0.2.1
       '@vercel/analytics': 1.1.1
       '@vercel/nft': 0.23.1
-      astro: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+      astro: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
       esbuild: 0.19.5
       fast-glob: 3.3.2
       set-cookie-parser: 2.6.0
@@ -2360,7 +2360,7 @@ packages:
     hasBin: true
     dev: true
 
-  /astro-auto-import@0.3.1(astro@3.5.2):
+  /astro-auto-import@0.3.1(astro@3.5.3):
     resolution:
       {
         integrity: sha512-4kXZMlZFiq3dqT6fcfPbCjHTABQ279eKbIqZAb6qktBhGlmHwpHr1spOUFj/RQFilaWVgfjzOBmuZnoydZb5Vg==,
@@ -2371,20 +2371,20 @@ packages:
     dependencies:
       '@types/node': 18.18.9
       acorn: 8.11.2
-      astro: 3.5.2(@types/node@20.9.0)(typescript@5.2.2)
+      astro: 3.5.3(@types/node@20.9.0)(typescript@5.2.2)
     dev: true
 
-  /astro@3.5.2(@types/node@20.9.0)(typescript@5.2.2):
+  /astro@3.5.3(@types/node@20.9.0)(typescript@5.2.2):
     resolution:
       {
-        integrity: sha512-AE37biXPX0fH4tmBKpYDyW8UvJ3XLNvRCuUE4RTGf+YdKPPcwGLgV8DE6GLG86pHfevTH+kM581sBDzGh54iEw==,
+        integrity: sha512-08ya96yvQLdZjwYYpylzDTUGcyuA+Kw9zIT2RHfL7VzXtLTL1ZxhQjSo6CiTBH8Tcrdam88Fez+Q1awwKKajGw==,
       }
     engines: { node: '>=18.14.1', npm: '>=6.14.0' }
     hasBin: true
     dependencies:
       '@astrojs/compiler': 2.3.0
       '@astrojs/internal-helpers': 0.2.1
-      '@astrojs/markdown-remark': 3.4.0(astro@3.5.2)
+      '@astrojs/markdown-remark': 3.4.0(astro@3.5.3)
       '@astrojs/telemetry': 3.0.4
       '@babel/core': 7.23.3
       '@babel/generator': 7.23.3
