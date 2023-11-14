@@ -1,5 +1,5 @@
 <media-player>
-  <media-slider class="vds-slider w-[400px]" value="50">
+  <media-slider class="vds-slider w-[400px]" value={50}>
     <div class="vds-slider-track" />
     <div class="vds-slider-track-fill vds-slider-track" />
     <div class="vds-slider-thumb" />

@@ -70,7 +70,7 @@ module.exports = {
   ],
 };
 
-function customVariants({ addVariant }) {
+function customVariants({ addVariant, matchVariant }) {
   addVariant(
     'supports-backdrop-blur',
     '@supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0))',
@@ -80,4 +80,5 @@ function customVariants({ addVariant }) {
   addVariant('hocus', ['&:hover', '&:focus-visible']);
   addVariant('scrolled', ['body[data-scrolled] &']);
   addVariant('group-hocus', ['.group:hover &', '.group:focus-visible &']);
+  matchVariant('parent-aria', (value) => `.parent[aria-${value}="true"] > &`);
 }

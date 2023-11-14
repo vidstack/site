@@ -1,8 +1,7 @@
 <div class="flex flex-col justify-center items-center">
   <media-tooltip class="contents">
     <media-tooltip-trigger>
-      <!-- svelte-ignore a11y-no-redundant-roles -->
-      <button class="vds-button" role="button">
+      <button class="vds-button">
         <media-icon type="play"></media-icon>
       </button>
     </media-tooltip-trigger>

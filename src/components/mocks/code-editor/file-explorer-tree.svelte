@@ -22,14 +22,27 @@
 
   onMount(() => {
     activeItem = root.querySelector('li[aria-selected="true"]');
-    initFromStorage();
+    init();
   });
 
-  function initFromStorage() {
-    if (!storageKey) return;
+  function initActiveItem() {
+    if (!activeItem) return;
+    const path = activeItem.getAttribute('data-path');
+    if (path) togglePath(path, true);
+  }
 
-    const path = window.localStorage.getItem(storageKey);
-    if (!path) return;
+  function init() {
+    if (!storageKey) {
+      initActiveItem();
+      return;
+    }
+
+    let path = window.localStorage.getItem(storageKey);
+
+    if (!path) {
+      initActiveItem();
+      return;
+    }
 
     if (activeItem) {
       const oldPath = activeItem.getAttribute('data-path');
@@ -45,7 +58,6 @@
 
     for (const folder of folders) {
       currentPath += '/' + folder;
-
       const el = root.querySelector<HTMLElement>(`[data-path="${currentPath}"]`);
       if (el) toggleFolder(el, isOpen);
     }
@@ -60,8 +72,15 @@
 
   function toggleFolder(target: HTMLElement, force?: boolean) {
     const el = target.hasAttribute('data-folder') ? target.parentElement! : target,
-      expanded = el.getAttribute('aria-expanded') === 'true';
-    el.setAttribute('aria-expanded', ariaBool(isUndefined(force) ? !expanded : force));
+      expanded = isUndefined(force) ? el.getAttribute('aria-expanded') !== 'true' : force;
+
+    el.setAttribute('aria-expanded', ariaBool(expanded));
+
+    const icon = target.querySelector<HTMLElement>('.folder-icon'),
+      openIcon = target.querySelector<HTMLElement>('.folder-open-icon');
+
+    if (icon) icon.style.display = expanded ? 'none' : 'inline-block';
+    if (openIcon) openIcon.style.display = expanded ? 'inline-block' : 'none';
   }
 
   function selectFile(target: HTMLElement) {

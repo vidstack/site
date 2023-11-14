@@ -4,7 +4,7 @@
   playsinline
 >
   <media-provider style="display: none"></media-provider>
-  <media-time-slider class="vds-time-slider vds-slider w-[400px]" value="50">
+  <media-time-slider class="vds-time-slider vds-slider w-[400px]" value={50}>
     <div class="vds-slider-track" />
     <div class="vds-slider-track-fill vds-slider-track" />
     <div class="vds-slider-progress vds-slider-track" />

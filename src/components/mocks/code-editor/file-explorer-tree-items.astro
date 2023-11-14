@@ -69,7 +69,7 @@ const { id, depth, path = '', items } = Astro.props;
 
 {
   items.map((item) => {
-    item.name = item.name.replace(/^\[\d+\]/, '');
+    item.name = item.name.replace(/^\[\d*?\]/, '');
 
     if ('children' in item) {
       // Ignore filtered folder names ([css]).
@@ -80,8 +80,8 @@ const { id, depth, path = '', items } = Astro.props;
       return (
         <ul
           class={clsx(
-            'folder group flex-col space-y-0.5 mt-0.5 text-sm',
-            depth > 0 ? 'hidden' : 'flex select-none',
+            'folder group parent flex-col space-y-0.5 mt-0.5 text-sm select-none ',
+            depth > 0 && 'hidden parent-aria-[expanded]:flex',
           )}
           role="treeitem"
           aria-expanded={ariaBool(item.expanded)}
@@ -97,7 +97,7 @@ const { id, depth, path = '', items } = Astro.props;
             )}
             data-folder
           >
-            <FolderIcon class="folder-icon w-4 h-4 mr-1.5 hidden" />
+            <FolderIcon class="folder-icon w-4 h-4 mr-1.5" />
             <FolderOpenIcon class="folder-open-icon w-4 h-4 mr-1.5 hidden" />
             {item.name}
           </div>
@@ -113,11 +113,11 @@ const { id, depth, path = '', items } = Astro.props;
       return (
         <li
           class={clsx(
+            depth > 0 ? 'hidden parent-aria-[expanded]:flex' : 'flex',
             'rounded-sm group text-sm items-center mt-0.5 py-1 text-soft',
             'aria-selected:text-inverse cursor-pointer whitespace-nowrap',
             'aria-selected:font-medium select-none border border-transparent',
             'hocus:border-brand/90 hocus:bg-brand/10 hocus:text-inverse hocus:shadow-sm',
-            depth > 0 ? 'hidden' : 'flex',
           )}
           role="treeitem"
           tabindex="-1"
@@ -143,19 +143,7 @@ const { id, depth, path = '', items } = Astro.props;
 }
 
 <style>
-  .folder[aria-expanded='true'] > * {
-    display: flex;
-  }
-
   .folder[aria-expanded='true'] > *:first-child {
     color: rgb(var(--color-inverse));
-  }
-
-  .folder[aria-expanded='false'] > * > .folder-icon {
-    display: inline-block;
-  }
-
-  .folder[aria-expanded='true'] > * > .folder-open-icon {
-    display: inline-block;
   }
 </style>

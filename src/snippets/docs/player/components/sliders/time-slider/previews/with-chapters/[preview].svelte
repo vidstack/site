@@ -11,7 +11,7 @@
       default
     />
   </media-provider>
-  <media-time-slider class="vds-time-slider vds-slider w-[400px]" value="50">
+  <media-time-slider class="vds-time-slider vds-slider w-[400px]" value={50}>
     <media-slider-chapters class="vds-slider-chapters">
       <template>
         <div class="vds-slider-chapter">

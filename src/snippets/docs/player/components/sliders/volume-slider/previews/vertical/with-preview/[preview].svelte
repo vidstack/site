@@ -1,5 +1,5 @@
 <media-player>
-  <media-slider class="vds-slider h-[200px]" value="50" orientation="vertical">
+  <media-slider class="vds-slider h-[200px]" value={50} orientation="vertical">
     <div class="vds-slider-track" />
     <div class="vds-slider-track-fill vds-slider-track" />
     <div class="vds-slider-thumb" />
@@ -21,9 +21,5 @@
 
   :global(:root.dark) media-player {
     --media-brand: #f5f5f5;
-  }
-
-  .vds-slider-thumb {
-    width: var(--thumb-size);
   }
 </style>

@@ -5,29 +5,21 @@
   const options = ['English', 'Spanish'];
 
   let value = 'English',
-    menuEl: MediaMenuElement,
-    menuItemsEl: HTMLElement;
+    menuEl: MediaMenuElement;
 
   onMount(() => {
     requestAnimationFrame(() => {
       menuEl.open();
     });
   });
-
-  // Temporary bug fix, needs to be resolved in core player lib.
-  function onOpen() {
-    requestAnimationFrame(() => {
-      menuItemsEl.style.cssText = menuItemsEl.style.cssText.replace(');', '));');
-    });
-  }
 </script>
 
 <media-player>
-  <media-menu class="vds-menu" bind:this={menuEl} on:open={onOpen}>
+  <media-menu class="vds-menu" bind:this={menuEl}>
     <media-menu-button class="vds-menu-button vds-button text-inverse" aria-label="Settings">
       <media-icon type="settings" class="vds-rotate-icon vds-icon"></media-icon>
     </media-menu-button>
-    <media-menu-items class="vds-menu-items" placement="top" offset="8" bind:this={menuItemsEl}>
+    <media-menu-items class="vds-menu-items" placement="top" offset="8">
       <media-menu>
         <media-menu-button class="vds-menu-button">
           <media-icon type="chevron-left" class="vds-menu-button-close-icon"></media-icon>
@@ -71,5 +63,9 @@
 
   :global(.vds-radio[aria-checked='true']) .vds-radio-check {
     border: 2px solid #f5f5f5;
+  }
+
+  .vds-menu-items:not([data-submenu]) {
+    height: auto;
   }
 </style>
