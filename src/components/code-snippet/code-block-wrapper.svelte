@@ -20,7 +20,7 @@
     'code-block relative text-sm leading-[var(--leading)] flex flex-col min-h-0 bg-elevate',
     !flat
       ? 'shadow-sm rounded-md border-border/90 border 576:max-h-[32rem] max-h-[60vh] mx-auto'
-      : 'w-full min-h-full',
+      : 'w-full min-h-full max-h-[calc(var(--code-block-max-h,0px)-var(--code-block-gutters,0px))]',
     _class,
   )}
   style={clsx(
@@ -51,10 +51,6 @@
 </div>
 
 <style>
-  .code-block[data-flat] {
-    max-height: calc(var(--code-block-max-h, 0px) - var(--code-block-gutters, 0px));
-  }
-
   .code-block :global(pre code[data-lang-bash] .line:not(:empty)::before) {
     content: '> ';
     font-weight: bold;
