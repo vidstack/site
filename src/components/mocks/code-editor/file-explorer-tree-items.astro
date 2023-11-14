@@ -69,6 +69,8 @@ const { id, depth, path = '', items } = Astro.props;
 
 {
   items.map((item) => {
+    item.name = item.name.replace(/^\[\d+\]/, '');
+
     if ('children' in item) {
       // Ignore filtered folder names ([css]).
       if (item.name.startsWith('[') && item.name.endsWith(']')) {

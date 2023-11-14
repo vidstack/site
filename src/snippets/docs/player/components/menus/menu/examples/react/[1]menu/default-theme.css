@@ -1,0 +1,65 @@
+.media-player {
+  /* Player CSS variables (defaults shown). */
+  --media-font-family: sans-serif;
+  --media-controls-color: #f5f5f5;
+  --media-focus-ring: 0 0 0 3px rgb(78 156 246);
+}
+
+.vds-menu {
+  /* CSS variables available for customization (defaults shown). */
+  --media-menu-bg: rgb(10 10 10 / 0.95);
+  --media-menu-border-radius: 8px;
+  --media-menu-border: 1px solid rgb(255 255 255 / 0.1);
+  --media-menu-box-shadow: 1px 1px 1px rgb(10 10 10 / 0.5);
+  --media-menu-font-size: 15px;
+  --media-menu-font-weight: 500;
+  --media-menu-max-height: calc(var(--player-height) * 0.6);
+  --media-menu-min-width: 260px;
+  --media-menu-padding: 10px;
+  --media-menu-divider: 1px solid rgb(245 245 245 /0.15);
+
+  --media-menu-top-bar-bg: rgb(10 10 10 / 0.6);
+
+  --media-menu-enter-animation: vds-menu-enter 0.3s ease-out;
+  --media-menu-exit-animation: vds-menu-exit 0.2s ease-out;
+
+  --media-menu-scrollbar-track-bg: rgb(245 245 245 / 0.08);
+  --media-menu-scrollbar-thumb-bg: rgb(245 245 245 / 0.1);
+
+  --media-menu-item-color: #f5f5f5;
+  --media-menu-item-bg: transparent;
+  --media-menu-item-hover-bg: rgb(245 245 245 / 0.08);
+  --media-menu-item-border: 0;
+  --media-menu-item-border-radius: 2px;
+  --media-menu-item-padding: 10px;
+
+  --media-menu-item-icon-size: 22px;
+  --media-menu-item-icon-spacing: 6px;
+
+  --media-menu-item-info-color: rgb(168: 169: 171);
+  --media-menu-item-info-font-size: 13px;
+
+  --media-menu-hint-color: rgb(245 245 245 / 0.5);
+  --media-menu-hint-font-size: 14px;
+
+  --media-menu-radio-check-size: 9px;
+  --media-menu-radio-check-inner-size: 4px;
+  --media-menu-radio-check-border: 2px solid rgb(245 245 245 / 0.5);
+  --media-menu-radio-check-active-color: var(--media-brand, #f5f5f5);
+}
+
+.vds-menu-button {
+  /* CSS variables available for customization (defaults shown). */
+  --media-button-color: var(--media-controls-color, #f5f5f5);
+  --media-button-size: 40px;
+  --media-button-icon-size: 80%;
+  --media-button-padding: 0px;
+  --media-button-border-radius: 8px;
+  --media-button-hover-bg: rgb(255 255 255 / 0.2);
+  --media-button-hover-transform: scale(1);
+  --media-button-hover-transition: transform 0.2s ease-in;
+  --media-button-touch-hover-border-radius: 100%;
+  --media-button-touch-hover-bg: rgb(255 255 255 / 0.2);
+
+  --media-menu-button-icon-rotate-deg: 90deg;
+}

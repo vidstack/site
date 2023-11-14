@@ -1,0 +1,119 @@
+.media-menu {
+  --enter-transform: translateY(0px);
+  --exit-transform: translateY(12px);
+
+  display: flex;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: sans-serif;
+  flex-direction: column;
+  transition: height 0.35s ease;
+  min-width: 260px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background-color: rgb(10 10 10 / 0.95);
+  backdrop-filter: blur(4px);
+  height: var(--menu-height, auto);
+  will-change: width, height;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  max-height: 250px;
+}
+
+.media-menu[data-resizing] {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.media-menu:not([data-open]) {
+  animation: media-menu-exit 0.2s ease-out;
+}
+
+.media-menu[data-open] {
+  animation: media-menu-enter 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.media-menu[data-placement~='bottom'] {
+  --enter-transform: translateY(0);
+  --exit-transform: translateY(-12px);
+}
+
+.media-menu :global([role='menuitem'][data-focus]),
+.media-menu :global([role='menuitemradio'][data-focus]) {
+  outline: none;
+  box-shadow: var(--media-focus-ring);
+}
+
+@keyframes media-menu-enter {
+  from {
+    opacity: 0;
+    transform: var(--exit-transform);
+  }
+  to {
+    opacity: 1;
+    transform: var(--enter-transform);
+  }
+}
+
+@keyframes media-menu-exit {
+  from {
+    opacity: 1;
+    transform: var(--enter-transform);
+  }
+  to {
+    opacity: 0;
+    transform: var(--exit-transform);
+  }
+}
+
+/* Other buttons use the same styles (e..g, `PlayButton`). */
+.media-button {
+  display: inline-flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  color: white;
+  border-radius: 8px;
+  margin-right: 2.5px;
+  cursor: pointer;
+  /* Browser resets. */
+  padding: 0;
+  user-select: none;
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.media-button > svg {
+  width: 80%;
+  height: 80%;
+  border-radius: 2px;
+}
+
+.media-button[data-focus] > svg {
+  box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .media-button:hover {
+    background-color: rgb(255 255 255 / 0.2);
+  }
+}
+
+.media-rotate-icon {
+  transition: transform 0.2s ease-out;
+}
+
+.media-button[aria-expanded='true'] .media-rotate-icon {
+  transform: rotate(90deg);
+  transition: transform 0.2s ease-in;
+}

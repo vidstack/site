@@ -1,4 +1,6 @@
 ---
+import { dirname } from 'path';
+
 import type { LazyCodeSnippet } from ':code_snippets';
 import MockCodeEditor from '~/components/mocks/code-editor/mock-code-editor.astro';
 import { codePreviews } from '~/stores/code-previews';
@@ -37,7 +39,7 @@ function resolveFiles(snippets: LazyCodeSnippet[]) {
     paths.push({
       path:
         snippet.id.includes('tailwind-css') && snippet.ext === 'js'
-          ? 'tailwind.config'
+          ? `${dirname(path)}/tailwind.config`
           : `${path}.${snippet.ext}`,
       snippet: snippet.id + `.${snippet.ext}`,
     });
