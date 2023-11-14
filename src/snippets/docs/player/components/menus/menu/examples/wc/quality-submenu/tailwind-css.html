@@ -1,0 +1,41 @@
+<media-menu>
+  <!-- Button -->
+  <media-menu-button
+    class="parent left-0 z-10 flex w-full cursor-pointer select-none items-center justify-start rounded-sm bg-black/60 p-2.5 outline-none ring-inset ring-sky-400 data-[open]:sticky data-[open]:-top-2.5 data-[hocus]:bg-white/10 data-[focus]:ring-[3px]"
+  >
+    <media-icon
+      type="chevron-left"
+      class="parent-data-[open]:block -ml-0.5 mr-1.5 hidden h-[18px] w-[18px]"
+    ></media-icon>
+    <media-icon type="settings-menu" class="parent-data-[open]:hidden h-5 w-5"></media-icon>
+    <span class="parent-data-[open]:ml-0 ml-1.5">Quality</span>
+    <span class="ml-auto text-sm text-white/50" data-part="hint"></span>
+    <media-icon
+      type="chevron-right"
+      class="parent-data-[open]:hidden ml-0.5 h-[18px] w-[18px] text-sm text-white/50"
+    ></media-icon>
+  </media-menu-button>
+  <!-- Items -->
+  <media-menu-items
+    class="hidden w-full flex-col items-start justify-center outline-none data-[keyboard]:mt-[3px] data-[open]:inline-block"
+  >
+    <media-quality-radio-group class="flex w-full flex-col" auto-label="Auto">
+      <template>
+        <media-radio
+          class="group relative flex w-full cursor-pointer select-none items-center justify-start rounded-sm p-2.5 outline-none ring-sky-400 data-[hocus]:bg-white/10 data-[focus]:ring-[3px]"
+        >
+          <media-icon
+            type="radio"
+            class="h-4 w-4 text-white group-data-[checked]:hidden"
+          ></media-icon>
+          <media-icon
+            type="radio-selected"
+            class="hidden h-4 w-4 text-indigo-400 group-data-[checked]:block"
+          ></media-icon>
+          <span class="ml-2" data-part="label"></span>
+          <span class="ml-auto text-[13px] text-gray-300" data-part="bitrate"></span>
+        </media-radio>
+      </template>
+    </media-quality-radio-group>
+  </media-menu-items>
+</media-menu>
