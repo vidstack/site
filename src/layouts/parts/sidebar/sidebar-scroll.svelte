@@ -5,7 +5,7 @@
 
   onMount(() => {
     setTimeout(() => {
-      const container = document.getElementById('main-sidebar')!.firstChild as HTMLElement,
+      const container = document.getElementById('main-sidebar')!.firstElementChild as HTMLElement,
         activeItem = container.querySelector('[data-active]');
       if (activeItem) {
         scrollIntoCenter(container, activeItem);
