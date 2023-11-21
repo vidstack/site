@@ -14,12 +14,15 @@
   });
 </script>
 
-<media-player>
+<media-player
+  class="border-0 bg-transparent translate-y-24"
+  style="--media-focus-ring: 0 0 0 3px rgb(78 156 246)"
+>
   <media-menu class="vds-menu" bind:this={menuEl}>
     <media-menu-button class="vds-menu-button vds-button text-inverse" aria-label="Settings">
       <media-icon type="settings" class="vds-rotate-icon vds-icon"></media-icon>
     </media-menu-button>
-    <media-menu-items class="vds-menu-items" placement="top" offset="8">
+    <media-menu-items class="vds-menu-items h-auto" placement="top" offset="8">
       <media-menu>
         <media-menu-button class="vds-menu-button">
           <media-icon type="chevron-left" class="vds-menu-button-close-icon"></media-icon>
@@ -38,7 +41,10 @@
                   value = option;
                 }}
               >
-                <span class="vds-radio-check" />
+                <span
+                  class="vds-radio-check"
+                  style="--media-menu-radio-check-active-color: white;"
+                />
                 <span class="vds-radio-label">{option}</span>
               </media-radio>
             {/each}
@@ -48,24 +54,3 @@
     </media-menu-items>
   </media-menu>
 </media-player>
-
-<style>
-  media-player {
-    --media-focus-ring: 0 0 0 3px rgb(78 156 246);
-    border: 0;
-    background-color: unset;
-    transform: translateY(100px);
-  }
-
-  .vds-radio-check {
-    border: 2px solid rgb(245 245 245 / 0.5);
-  }
-
-  :global(.vds-radio[aria-checked='true']) .vds-radio-check {
-    border: 2px solid #f5f5f5;
-  }
-
-  .vds-menu-items:not([data-submenu]) {
-    height: auto;
-  }
-</style>
