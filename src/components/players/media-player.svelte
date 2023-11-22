@@ -42,7 +42,7 @@
   <media-provider class="block">
     {#if type === 'video'}
       <media-poster
-        src="https://image.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/thumbnail.webp?time=268&width=640"
+        src="https://media-files.vidstack.io/sprite-fight/poster.webp"
         class="vds-poster"
         alt="Girl walks into sprite gnomes around her friend on a campfire in danger!"
       ></media-poster>
