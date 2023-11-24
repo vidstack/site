@@ -1,8 +1,6 @@
-import { walkTriggerEventChain } from 'vidstack';
-
 player.addEventListener('playing', (event) => {
   // walk through each trigger event in the chain
-  walkTriggerEventChain(event, (trigger) => {
+  event.triggers.walk((trigger) => {
     console.log(trigger);
   });
 });

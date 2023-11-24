@@ -1,8 +1,8 @@
-import { MediaPlayer, walkTriggerEventChain, type MediaPlayingEvent } from '@vidstack/react';
+import { MediaPlayer, type MediaPlayingEvent } from '@vidstack/react';
 
 function onPlaying(nativeEvent: MediaPlayingEvent) {
   // walk through each trigger event in the chain
-  walkTriggerEventChain(nativeEvent, (trigger) => {
+  nativeEvent.triggers.walk((trigger) => {
     console.log(trigger);
   });
 }

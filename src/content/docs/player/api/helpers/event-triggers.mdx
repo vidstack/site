@@ -1,29 +1,48 @@
 ---
-description: Utilities for working with event trigger chains.
+description: Helpful methods when working with event triggers.
 ---
 
-## `findTriggerEvent`
+All events dispatched by the player contain a `triggers` property which is a `EventTriggers`
+class instance. It stores a history of events that were responsible for triggering the event
+it was stored on. For example, `media-play-request` will lead to `play` being fired, hence it's
+referred to as a "trigger." Below you'll find methods that can be used to modify or inspect the
+trigger event chain.
 
-Whether a trigger event with the given event `type` exists in the chain.
+## `add`
 
-::code[./find]
+Appends the given event to the chain. The origin of the appended event will become the
+new origin.
 
-## `hasTriggerEvent`
+::code[./add]
 
-Whether a trigger event with the given event `type` exists in the chain.
+## `remove`
+
+Removes the event from the chain and returns it (if found).
+
+::code[./remove]
+
+## `has`
+
+Whether the chain contains the given event.
 
 ::code[./has]
 
-## `walkTriggerEventChain`
+## `hasType`
 
-Walks an event chain on a given event, and invokes the given callback for each trigger event.
-If a value is returned by the callback, the walk will end and `[event, value]` will be returned.
+Whether an event with the given `type` exists in the chain.
+
+::code[./has-type]
+
+## `findType`
+
+Whether an event with the given `type` exists in the chain. If found, the event will
+be returned.
+
+::code[./find-type]
+
+## `walk`
+
+Walks an event chain, and invokes the given callback for each trigger event.
+If a `value` is returned by the callback, the walk will end and `[event, value]` will be returned.
 
 ::code[./walk]
-
-## `appendTriggerEvent`
-
-Appends the given trigger event to the chain. The origin of the appended event will become the
-new origin.
-
-::code[./append]
