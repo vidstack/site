@@ -13,7 +13,7 @@ export type JSSelection =
 
 export type CSSSelection = 'css' | 'default-theme' | 'default-layout' | 'tailwind-css';
 
-export type ProviderSelection = 'audio' | 'video' | 'hls';
+export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube';
 
 export const selections = {
   js: writable<JSSelection>(initJSSelection()),

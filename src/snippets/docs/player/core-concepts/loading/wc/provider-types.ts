@@ -2,10 +2,12 @@ import {
   isAudioProvider,
   isHLSProvider,
   isVideoProvider,
+  isYouTubeProvider,
   type AudioProvider,
   type HLSProvider,
   type MediaProvider,
   type VideoProvider,
+  type YouTubeProvider,
 } from 'vidstack';
 
 player.addEventListener('provider-change', (event) => {
@@ -24,5 +26,10 @@ player.addEventListener('provider-change', (event) => {
     provider.onInstance((hls) => {
       // ...
     });
+  }
+
+  if (isYouTubeProvider(provider)) {
+    provider.cookies = true;
+    // ...
   }
 });

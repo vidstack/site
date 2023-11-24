@@ -1,0 +1,43 @@
+---
+title: YouTube
+description: This provider enables playing videos hosted on YouTube via embeds.
+---
+
+This provider is used to embed video content hosted on [YouTube][youtube] via
+the [IFrame API][yt-iframe]. Out of the box you can enjoy the following benefits over the native
+embed:
+
+- Preconnections for 224x faster rendering (using the same technique as [lite-youtube-embed][lite-yt-embed]).
+- Automatically discovering and loading [WebP][webp] posters, falling back to JPG.
+- Complete control of loading using [load strategies][load-strategy]. Lazy by default (only loaded when in view).
+- Autoplay failure detection.
+- No cookies by default for GDPR-compliance.
+- Ugly recommendations popup is hidden when using custom controls.
+
+:::info
+Please refer to the [Player component][player] if you're looking for props, methods, and events.
+:::
+
+[player]: /docs/wc/player/components/core/player
+[youtube]: https://www.youtube.com
+[yt-iframe]: https://developers.google.com/youtube/iframe_api_reference
+[lite-yt-embed]: https://github.com/paulirish/lite-youtube-embed
+[webp]: https://developers.google.com/speed/webp
+[load-strategy]: /docs/wc/player/core-concepts/loading#load-strategies
+
+## Sources
+
+The following source URLs are supported and used to determine when to load the YouTube provider:
+
+- `youtube/_cMxraX_5RE`
+- `https://www.youtube.com/watch?v=_cMxraX_5RE`
+- `https://www.youtube-nocookie.com/watch?v=_cMxraX_5RE`
+- `https://www.youtube.com/embed/_cMxraX_5RE`
+- `https://youtu.be/_cMxraX_5RE`
+
+::code[./source]
+
+:::tip
+What is "\_cMxraX_5RE"? It's the ID of the video which can be found in the URL when watching a
+video on YouTube (e.g., `https://www.youtube.com/watch?v={VIDEO_ID_HERE}`).
+:::

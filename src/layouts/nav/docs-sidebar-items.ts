@@ -47,6 +47,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/providers/audio.mdx',
     'player/api/providers/video.mdx',
     'player/api/providers/hls.mdx',
+    'player/api/providers/youtube.mdx',
     // Classes
     'player/api/classes/media-remote-control.mdx',
     // Helpers

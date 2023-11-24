@@ -13,8 +13,8 @@
     $css === 'css' || $css === 'tailwind-css'
       ? 'base'
       : $css === 'default-layout'
-      ? `default-layout-${$provider === 'hls' ? 'video' : $provider}`
-      : 'default-theme';
+        ? `default-layout-${$provider === 'hls' || $provider === 'youtube' ? 'video' : $provider}`
+        : 'default-theme';
 
   $: id = `${basePath}/import-${styleId}`;
 

@@ -10,7 +10,7 @@
 
   $: importId =
     $css === 'default-layout'
-      ? `default-layout-${$provider === 'hls' ? 'video' : $provider}`
+      ? `default-layout-${$provider === 'hls' || $provider === 'youtube' ? 'video' : $provider}`
       : 'base';
 
   $: id = `${basePath}/${importId}`;
@@ -22,11 +22,13 @@
   function transform(code: string) {
     const title = 'Sprite Fight',
       src =
-        $provider === 'audio'
-          ? 'https://media-files.vidstack.io/sprite-fight/audio.mp3'
-          : $provider === 'video'
-          ? `https://stream.mux.com/${muxPlaybackId}/low.mp4`
-          : `https://stream.mux.com/${muxPlaybackId}.m3u8`,
+        $provider === 'youtube'
+          ? 'youtube/_cMxraX_5RE'
+          : $provider === 'audio'
+            ? 'https://media-files.vidstack.io/sprite-fight/audio.mp3'
+            : $provider === 'video'
+              ? `https://stream.mux.com/${muxPlaybackId}/low.mp4`
+              : `https://stream.mux.com/${muxPlaybackId}.m3u8`,
       thumbnails = `https://image.mux.com/${muxPlaybackId}/storyboard.vtt`;
 
     return code.replace('{TITLE}', title).replace('{SRC}', src).replace('{THUMBNAILS}', thumbnails);

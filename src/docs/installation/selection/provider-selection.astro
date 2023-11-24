@@ -2,10 +2,12 @@
 import AudioIcon from '../icons/audio-file-icon.svelte';
 import HLSIcon from '../icons/hls-icon.svelte';
 import VideoIcon from '../icons/video-file-icon.svelte';
+import YouTubeIcon from '../icons/youtube-icon.svelte';
 import Selections from '../selection/selections.astro';
 import AudioInfo from './info/providers/audio-info.mdx';
 import HLSInfo from './info/providers/hls-info.mdx';
 import VideoInfo from './info/providers/video-info.mdx';
+import YouTubeInfo from './info/providers/youtube-info.mdx';
 ---
 
 <Selections
@@ -30,6 +32,12 @@ import VideoInfo from './info/providers/video-info.mdx';
       Info: HLSInfo,
       Icon: HLSIcon,
       color: 'orange',
+    },
+    {
+      label: 'YouTube',
+      Info: YouTubeInfo,
+      Icon: YouTubeIcon,
+      color: 'red',
     },
   ]}
 />
