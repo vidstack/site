@@ -13,7 +13,7 @@ import { VolumeSlider } from '@vidstack/react';
     className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100"
     noClamp
   >
-    <VolumeSlider.Value className="rounded-sm bg-black px-2 py-px text-[13px] font-medium" />
+    <VolumeSlider.Value className="rounded-sm bg-black px-2 py-px text-[13px] font-medium text-white" />
   </VolumeSlider.Preview>
 
   <VolumeSlider.Thumb className="absolute left-1/2 bottom-[var(--slider-fill)] z-20 h-[15px] w-[15px] -translate-x-1/2 translate-y-1/2 rounded-full border border-[#cacaca] bg-white opacity-0 ring-white/40 transition-opacity group-data-[active]:opacity-100 group-data-[dragging]:ring-4 will-change-[bottom]" />

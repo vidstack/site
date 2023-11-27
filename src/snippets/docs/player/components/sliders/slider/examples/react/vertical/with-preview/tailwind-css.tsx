@@ -14,7 +14,7 @@ import { Slider } from '@vidstack/react';
     noClamp
   >
     <Slider.Value
-      className="rounded-sm bg-black px-2 py-px text-[13px] font-medium"
+      className="rounded-sm bg-black px-2 py-px text-[13px] font-medium text-white"
       format="percent"
     />
   </Slider.Preview>

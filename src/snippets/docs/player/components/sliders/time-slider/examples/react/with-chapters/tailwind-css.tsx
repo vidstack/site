@@ -1,7 +1,7 @@
 import { TimeSlider } from '@vidstack/react';
 
 // @hl-start
-<TimeSlider.Root className="group relative mx-[7.5px] inline-flex h-10 w-full max-w-[80px] cursor-pointer touch-none select-none items-center outline-none aria-hidden:hidden">
+<TimeSlider.Root className="group relative mx-[7.5px] inline-flex h-10 w-full cursor-pointer touch-none select-none items-center outline-none aria-hidden:hidden">
   <TimeSlider.Chapters className="relative flex h-full w-full items-center rounded-[1px]">
     {(cues, forwardRef) =>
       cues.map((cue) => (
@@ -25,7 +25,7 @@ import { TimeSlider } from '@vidstack/react';
     noClamp
   >
     <TimeSlider.ChapterTitle className="text-sm" />
-    <TimeSlider.Value className="rounded-sm bg-black px-2 py-px text-[13px] font-medium" />
+    <TimeSlider.Value className="rounded-sm bg-black px-2 py-px text-[13px] font-medium text-white" />
   </TimeSlider.Preview>
 
   <TimeSlider.Thumb className="absolute left-[var(--slider-fill)] top-1/2 z-20 h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#cacaca] bg-white opacity-0 ring-white/40 transition-opacity group-data-[active]:opacity-100 group-data-[dragging]:ring-4 will-change-[left]" />
