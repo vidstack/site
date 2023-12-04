@@ -1,0 +1,51 @@
+---
+description: This provider enables playing videos hosted on Vimeo via embeds.
+---
+
+This provider is used to embed video content hosted on [Vimeo][vimeo] via
+the [IFrame API][vimeo-iframe]. Out of the box you can enjoy the following benefits over the native
+embed:
+
+- Preconnections for faster rendering.
+- Automatically loading titles and posters.
+- Complete control of loading using [load strategies][load-strategy]. Lazy by default (only loaded when in view).
+- Autoplay failure detection.
+- No cookies by default for GDPR-compliance.
+- Vimeo Pro detection for configuring playback speed and quality.
+- Access to all of [Vidstack Player features][player-features].
+
+:::info
+Please refer to the [Player component][player] if you're looking for props, methods, and events.
+:::
+
+[vimeo]: https://vimeo.com
+[vimeo-iframe]: https://developer.vimeo.com/player/sdk
+[player-features]: /docs/player#features
+[load-strategy]: /docs/wc/player/core-concepts/loading#load-strategies
+
+## Sources
+
+The following source URLs are supported and used to determine when to load the Vimeo provider:
+
+- `vimeo/640499893`
+- `https://vimeo.com/640499893`
+- `https://player.vimeo.com/video/640499893`
+
+::code[./source]
+
+:::tip
+What is "640499893"? It's the ID of the video which can be found in the URL when watching a
+video on Vimeo.
+:::
+
+### Hash
+
+You can append a hash to any [valid source](#sources) for private embeds like so:
+
+::code[./hash]
+
+## Configure
+
+You can configure specific embed options on the provider like so:
+
+::code[./configure]

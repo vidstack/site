@@ -1,7 +1,7 @@
 <script lang="ts">
   import CodeSnippet from '~/components/code-snippet/code-snippet.svelte';
 
-  import { selections } from '../selection/selection-stores';
+  import { selections, videoProviders } from '../selection/selection-stores';
 
   const { js, css, provider } = selections;
 
@@ -13,7 +13,7 @@
     $css === 'css' || $css === 'tailwind-css'
       ? 'base'
       : $css === 'default-layout'
-        ? `default-layout-${$provider === 'hls' || $provider === 'youtube' ? 'video' : $provider}`
+        ? `default-layout-${videoProviders.has($provider) ? 'video' : $provider}`
         : 'default-theme';
 
   $: id = `${basePath}/import-${styleId}`;

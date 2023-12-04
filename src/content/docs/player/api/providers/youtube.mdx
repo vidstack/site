@@ -13,12 +13,14 @@ embed:
 - Autoplay failure detection.
 - No cookies by default for GDPR-compliance.
 - Ugly recommendations popup is hidden when using custom controls.
+- Access to all of [Vidstack Player features][player-features].
 
 :::info
 Please refer to the [Player component][player] if you're looking for props, methods, and events.
 :::
 
 [player]: /docs/wc/player/components/core/player
+[player-features]: /docs/player#features
 [youtube]: https://www.youtube.com
 [yt-iframe]: https://developers.google.com/youtube/iframe_api_reference
 [lite-yt-embed]: https://github.com/paulirish/lite-youtube-embed
@@ -41,3 +43,9 @@ The following source URLs are supported and used to determine when to load the Y
 What is "\_cMxraX_5RE"? It's the ID of the video which can be found in the URL when watching a
 video on YouTube (e.g., `https://www.youtube.com/watch?v={VIDEO_ID_HERE}`).
 :::
+
+## Configure
+
+You can configure specific embed options on the provider like so:
+
+::code[./configure]

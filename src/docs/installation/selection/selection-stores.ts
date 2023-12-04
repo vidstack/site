@@ -13,7 +13,9 @@ export type JSSelection =
 
 export type CSSSelection = 'css' | 'default-theme' | 'default-layout' | 'tailwind-css';
 
-export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube';
+export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube' | 'vimeo';
+
+export const videoProviders = new Set<ProviderSelection>(['hls', 'youtube', 'vimeo']);
 
 export const selections = {
   js: writable<JSSelection>(initJSSelection()),

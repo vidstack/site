@@ -2,11 +2,13 @@ import {
   isAudioProvider,
   isHLSProvider,
   isVideoProvider,
+  isVimeoProvider,
   isYouTubeProvider,
   type AudioProvider,
   type HLSProvider,
   type MediaProvider,
   type VideoProvider,
+  type VimeoProvider,
   type YouTubeProvider,
 } from 'vidstack';
 
@@ -29,6 +31,11 @@ player.addEventListener('provider-change', (event) => {
   }
 
   if (isYouTubeProvider(provider)) {
+    provider.cookies = true;
+    // ...
+  }
+
+  if (isVimeoProvider(provider)) {
     provider.cookies = true;
     // ...
   }

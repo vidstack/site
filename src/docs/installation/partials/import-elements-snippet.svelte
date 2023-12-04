@@ -1,7 +1,7 @@
 <script lang="ts">
   import CodeSnippet from '~/components/code-snippet/code-snippet.svelte';
 
-  import { selections } from '../selection/selection-stores';
+  import { selections, videoProviders } from '../selection/selection-stores';
 
   const { js, provider, css } = selections;
 
@@ -11,7 +11,7 @@
   $: importId =
     $css === 'default-layout'
       ? $js === 'react'
-        ? `default-layout-${$provider}`
+        ? `default-layout-${videoProviders.has($provider) ? 'video' : $provider}`
         : 'default-layout'
       : 'base';
 

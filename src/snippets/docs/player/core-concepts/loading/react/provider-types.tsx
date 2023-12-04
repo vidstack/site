@@ -2,6 +2,7 @@ import {
   isAudioProvider,
   isHLSProvider,
   isVideoProvider,
+  isVimeoProvider,
   isYouTubeProvider,
   MediaPlayer,
   MediaProvider,
@@ -9,6 +10,7 @@ import {
   type HLSProvider,
   type MediaProviderAdapter,
   type VideoProvider,
+  type VimeoProvider,
   type YouTubeProvider,
 } from '@vidstack/react';
 
@@ -30,6 +32,11 @@ function Player() {
     }
 
     if (isYouTubeProvider(provider)) {
+      provider.cookies = true;
+      // ...
+    }
+
+    if (isVimeoProvider(provider)) {
       provider.cookies = true;
       // ...
     }
