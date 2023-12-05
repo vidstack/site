@@ -41,6 +41,9 @@ export default defineConfig({
     optimizeDeps: { disabled: true },
     plugins: [codeHighlight(), codeSnippets(), codePreviews(), icons({ compiler: 'svelte' })],
   },
+  experimental: {
+    contentCollectionCache: true,
+  },
   integrations: [
     AutoImport({
       imports: [
