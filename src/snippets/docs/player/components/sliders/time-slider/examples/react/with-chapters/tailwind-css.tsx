@@ -21,7 +21,7 @@ import { TimeSlider } from '@vidstack/react';
   </TimeSlider.Chapters>
 
   <TimeSlider.Preview
-    className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100"
+    className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100 pointer-events-none"
     noClamp
   >
     <TimeSlider.ChapterTitle className="text-sm" />

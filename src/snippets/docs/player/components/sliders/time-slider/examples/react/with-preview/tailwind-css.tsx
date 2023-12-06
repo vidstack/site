@@ -8,7 +8,7 @@ import { TimeSlider } from '@vidstack/react';
   </TimeSlider.Track>
 
   <TimeSlider.Preview
-    className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100"
+    className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100 pointer-events-none"
     noClamp
   >
     <TimeSlider.Thumbnail.Root

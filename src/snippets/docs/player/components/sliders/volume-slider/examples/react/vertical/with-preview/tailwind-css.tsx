@@ -10,7 +10,7 @@ import { VolumeSlider } from '@vidstack/react';
   </VolumeSlider.Track>
 
   <VolumeSlider.Preview
-    className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100"
+    className="flex flex-col items-center opacity-0 transition-opacity duration-200 data-[visible]:opacity-100 pointer-events-none"
     noClamp
   >
     <VolumeSlider.Value className="rounded-sm bg-black px-2 py-px text-[13px] font-medium text-white" />
