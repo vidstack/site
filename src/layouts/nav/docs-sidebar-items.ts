@@ -49,6 +49,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/providers/hls.mdx',
     'player/api/providers/youtube.mdx',
     'player/api/providers/vimeo.mdx',
+    'player/api/providers/react/remotion.mdx',
     // Classes
     'player/api/classes/media-remote-control.mdx',
     // Helpers
@@ -121,6 +122,10 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/menus/wc/chapters-radio-group.mdx',
     'player/components/menus/wc/quality-radio-group.mdx',
     'player/components/menus/wc/speed-radio-group.mdx',
+    // Remotion
+    'player/components/remotion/react/remotion-poster.mdx',
+    'player/components/remotion/react/remotion-thumbnail.mdx',
+    'player/components/remotion/react/remotion-slider-thumbnail.mdx',
   ],
 };
 

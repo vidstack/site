@@ -1,0 +1,44 @@
+---
+title: Remotion
+description: This provider enables playing videos programmatically built with React.
+---
+
+[Remotion][remotion] enables creating complex animations and videos programatically using React. You
+can use this provider to embed, preview, and play dynamic React components that are using Remotion.
+You can also provide the rendered MP4 directly to the player in production (see
+the [video provider][video-provider]).
+
+:::info
+Please refer to the [Player component][player] if you're looking for props, methods, and events.
+:::
+
+[remotion]: https://www.remotion.dev
+[player]: /docs/wc/player/components/core/player
+[video-provider]: /docs/player/api/providers/video
+
+## Source
+
+::code[./source]
+
+### Options
+
+import RemotionSourceOptions from '~/docs/remotion/remotion-source-options.astro';
+
+The `src` player property as shown above accepts the same video options as [Remotion Player][remotion-player]:
+
+<RemotionSourceOptions />
+
+[remotion-player]: https://www.remotion.dev/docs/player/player
+
+## Components
+
+The following components are available when using the Remotion provider. See the respective links for
+how to use and style them.
+
+- [`RemotionPoster`][poster]
+- [`RemotionThumbnail`][thumbnail]
+- [`RemotionSliderThumbnail`][slider-thumbnail]
+
+[poster]: /docs/player/components/remotion/remotion-poster
+[thumbnail]: /docs/player/components/remotion/remotion-thumbnail
+[slider-thumbnail]: /docs/player/components/remotion/remotion-slider-thumbnail

@@ -3,7 +3,7 @@ import TableWrapper from './table-wrapper.astro';
 
 interface Props {
   cols: string[];
-  rows: any[][];
+  rows?: any[][];
 }
 
 const { cols, rows } = Astro.props;
@@ -18,7 +18,7 @@ const { cols, rows } = Astro.props;
     </thead>
     <tbody>
       {
-        rows.map((row) => (
+        rows?.map((row) => (
           <tr>
             {row.map((data) => (
               <td>{data}</td>
@@ -26,6 +26,7 @@ const { cols, rows } = Astro.props;
           </tr>
         ))
       }
+      <slot />
     </tbody>
   </table>
 </TableWrapper>

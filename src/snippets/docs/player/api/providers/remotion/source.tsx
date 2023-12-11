@@ -1,5 +1,7 @@
+import { MediaPlayer, MediaProvider } from '@vidstack/react';
+import { type RemotionMediaResource } from '@vidstack/react/player/remotion';
+
 <MediaPlayer
-  title="video_title_here"
   src={{
     // Provide your React component here.
     src: RemotionVideo,
@@ -21,6 +23,6 @@
     },
   }}
 >
-  <MediaProvider loaders={[RemotionProviderLoader]} />
-  <DefaultVideoLayout icons={defaultLayoutIcons} />
+  <MediaProvider />
+  {/* ... */}
 </MediaPlayer>;

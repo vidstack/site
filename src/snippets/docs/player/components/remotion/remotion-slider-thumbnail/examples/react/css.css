@@ -1,0 +1,9 @@
+.media-slider-thumbnail {
+  display: block;
+  background-color: black;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 160px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid white;
+}

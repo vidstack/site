@@ -13,6 +13,7 @@ import {
   type VimeoProvider,
   type YouTubeProvider,
 } from '@vidstack/react';
+import { isRemotionProvider, type RemotionProvider } from '@vidstack/react/player/remotion';
 
 function Player() {
   function onProviderChange(provider: MediaProviderAdapter | null) {
@@ -38,6 +39,10 @@ function Player() {
 
     if (isVimeoProvider(provider)) {
       provider.cookies = true;
+      // ...
+    }
+
+    if (isRemotionProvider(provider)) {
       // ...
     }
   }

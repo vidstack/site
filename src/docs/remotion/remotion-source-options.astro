@@ -1,0 +1,125 @@
+---
+import Table from '~/components/table.astro';
+import NameCell from '~/layouts/parts/api-table/name-table-cell.astro';
+import TypeCell from '~/layouts/parts/api-table/type-table-cell.astro';
+
+const options = [
+  {
+    name: 'src',
+    type: 'React.ReactNode',
+    description: 'React component that renders the Remotion video.',
+  },
+  {
+    name: 'type',
+    type: 'string',
+    description: 'Remotion source type.',
+  },
+  {
+    name: 'compositionWidth',
+    type: 'number',
+    description: 'The width of the video composition.',
+    defaultValue: 1920,
+  },
+  {
+    name: 'compositionHeight',
+    type: 'number',
+    description: 'The height of the video composition.',
+    defaultValue: 1080,
+  },
+  {
+    name: 'fps',
+    type: 'number',
+    description: 'The frame rate of the video per second.',
+    defaultValue: 30,
+  },
+  {
+    name: 'durationInFrames',
+    type: 'number',
+    description: 'The duration of the video in frames. Must be an integer and greater than 0.',
+  },
+  {
+    name: 'initialFrame',
+    type: 'number',
+    description: 'Start the playback from a specific frame.',
+    defaultValue: 0,
+  },
+  {
+    name: 'inFrame',
+    type: 'number | null',
+    description:
+      'Limit playback to only play after a certain frame. The video will start from this frame and move to this position once it has ended.',
+    defaultValue: 0,
+  },
+  {
+    name: 'outFrame',
+    type: 'number | null',
+    description:
+      'Limit playback to only play before a certain frame. The video will end at this frame and move to the beginning once it has ended.',
+    defaultValue: 'durationInFrames',
+  },
+  {
+    name: 'numberOfSharedAudioTags',
+    type: 'number | undefined',
+    description:
+      "If you use an <code>&lt;Audio &bsol;&gt;</code> tag, it might not play in some browsers (specifically iOS Safari) due to browser autoplay policies. This is why the player pre-mounts a set of audio tags with silent audio that get played upon user interaction. These audio tags can then be used to play real audio later and will not be subject to the autoplay policy of the browser.<br /><br/>This option controls how many audio tags are being rendered, the default is 5. If you mount more audio tags than shared audio tags are available, then an error will be thrown. If you'd like to opt out of this behavior, you can pass 0 to mount native audio tags simultaneously as you mount Remotion's <code>&lt;Audio &bsol;&gt;</code> tags.",
+    defaultValue: 5,
+  },
+  {
+    name: 'inputProps',
+    type: 'Record<string, unknown>',
+    typeConcise: 'RemotionInputProps',
+    description: 'Pass props to the component that you have specified using the component prop.',
+    defaultValue: '{}',
+  },
+  {
+    name: 'renderLoading',
+    type: '() => React.ReactNode',
+    typeConcise: 'RemotionLoadingRenderer',
+    description:
+      'A callback function that allows you to return a custom UI that gets displayed while the provider is loading.',
+    defaultValue: 'undefined',
+  },
+  {
+    name: 'errorFallback',
+    type: '(error: Error) => React.ReactNode',
+    typeConcise: 'RemotionErrorRenderer',
+    description: 'A callback for rendering a custom error message.',
+    defaultValue: 'undefined',
+  },
+  {
+    name: 'onError',
+    type: '(error: Error) => void',
+    description: 'Called when an error or uncaught exception has happened in the video.',
+    defaultValue: 'undefined',
+  },
+];
+---
+
+<Table cols={['Name', 'Type', 'Default']}>
+  {
+    options.map((option) => {
+      return (
+        <>
+          <tr>
+            <td>
+              <NameCell
+                id={`source.${option.name.toLowerCase()}`}
+                name={option.name}
+                docs={`<p>${option.description}</p>`}
+              />
+            </td>
+            <td>
+              <TypeCell
+                concise={option.typeConcise ?? option.type}
+                full={option.typeConcise ? option.type : undefined}
+              />
+            </td>
+            <td>
+              <code>{option.defaultValue ?? '-'}</code>
+            </td>
+          </tr>
+        </>
+      );
+    })
+  }
+</Table>

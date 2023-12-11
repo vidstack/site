@@ -11,12 +11,12 @@ interface Props {
 const { concise, full } = Astro.props;
 ---
 
-<div class="flex items-center h-full">
+<div class="flex h-full items-center">
   <code style="margin-right: 0.25rem;">
     {concise}
   </code>
   {
-    concise !== full && (
+    full && concise !== full && (
       <InfoPopup class="ml-px" label="Show more info" center>
         <Code code={full} lang="tsx" theme="github-dark" />
         <Code code={full} lang="tsx" theme="github-light" />
