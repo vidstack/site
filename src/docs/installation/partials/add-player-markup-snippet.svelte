@@ -10,8 +10,14 @@
 
   $: importId =
     $css === 'default-layout'
-      ? `default-layout-${videoProviders.has($provider) ? 'video' : $provider}`
-      : 'base';
+      ? `default-layout-${
+          $provider === 'remotion'
+            ? 'remotion'
+            : videoProviders.has($provider)
+              ? 'video'
+              : $provider
+        }`
+      : `base${$provider === 'remotion' ? '-remotion' : ''}`;
 
   $: id = `${basePath}/${importId}`;
 

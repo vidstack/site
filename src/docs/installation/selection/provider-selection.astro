@@ -1,12 +1,14 @@
 ---
 import AudioIcon from '../icons/audio-file-icon.svelte';
 import HLSIcon from '../icons/hls-icon.svelte';
+import RemotionIcon from '../icons/remotion-icon.svelte';
 import VideoIcon from '../icons/video-file-icon.svelte';
 import VimeoIcon from '../icons/vimeo-icon.svelte';
 import YouTubeIcon from '../icons/youtube-icon.svelte';
 import Selections from '../selection/selections.astro';
 import AudioInfo from './info/providers/audio-info.mdx';
 import HLSInfo from './info/providers/hls-info.mdx';
+import RemotionInfo from './info/providers/remotion-info.mdx';
 import VideoInfo from './info/providers/video-info.mdx';
 import YouTubeInfo from './info/providers/youtube-info.mdx';
 import VimeoInfo from './info/providers/youtube-info.mdx';
@@ -46,6 +48,13 @@ import VimeoInfo from './info/providers/youtube-info.mdx';
       Info: VimeoInfo,
       Icon: VimeoIcon,
       color: 'blue',
+    },
+    {
+      label: 'Remotion',
+      Info: RemotionInfo,
+      Icon: RemotionIcon,
+      color: 'blue',
+      jsLib: 'react',
     },
   ]}
 />

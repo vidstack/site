@@ -1,6 +1,6 @@
 import { currentCSSLibrary, currentJSLibrary } from '~/stores/libraries';
 import { IS_BROWSER } from '~/utils/env';
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 export type JSSelection =
   | 'angular'
@@ -13,9 +13,9 @@ export type JSSelection =
 
 export type CSSSelection = 'css' | 'default-theme' | 'default-layout' | 'tailwind-css';
 
-export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube' | 'vimeo';
+export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube' | 'vimeo' | 'remotion';
 
-export const videoProviders = new Set<ProviderSelection>(['hls', 'youtube', 'vimeo']);
+export const videoProviders = new Set<ProviderSelection>(['hls', 'youtube', 'vimeo', 'remotion']);
 
 export const selections = {
   js: writable<JSSelection>(initJSSelection()),
@@ -24,7 +24,11 @@ export const selections = {
 };
 
 selections.js.subscribe((lib) => {
-  lib && currentJSLibrary.set(lib === 'react' ? 'react' : 'web-components');
+  if (lib) currentJSLibrary.set(lib === 'react' ? 'react' : 'web-components');
+
+  if (lib !== 'react' && get(selections.provider) === 'remotion') {
+    selections.provider.set('video');
+  }
 });
 
 selections.css.subscribe((lib) => {
@@ -32,6 +36,13 @@ selections.css.subscribe((lib) => {
     currentCSSLibrary.set(
       lib === 'tailwind-css' ? 'tailwind-css' : lib.startsWith('default') ? 'default-theme' : 'css',
     );
+});
+
+selections.provider.subscribe((provider) => {
+  if (provider === 'remotion') {
+    selections.js.set('react');
+    currentJSLibrary.set('react');
+  }
 });
 
 function initJSSelection(): JSSelection {

@@ -11,9 +11,15 @@
   $: importId =
     $css === 'default-layout'
       ? $js === 'react'
-        ? `default-layout-${videoProviders.has($provider) ? 'video' : $provider}`
+        ? `default-layout-${
+            $provider === 'remotion'
+              ? 'remotion'
+              : videoProviders.has($provider)
+                ? 'video'
+                : $provider
+          }`
         : 'default-layout'
-      : 'base';
+      : `base${$provider === 'remotion' ? '-remotion' : ''}`;
 
   $: id = `${basePath}/import-${importId}`;
 

@@ -6,12 +6,12 @@ import MockDashboardVideos from './mock-dashboard-videos.astro';
 ---
 
 <section
-  class="w-full border border-border/90 flex flex-col flex-1 h-[500px] rounded-md shadow-md 1200:shadow-lg bg-elevate"
+  class="flex h-[500px] w-full flex-1 flex-col overflow-hidden rounded-md border border-border/90 bg-elevate shadow-md 1200:shadow-lg"
   aria-label="Mock Vidstack Dashboard"
 >
   <MockWindowBar url="vidstack.io" />
 
-  <div class="w-full flex-1 flex flex-row relative @container">
+  <div class="relative flex w-full flex-1 flex-row @container">
     <MockDashboardSidebar />
 
     <div class="flex-1 flex-col items-start px-2 py-2.5">

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { currentJSLibrary, type JSLibrary } from '~/stores/libraries';
   import { DisposalBin, onPress } from '~/utils/events';
   import { onMount } from 'svelte';
   import { get, type Writable } from 'svelte/store';
@@ -57,6 +58,18 @@
 
     prevOption = el;
   }
+
+  function onJSLibChange(lib: JSLibrary) {
+    const options = root.querySelectorAll<HTMLElement>('[data-option]');
+    for (const option of options) {
+      const optionLib = option.getAttribute('data-js-lib');
+      if (optionLib) {
+        option.style.display = optionLib !== lib ? 'none' : '';
+      }
+    }
+  }
+
+  $: if (root) onJSLibChange($currentJSLibrary);
 </script>
 
 <div class="contents" bind:this={root}>

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import GradientBorder from '~/components/gradient-border.svelte';
 import InfoPopup from '~/components/info-popup.astro';
 import Style from '~/components/style/style.svelte';
+import type { JSLibrary } from '~/stores/libraries';
 import { isString } from '~/utils/unit';
 
 import SelectionManager from './selection-manager.svelte';
@@ -19,6 +20,7 @@ interface Props {
     Info?: any;
     Icon: any;
     color?: 'red' | 'blue' | 'green' | 'orange' | 'cyan';
+    jsLib?: JSLibrary;
   }[];
 }
 
@@ -28,12 +30,12 @@ const { pathname } = Astro.url,
 
 <SelectionManager {store} {param} client:load>
   <div
-    class="grid gap-x-8 gap-y-10 grid-cols-2 576:grid-cols-3 1200:grid-cols-4 pt-4 pb-8"
+    class="grid grid-cols-2 gap-x-8 gap-y-10 pb-8 pt-4 576:grid-cols-3 1200:grid-cols-4"
     role={param ? 'listbox' : null}
     aria-label={label}
   >
     {
-      options.map(({ label, Info, Icon, color }, i) => {
+      options.map(({ label, Info, Icon, color, jsLib }, i) => {
         const id = label.replace(' ', '-').toLowerCase(),
           isActive = !param && pathname.replace(/\/$/, '').endsWith(`/${id}`);
 
@@ -44,22 +46,23 @@ const { pathname } = Astro.url,
           'data-option': '',
           'data-value': id,
           'data-active': isActive ? '' : null,
+          'data-js-lib': jsLib,
           tabindex: 0,
           style: 'box-shadow: none;',
         } as const;
 
         const contents = (
           <div class="relative">
-            <GradientBorder class="rounded-md hidden group-hocus:inline group-data-[active]:inline" />
+            <GradientBorder class="hidden rounded-md group-data-[active]:inline group-hocus:inline" />
             <div
               class={clsx(
-                'group-hocus:bg-elevate group-hocus:border-transparent flex items-center justify-center',
-                'rounded-md bg-clip-padding border-2 border-border/90 font-medium',
-                'font-mono group-data-[active]:border-transparent py-8 cursor-pointer',
+                'flex items-center justify-center group-hocus:border-transparent group-hocus:bg-elevate',
+                'rounded-md border-2 border-border/90 bg-clip-padding font-medium',
+                'cursor-pointer py-8 font-mono group-data-[active]:border-transparent',
                 'group-data-[active]:bg-elevate',
               )}
             >
-              <Icon class="w-[50px] h-[50px] shrink-0" />
+              <Icon class="h-[50px] w-[50px] shrink-0" />
             </div>
           </div>
         );
@@ -67,7 +70,7 @@ const { pathname } = Astro.url,
         const title = (
           <div
             class={clsx(
-              'flex items-center justify-center font-medium text-center w-full pt-3 text-sm text-soft',
+              'flex w-full items-center justify-center pt-3 text-center text-sm font-medium text-soft',
               'group-data-[active]:text-inverse group-hocus:text-inverse',
             )}
           >
