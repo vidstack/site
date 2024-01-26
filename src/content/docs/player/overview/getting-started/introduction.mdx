@@ -71,7 +71,7 @@ Player:
 - Multiple framework support via our [Web Component][wc] and [React][react] libraries. JSX types
   included out of the box for [Vue][vue], [Svelte][svelte], and [Solid][solid].
 - Multiple styling options: CSS, [Tailwind CSS][tw-plugin], and extending our Default Theme.
-- Multiple media provider support: Audio, Video, HLS, DASH (soon), YouTube, Vimeo, and Remotion.
+- Multiple media provider support: Audio, Video, HLS, YouTube, Vimeo, and Remotion.
 - Single standard API across all providers.
 - Mature and battle-tested architecture which we integrated into Reddit at scale and used for analytics.
 - Production-ready layouts for when you don't have time to build your own UI.
@@ -83,13 +83,17 @@ Player:
 - Completely customizable headless components.
 - [30+ components](/docs/player/components/core/player) for you to build with and configure.
 - [18+ React hooks](/docs/player/api/hooks/use-media-state) for managing state and building UI.
+- Simple automatic setup via our bundler plugins.
 - State management solutions for reading and updating media state.
 - Rich event system.
 - Comprehensive player API: autoplay, audio tracks, fullscreen, picture-in-picture, live, keyboard,
   text tracks, and video quality.
 - Resolve cross-browser differences for native APIs such as fullscreen, picture-in-picture,
   tracks, streaming, and rendering/styling captions.
+- AirPlay and Google Cast support.
 - Screen orientation support.
+- Clipping media start and end times.
+- Easily add async local or database storage.
 - Tons of styling hooks for components via data attributes.
 - Accessible. Following the WCAG 2.1 specification and adhering to FCC and CVAA guidelines.
 - Custom [media captions library][media-captions] with support for VTT, SRT, and SSA. We also include a
@@ -97,11 +101,12 @@ Player:
 - Tooltips and menus with animation support.
 - Support for media chapters inside sliders and menus.
 - Thumbnails/previews when user is interacting with time slider.
+- JSON suppot for text tracks and thumbnails.
 - Gesture-support for handling direct user interaction with media such as tapping to seek and more.
-- Load strategies for determining when to load media (lazy by default).
+- Load strategies for determining when to load media and posters (lazy by default).
 - Lightweight at `54kB` gzip for all core features and components. The library is also treeshakeable
   to bring that down further.
-- Internationalization support on all components and our production-ready layouts.
+- Internationalization (i18n) support on all components and our production-ready layouts.
 
 ## Compare
 

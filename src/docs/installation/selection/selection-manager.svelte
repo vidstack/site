@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
   import { get, type Writable } from 'svelte/store';
 
-  import { selections } from './selection-stores';
+  import { selections, type JSSelection } from './selection-stores';
 
   let root: HTMLElement,
     prevOption: HTMLElement | null = null;
@@ -69,7 +69,18 @@
     }
   }
 
+  function onFrameworkChange(framework: JSSelection) {
+    const options = root.querySelectorAll<HTMLElement>('[data-framework]');
+    for (const option of options) {
+      const requiredFramework = option.getAttribute('data-framework');
+      option.parentElement!.style.display = requiredFramework !== framework ? 'none' : '';
+    }
+  }
+
   $: if (root) onJSLibChange($currentJSLibrary);
+
+  const { js } = selections;
+  $: if (root) onFrameworkChange($js);
 </script>
 
 <div class="contents" bind:this={root}>

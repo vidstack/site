@@ -8,13 +8,14 @@ import MediaIconsSetup from '~/docs/installation/partials/media-icons-setup.mdx'
 import AddPlayerMarkup from '~/docs/installation/partials/add-player-markup.mdx';
 import AddPoster from '~/docs/installation/partials/add-poster.mdx';
 import BrowserSupport from '~/docs/installation/partials/browser-support.mdx';
-import ImportElements from '~/docs/installation/partials/import-elements.mdx';
-import ImportStyles from '~/docs/installation/partials/import-styles.mdx';
+import ImportLibrary from '~/docs/installation/partials/import-library.mdx';
 import InstallPackages from '~/docs/installation/partials/install-packages.mdx';
 import KeepAlive from '~/docs/installation/partials/keep-alive.mdx';
 import NextSteps from '~/docs/installation/partials/next-steps.mdx';
 import SetPlaysinline from '~/docs/installation/partials/set-playsinline.mdx';
+import SetupBundler from '~/docs/installation/partials/setup-bundler.mdx';
 import VSCodeSetup from '~/docs/installation/partials/vscode-setup.mdx';
+import BundlerSelection from '~/docs/installation/selection/bundler-selection.astro';
 import FrameworkSelection from '~/docs/installation/selection/framework-selection.astro';
 import ProviderSelection from '~/docs/installation/selection/provider-selection.astro';
 import StylingSelection from '~/docs/installation/selection/styling-selection.astro';
@@ -23,55 +24,59 @@ import StylingSelection from '~/docs/installation/selection/styling-selection.as
 
 <FrameworkSelection />
 
-## 2. Select Provider
+## 2. Select Bundler
+
+<BundlerSelection />
+
+## 3. Select Provider
 
 <ProviderSelection />
 
-## 3. Select Styling
+## 4. Select Styling
 
 <StylingSelection />
 
-## 4. Check Support
+## 5. Check Support
 
 <BrowserSupport />
 
-## 5. Install Packages
+## 6. Install Packages
 
 <InstallPackages />
 
-## 6. Import Styles
+## 7. Setup Bundler
 
-<ImportStyles />
+<SetupBundler />
 
-## 7. Import Elements
+## 8. Import Library
 
-<ImportElements />
+<ImportLibrary />
 
-## 8. Player Markup
+## 9. Player Markup
 
 <AddPlayerMarkup />
 
-## 9. Poster (Optional)
+## 10. Poster (Optional)
 
 <AddPoster />
 
-## 10. Playsinline (Optional)
+## 11. Playsinline (Optional)
 
 <SetPlaysinline />
 
-## 11. Visual Studio (Optional)
+## 12. Visual Studio (Optional)
 
 <VSCodeSetup />
 
-## 12. Media Icons (Optional)
+## 13. Media Icons (Optional)
 
 <MediaIconsSetup />
 
-## 13. Keep Alive (Optional)
+## 14. Keep Alive (Optional)
 
 <KeepAlive />
 
-## 14. Examples
+## 15. Examples
 
 You should be all set up by this point. We recommend exploring our 👉 [examples][wc-examples] to
 learn how to start building and customizing your player. You can also use the examples to make
@@ -79,6 +84,6 @@ sure you've set everything up correctly.
 
 [wc-examples]: https://github.com/vidstack/examples/tree/main/player/web-components
 
-## 15. Next Steps
+## 16. Next Steps
 
 <NextSteps />

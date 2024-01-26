@@ -8,13 +8,15 @@ import MediaIconsSetup from '~/docs/installation/partials/media-icons-setup.mdx'
 import AddPlayerMarkup from '~/docs/installation/partials/add-player-markup.mdx';
 import AddPoster from '~/docs/installation/partials/add-poster.mdx';
 import BrowserSupport from '~/docs/installation/partials/browser-support.mdx';
-import ImportElements from '~/docs/installation/partials/import-elements.mdx';
-import ImportStyles from '~/docs/installation/partials/import-styles.mdx';
+import ImportLibrary from '~/docs/installation/partials/import-library.mdx';
 import InstallPackages from '~/docs/installation/partials/install-packages.mdx';
 import KeepAlive from '~/docs/installation/partials/keep-alive.mdx';
 import NextSteps from '~/docs/installation/partials/next-steps.mdx';
 import SetPlaysinline from '~/docs/installation/partials/set-playsinline.mdx';
+import SetupBundler from '~/docs/installation/partials/setup-bundler.mdx';
 import VSCodeSetup from '~/docs/installation/partials/vscode-setup.mdx';
+import VuePluginSnippet from '~/docs/installation/partials/vue-plugin-snippet.svelte';
+import BundlerSelection from '~/docs/installation/selection/bundler-selection.astro';
 import FrameworkSelection from '~/docs/installation/selection/framework-selection.astro';
 import ProviderSelection from '~/docs/installation/selection/provider-selection.astro';
 import StylingSelection from '~/docs/installation/selection/styling-selection.astro';
@@ -23,31 +25,25 @@ import StylingSelection from '~/docs/installation/selection/styling-selection.as
 
 <FrameworkSelection />
 
-## 2. Select Provider
+## 2. Select Bundler
+
+<BundlerSelection />
+
+## 3. Select Provider
 
 <ProviderSelection />
 
-## 3. Select Styling
+## 4. Select Styling
 
 <StylingSelection />
 
-## 4. Check Support
+## 5. Check Support
 
 <BrowserSupport />
 
-## 5. Install Packages
+## 6. Install Packages
 
 <InstallPackages />
-
-## 6. Configure Plugin
-
-:::info
-Refer to the [Custom Elements in Vue][vue-ce-guide] guide for more information.
-:::
-
-::code[./config]{title="vite.config.js" copy=true}
-
-[vue-ce-guide]: https://vuejs.org/guide/extras/web-components.html#using-custom-elements-in-vue
 
 ## 7. Add Types
 
@@ -56,39 +52,49 @@ custom elements:
 
 ::code[./tsconfig]{title="tsconfig.json" copy=true}
 
-## 8. Import Styles
+## 8. Configure Vue
 
-<ImportStyles />
+<VuePluginSnippet client:load />
 
-## 9. Import Elements
+:::info
+Refer to the [Custom Elements in Vue][vue-ce-guide] guide for more information.
+:::
 
-<ImportElements />
+[vue-ce-guide]: https://vuejs.org/guide/extras/web-components.html#using-custom-elements-in-vue
 
-## 10. Player Markup
+## 9. Setup Bundler
+
+<SetupBundler />
+
+## 10. Import Library
+
+<ImportLibrary />
+
+## 11. Player Markup
 
 <AddPlayerMarkup />
 
-## 11. Poster (Optional)
+## 12. Poster (Optional)
 
 <AddPoster />
 
-## 12. Playsinline (Optional)
+## 13. Playsinline (Optional)
 
 <SetPlaysinline />
 
-## 13. Visual Studio (Optional)
+## 14. Visual Studio (Optional)
 
 <VSCodeSetup />
 
-## 14. Media Icons (Optional)
+## 15. Media Icons (Optional)
 
 <MediaIconsSetup />
 
-## 15. Keep Alive (Optional)
+## 16. Keep Alive (Optional)
 
 <KeepAlive />
 
-## 16. Examples
+## 17. Examples
 
 You should be all set up by this point. We recommend exploring our 👉 [examples][examples] to
 learn how to start building and customizing your player. You can also use the examples to make
@@ -96,6 +102,6 @@ sure you've set everything up correctly.
 
 [examples]: https://github.com/vidstack/examples/tree/main/player/vue
 
-## 17. Next Steps
+## 18. Next Steps
 
 <NextSteps />

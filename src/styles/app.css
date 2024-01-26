@@ -106,6 +106,12 @@ body[data-breadcrumb-bar] {
   --js-orange-gradient-end: #d7333c;
   --js-cyan-gradient-start: #00d7ff;
   --js-cyan-gradient-end: #0090b8;
+  --js-purple-gradient-start: #c100ec;
+  --js-purple-gradient-end: #a844bf;
+  --js-pink-gradient-start: #ff00dc;
+  --js-pink-gradient-end: #a33a82;
+  --js-nuxt-gradient-start: #05a965;
+  --js-nuxt-gradient-end: #00dc82;
 }
 
 .dark,
@@ -153,6 +159,12 @@ body[data-breadcrumb-bar] {
       --js-orange-gradient-end: oklch(0.58 0.2 23.58);
       --js-cyan-gradient-start: oklch(0.81 0.15 217.11);
       --js-cyan-gradient-end: oklch(0.6 0.13 222.62);
+      --js-purple-gradient-start: oklch(0.59 0.3 317.97);
+      --js-purple-gradient-end: oklch(0.57 0.2 319.61);
+      --js-pink-gradient-start: oklch(0.7 0.32 339.57);
+      --js-pink-gradient-end: oklch(0.52 0.16 342);
+      --js-nuxt-gradient-start: oklch(0.65 0.16 156.28);
+      --js-nuxt-gradient-end: oklch(0.79 0.19 155.62);
     }
 
     .dark,

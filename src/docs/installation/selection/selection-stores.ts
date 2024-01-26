@@ -15,12 +15,22 @@ export type CSSSelection = 'css' | 'default-theme' | 'default-layout' | 'tailwin
 
 export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube' | 'vimeo' | 'remotion';
 
+export type BundlerSelection =
+  | 'astro'
+  | 'sveltekit'
+  | 'nuxt'
+  | 'solidstart'
+  | 'vite'
+  | 'webpack'
+  | 'none';
+
 export const videoProviders = new Set<ProviderSelection>(['hls', 'youtube', 'vimeo', 'remotion']);
 
 export const selections = {
   js: writable<JSSelection>(initJSSelection()),
   css: writable<CSSSelection>(initCSSSelection()),
   provider: writable<ProviderSelection>('video'),
+  bundler: writable<BundlerSelection>(initBundlerSelection()),
 };
 
 selections.js.subscribe((lib) => {
@@ -78,4 +88,33 @@ function initCSSSelection(): CSSSelection {
     param = url.searchParams.get('styling');
 
   return (param as CSSSelection) ?? 'default-layout';
+}
+
+function initBundlerSelection(): BundlerSelection {
+  let href = IS_BROWSER ? location.href : undefined;
+
+  if (!href) return 'none';
+
+  const url = new URL(href),
+    param = url.searchParams.get('bundler');
+
+  return (param as BundlerSelection) ?? 'none';
+}
+
+export function getBundlerConfigFileName(bundler: BundlerSelection) {
+  switch (bundler) {
+    case 'astro':
+      return 'astro.config.mjs';
+    case 'sveltekit':
+    case 'vite':
+      return 'vite.config.js';
+    case 'solidstart':
+      return 'vite.config.ts';
+    case 'nuxt':
+      return 'nuxt.config.ts';
+    case 'webpack':
+      return 'webpack.config.js';
+    default:
+      return '';
+  }
 }
