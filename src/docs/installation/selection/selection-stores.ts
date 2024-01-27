@@ -11,7 +11,12 @@ export type JSSelection =
   | 'cdn'
   | 'solid';
 
-export type CSSSelection = 'css' | 'default-theme' | 'default-layout' | 'tailwind-css';
+export type CSSSelection =
+  | 'css'
+  | 'default-theme'
+  | 'default-layout'
+  | 'plyr-layout'
+  | 'tailwind-css';
 
 export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube' | 'vimeo' | 'remotion';
 

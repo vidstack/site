@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  vite: {
+  vue: {
     // @hl-start
     template: {
       compilerOptions: {

@@ -2,10 +2,12 @@
 import CSSIcon from '~/icons/css-icon.svelte';
 import TailwindLogo from '~/icons/logos/tailwind-logo.svelte';
 import DefaultLayoutIcon from '~icons/lucide/layout-dashboard';
+import PlyrLayoutIcon from '~/icons/logos/plyr-logo.svelte';
 
 import DefaultThemeIcon from '../icons/default-theme-icon.svelte';
 import CSSInfo from './info/styling/css-info.mdx';
 import DefaultLayoutInfo from './info/styling/default-layout-info.mdx';
+import PlyrLayoutInfo from './info/styling/plyr-layout-info.mdx';
 import DefaultThemeInfo from './info/styling/default-theme-info.mdx';
 import TailwindInfo from './info/styling/tailwind-info.mdx';
 import Selections from './selections.astro';
@@ -33,6 +35,12 @@ import Selections from './selections.astro';
       Info: DefaultLayoutInfo,
       Icon: DefaultLayoutIcon,
       color: 'orange',
+    },
+    {
+      label: 'Plyr Layout',
+      Info: PlyrLayoutInfo,
+      Icon: PlyrLayoutIcon,
+      color: 'cyan',
     },
     {
       label: 'Tailwind CSS',

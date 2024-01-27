@@ -1,6 +1,6 @@
 /* AND conditional style. */
-/* Apply styles when media playback has ended and user is idle. */
-media-player[data-user-idle][data-ended] {
+/* Apply styles when controls are visible and media playback has ended. */
+media-player[data-controls][data-ended] {
 }
 
 /* OR conditional style. */

@@ -9,16 +9,16 @@
   $: basePath = `docs/player/getting-started/installation/elements/${dir}`;
 
   $: importId =
-    $css === 'default-layout'
+    $css === 'default-layout' || $css === 'plyr-layout'
       ? $js === 'react'
-        ? `default-layout-${
+        ? `${$css}-${
             $provider === 'remotion'
               ? 'remotion'
               : videoProviders.has($provider)
                 ? 'video'
                 : $provider
           }`
-        : 'default-layout'
+        : $css
       : `base${$provider === 'remotion' ? '-remotion' : ''}`;
 
   $: id = `${basePath}/import-${importId}`;

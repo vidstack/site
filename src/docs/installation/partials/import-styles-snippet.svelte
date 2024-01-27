@@ -12,9 +12,11 @@
   $: styleId =
     $css === 'css' || $css === 'tailwind-css'
       ? 'base'
-      : $css === 'default-layout'
-        ? `default-layout-${videoProviders.has($provider) ? 'video' : $provider}`
-        : 'default-theme';
+      : $css === 'plyr-layout'
+        ? $css
+        : $css === 'default-layout'
+          ? `${$css}-${videoProviders.has($provider) ? 'video' : $provider}`
+          : 'default-theme';
 
   $: id = `${basePath}/import-${styleId}`;
 

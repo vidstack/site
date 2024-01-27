@@ -9,8 +9,8 @@
   $: basePath = `docs/player/getting-started/installation/markup/${dir}`;
 
   $: importId =
-    $css === 'default-layout'
-      ? `default-layout-${
+    $css === 'default-layout' || $css === 'plyr-layout'
+      ? `${$css}-${
           $provider === 'remotion'
             ? 'remotion'
             : videoProviders.has($provider)

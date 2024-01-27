@@ -1,4 +1,0 @@
-<MediaPlayer playsinline>
-  <MediaProvider />
-  {/* ... */}
-</MediaPlayer>;
