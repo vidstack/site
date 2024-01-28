@@ -95,6 +95,14 @@ identifying DVR support). When possible, prefer specifying it like so:
 
 ::code[./stream-type]
 
+## Duration
+
+By default, the duration is inferred from the provider and media. It's always best to provide
+the duration when known to avoid any inaccuracies such as rounding errors, and to ensure UI is
+set to the correct state without waiting on metadata to load. You can specify the exact duration like so:
+
+::code[./duration]
+
 ## Clipping
 
 Clipping allows shortening the media by specifying the time at which playback should start
