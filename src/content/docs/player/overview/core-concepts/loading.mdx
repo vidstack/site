@@ -95,6 +95,23 @@ identifying DVR support). When possible, prefer specifying it like so:
 
 ::code[./stream-type]
 
+## Clipping
+
+Clipping allows shortening the media by specifying the time at which playback should start
+and end.
+
+::code[./clipping]
+
+- You can set a clip start time or just an end time, both are not required.
+- The media duration and chapter durations will be updated to match the clipped length.
+- Any media resources such as text tracks and thumbnails should use the full duration.
+- Seeking to a new time is based on the clipped duration. For example, if a 1 minute video is clipped
+  to 30 seconds, seeking to 30s will be the end of the video.
+- [Media URI Fragments][media-frags] are set internally to efficiently load audio and video files
+  between the clipped start and end times (e.g., `/video.mp4#t=30,60`).
+
+[media-frags]: https://www.w3.org/TR/media-frags
+
 ## Sources
 
 The player can accept one or more media sources which can be a `string` URL of the media resource
