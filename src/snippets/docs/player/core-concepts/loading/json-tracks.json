@@ -1,0 +1,11 @@
+[
+  {
+    "label": "English",
+    "kind": "captions",
+    "lang": "en-US",
+    "type": "json",
+    "content": { "regions": [], "cues": [] },
+    "default": true
+  },
+  ...
+]

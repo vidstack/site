@@ -331,23 +331,23 @@ The following text track kinds are supported:
 
 ### JSON Tracks
 
-Text tracks also support the `json` type. The resource at the given src should return a
-JSON object with:
-
-- An optional `regions` array of partial [`VTTRegion`][vtt-region] objects
-- An optional `cues` array of partial [`VTTCue`][vtt-cue] objects.
-
-::code[./json-captions]
-
-The type can be specified on the text track like so:
+JSON content can be provided directly to text tracks or loaded from a remote location like so:
 
 ::code[./text-track-json]
 
-Example JSON file with cues:
+::code[./text-track-json-html]
+
+Example JSON text tracks:
+
+::code[./json-tracks]
+
+::code[./provide-json-tracks]
+
+Example JSON cues:
 
 ::code[./json-cues]{title=cues.json}
 
-Example JSON file with regions:
+Example JSON regions and cues:
 
 ::code[./json-regions]{title=regions.json}
 
