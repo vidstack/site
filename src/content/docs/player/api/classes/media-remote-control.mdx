@@ -22,12 +22,19 @@ searching up from either the given `target` or default target set via [`setTarge
 
 ## `startLoading`
 
-Dispatch a `media-start-loading-request` event to start the media loading process. This will
-only work if the media player has been initialized with a custom [loading strategy][load-strategy].
+Dispatch a `media-start-loading` event to start the media loading process. This will
+only work if the media player has been initialized with a custom [media loading strategy][load-strategy].
 
 ::code[./start-loading]
 
 [load-strategy]: /docs/player/core-concepts/loading#load-strategies
+
+## `startLoadingPoster`
+
+Dispatch a `media-start-loading-poster` event to start the poster image loading process. This will
+only work if the media player has been initialized with a custom [poster loading strategy][load-strategy].
+
+::code[./start-loading-poster]
 
 ## `play`
 

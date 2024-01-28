@@ -1,1 +1,1 @@
-<MediaPlayer load="visible">
+<MediaPlayer load="visible" posterLoad="visible">

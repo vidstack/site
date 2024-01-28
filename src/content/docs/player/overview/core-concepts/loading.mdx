@@ -4,7 +4,7 @@ description: A guide on how to handle loading various media resources.
 
 import hlsManifestImage from '~/images/hls-manifest.png';
 
-## Avoiding Layout Shifts
+## Sizing
 
 By default, the browser will use the [intrinsic size][intrinsic-size] of the loaded media to
 set the dimensions of the provider. As media loads over the network, the element will jump
@@ -33,23 +33,32 @@ player simply using CSS like so:
 
 ## Load Strategies
 
-A loading strategy specifies when media should begin loading. Loading media too early
-can effectively slow down your entire application, so choose wisely. The following media loading
-strategies are available:
+A loading strategy specifies when media or the poster image should begin loading. Loading media too
+early can effectively slow down your entire application, so choose wisely.
+
+The following media loading strategies are available:
 
 - `eager`: Load media immediately - use when media needs to be interactive as soon as possible.
 - `idle`: Load media once the page has loaded and the `requestIdleCallback` is fired - use when
   media is lower priority and doesn't need to be interactive immediately.
 - `visible`: Load media once it has entered the visual viewport - use when media is below the fold
   and you prefer delaying loading until it's required.
-- `custom`: Load media when the `startLoading()` method is called or the `media-start-loading` event
-  is dispatched - use when you need fine control of when media should begin loading.
+- `play`: Load the provider and media on play - use when you want to delay loading until interaction.
+- `custom`: Load media when the `startLoading()`/`startLoadingPoster()` method is called or
+  the `media-start-loading`/`media-start-loading-poster` event is dispatched - use when you need
+  fine control of when media should begin loading.
 
 ::code[./load-strategy]
 
+:::info
+The poster load strategy specifies when the poster should begin loading. Poster loading is separate
+from media loading so you can display an image before media is ready for playback. This
+generally works well in combination with `load="play"` to create thumbnails.
+:::
+
 ### Custom Load Strategy
 
-A custom load strategy lets you control when media should begin loading:
+A custom load strategy lets you control when media or the poster image should begin loading:
 
 ::code[./load-custom-strategy]
 

@@ -2,10 +2,14 @@
   const player = document.querySelector('media-player');
 
   function loadWhenImReady() {
+    // Call whenever you like - also available on `MediaRemoteControl`.
     player.startLoading();
+
+    // Call when poster should start loading.
+    player.current!.startLoadingPoster();
   }
 </script>
 
-<media-player load="custom">
+<media-player load="custom" poster-load="custom">
   <!-- ... -->
 </media-player>
