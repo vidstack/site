@@ -35,8 +35,8 @@
   src={type === 'audio' ? audioSrc : type === 'video' ? videoSrc : liveSrc}
   class="w-full"
   crossorigin
-  keep-alive
   playsinline
+  keep-alive
   style={type === 'audio' ? '' : 'aspect-ratio: 16/9;'}
   bind:this={player}
 >

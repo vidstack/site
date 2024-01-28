@@ -34,7 +34,8 @@ const { pathname } = Astro.url,
             hasInstance && component.instance ? `${component.instance.name}Instance` : refType;
 
         if (component.name.includes('Layout')) {
-          importCode = `import { ${component.name} } from "@vidstack/react/player/layouts/default";`;
+          const layoutName = component.name.includes('DefaultLayout') ? 'default' : 'plyr';
+          importCode = `import { ${component.name} } from "@vidstack/react/player/layouts/${layoutName}";`;
         } else if (component.namespace) {
           importCode = [
             `import { ${component.namespace} } from "@vidstack/react";`,
@@ -192,7 +193,7 @@ const { pathname } = Astro.url,
                   slug={`${fullComponentName}.state`}
                   level={tableHeadingLevel}
                 />
-                <CodeBlockWrapper class="text-sm font-normal not-prose">
+                <CodeBlockWrapper class="not-prose text-sm font-normal">
                   <Code code={stateUsageCode} lang="tsx" theme="github-dark" />
                   <Code code={stateUsageCode} lang="tsx" theme="github-light" />
                 </CodeBlockWrapper>
@@ -218,7 +219,7 @@ const { pathname } = Astro.url,
                   slug={`${fullComponentName}.instance`}
                   level={tableHeadingLevel}
                 />
-                <CodeBlockWrapper class="mt-6 not-prose text-sm">
+                <CodeBlockWrapper class="not-prose mt-6 text-sm">
                   <Code code={instanceUsageCode} lang="tsx" theme="github-dark" />
                   <Code code={instanceUsageCode} lang="tsx" theme="github-light" />
                 </CodeBlockWrapper>

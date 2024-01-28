@@ -1,27 +1,27 @@
 import {
   MediaPlayer,
-  type MediaAutoplayEvent,
-  type MediaAutoplayEventDetail,
-  type MediaAutoplayFailEvent,
-  type MediaAutoplayFailEventDetail,
+  type MediaAutoPlayEvent,
+  type MediaAutoPlayEventDetail,
+  type MediaAutoPlayFailEvent,
+  type MediaAutoPlayFailEventDetail,
 } from '@vidstack/react';
 
 function Player() {
   // autoplay has successfully started.
-  function onAutoplay({ muted }: MediaAutoplayEventDetail, nativeEvent: MediaAutoplayEvent) {
+  function onAutoPlay({ muted }: MediaAutoPlayEventDetail, nativeEvent: MediaAutoPlayEvent) {
     const requestEvent = nativeEvent.request;
   }
 
   // autoplay has failed.
-  function onAutoplayFail(
-    { muted, error }: MediaAutoplayFailEventDetail,
-    nativeEvent: MediaAutoplayFailEvent,
+  function onAutoPlayFail(
+    { muted, error }: MediaAutoPlayFailEventDetail,
+    nativeEvent: MediaAutoPlayFailEvent,
   ) {
     const requestEvent = nativeEvent.request;
   }
 
   return (
-    <MediaPlayer autoplay onAutoplay={onAutoplay} onAutoplayFail={onAutoplayFail}>
+    <MediaPlayer autoplay onAutoPlay={onAutoPlay} onAutoPlayFail={onAutoPlayFail}>
       {/* ... */}
     </MediaPlayer>
   );

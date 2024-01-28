@@ -142,13 +142,13 @@
 
   function transformRawImportSnippet(code: string) {
     return code
-      .replace('ICON', kebabToPascalCase(currentIconName) + 'Icon')
+      .replace('ICON', getComponentName(currentIconName))
       .replace('__path__', `media-icons/raw/${currentIconName}.svg`);
   }
 
   function transformUnpluginImportSnippet(code: string) {
     return code
-      .replace('ICON', kebabToPascalCase(currentIconName) + 'Icon')
+      .replace('ICON', getComponentName(currentIconName))
       .replace('__path__', `~icons/media/${currentIconName}`);
   }
 
@@ -157,8 +157,16 @@
   }
 
   function transformReactSnippet(code: string) {
-    const componentName = kebabToPascalCase(currentIconName) + 'Icon';
+    const componentName = getComponentName(currentIconName);
     return code.replace(/ICON/g, componentName);
+  }
+
+  const componentNameRecord: Record<string, string> = {
+    airplay: 'AirPlay',
+  };
+
+  function getComponentName(name: string) {
+    return (componentNameRecord[name] ?? kebabToPascalCase(name)) + 'Icon';
   }
 </script>
 
@@ -169,8 +177,8 @@
     <div class="flex flex-col items-center justify-center">
       <div
         class={clsx(
-          'flex flex-col items-center border border-border/90 justify-center text-inverse',
-          'w-[120px] h-[120px] rounded-sm graph-paper bg-elevate shadow-md',
+          'flex flex-col items-center justify-center border border-border/90 text-inverse',
+          'graph-paper h-[120px] w-[120px] rounded-sm bg-elevate shadow-md',
         )}
       >
         <svg
@@ -186,24 +194,24 @@
         </svg>
       </div>
 
-      <h1 class="mt-4 mb-1 text-xl font-semibold text-inverse">
+      <h1 class="mb-1 mt-4 text-xl font-semibold text-inverse">
         {formatIconName(currentIconName, $currentIconLibrary)}
       </h1>
 
       <a
-        class="px-4 py-2 hover:text-brand rounded-md"
+        class="rounded-md px-4 py-2 hover:text-brand"
         href={downloadURL}
         download={`${currentIconName}.svg`}
         aria-label="download svg"
       >
         <div class="flex flex-row items-center text-sm">
-          <DownloadIcon class="mr-1.5 w-4.5 h-4.5" />
+          <DownloadIcon class="w-4.5 h-4.5 mr-1.5" />
           Download
         </div>
       </a>
     </div>
 
-    <div class="py-4 mt-2 flex w-full">
+    <div class="mt-2 flex w-full py-4">
       <Tabs label="Icon Formats" color="brand" tabs={['Component', 'SVG', 'Raw', 'Unplugin']}>
         <TabPanel>
           {#if $currentIconLibrary === 'html'}
