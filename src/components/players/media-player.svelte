@@ -12,6 +12,7 @@
   import type { MediaPlayerElement } from 'vidstack/elements';
 
   export let type: 'audio' | 'video' | 'live' = 'video';
+  export let layout: 'default' | 'plyr' = 'default';
 
   let player: MediaPlayerElement;
 
@@ -40,7 +41,7 @@
   bind:this={player}
 >
   <media-provider class="block">
-    {#if type === 'video'}
+    {#if type === 'video' && layout === 'default'}
       <media-poster
         src="https://media-files.vidstack.io/sprite-fight/poster.webp"
         class="vds-poster"
@@ -69,8 +70,12 @@
       />
     {/if}
   </media-provider>
-  <media-audio-layout {thumbnails} />
-  <media-video-layout {thumbnails} />
+  {#if layout === 'default'}
+    <media-audio-layout {thumbnails} />
+    <media-video-layout {thumbnails} />
+  {:else if layout === 'plyr'}
+    <media-plyr-layout {thumbnails} />
+  {/if}
 </media-player>
 
 <style>

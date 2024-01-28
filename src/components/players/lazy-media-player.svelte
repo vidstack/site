@@ -4,6 +4,7 @@
   import { onMount } from 'svelte';
 
   export let type: 'audio' | 'video' | 'live' = 'video';
+  export let layout: 'default' | 'plyr' = 'default';
 
   let playerImport: any;
 
@@ -20,7 +21,7 @@
 >
   {#if playerImport}
     {#await playerImport then { default: Player }}
-      <Player {type} />
+      <Player {type} {layout} />
     {/await}
   {/if}
 </div>

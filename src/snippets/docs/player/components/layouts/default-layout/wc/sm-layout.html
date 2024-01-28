@@ -1,2 +1,11 @@
-<media-audio-layout small-when="(width < 576)"></media-audio-layout>
-<media-video-layout small-when="(width < 576) or (height < 380)"></media-video-layout>
+<script>
+  const audioLayout = document.querySelector('media-audio-layout'),
+    videoLayout = document.querySelector('media-video-layout');
+
+  // You can subscribe to any player state here.
+  audioLayout.smallWhen = ({ width }) => width < 576;
+  videoLayout.smallWhen = ({ width, height }) => width < 576 || height < 380;
+</script>
+
+<media-audio-layout></media-audio-layout>
+<media-video-layout></media-video-layout>

@@ -11,14 +11,20 @@
 
   /* Buttons. */
   --audio-button-size: 40px;
-  --audio-button-size: 40px;
+
   --audio-play-button-size: 43px;
-  --audio-play-button-size: 43px;
+  --audio-play-button-color: rgb(0 0 0 / 0.8);
+  --audio-play-button-bg: var(--media-brand);
+  --audio-play-button-border-radius: 100%;
+  --audio-caption-button-off-opacity: 0.64;
 
   /* Sliders. */
   --audio-slider-chapter-title-color: black;
-  --audio-slider-chapter-title-color: white;
   --audio-slider-value-border: 1px solid rgb(255 255 255 / 0.1);
+
+  --audio-volume-height: 96px;
+  --audio-volume-bg: var(--media-menu-bg, rgb(10 10 10));
+  --audio-volume-border-radius: 8px;
 
   /* Menus. */
   --audio-menu-max-height: 320px;
@@ -29,10 +35,13 @@
   --audio-buffering-stripe-speed: 2s;
 
   /* Captions. */
-  --audio-captions-offset: 2px;
+  --audio-captions-offset: 4px;
   --audio-captions-bg: transparent;
   --audio-cue-font-size: 14px;
   --audio-cue-color: white;
   --audio-cue-border: 1px solid rgb(255 255 255 / 0.1);
   --audio-cue-bg: black;
+
+  /* Time */
+  --audio-time-font-size: 15px;
 }

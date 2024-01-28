@@ -14,18 +14,22 @@ type like so:
 
 ::code[./view-type]
 
+The same is true for the [stream type][stream-type]:
+
+::code[./stream-type]
+
+[stream-type]: /docs/player/core-concepts/loading#stream-type
+
 ## Size
 
 Both the audio and video layout will adapt to small containers to ensure an optimal user experience.
-You configure when the small layout is displayed by using [Player Queries][player-queries]:
+You configure when the small layout is displayed like so:
 
 ::code[./sm-layout]
 
 If you'd like to disable small layouts, set the query to `false` or `'never'`:
 
 ::code[./disable-sm-layout]
-
-[player-queries]: /docs/player/styling/responsive-design#player-queries
 
 ## Icons
 
@@ -48,7 +52,7 @@ for more information.
 
 ## Language
 
-Both the audio and video layout support internationalization by accepting custom language
+Both the audio and video layout support internationalization (i18n) by accepting custom language
 translations. You can dynamically set the `translations` property to update the language like so:
 
 ::code[./language]{copy=true}
@@ -78,6 +82,8 @@ The following variables can be used to specifically customize the video layout. 
 ::code[./component-vars]{copy=true}
 
 ## Previews
+
+The following demos show how the Default Layout adapts to audio, video, and live streams:
 
 ### Audio
 

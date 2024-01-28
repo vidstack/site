@@ -1,6 +1,17 @@
 import type { DefaultLayoutIcons } from '@vidstack/react/player/layouts/default';
 
-const customIcons: DefaultLayoutIcons = {
+// All icons are optional, replace only what you want.
+const customIcons: Partial<DefaultLayoutIcons> = {
+  AirPlayButton: {
+    Default: AirPlayIcon,
+    Connecting: AirPlayConnectingIcon,
+    Connected: AirPlayConnectedIcon,
+  },
+  GoogleCastButton: {
+    Default: GoogleCastIcon,
+    Connecting: GoogleCastConnectingIcon,
+    Connected: GoogleCastConnectedIcon,
+  },
   PlayButton: {
     Play: PlayIcon,
     Pause: PauseIcon,
@@ -36,5 +47,19 @@ const customIcons: DefaultLayoutIcons = {
     Captions: MenuCaptionsIcon,
     Settings: MenuSetingsIcon,
     Speed: MenuSpeedIcon,
+    Font: FontIcon,
+  },
+  KeyboardAction: {
+    Play: KeyboardPlayIcon,
+    Pause: KeyboardPauseIcon,
+    Mute: KeyboardMuteIcon,
+    VolumeUp: KeyboardVolumeUpIcon,
+    VolumeDown: KeyboardVolumeDownIcon,
+    EnterFullscreen: KeyboardEnterFullscreenIcon,
+    ExitFullscreen: KeyboardExitFullscreenIcon,
+    EnterPiP: KeyboardEnterPiPIcon,
+    ExitPiP: KeyboardExitPiPIcon,
+    CaptionsOn: KeyboardCaptionsOnIcon,
+    CaptionsOff: KeyboardCaptionsOffIcon,
   },
 };

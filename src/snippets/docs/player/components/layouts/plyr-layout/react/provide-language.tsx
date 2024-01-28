@@ -1,0 +1,1 @@
+<PlyrLayout translations={SPANISH} />;
