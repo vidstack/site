@@ -120,6 +120,37 @@ and end.
 
 [media-frags]: https://www.w3.org/TR/media-frags
 
+## Storage
+
+Storage enables saving player and media settings so that the user can resume where they left off.
+This includes saving and initializing on load settings such as language, volume,
+muted, captions visibility, and playback time.
+
+### Local Storage
+
+[Local Storage][local-storage] enables saving data locally on the user's browser. This is
+a simple and fast option for remembering player settings, but it _won't_ persist across domains,
+devices, or browsers.
+
+Provide a storage key prefix for turning local storage on like so:
+
+::code[./local-storage]
+
+[local-storage]: https://developer.mozilla.org/en-US/docs/Web/API/Storage
+
+### Remote Storage
+
+Remote Storage enables asynchronously saving and loading data from anywhere. This is great
+as settings willl persist across user sessions even if the domain, device, or browser changes.
+Generally, you will save player/media settings to a remote database based on the currently authenticated
+user.
+
+Implement the `MediaStorage` interface and provide it to the player like so:
+
+::code[./remote-storage]{copy=true}
+
+::code[./provide-remote-storage]
+
 ## Sources
 
 The player can accept one or more media sources which can be a `string` URL of the media resource
