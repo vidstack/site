@@ -382,15 +382,13 @@ identify and navigate to specific points within the video or audio. Thumbnails a
 in the time slider or chapters menu; enabling users to visually browse and select the part of
 the content they want to play.
 
+### Usage
+
 Thumbnails can be loaded using the [Thumbnail][thumbnail] component or [`useThumbnails`][use-thumbnails] hook.
-They're also supported out the box by the [Default Layout][default-layout-thumbnails].
+They're also supported out the box by the [Default Layout][default-layout-thumbnails] and
+[Plyr Layout][plyr-layout-thumbnails].
 
-General notes:
-
-- The image URLs specified can be absolute `https://example.com/media/thumbnail-1.jpg`
-  or relative `/media/thumbnail-1.jpg`.
-- The width and height of each thumbnail image should be kept the same. If sizes differ, the
-  aspect ratio should remain the same to avoid jumping when previewing.
+::code[./provide-thumbnail-vtt]
 
 ### VTT
 
@@ -421,17 +419,50 @@ thumbnail images, they can be specified like so:
 
 ### JSON
 
-Thumbnails can also be loaded as a JSON file. First, make sure the `Content-Type` header is
-set to `application/json` on the response, and then return the cues as a JSON array like so:
+Thumbnails can be loaded as a JSON file. Ensure the `Content-Type` header is
+set to `application/json` on the response. The returned JSON can be VTT cues, an array of images, or
+a storyboard.
 
-::code[./thumbnail-json]
+::code[./provide-thumbnail-json]
+
+[Mux storyboards][mux-storyboard] are supported out of the box:
+
+::code[./thumbnails-mux]
+
+Example JSON VTT:
+
+::code[./thumbnail-vtt-json]{title="vtt.json"}
+
+Example JSON images:
+
+::code[./thumbnail-images-json]{title="images.json"}
+
+Example JSON storyboard:
+
+::code[./thumbnail-storyboard-json]{title="storyboard.json"}
+
+### Object
+
+Example object with multiple images:
+
+::code[./thumbnail-image-object]
+
+Example storyboard object:
+
+::code[./thumbnail-storyboard-object]
+
+Provide objects directly like so:
+
+::code[./provide-thumbnail-object]
 
 [webvtt]: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API
 [thumbnail]: /docs/player/components/display/thumbnail
 [storyboard]: https://media-files.vidstack.io/storyboard.jpg
+[mux-storyboard]: https://docs.mux.com/guides/create-timeline-hover-previews#json
 [thumbnails-example]: https://media-files.vidstack.io/thumbnails.vtt
 [use-thumbnails]: /docs/player/api/hooks/use-thumbnails
 [default-layout-thumbnails]: /docs/player/components/layouts/default-layout#thumbnails
+[plyr-layout-thumbnails]: /docs/player/components/layouts/plyr-layout#thumbnails
 
 ## Video Qualities
 
