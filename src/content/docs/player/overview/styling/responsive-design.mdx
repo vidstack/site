@@ -39,8 +39,7 @@ characteristics of the viewing device, such as screen size, orientation, or reso
 media queries are widely used for responsive web design, they have limitations when styling a
 media player, particularly in scenarios where the player's size and layout need to adapt
 dynamically to its container element, [view type][view-type], or [stream type][stream-type].
-This is where [container queries](#container-queries) and [player queries](#player-queries) are
-preferable.
+This is where [container queries](#container-queries) are preferable.
 
 [view-type]: /docs/player/core-concepts/loading#view-type
 [stream-type]: /docs/player/core-concepts/loading#stream-type
@@ -65,24 +64,3 @@ new feature added to browsers.
 
 [container-queries]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_container_queries
 [caniuse-container-queries]: https://caniuse.com/css-container-queries
-
-### Player Queries
-
-Player Queries are a feature we ship to enable matching against the current media state using
-strings which support CSS media-query-like syntax. They are generally used when working with
-layouts.
-
-Player Queries support the following syntax:
-
-- Comparators: `(width < 576) or (height <= 380)`
-- And: `(view-type: video) and (stream-type: on-demand)`
-- Or: `(fullscreen: true) or (orientation: landscape)`
-- Media Queries: `(fullscreen: true) and @media (min-width: 992px)`
-
-Do note, all **[media player state][player-state]** properties are available when writing queries.
-
-:::danger
-Player Queries use `eval` under the hood. **DO NOT** inject unsanitized content into query strings.
-:::
-
-[player-state]: /docs/player/components/core/player#mediaplayer.state

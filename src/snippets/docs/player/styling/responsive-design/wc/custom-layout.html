@@ -1,9 +1,14 @@
+<script type="module">
+  const vodLayout = document.getElementById('vod-layout');
+  // Determines when the layout will be rendered and displayed.
+  vodLayout.when = ({ viewType, streamType }) => viewType === 'video' && streamType === 'on-demand';
+</script>
+
 <media-player>
   <!-- This element is where the video canvas will be rendered. -->
   <media-provider />
 
-  <!-- See "Player Queries" below for how `when` works. -->
-  <media-layout when="(view-type: video) and (stream-type: on-demand)">
+  <media-layout id="vod-layout">
     <template>
       <media-captions class="..." />
       <media-controls class="...">
