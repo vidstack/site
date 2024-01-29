@@ -95,6 +95,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/display/thumbnail.mdx',
     'player/components/display/time.mdx',
     'player/components/display/react/track.mdx',
+    'player/components/display/title.mdx',
     'player/components/display/chapter-title.mdx',
     'player/components/display/buffering-indicator.mdx',
     // Buttons
