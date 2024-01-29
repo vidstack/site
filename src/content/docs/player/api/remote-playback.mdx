@@ -1,0 +1,85 @@
+---
+description: An overview on requesting and tracking remote playback.
+---
+
+## Requesting
+
+The player supports playing on a remote device such as a TV when [AirPlay][airplay] or
+[Google Cast][google-cast] are available. You can request remote playback by using the
+[`AirPlayButton`][airplay-button], [`GoogleCastButton`][google-cast-button],
+[remote control](#remote-control) or via [methods](#methods) on the player instance.
+
+### Process
+
+The entire remote playback request process is async and lazy loaded to avoid bloating the
+player library and your application:
+
+1. The Google Cast framework is lazy loaded only on request.
+2. Once the framework is loaded, the cast prompt is shown.
+3. When a cast receiver device is selected by the user, the [`GoogleCastProvider`][google-cast-provider] is
+   lazy loaded and switched with current provider. The remote cast player is set to the correct
+   state with respect to paused, time, muted, captions, etc. A provider change and setup event is
+   fired in this process.
+4. When the casting session ends, the `GoogleCastProvider` is destroyed.
+5. The previous provider is created and set back to its original state. A provider change and
+   setup event is fired in this process.
+
+::code[./cast-provider]
+
+:::info
+AirPlay does not require loading any framework as it's supported directly on the `<video>` element
+via the [Remote Playback API][remote-playback-api].
+:::
+
+[airplay]: https://www.apple.com/au/airplay
+[google-cast]: https://developers.google.com/cast/docs/overview
+[airplay-button]: /docs/player/components/buttons/airplay-button
+[google-cast-button]: /docs/player/components/buttons/google-cast-button
+[google-cast-provider]: /docs/player/api/providers/google-cast
+[remote-playback-api]: https://developer.mozilla.org/en-US/docs/Web/API/Remote_Playback_API
+
+### Remote Control
+
+The [media remote][media-remote] provides methods for dispatching `media-airplay-request`
+and `media-google-cast-request` request events like so:
+
+::code[./remote-control]
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+### Methods
+
+The following `requestAirPlay()` and `requestGoogleCast()` methods are available on the player
+component instance for requesting remote playback:
+
+::code[./airplay-method]{copy=true}
+::code[./google-cast-method]{copy=true}
+
+## State
+
+The following remote playback properties are available on the media store:
+
+- `canAirPlay`: Whether AirPlay is supported.
+- `canGoogleCast`: Whether Google Cast is supported.
+- `remotePlaybackState`: Current remote playback state: `connecting`, `connected`, or `disconnected`.
+- `remotePlaybackType`: Type of remote playback: `airplay` or `google-cast`.
+- `remotePlaybackInfo`: Contains the device name when using Google Cast.
+- `isAirPlayConnected`: Whether the player is connected via AirPlay.
+- `isGoogleCastConnected`: Whether the player is connected via Google Cast.
+
+::code[./state]
+
+## Styling
+
+The following [media data attributes][player-data-attrs] are available for styling based on the
+current remote playback state:
+
+::code[./styling]
+
+[player-data-attrs]: /docs/player/components/core/player#mediaplayer.attrs
+
+## Events
+
+The following events are available for detecting remote playback changes:
+
+::code[./events]

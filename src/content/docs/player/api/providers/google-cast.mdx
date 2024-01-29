@@ -1,0 +1,29 @@
+---
+description: This provider enables remote playback using the Google Cast framework.
+---
+
+import googleCastImage from '~/images/google-cast.png';
+
+This provider adds support for playing media on a remote device such as a TV using the
+[Google Cast framework][google-cast]. This provider is automatically lazy loaded when a cast
+receiver is selected by the user. See the [Remote Playback API][remote-playback] for
+more information on how to request and track changes.
+
+::code[./usage]
+
+:::info
+When this provider is active (i.e., connected to a receiver), a black screen is displayed inside
+the [`MediaProvider`][media-provider] with the Google Cast logo and the name of the connected device.
+
+<img
+  src={googleCastImage.src}
+  alt="Centered display of a logo with the text 'Google Cast on Lounge Room' below it."
+  decoding="async"
+  loading="lazy"
+  style="width: 480px; aspect-ratio: 16 / 9;"
+/>
+:::
+
+[google-cast]: https://developers.google.com/cast/docs/overview
+[remote-playback]: /docs/player/api/remote-playback
+[media-provider]: /docs/player/components/core/provider

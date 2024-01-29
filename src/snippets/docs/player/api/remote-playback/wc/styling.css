@@ -1,0 +1,23 @@
+media-player[data-can-airplay] {
+  /** Whether AirPlay is supported. */
+}
+
+media-player[data-can-google-cast] {
+  /* Whether Google Cast framework is supported. */
+}
+
+media-player[data-airplay] {
+  /* AirPlay is connected. */
+}
+
+media-player[data-google-cast] {
+  /* Google Cast is connected. */
+}
+
+media-player[data-remote-state='connecting'] {
+  /* connected, connecting, disconnected */
+}
+
+media-player[data-remote-type='airplay'] {
+  /* airplay, google-cast */
+}

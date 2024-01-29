@@ -41,6 +41,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/live.mdx',
     'player/api/keyboard.mdx',
     'player/api/audio-tracks.mdx',
+    'player/api/remote-playback.mdx',
     'player/api/text-tracks.mdx',
     'player/api/video-quality.mdx',
     // Providers
@@ -49,6 +50,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/providers/hls.mdx',
     'player/api/providers/youtube.mdx',
     'player/api/providers/vimeo.mdx',
+    'player/api/providers/google-cast.mdx',
     'player/api/providers/react/remotion.mdx',
     // Classes
     'player/api/classes/media-remote-control.mdx',
@@ -104,11 +106,13 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/buttons/fullscreen-button.mdx',
     'player/components/buttons/live-button.mdx',
     'player/components/buttons/seek-button.mdx',
+    'player/components/buttons/airplay-button.mdx',
+    'player/components/buttons/google-cast-button.mdx',
     'player/components/buttons/tooltip.mdx',
     // Sliders
     'player/components/sliders/slider.mdx',
-    'player/components/sliders/volume-slider.mdx',
     'player/components/sliders/time-slider.mdx',
+    'player/components/sliders/volume-slider.mdx',
     'player/components/sliders/wc/slider-preview.mdx',
     'player/components/sliders/wc/slider-value.mdx',
     'player/components/sliders/wc/slider-video.mdx',

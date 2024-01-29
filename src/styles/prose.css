@@ -21,7 +21,7 @@
 }
 
 .prose a:not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  @apply border-0 text-[0.95em] font-medium underline hocus:text-inverse;
+  @apply border-0 text-[0.99em] font-medium underline hocus:text-inverse;
 }
 
 .prose a .external-link-icon {

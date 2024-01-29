@@ -1,5 +1,6 @@
 import {
   isAudioProvider,
+  isGoogleCastProvider,
   isHLSProvider,
   isVideoProvider,
   isVimeoProvider,
@@ -7,6 +8,7 @@ import {
   MediaPlayer,
   MediaProvider,
   type AudioProvider,
+  type GoogleCastProvider,
   type HLSProvider,
   type MediaProviderAdapter,
   type VideoProvider,
@@ -43,6 +45,10 @@ function Player() {
     }
 
     if (isRemotionProvider(provider)) {
+      // ...
+    }
+
+    if (isGoogleCastProvider(provider)) {
       // ...
     }
   }
