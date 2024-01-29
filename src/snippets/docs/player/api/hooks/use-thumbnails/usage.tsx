@@ -1,4 +1,4 @@
 import { useThumbnails } from '@vidstack/react';
 
-// Returns `ThumbnailData[]`
+// Returns `ThumbnailImage[]`
 const thumbnails = useThumbnails('https://media-files.vidstack.io/thumbnails.vtt');

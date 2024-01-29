@@ -1,8 +1,13 @@
-export interface ThumbnailData {
-  url: string;
-  cue: VTTCue;
+interface ThumbnailImage {
+  url: URL;
+  startTime: number;
+  endTime?: number;
+  width?: number;
+  height?: number;
+  coords?: ThumbnailCoords;
+}
+
+interface ThumbnailCoords {
   x: number;
   y: number;
-  width: number;
-  height: number;
 }

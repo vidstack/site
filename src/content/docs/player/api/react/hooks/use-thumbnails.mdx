@@ -1,10 +1,15 @@
 ---
-description: This hook is used to fetch and parse a WebVTT source containing thumbnail cues.
+description: This hook is used to fetch and resolve thumbnail images.
 ---
 
-Fetches and parses a WebVTT file. The function will return the parsed thumbnail
-data such as the VTTCue, coordinates, dimensions, and url. It's safe to call this hook in
-multiple places with the same `src` argument as work is de-duped and cached.
+This hook fetches, parses, and resolves thumbnail images from a [WebVTT file][thumbnails-vtt],
+[JSON file][thumbnails-json], or [Object][thumbnails-object]. The hook will return the resolved
+data for each image such as the start time, end time, coordinates, dimensions, and url. It's safe
+to call this hook in multiple places with the same `src` argument as work is de-duped and cached.
+
+:::info
+See the [Loading Thumbnails][loading] guide for more information.
+:::
 
 ::code[./usage]
 
@@ -17,8 +22,7 @@ a desired time:
 
 ::code[./active]
 
-:::info
-See the [Loading Thumbnails][loading] guide for more information.
-:::
-
+[thumbnails-vtt]: /docs/player/core-concepts/loading#vtt
+[thumbnails-json]: /docs/player/core-concepts/loading#json
+[thumbnails-object]: /docs/player/core-concepts/loading#objects
 [loading]: /docs/player/core-concepts/loading#thumbnails
