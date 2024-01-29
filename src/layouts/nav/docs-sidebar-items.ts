@@ -70,6 +70,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/react/hooks/use-player-query.mdx',
     'player/api/react/hooks/use-thumbnails.mdx',
     'player/api/react/hooks/create-text-track.mdx',
+    'player/api/react/hooks/use-text-cues.mdx',
     'player/api/react/hooks/use-active-text-cues.mdx',
     'player/api/react/hooks/use-active-text-track.mdx',
     'player/api/react/hooks/use-audio-options.mdx',
