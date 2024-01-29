@@ -42,6 +42,13 @@ good practice is to always attach [event triggers](#event-triggers) to ensure re
 traced back to their origin. This is the same way all Vidstack components dispatch requests
 internally.
 
+### Cancelling Requests
+
+Meida request events can be cancelled by listening for them on the player or the component
+dispatching it and preventing the default behavior:
+
+::code[./cancel-request]
+
 [player-architecture]: /docs/player/getting-started/architecture
 [remote-control]: /docs/player/core-concepts/state-management#updating
 
