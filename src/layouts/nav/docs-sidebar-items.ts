@@ -67,7 +67,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/react/hooks/use-slider-state.mdx',
     'player/api/react/hooks/use-slider-store.mdx',
     'player/api/react/hooks/use-slider-preview.mdx',
-    'player/api/react/hooks/use-player-query.mdx',
+    'player/api/react/hooks/use-chapter-title.mdx',
     'player/api/react/hooks/use-thumbnails.mdx',
     'player/api/react/hooks/create-text-track.mdx',
     'player/api/react/hooks/use-text-cues.mdx',
