@@ -73,7 +73,7 @@
     {/if}
   </media-provider>
   {#if layout === 'default'}
-    <media-audio-layout {thumbnails} />
+    <media-audio-layout />
     <media-video-layout {thumbnails} />
   {:else if layout === 'plyr'}
     <media-plyr-layout {thumbnails} />
@@ -81,6 +81,10 @@
 </media-player>
 
 <style>
+  media-player {
+    --media-slider-value-gap: -4px;
+  }
+
   media-player :global(img),
   media-player :global(video) {
     margin: 0 !important;
