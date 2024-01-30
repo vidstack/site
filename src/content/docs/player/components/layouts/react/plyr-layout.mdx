@@ -53,6 +53,44 @@ They can all be adjusted by you to customize the layout as desired.
 
 ::code[./layout-vars]{copy=true}
 
+## Slots
+
+The `slots` prop can be used to insert or replace content inside the `PlyrLayout`. You can
+find all available [slot positions](#positions) below.
+
+::code[./slots]{copy=true}
+
+### Positions
+
+The following slot positions are available for inserting or replacing content:
+
+- airPlayButton
+- captionsButton
+- currentTime
+- download
+- duration
+- fastForwardButton
+- fullscreenButton
+- liveButton
+- muteButton
+- pipButton
+- playButton
+- playLargeButton
+- poster
+- restartButton
+- rewindButton
+- settings
+- settingsButton
+- timeSlider
+- volumeSlider
+- settingsMenu
+
+:::info
+Any slot position can be prefixed with either `before` or `after` to insert content before or
+after that position. For example, `afterCaptionButton` will insert content after the caption
+button.
+:::
+
 ## Previews
 
 The following demos show how the Plyr Layout adapts to audio, video, and live streams:

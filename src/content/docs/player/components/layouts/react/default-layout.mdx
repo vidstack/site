@@ -81,6 +81,62 @@ The following variables can be used to specifically customize the video layout. 
 
 ::code[./component-vars]{copy=true}
 
+## Slots
+
+### Audio Layout
+
+The `slots` prop can be used to insert or replace content inside the `DefaultAudioLayout`. You can
+find all available [slot positions](#positions) below.
+
+::code[./audio-slots]{copy=true}
+
+### Video Layout
+
+The `slots` prop can be used to insert or replace content inside the `DefaultVideoLayout`. You can
+find all available [slot positions](#positions) below.
+
+::code[./video-slots]{copy=true}
+
+Content can be slotted inside specific video layout sizes like so:
+
+::code[./video-sized-slots]{copy=true}
+
+### Positions
+
+The following slot positions are available for inserting or replacing content:
+
+- bufferingIndicator
+- captionButton
+- captions
+- title
+- chapterTitle
+- currentTime
+- endTime
+- fullscreenButton
+- liveButton
+- livePlayButton
+- muteButton
+- pipButton
+- airPlayButton
+- googleCastButton
+- playButton
+- loadButton
+- seekBackwardButton
+- seekForwardButton
+- startDuration
+- timeSlider
+- volumeSlider
+- chaptersMenu
+- settingsMenu
+- settingsMenuStartItems
+- settingsMenuEndItems
+
+:::info
+Any slot position can be prefixed with either `before` or `after` to insert content before or
+after that position. For example, `afterCaptionButton` will insert content after the caption
+button.
+:::
+
 ## Previews
 
 The following demos show how the Default Layout adapts to audio, video, and live streams:
