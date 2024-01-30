@@ -86,6 +86,8 @@
   --plyr-progress-marker-width: 3px;
   --plyr-progress-marker-background: #fff;
 
+  --plyr-progress-live-color: var(--plyr-color-main);
+
   --plyr-audio-progress-buffered-background: rgba(193, 200, 209, 0.6);
 
   --plyr-video-progress-buffered-background: rgba(255, 255, 255, 0.25);

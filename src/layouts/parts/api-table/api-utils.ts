@@ -49,6 +49,14 @@ export function findWebComponents(pathname: string) {
   return components;
 }
 
+const ignore = new Set<string>([
+  'PlyrAudioLayout',
+  'PlyrVideoLayout',
+  'DefaultVideoLargeLayout',
+  'DefaultVideoSmallLayout',
+  'DefaultVideoLoadLayout',
+]);
+
 export function findReactComponents(pathname: string) {
   pathname = pathname.replace(/\/$/, '');
 
@@ -57,6 +65,8 @@ export function findReactComponents(pathname: string) {
   }
 
   let components = reactComponents.filter((c) => {
+    if (ignore.has(c.name)) return false;
+
     let slug = '/' + pascalToKebabCase(c.namespace ?? c.name).replace('media-', '');
 
     // Special Cases.

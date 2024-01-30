@@ -3,6 +3,7 @@
   import 'vidstack/player/styles/default/theme.css';
   import 'vidstack/player/styles/default/layouts/audio.css';
   import 'vidstack/player/styles/default/layouts/video.css';
+  import 'vidstack/player/styles/plyr/theme.css';
   // Elements
   import 'vidstack/player';
   import 'vidstack/player/layouts';
@@ -17,6 +18,7 @@
   let player: MediaPlayerElement;
 
   onMount(() => {
+    player.title = 'Sprite Fight';
     return () => {
       player?.destroy();
     };
@@ -37,13 +39,13 @@
   crossorigin
   playsinline
   keep-alive
+  poster="https://media-files.vidstack.io/sprite-fight/poster.webp"
   style={type === 'audio' ? '' : 'aspect-ratio: 16/9;'}
   bind:this={player}
 >
   <media-provider class="block">
     {#if type === 'video' && layout === 'default'}
       <media-poster
-        src="https://media-files.vidstack.io/sprite-fight/poster.webp"
         class="vds-poster"
         alt="Girl walks into sprite gnomes around her friend on a campfire in danger!"
       ></media-poster>

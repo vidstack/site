@@ -24,8 +24,8 @@ dependencies:
     specifier: ^0.5.1
     version: 0.5.1
   '@vidstack/react':
-    specifier: ^1.9.7
-    version: 1.9.8(@types/react@18.2.48)(react@18.2.0)
+    specifier: ^1.10.1
+    version: 1.10.1(@types/react@18.2.48)(react@18.2.0)
   astro:
     specifier: ^4.0.0
     version: 4.2.6(@types/node@20.11.8)(typescript@5.3.3)
@@ -42,8 +42,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0
   vidstack:
-    specifier: ^1.9.7
-    version: 1.9.8
+    specifier: ^1.10.1
+    version: 1.10.1
 
 devDependencies:
   '@algolia/client-search':
@@ -1942,10 +1942,10 @@ packages:
       ws: 8.14.2(bufferutil@4.0.8)(utf-8-validate@6.0.3)
     dev: false
 
-  /@vidstack/react@1.9.8(@types/react@18.2.48)(react@18.2.0):
+  /@vidstack/react@1.10.1(@types/react@18.2.48)(react@18.2.0):
     resolution:
       {
-        integrity: sha512-1gGlCXpmGriKZ+sgP1WLgm4tpkU2buXeAIPFoh8t7V4X3jV1l15oZS4whfPswCY6/9jAwVKq0jQBLryAuBYZww==,
+        integrity: sha512-iSDwQKTwtzJvoIPD4WT6Pf06SBhiqv2l2nTnlFlCLYqm2tmsTi/TJTRJMiTL9bZlHwlgosdSRy80lJJHuTTXsw==,
       }
     engines: { node: '>=18' }
     peerDependencies:
@@ -7863,7 +7863,6 @@ packages:
       chokidar: 3.5.3
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.6.1
-    dev: true
 
   /update-browserslist-db@1.0.13(browserslist@4.22.3):
     resolution:
@@ -7943,14 +7942,15 @@ packages:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  /vidstack@1.9.8:
+  /vidstack@1.10.1:
     resolution:
       {
-        integrity: sha512-0N5XqsvRHz4zO8nWnZ+ggSNkf65BkkjfDikJv1M8QCEovziSdnocBoIKuG1qQCHrcOxqwB8Z5/se8c1PrW98fQ==,
+        integrity: sha512-2Ayf625ceggtVXkuZnEMdy7yvNNq8LG3yaooEUDHr2l5HiX5JC6R+PsZ1OJn3gl2GrPwKZ1DaSaMNXW3GeuDXw==,
       }
     engines: { node: '>=18' }
     dependencies:
       media-captions: 1.0.2
+      unplugin: 1.6.0
     dev: false
 
   /vite@5.0.12(@types/node@20.11.8):
@@ -8063,14 +8063,12 @@ packages:
         integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==,
       }
     engines: { node: '>=10.13.0' }
-    dev: true
 
   /webpack-virtual-modules@0.6.1:
     resolution:
       {
         integrity: sha512-poXpCylU7ExuvZK8z+On3kX+S8o/2dQ/SVYueKA0D4WEMXROXgY8Ez50/bQEUmvoSMMrWcrJqCHuhAbsiwg7Dg==,
       }
-    dev: true
 
   /whatwg-url@5.0.0:
     resolution:
