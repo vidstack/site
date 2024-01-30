@@ -41,8 +41,8 @@ const description =
 ---
 
 <DefaultLayout {title} {description}>
-  <AnnouncementBar href="https://github.com/vidstack/player/discussions/935" slot="announcement">
-    <span class="font-semibold">Player:</span> 1.0@next!
+  <AnnouncementBar href="https://github.com/vidstack/player/discussions/1116" slot="announcement">
+    <span class="font-semibold">Player:</span> 1.10@next!
   </AnnouncementBar>
 
   <Style style="--from-color: var(--next-gradient-start); --to-color: var(--next-gradient-end);">
@@ -50,7 +50,7 @@ const description =
       <Fragment slot="title">
         Video Platform.
         <br />
-        <span class="inline-block mt-1">
+        <span class="mt-1 inline-block">
           For
           <TextGradient>Next.js.</TextGradient>
         </span>
@@ -68,30 +68,30 @@ const description =
 
       <Fragment slot="frameworks">
         <a
-          class="hocus:scale-105 transition rounded-md text-soft hocus:text-[#00D8FF]"
+          class="rounded-md text-soft transition hocus:scale-105 hocus:text-[#00D8FF]"
           href="https://react.dev"
           aria-label="React"
           target="_blank"
         >
-          <ReactIcon class="w-9 h-9" />
+          <ReactIcon class="h-9 w-9" />
         </a>
 
         <a
-          class="hocus:scale-105 transition rounded-md text-soft hocus:text-[#06B6D4]"
+          class="rounded-md text-soft transition hocus:scale-105 hocus:text-[#06B6D4]"
           href="https://tailwindcss.com"
           aria-label="Tailwind CSS"
           target="_blank"
         >
-          <TailwindIcon class="w-11 h-11" />
+          <TailwindIcon class="h-11 w-11" />
         </a>
 
         <a
-          class="hocus:scale-105 transition rounded-md text-soft hocus:text-inverse"
+          class="rounded-md text-soft transition hocus:scale-105 hocus:text-inverse"
           href="https://nextjs.org"
           aria-label="Next.js"
           target="_blank"
         >
-          <NextIcon class="w-9 h-9" />
+          <NextIcon class="h-9 w-9" />
         </a>
       </Fragment>
     </HeroSection>
@@ -118,7 +118,7 @@ const description =
     style="--from-color: var(--player-gradient-start); --to-color: var(--player-gradient-end);"
   >
     <FeatureSection title="Player." subtitle="Built for React." align="center">
-      <ReactIcon class="w-full h-full" slot="icon" />
+      <ReactIcon class="h-full w-full" slot="icon" />
 
       <p slot="description">
         Build a production-ready player in minutes using our free and open-source UI library. Use
@@ -156,7 +156,7 @@ const description =
 
   <Style style="--from-color: var(--ship-gradient-start); --to-color: var(--ship-gradient-end);">
     <FeatureSection title="Ready." subtitle="Built to ship." align="center">
-      <AnimatedPackageIcon class="w-full h-full" delay={3000} client:visible slot="icon" />
+      <AnimatedPackageIcon class="h-full w-full" delay={3000} client:visible slot="icon" />
 
       <p slot="description">
         Don't have time to build your own player? We provide high-quality, accessible, and
@@ -172,16 +172,16 @@ const description =
           )}
         >
           <TerminalIcon
-            class="text-[var(--from-color)] dark:text-[var(--to-color)] w-4 h-4 absolute top-2.5 left-[18px]"
+            class="absolute left-[18px] top-2.5 h-4 w-4 text-[var(--from-color)] dark:text-[var(--to-color)]"
           />
           <div class="translate-x-10">
             <TypeWriter text="npm i @vidstack/react" speed={50} delay={1200} caret client:visible />
           </div>
         </div>
-        <div class="w-[242px] h-[40px] absolute top-0.5 left-0.5 bg-brand/10 rounded-full"></div>
+        <div class="absolute left-0.5 top-0.5 h-[40px] w-[242px] rounded-full bg-brand/10"></div>
       </div>
 
-      <div class="w-full flex items-center justify-center" slot="content">
+      <div class="flex w-full items-center justify-center" slot="content">
         <CodeSnippet id="home/default-layout" class="w-full max-w-3xl" numbered />
       </div>
     </FeatureSection>
@@ -189,7 +189,7 @@ const description =
 
   <Style style="--from-color: var(--next-gradient-start); --to-color: var(--next-gradient-end);">
     <FeatureSection title="Next.js." subtitle="Built to be seamless." align="start">
-      <NextIcon class="w-full h-full" slot="icon" />
+      <NextIcon class="h-full w-full" slot="icon" />
 
       <p slot="description">
         We're building Vidstack for a seamless start-to-finish workflow. No setup headaches, no
@@ -198,7 +198,7 @@ const description =
 
       <JoinWaitlist slot="cta" gradient client:load />
 
-      <div class="w-full flex items-center justify-center" slot="content">
+      <div class="flex w-full items-center justify-center" slot="content">
         <Steps
           class="w-full"
           stepListClass="max-w-xl"
@@ -212,13 +212,13 @@ const description =
           <div class="min-w-full max-w-3xl">
             <!-- Setup -->
             <Step>
-              <div class="w-full relative overflow-hidden min-h-[512px]">
+              <div class="relative min-h-[512px] w-full overflow-hidden">
                 <CodeSnippet
                   title=".env"
                   id="home/next-steps/setup-env"
-                  class="w-[80%] overflow-hidden max-w-md"
+                  class="w-[80%] max-w-md overflow-hidden"
                 />
-                <div class="transform -translate-y-3">
+                <div class="-translate-y-3 transform">
                   <CodeSnippet
                     title="app/layout.tsx"
                     id="home/next-steps/setup"
@@ -255,7 +255,7 @@ const description =
   <Style style="--from-color: var(--git-gradient-start); --to-color: var(--git-gradient-end);">
     <FeatureSection title="Git." subtitle="Built to commit." align="center">
       <AnimatedGithubIcon
-        class="dark:text-black w-[110%] h-[110%]"
+        class="h-[110%] w-[110%] dark:text-black"
         delay={1800}
         client:visible
         slot="icon"
@@ -268,18 +268,18 @@ const description =
 
       <JoinWaitlist gradient slot="cta" client:load />
 
-      <div class="w-full flex flex-col items-center justify-center" slot="content">
-        <div class="w-full max-w-3xl mx-auto">
+      <div class="flex w-full flex-col items-center justify-center" slot="content">
+        <div class="mx-auto w-full max-w-3xl">
           <GitTerminalProcess client:visible />
         </div>
 
         <div
-          class="w-px h-20 992:h-28 border border-dashed border-border/90 my-6 992:my-8 animate-[levitate_16s_ease_infinite]"
+          class="my-6 h-20 w-px animate-[levitate_16s_ease_infinite] border border-dashed border-border/90 992:my-8 992:h-28"
         >
         </div>
 
         <FadeInWhenVisible>
-          <div class="w-full max-w-xl mx-auto">
+          <div class="mx-auto w-full max-w-xl">
             <GitHubComment>
               <GitHubCommentTable
                 rows={[
@@ -296,7 +296,7 @@ const description =
 
   <Style style="--from-color: var(--oss-gradient-start); --to-color: var(--oss-gradient-end);">
     <FeatureSection title="Open Source." subtitle="Built transparently." align="center">
-      <AnimatedBookIcon class="w-full h-full" delay={1000} client:visible slot="icon" />
+      <AnimatedBookIcon class="h-full w-full" delay={1000} client:visible slot="icon" />
 
       <p slot="description">
         Our entire journey is rooted in open-source and you can find all of our work on GitHub. If
@@ -315,7 +315,7 @@ const description =
     style="--from-color: var(--community-gradient-start); --to-color: var(--community-gradient-end);"
   >
     <FeatureSection title="Community." subtitle="Built for us." align="center">
-      <AnimatedHeartHandshakeIcon class="w-full h-full" delay={2000} client:visible slot="icon" />
+      <AnimatedHeartHandshakeIcon class="h-full w-full" delay={2000} client:visible slot="icon" />
 
       <p slot="description">
         We're a community of frontend devs working with video & audio. Join in on the discussions,
@@ -323,7 +323,7 @@ const description =
         experiences.
       </p>
 
-      <div class="flex items-center w-full justify-center" slot="cta">
+      <div class="flex w-full items-center justify-center" slot="cta">
         <SocialLink class="mr-4 768:mr-8" type="twitter" iconSize={40} />
         <SocialLink class="mr-4 768:mr-8" type="discord" iconSize={40} />
         <SocialLink type="gitHub" iconSize={40} />
