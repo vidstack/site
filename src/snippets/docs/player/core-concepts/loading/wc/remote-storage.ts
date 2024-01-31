@@ -16,6 +16,9 @@ class MediaDatabaseStorage implements MediaStorage {
   async getCaptions() {}
   async setCaptions(isOn: boolean) {}
 
+  async getPlaybackRate() {}
+  async setPlaybackRate(rate: number) {}
+
   onChange(src, mediaId, playerId) {}
 
   onDestroy() {}
