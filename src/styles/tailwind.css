@@ -50,9 +50,10 @@
 }
 
 .scrollbar {
+  --scrollbar-thumb: rgb(var(--color-border));
+  --scrollbar-track: transparent;
   scrollbar-width: thin;
-  --scrollbar-track-bg: rgb(var(--color-border) / 0.6);
-  --scrollbar-thumb-bg: rgb(var(--color-border));
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 .dark .scrollbar {
@@ -71,16 +72,16 @@
 
 .scrollbar::-webkit-scrollbar-track {
   @apply !rounded;
-  background-color: var(--scrollbar-track-bg) !important;
+  background-color: var(--scrollbar-track) !important;
 }
 
 .scrollbar::-webkit-scrollbar-corner {
-  background-color: var(--scrollbar-track-bg) !important;
+  background-color: var(--scrollbar-track) !important;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
   @apply !rounded;
-  background-color: var(--scrollbar-thumb-bg) !important;
+  background-color: var(--scrollbar-thumb) !important;
 }
 
 .scrollbar-square::-webkit-scrollbar-track {

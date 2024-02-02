@@ -17,6 +17,8 @@
 
   let player: MediaPlayerElement;
 
+  $: console.log(type);
+
   onMount(() => {
     player.title = 'Sprite Fight';
     return () => {
@@ -76,7 +78,7 @@
     <media-audio-layout />
     <media-video-layout {thumbnails} />
   {:else if layout === 'plyr'}
-    <media-plyr-layout {thumbnails} />
+    <media-plyr-layout thumbnails={type === 'video' ? thumbnails : null} />
   {/if}
 </media-player>
 
