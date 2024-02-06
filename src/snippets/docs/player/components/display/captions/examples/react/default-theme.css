@@ -19,7 +19,6 @@
   --media-cue-line-height: calc(var(--cue-font-size) * 1.2);
   --media-cue-padding-x: calc(var(--cue-font-size) * 0.4);
   --media-cue-padding-x: calc(var(--cue-font-size) * 0.6);
-  --media-lg-fullscreen-cue-font-size: calc(var(--overlay-height) / 100 * 3);
 }
 
 /* Pull captions up when controls are visible. */
