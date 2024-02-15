@@ -31,7 +31,7 @@ const SPANISH: DefaultLayoutTranslations = {
   Unmute: '',
   // Remote Playback
   AirPlay: '',
-  GoogleCast: '',
+  'Google Cast': '',
   Connected: '',
   Connecting: '',
   Disconnected: '',
