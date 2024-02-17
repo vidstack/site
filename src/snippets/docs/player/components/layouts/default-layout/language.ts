@@ -29,9 +29,10 @@ const SPANISH: DefaultLayoutTranslations = {
   'Skip To Live': '',
   Speed: '',
   Unmute: '',
+  Volume: '',
   // Remote Playback
   AirPlay: '',
-  GoogleCast: '',
+  'Google Cast': '',
   Connected: '',
   Connecting: '',
   Disconnected: '',
@@ -48,6 +49,7 @@ const SPANISH: DefaultLayoutTranslations = {
   'Text Shadow': '',
   // Colors
   Black: '',
+  Blue: '',
   Cyan: '',
   Green: '',
   Magenta: '',
