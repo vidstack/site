@@ -59,16 +59,18 @@ const { pathname } = Astro.url,
             ];
           });
 
-        const state = (component?.instance?.state || []).map((prop) => [
-          <NameCell
-            id={`${componentName}.state.${prop.name}`.toLowerCase()}
-            name={prop.name}
-            docs={prop.docs}
-            mdnLink={findMDNLink(getLinks(prop))}
-          />,
-          <TypeCell concise={prop.type.primitive} full={prop.type.full} />,
-          <code>{prop.default ?? 'undefined'}</code>,
-        ]);
+        const state = (component?.instance?.state || [])
+          .filter((prop) => !prop.internal)
+          .map((prop) => [
+            <NameCell
+              id={`${componentName}.state.${prop.name}`.toLowerCase()}
+              name={prop.name}
+              docs={prop.docs}
+              mdnLink={findMDNLink(getLinks(prop))}
+            />,
+            <TypeCell concise={prop.type.primitive} full={prop.type.full} />,
+            <code>{prop.default ?? 'undefined'}</code>,
+          ]);
 
         const stateUsageCode = state.length
           ? [
@@ -167,7 +169,7 @@ const { pathname } = Astro.url,
 
             {component.instance?.docs ? <Fragment set:html={component.instance?.docs} /> : null}
 
-            <CodeBlockWrapper class="text-sm font-normal not-prose">
+            <CodeBlockWrapper class="not-prose text-sm font-normal">
               <div class="flex flex-col">
                 <Code code={importCode} lang="tsx" theme="github-dark" />
                 <Code code={importCode} lang="tsx" theme="github-light" />
@@ -188,7 +190,7 @@ const { pathname } = Astro.url,
             {state.length ? (
               <div>
                 <Heading title="State" slug={`${componentName}.state`} level={tableHeadingLevel} />
-                <CodeBlockWrapper class="text-sm font-normal not-prose">
+                <CodeBlockWrapper class="not-prose text-sm font-normal">
                   <Code code={stateUsageCode} lang="ts" theme="github-dark" />
                   <Code code={stateUsageCode} lang="ts" theme="github-light" />
                 </CodeBlockWrapper>
@@ -214,7 +216,7 @@ const { pathname } = Astro.url,
                   slug={`${componentName}.instance`}
                   level={tableHeadingLevel}
                 />
-                <CodeBlockWrapper class="text-sm font-normal not-prose">
+                <CodeBlockWrapper class="not-prose text-sm font-normal">
                   <Code code={instanceCode} lang="ts" theme="github-dark" />
                   <Code code={instanceCode} lang="ts" theme="github-light" />
                 </CodeBlockWrapper>
@@ -240,7 +242,7 @@ const { pathname } = Astro.url,
                   slug={`${componentName}.attrs`}
                   level={tableHeadingLevel}
                 />
-                <CodeBlockWrapper class="text-sm font-normal not-prose">
+                <CodeBlockWrapper class="not-prose text-sm font-normal">
                   <Code code={dataAttrsUsageCode} lang="css" theme="github-dark" />
                   <Code code={dataAttrsUsageCode} lang="css" theme="github-light" />
                 </CodeBlockWrapper>
@@ -255,7 +257,7 @@ const { pathname } = Astro.url,
                   slug={`${componentName}.parts`}
                   level={tableHeadingLevel}
                 />
-                <CodeBlockWrapper class="text-sm font-normal not-prose">
+                <CodeBlockWrapper class="not-prose text-sm font-normal">
                   <Code code={dataPartUsageCode} lang="html" theme="github-dark" />
                   <Code code={dataPartUsageCode} lang="html" theme="github-light" />
                 </CodeBlockWrapper>

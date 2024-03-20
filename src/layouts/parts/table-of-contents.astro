@@ -46,11 +46,11 @@ if (pathname.includes('components/')) {
           addHeading(component.name, 3, fullName);
         }
 
-        if ((component.props || []).filter((prop) => !prop.internal)) {
+        if (component.props?.filter((prop) => !prop.internal).length) {
           addHeading('Props', tableHeadingLevel, fullName + '.props');
         }
 
-        if (hasInstance && component.instance?.state) {
+        if (hasInstance && component.instance?.state?.filter((prop) => !prop.internal).length) {
           addHeading('State', tableHeadingLevel, fullName + '.state');
         }
 
@@ -89,9 +89,13 @@ if (pathname.includes('components/')) {
         addHeading('Props', tableHeadingLevel, name + '.props');
       }
 
-      if (component.instance?.state) addHeading('State', tableHeadingLevel, name + '.state');
+      if (component.instance?.state?.filter((prop) => !prop.internal).length) {
+        addHeading('State', tableHeadingLevel, name + '.state');
+      }
 
-      if (component.instance?.events) addHeading('Events', tableHeadingLevel, name + '.events');
+      if (component.instance?.events) {
+        addHeading('Events', tableHeadingLevel, name + '.events');
+      }
 
       if (component.instance?.members?.props || component.instance?.members?.methods) {
         addHeading('Instance', tableHeadingLevel, name + '.instance');
@@ -120,19 +124,19 @@ if (pathname.includes('components/')) {
       <nav
         id="table-of-contents"
         class={clsx(
-          'hidden 1280:flex flex-col pl-10 mr-6 1480:mr-0 flex-none',
-          'fixed top-[var(--content-top)] right-[max(0px,calc(50%-45rem))]',
+          'mr-6 hidden flex-none flex-col pl-10 1280:flex 1480:mr-0',
+          'fixed right-[max(0px,calc(50%-45rem))] top-[var(--content-top)]',
           'h-[var(--content-height)]',
         )}
         aria-label="Table of Contents"
       >
-        <h5 class="text-inverse w-full text-left text-[15px] font-semibold mt-6 992:mt-8">
+        <h5 class="mt-6 w-full text-left text-[15px] font-semibold text-inverse 992:mt-8">
           On this page
         </h5>
         <ul
           class={clsx(
-            'flex flex-col space-y-1.5 pt-1 pr-1 mt-1 -ml-1.5',
-            'scrollbar scroll-contain overflow-y-auto flex-1 pb-2 mb-1',
+            '-ml-1.5 mt-1 flex flex-col space-y-1.5 pr-1 pt-1',
+            'scrollbar scroll-contain mb-1 flex-1 overflow-y-auto pb-2',
           )}
         >
           {headings.map((heading, i) => (
@@ -142,10 +146,10 @@ if (pathname.includes('components/')) {
             >
               <a
                 class={clsx(
-                  'text-sm text-soft border border-transparent px-2 py-1 rounded-md',
-                  'data-[active]:text-brand data-[active]:border-brand/10 data-[active]:bg-brand/10',
-                  'data-[active]:shadow-sm whitespace-nowrap',
-                  'hocus:border-soft/20 hocus:bg-elevate hocus:shadow-sm hocus:text-inverse',
+                  'rounded-md border border-transparent px-2 py-1 text-sm text-soft',
+                  'data-[active]:border-brand/10 data-[active]:bg-brand/10 data-[active]:text-brand',
+                  'whitespace-nowrap data-[active]:shadow-sm',
+                  'hocus:border-soft/20 hocus:bg-elevate hocus:text-inverse hocus:shadow-sm',
                 )}
                 href={`#${heading.slug}`}
                 data-depth={heading.depth - 2}

@@ -63,16 +63,18 @@ const { pathname } = Astro.url,
             <code>{prop.default ?? 'undefined'}</code>,
           ]);
 
-        const state = ((hasInstance && component?.instance?.state) || []).map((prop) => [
-          <NameCell
-            id={`${fullComponentName}.state.${prop.name}`.toLowerCase()}
-            name={prop.name}
-            docs={prop.docs}
-            mdnLink={findMDNLink(getLinks(prop))}
-          />,
-          <TypeCell concise={prop.type.primitive} full={prop.type.full} />,
-          <code>{prop.default ?? 'undefined'}</code>,
-        ]);
+        const state = ((hasInstance && component?.instance?.state) || [])
+          .filter((prop) => !prop.internal)
+          .map((prop) => [
+            <NameCell
+              id={`${fullComponentName}.state.${prop.name}`.toLowerCase()}
+              name={prop.name}
+              docs={prop.docs}
+              mdnLink={findMDNLink(getLinks(prop))}
+            />,
+            <TypeCell concise={prop.type.primitive} full={prop.type.full} />,
+            <code>{prop.default ?? 'undefined'}</code>,
+          ]);
 
         const stateUsageCode = state.length
           ? [
