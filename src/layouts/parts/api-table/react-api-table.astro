@@ -101,9 +101,13 @@ const { pathname } = Astro.url,
             <TypeCell concise="function" full={cb.type.full} />,
           ]);
 
-        const example = component.doctags?.find((tag) => tag.name === 'example')?.text,
+        let example = component.doctags?.find((tag) => tag.name === 'example')?.text,
           exampleCode =
             example?.replace(/\`\`\`.*?\n/, '').replace('\n```', '') ?? `<${component.name} />`;
+
+        if (component.namespace?.endsWith('Slider')) {
+          exampleCode = exampleCode.replace(/Slider\./g, `${component.namespace}.`);
+        }
 
         const instanceProps = ((hasInstance && component.instance?.members?.props) || [])
           .filter((prop) => !prop.internal && !component.props?.some((p) => p.name === prop.name))
