@@ -84,7 +84,7 @@
     "vue": "^3.3.8"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx --no-install lint-staged"
+    "pre-commit": "npx --no-install lint-staged --allow-empty"
   },
   "lint-staged": {
     "*": "prettier --write"
