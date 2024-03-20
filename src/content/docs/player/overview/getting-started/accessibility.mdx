@@ -12,18 +12,22 @@ accessible media experience, but where you take that is still on you.
 We currently consider the following when trying to build and provide users an accessible
 media experience:
 
-- Provide clear ARIA roles and labels.
+- Provide clear [ARIA][mdn-aria] roles and labels.
 - Provide alternative text descriptions for images and videos.
 - Ensure [proper color contrast][color-contrast] for all text and controls.
+- Respect [color scheme][mdn-color-scheme] preference (light/dark) to help with visibility of UI controls.
 - Manage focus sensibly with clear indicators.
 - Add keyboard controls and shortcuts.
 - Define adequate touch target zones.
 - Ensure tooltips and menus are positioned correctly and visible.
 - Offer captions and/or subtitles for multimedia content.
 - Render, style, and customize captions consistently.
+- Enable [audio descriptions](#audio-descriptions) for the blind and vision impaired.
 - Ensure caption text is readable and doesn't overlap with other elements.
-- Allow users to customize the playback experience (e.g., volume, speed, and captions).
+- Respect [reduced motion][mdn-reduced-motion] to ease users with vestibular motion disorders.
+- Allow users to customize the playback experience (e.g., volume, speed, captions, animations).
 - Provide the correct language in both spoken and text form.
+- Announce important player state changes to screen readers.
 - Test with screen readers like JAWS, NVDA, or VoiceOver.
 - Document all accessibility features.
 - Conduct user testing with people who have disabilities.
@@ -33,6 +37,9 @@ end too. You should strive to review and implement the list above, follow the gu
 test, speak to your users, and help us improve. We should hold each other to high standards.
 
 [color-contrast]: https://webaim.org/resources/contrastchecker/
+[mdn-aria]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
+[mdn-color-scheme]: https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+[mdn-reduced-motion]: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
 
 ## Guidelines
 
@@ -68,7 +75,7 @@ We're committed to respecting and adhering to the following guidelines and speci
 
 ## Labels
 
-We consider the following with respect to ARIA labelling:
+We consider the following with respect to [ARIA][mdn-aria] labelling:
 
 - Descriptions for the player content and posters.
 - Labelled control elements with `aria-label`, `aria-labelledby`, or `aria-describedby`.
@@ -85,6 +92,12 @@ language.
 
 ## Captions
 
+Native captions fall short, as highlighted in [our motivation for not relying on
+native captions][media-captions-motivation]. We've integrated our custom
+[media captions library][media-captions] to ensure consistent and customizable captions/subtitles
+across browsers and providers. We also provide support for additional formats beyond VTT such as
+text, SRT, SSA, and JSON.
+
 :::info
 Did you know closed-captions are governed by the Federal Communications Commission (FCC)
 under the Communications and Video Accessibility Act (CVA)? Not providing captions and adequate
@@ -93,15 +106,18 @@ Filed law suits have dramatically increased in recent years! See the amazing
 [Caption Me If You Can][caption-talk] talk at Demuxed by Dan Sparacio to learn more.
 :::
 
-Native captions fall short, as highlighted in [our motivation for not relying on
-native captions][media-captions-motivation]. We've integrated our custom
-[media captions library][media-captions] to ensure consistent and customizable captions/subtitles
-across browsers and providers. We also provide support for additional formats beyond VTT such as
-text, SRT, SSA, and JSON.
-
 [media-captions]: https://github.com/vidstack/media-captions
 [caption-talk]: https://www.youtube.com/watch?v=Z0HqYQqdErE
 [media-captions-motivation]: https://github.com/vidstack/media-captions#motivation
+
+## Audio Descriptions
+
+Audio descriptions describe visual elements such as scenes, settings, actions, and costumes. It is
+particularly helpful for people who are blind and vision impaired. We support multiple audio tracks
+by including them in your HLS playlists. In addition, all audio tracks will automatically appear in our
+[Default Layout][default-layout] settings menu which can be set as desired by the user.
+
+[default-layout]: /docs/player/components/layouts/default-layout
 
 ## Keyboard Navigation
 
@@ -115,6 +131,7 @@ Good keyboard navigation generally includes:
 - Implementing keyboard shortcuts for all key player functions.
 - Allowing users to control the player with screen readers and keyboard navigation.
 - Ensuring all interactive elements are keyboard accessible.
+- Displaying and announcing all player state changes via screen readers.
 
 ## Focus Management
 
