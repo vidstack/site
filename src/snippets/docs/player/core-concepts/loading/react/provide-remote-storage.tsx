@@ -1,3 +1,3 @@
-const storage = useMemo(() => new DatabaseStorage(), []);
+const storage = useMemo(() => new MediaDatabaseStorage(), []);
 
 <MediaPlayer storage={storage}>

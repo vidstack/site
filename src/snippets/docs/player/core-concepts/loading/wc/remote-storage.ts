@@ -19,6 +19,8 @@ class MediaDatabaseStorage implements MediaStorage {
   async getPlaybackRate() {}
   async setPlaybackRate(rate: number) {}
 
+  async onLoad() {}
+
   onChange(src, mediaId, playerId) {}
 
   onDestroy() {}
