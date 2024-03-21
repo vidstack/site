@@ -1,3 +1,4 @@
+<!-- Using HTML: -->
 <media-player>
   <media-provider>
     <source src="https://media-files.vidstack.io/720p.ogv" type="video/ogg" />
@@ -5,3 +6,12 @@
     <source src="https://media-files.vidstack.io/720p.mp4" type="video/mp4" />
   </media-provider>
 </media-player>
+
+<!-- Using JS: -->
+<script>
+  player.src = [
+    { src: 'https://media-files.vidstack.io/720p.ogv', type: 'video/ogg' },
+    { src: 'https://media-files.vidstack.io/720p.avi', type: 'video/avi' },
+    { src: 'https://media-files.vidstack.io/720p.mp4', type: 'video/mp4' },
+  ];
+</script>

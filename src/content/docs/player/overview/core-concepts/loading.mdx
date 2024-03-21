@@ -173,7 +173,7 @@ to load, or any of the following objects: `MediaStream`, `MediaSource`, `Blob`, 
 
 ::code[./single-source]
 
-**Multiple Sources**
+**Multiple Source Types**
 
 The list of [supported media formats](#supported-codecs) varies from one browser to the other. You should
 either provide your source in a single format that all relevant browsers support, or provide multiple
@@ -233,11 +233,15 @@ The following are invalid as they are missing a file extension and type hint:
 
 ### Source Sizes
 
-We do not currently support providing multiple static source sizes such as
-`[{ src: "...", size: 480 }, { src: "...", size: 720 }, ...]`. We will most likely add support
-for this feature but only for the initial load similar to the `<picture>` element. The sources will
-not show up in the video quality API. Please use an adaptive streaming protocol such as HLS as
-explained in the [Video Qualities](#video-qualities) section below.
+You can provide video qualities/resolutions using multiple video files with different
+sizes (e.g, 1080p, 720p, 480p) like so:
+
+::code[./source-sizes]
+
+:::note
+We strongly recommend using adaptive streaming protocols such as HLS over providing multiple
+static media files, see the [Video Qualities](#video-qualities) section for more information.
+:::
 
 ### Supported Codecs
 

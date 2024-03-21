@@ -35,7 +35,7 @@ The source selection process determines which [provider loader](#media-provider-
 active and consequently which provider to load and render. The selection process is as follows:
 
 1. Detect `src` attr or prop change.
-2. Normalize `src` into an array of `MediaSrc` objects (`{src, type}`). If a source object is provided
+2. Normalize `src` into an array of `Src` objects (`{src, type}`). If a source object is provided
    (e.g., `MediaStream` or `MediaSource`), the type will default to `video/object`, otherwise `unknown`.
 3. The `sources-change` event is fired.
 4. Walk through each source at a time in given order and attempt to find a provider who can play it.
