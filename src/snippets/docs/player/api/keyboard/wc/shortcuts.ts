@@ -15,9 +15,14 @@ player.keyShortcuts = {
   volumeDown: 'ArrowDown',
   speedUp: '>',
   slowDown: '<',
-  // Callback.
+  // Custom callback.
   fooBar: {
     keys: ['k', 'Space'],
-    callback(event) {},
+    onKeyUp({ event, player, remote }) {
+      // ...
+    },
+    onKeyDown({ event, player, remote }) {
+      // ...
+    },
   },
 };
