@@ -9,10 +9,39 @@ This provider adds support for playing media on a remote device such as a TV usi
 receiver is selected by the user. See the [Remote Playback API][remote-playback] for
 more information on how to request and track changes.
 
+## Configure
+
+The `googleCast` player property can be used to configure the receiver application ID like so:
+
+::code[./configure]
+
+You can further configure the cast context, session, media, and player in the provider setup hook
+like so:
+
 ::code[./usage]
 
-:::info
-When this provider is active (i.e., connected to a receiver), a black screen is displayed inside
+[google-cast]: https://developers.google.com/cast/docs/overview
+[remote-playback]: /docs/player/api/remote-playback
+[media-provider]: /docs/player/components/core/provider
+
+## Error Handling
+
+You can listen for and handle Google Cast prompt errors like so:
+
+::code[./errors]
+
+### No Devices
+
+If there are no devices available, a [toast is shown][toast-preview] at the top of the screen to prevent opening
+an empty prompt. You can prevent showing the toast and display your own message like so:
+
+::code[./prevent-toast]
+
+[toast-preview]: https://github.com/vidstack/player/issues/1206#issuecomment-2003565591
+
+## Active Screen
+
+When Google Cast is active (i.e., connected to a receiver), a black screen is displayed inside
 the [`MediaProvider`][media-provider] with the Google Cast logo and the name of the connected device.
 
 <img
@@ -22,8 +51,3 @@ the [`MediaProvider`][media-provider] with the Google Cast logo and the name of 
   loading="lazy"
   style="width: 480px; aspect-ratio: 16 / 9;"
 />
-:::
-
-[google-cast]: https://developers.google.com/cast/docs/overview
-[remote-playback]: /docs/player/api/remote-playback
-[media-provider]: /docs/player/components/core/provider
