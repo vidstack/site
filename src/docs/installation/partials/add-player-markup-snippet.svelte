@@ -23,21 +23,28 @@
 
   $: title = $js === 'react' ? 'jsx' : 'html';
 
-  function transform(code: string) {
-    const title = 'Sprite Fight',
-      src =
-        $provider === 'vimeo'
-          ? 'vimeo/640499893'
-          : $provider === 'youtube'
-            ? 'youtube/_cMxraX_5RE'
-            : $provider === 'audio'
-              ? 'https://files.vidstack.io/sprite-fight/audio.mp3'
-              : $provider === 'video'
-                ? `https://files.vidstack.io/sprite-fight/1080p.mp4`
-                : `https://files.vidstack.io/sprite-fight/hls/stream.m3u8`,
-      thumbnails = `https://files.vidstack.io/sprite-fight/thumbnails.vtt`;
+  function getSource() {
+    switch ($provider) {
+      case 'audio':
+        return 'https://files.vidstack.io/sprite-fight/audio.mp3';
+      case 'video':
+        return 'https://files.vidstack.io/sprite-fight/720p.mp4';
+      case 'vimeo':
+        return 'vimeo/640499893';
+      case 'youtube':
+        return 'youtube/_cMxraX_5RE';
+      case 'hls':
+        return 'https://files.vidstack.io/sprite-fight/hls/stream.m3u8';
+      default:
+        return '';
+    }
+  }
 
-    return code.replace('{TITLE}', title).replace('{SRC}', src).replace('{THUMBNAILS}', thumbnails);
+  function transform(code: string) {
+    return code
+      .replace('{TITLE}', 'Sprite Fight')
+      .replace('{SRC}', getSource())
+      .replace('{THUMBNAILS}', `https://files.vidstack.io/sprite-fight/thumbnails.vtt`);
   }
 </script>
 

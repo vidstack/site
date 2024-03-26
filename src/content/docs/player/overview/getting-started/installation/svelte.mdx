@@ -8,6 +8,7 @@ import MediaIconsSetup from '~/docs/installation/partials/media-icons-setup.mdx'
 import AddPlayerMarkup from '~/docs/installation/partials/add-player-markup.mdx';
 import AddPoster from '~/docs/installation/partials/add-poster.mdx';
 import BrowserSupport from '~/docs/installation/partials/browser-support.mdx';
+import IfNoLayout from '~/docs/installation/partials/if-no-layout.svelte';
 import ImportLibrary from '~/docs/installation/partials/import-library.mdx';
 import InstallPackages from '~/docs/installation/partials/install-packages.mdx';
 import KeepAlive from '~/docs/installation/partials/keep-alive.mdx';
@@ -36,6 +37,14 @@ import StylingSelection from '~/docs/installation/selection/styling-selection.as
 
 <StylingSelection />
 
+<IfNoLayout client:load>
+:::warning
+Be careful of the [svelte-preprocess][svelte-pre] auto-processor when building your own layout as
+it will strip away `<template>` tags that are used in certain player components. Either specify
+the preprocessors you need or change the `markupTagName` to something other than "template".
+:::
+</IfNoLayout>
+
 ## 5. Check Support
 
 <BrowserSupport />
@@ -54,6 +63,8 @@ custom elements:
 ## 8. Setup Bundler
 
 <SetupBundler />
+
+[svelte-pre]: https://github.com/sveltejs/svelte-preprocess
 
 ## 9. Import Library
 
