@@ -1,1 +1,1 @@
-<PlyrLayout thumbnails="https://media-files.vidstack.io/thumbnails.vtt" />;
+<PlyrLayout thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt" />;

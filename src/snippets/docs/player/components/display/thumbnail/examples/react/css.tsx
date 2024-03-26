@@ -2,7 +2,7 @@ import { Thumbnail } from '@vidstack/react';
 
 // @hl-start
 <Thumbnail.Root
-  src="https://media-files.vidstack.io/sprite-fight/thumbnails.vtt"
+  src="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
   time={10}
   className="media-thumbnail"
 >

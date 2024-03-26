@@ -1,6 +1,6 @@
 <media-player
   class="border-0 bg-transparent"
-  src="https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8"
+  src="https://files.vidstack.io/sprite-fight/hls/stream.m3u8"
   muted
   playsinline
   style="--media-focus-ring: 0 0 0 3px rgb(78 156 246);"

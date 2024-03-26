@@ -6,9 +6,9 @@
   }
 </script>
 
-<media-player class="not-prose flex flex-col justify-center items-center min-w-[375px]">
+<media-player class="not-prose flex min-w-[375px] flex-col items-center justify-center">
   <media-thumbnail
-    src="https://media-files.vidstack.io/sprite-fight/thumbnails.vtt"
+    src="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
     time={value}
     class="vds-thumbnail"
   ></media-thumbnail>

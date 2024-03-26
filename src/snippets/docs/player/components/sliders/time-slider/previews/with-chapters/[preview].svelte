@@ -1,5 +1,5 @@
 <media-player
-  src="https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8"
+  src="https://files.vidstack.io/sprite-fight/hls/stream.m3u8"
   class="border-0 bg-transparent"
   muted
   playsinline
@@ -7,7 +7,7 @@
 >
   <media-provider style="display: none">
     <track
-      src="https://media-files.vidstack.io/sprite-fight/chapters.vtt"
+      src="https://files.vidstack.io/sprite-fight/chapters.vtt"
       srclang="en-US"
       kind="chapters"
       default

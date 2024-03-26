@@ -5,6 +5,8 @@
 
   const { js, provider, css } = selections;
 
+  export let dev = false;
+
   $: dir = $js === 'cdn' ? 'cdn' : $js === 'react' ? 'react' : 'wc';
   $: basePath = `docs/player/getting-started/installation/elements/${dir}`;
 
@@ -21,7 +23,7 @@
         : $css
       : `base${$provider === 'remotion' ? '-remotion' : ''}`;
 
-  $: id = `${basePath}/import-${importId}`;
+  $: id = `${basePath}/import-${importId}${dev ? '-dev' : ''}`;
 
   $: title = $js === 'cdn' ? 'html' : 'js';
 </script>

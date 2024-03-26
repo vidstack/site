@@ -1,1 +1,1 @@
-<MediaPlayer src="https://media-files.vidstack.io/audio.mp3" />;
+<MediaPlayer src="https://files.vidstack.io/sprite-fight/audio.mp3" />;

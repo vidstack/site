@@ -1,13 +1,13 @@
 <media-player
-  src="https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8"
-  class="not-prose flex-col bg-transparent border-none"
+  src="https://files.vidstack.io/sprite-fight/hls/stream.m3u8"
+  class="not-prose flex-col border-none bg-transparent"
   crossorigin
   muted
 >
-  <media-provider class="border border-inverse w-[400px] max-w-[400px] aspect-video">
+  <media-provider class="aspect-video w-[400px] max-w-[400px] border border-inverse">
     <media-captions class="vds-captions" />
     <track
-      src="https://media-files.vidstack.io/sprite-fight/subs/english.vtt"
+      src="https://files.vidstack.io/sprite-fight/subs/english.vtt"
       label="English"
       srclang="en-US"
       kind="subtitles"

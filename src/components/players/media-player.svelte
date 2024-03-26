@@ -26,12 +26,11 @@
     };
   });
 
-  const audioSrc = 'https://media-files.vidstack.io/sprite-fight/audio.mp3',
-    videoSrc = 'https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8',
+  const audioSrc = 'https://files.vidstack.io/sprite-fight/audio.mp3',
+    videoSrc = 'https://files.vidstack.io/sprite-fight/hls/stream.m3u8',
     liveSrc = 'https://stream.mux.com/v69RSHhFelSm4701snP22dYz2jICy4E4FUyk02rW4gxRM.m3u8';
 
-  $: thumbnails =
-    type === 'live' ? '' : 'https://media-files.vidstack.io/sprite-fight/thumbnails.vtt';
+  $: thumbnails = type === 'live' ? '' : 'https://files.vidstack.io/sprite-fight/thumbnails.vtt';
 </script>
 
 <media-player
@@ -41,7 +40,7 @@
   crossorigin
   playsinline
   keep-alive
-  poster="https://media-files.vidstack.io/sprite-fight/poster.webp"
+  poster="https://files.vidstack.io/sprite-fight/poster.webp"
   style={type === 'audio' ? '' : 'aspect-ratio: 16/9;'}
   bind:this={player}
 >
@@ -54,20 +53,20 @@
     {/if}
     {#if type !== 'live'}
       <track
-        src="https://media-files.vidstack.io/sprite-fight/subs/english.vtt"
+        src="https://files.vidstack.io/sprite-fight/subs/english.vtt"
         label="English"
         srclang="en-US"
         kind="subtitles"
         default
       />
       <track
-        src="https://media-files.vidstack.io/sprite-fight/subs/spanish.vtt"
+        src="https://files.vidstack.io/sprite-fight/subs/spanish.vtt"
         label="Spanish"
         srclang="es-ES"
         kind="subtitles"
       />
       <track
-        src="https://media-files.vidstack.io/sprite-fight/chapters.vtt"
+        src="https://files.vidstack.io/sprite-fight/chapters.vtt"
         srclang="en-US"
         kind="chapters"
         default

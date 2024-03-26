@@ -1,1 +1,1 @@
-<MediaPlayer src="https://media-files.vidstack.io/720p.mp4" />;
+<MediaPlayer src="https://files.vidstack.io/sprite-fight/720p.mp4" />;

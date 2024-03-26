@@ -1,1 +1,1 @@
-<DefaultVideoLayout thumbnails="https://media-files.vidstack.io/thumbnails.vtt" />;
+<DefaultVideoLayout thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt" />;

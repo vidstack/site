@@ -4,7 +4,7 @@ import { MediaPlayer, MediaProvider, Track } from '@vidstack/react';
   <MediaProvider>
     {/* @hl-start */}
     <Track
-      src="https://media-files.vidstack.io/sprite-fight/chapters.vtt"
+      src="https://files.vidstack.io/sprite-fight/chapters.vtt"
       lang="en-US"
       kind="chapters"
       default
