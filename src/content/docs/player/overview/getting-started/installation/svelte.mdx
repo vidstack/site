@@ -5,10 +5,11 @@ description: Instructions to get your player installed and on-screen using Svelt
 
 import MediaIconsSetup from '~/docs/installation/partials/media-icons-setup.mdx';
 
+import IfNoLayout from '~/docs/installation/conditions/if-no-layout.svelte';
+import IfSSR from '~/docs/installation/conditions/if-ssr.svelte';
 import AddPlayerMarkup from '~/docs/installation/partials/add-player-markup.mdx';
 import AddPoster from '~/docs/installation/partials/add-poster.mdx';
 import BrowserSupport from '~/docs/installation/partials/browser-support.mdx';
-import IfNoLayout from '~/docs/installation/partials/if-no-layout.svelte';
 import ImportLibrary from '~/docs/installation/partials/import-library.mdx';
 import InstallPackages from '~/docs/installation/partials/install-packages.mdx';
 import KeepAlive from '~/docs/installation/partials/keep-alive.mdx';
@@ -38,11 +39,13 @@ import StylingSelection from '~/docs/installation/selection/styling-selection.as
 <StylingSelection />
 
 <IfNoLayout client:load>
+
 :::warning
 Be careful of the [svelte-preprocess][svelte-pre] auto-processor when building your own layout as
 it will strip away `<template>` tags that are used in certain player components. Either specify
 the preprocessors you need or change the `markupTagName` to something other than "template".
 :::
+
 </IfNoLayout>
 
 ## 5. Check Support
@@ -73,6 +76,22 @@ custom elements:
 ## 10. Player Markup
 
 <AddPlayerMarkup />
+
+<IfSSR client:load>
+
+:::warning
+There's a long-standing [hydration bug][svelte-hydrate-bug] with Svelte 4 and Custom Elements which
+has been resolved in Svelte 5. If you're using Svelte 4, you will need to dynamically import the
+player or [disable SSR][svelte-no-ssr]:
+
+::code[./ssr]{copy=true}
+
+:::
+
+</IfSSR>
+
+[svelte-no-ssr]: https://kit.svelte.dev/docs/page-options#ssr
+[svelte-hydrate-bug]: https://github.com/sveltejs/svelte/issues/7379
 
 ## 11. Poster (Optional)
 
