@@ -1,0 +1,10 @@
+---
+import { Poster } from '@vidstack/react';
+import { Image } from 'astro:assets';
+
+import poster from './poster.webp';
+---
+
+<Poster asChild>
+  <Image src={poster} alt="A description of my image." />
+</Poster>
