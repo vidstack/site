@@ -1,0 +1,98 @@
+---
+title: JavaScript Installation Guide
+description: Instructions to get your player installed and on-screen using JavaScript.
+---
+
+import IfLayout from '~/docs/installation/conditions/if-layout.svelte';
+import BrowserSupport from '~/docs/installation/partials/browser-support.mdx';
+import ImportStyles from '~/docs/installation/partials/import-styles.mdx';
+import InstallPackages from '~/docs/installation/partials/install-packages.mdx';
+import JSPlayer from '~/docs/installation/partials/js-player-snippet.svelte';
+import JSTarget from '~/docs/installation/partials/js-target-snippet.svelte';
+import FrameworkSelection from '~/docs/installation/selection/framework-selection.astro';
+import InstallSelection from '~/docs/installation/selection/install-selection.astro';
+import ProviderSelection from '~/docs/installation/selection/provider-selection.astro';
+import StylingSelection from '~/docs/installation/selection/styling-selection.astro';
+
+## 1. Select Framework
+
+<FrameworkSelection />
+
+## 2. Select Provider
+
+<ProviderSelection />
+
+## 3. Select Styling
+
+<StylingSelection />
+
+## 4. Install Method
+
+<InstallSelection />
+
+## 5. Check Support
+
+<BrowserSupport />
+
+## 6. Import Styles
+
+<ImportStyles />
+
+## 7. Create Player
+
+<JSPlayer client:load />
+
+The first argument to `VidstackPlayer.create` is a target element which can be a CSS string
+selector or a `HTMLElement`. The target can be any element but if it's a `<audio>`, `<video>`,
+or `<iframe>` element it will be replaced and enhanced (i.e., progressive enhancement).
+
+::code[./target-container]
+
+<JSTarget client:visible />
+
+Props can also be set on the target element using data attributes like so:
+
+::code[./data-attrs]
+
+<IfLayout name="plyr-layout" client:load>
+
+:::info
+If you're coming over from [Plyr][plyr] and want a softer migration path, you can consider using our
+Plyr constructor which has about ~95% of the same features and API:
+
+<JSPlayer plyr client:load />
+
+See the Plyr GitHub repo for docs and usage. Do note, in general this API is more limited and
+doesn't have easy access to all player features. We strongly recommend upgrading to the newer API
+above.
+:::
+
+</IfLayout>
+
+[plyr]: https://github.com/sampotts/plyr
+
+## 8. Next Steps
+
+- For player props, methods, and events, see the [Player API][player-api].
+- See [Loading][loading] for how to setup storage, text tracks, thumbnails, and more.
+- See [State Management][state-mgmt] for how to read and update player state.
+- Explore the [API][api] and [Components][components] references.
+- Check out the [Default Layout][default-layout] or [Plyr Layout][plyr-layout] pages if you're using them.
+
+Lastly, remember you're not alone. You can reach out for help or to talk with other developers using
+Vidstack:
+
+- [Join our Discord server][discord].
+- [Open a discussion on GitHub][github-discussions].
+
+[player-api]: /docs/player/components/core/player#api-reference
+[loading]: /docs/player/core-concepts/loading
+[state-mgmt]: /docs/player/core-concepts/state-management
+[api]: /docs/player/api/autoplay
+[components]: /docs/player/components/core/player
+[default-layout]: /docs/player/components/layouts/default-layout
+[plyr-layout]: /docs/player/components/layouts/plyr-layout
+[discord]: https://discord.gg/QAjfh2gZE4
+[github-discussions]: https://github.com/vidstack/player/discussions
+[tw]: https://tailwindcss.com
+[tw-plugin]: /docs/player/styling/tailwind

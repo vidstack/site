@@ -1,0 +1,24 @@
+---
+import JSDelivrLogo from '~/icons/logos/jsdelivr-logo.svelte';
+import NPMLogo from '~/icons/logos/npm-logo.svelte';
+
+import Selections from './selections.astro';
+---
+
+<Selections
+  type="install"
+  label="Install Method"
+  param="install"
+  options={[
+    {
+      label: 'NPM',
+      Icon: NPMLogo,
+      color: 'red',
+    },
+    {
+      label: 'CDN',
+      Icon: JSDelivrLogo,
+      color: 'orange',
+    },
+  ]}
+/>

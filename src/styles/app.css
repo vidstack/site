@@ -102,6 +102,8 @@ body[data-breadcrumb-bar] {
   --js-blue-gradient-end: #00d7ff;
   --js-green-gradient-start: #00b746;
   --js-green-gradient-end: #00abbb;
+  --js-yellow-gradient-start: #c6b000;
+  --js-yellow-gradient-end: #e2aa23;
   --js-orange-gradient-start: #e87833;
   --js-orange-gradient-end: #d7333c;
   --js-cyan-gradient-start: #00d7ff;
@@ -155,6 +157,8 @@ body[data-breadcrumb-bar] {
       --js-blue-gradient-end: oklch(0.81 0.15 217.11);
       --js-green-gradient-start: oklch(0.66 0.23 153.66);
       --js-green-gradient-end: oklch(0.66 0.15 203.58);
+      --js-yellow-gradient-start: oklch(0.75 0.18 101.59);
+      --js-yellow-gradient-end: oklch(0.77 0.15 83.2);
       --js-orange-gradient-start: oklch(0.69 0.16 48.76);
       --js-orange-gradient-end: oklch(0.58 0.2 23.58);
       --js-cyan-gradient-start: oklch(0.81 0.15 217.11);

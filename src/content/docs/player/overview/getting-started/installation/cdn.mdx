@@ -12,6 +12,7 @@ import ImportCDNDev from '~/docs/installation/partials/import-cdn-dev.mdx';
 import ImportElements from '~/docs/installation/partials/import-elements.mdx';
 import ImportStyles from '~/docs/installation/partials/import-styles.mdx';
 import InstallPackages from '~/docs/installation/partials/install-packages.mdx';
+import JSPlayer from '~/docs/installation/partials/js-player-snippet.svelte';
 import KeepAlive from '~/docs/installation/partials/keep-alive.mdx';
 import NextSteps from '~/docs/installation/partials/next-steps.mdx';
 import SetPlaysinline from '~/docs/installation/partials/set-playsinline.mdx';
@@ -48,6 +49,14 @@ import StylingSelection from '~/docs/installation/selection/styling-selection.as
 ## 7. Player Markup
 
 <AddPlayerMarkup />
+
+You can also construct the player using JavaScript. The target argument can be a query selector
+or `HTMLElement`. If the target is a `<audio>`, `<video>`, or `<iframe>` element it will be
+progressively enhanced. See the [JavaScript installation][js-install] page for more information.
+
+<JSPlayer cdn client:visible />
+
+[js-install]: /docs/player/getting-started/installation/javascript?install=cdn
 
 ## 8. Poster (Optional)
 

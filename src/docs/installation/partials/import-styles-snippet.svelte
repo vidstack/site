@@ -3,10 +3,12 @@
 
   import { selections, videoProviders } from '../selection/selection-stores';
 
-  const { js, css, provider } = selections;
+  const { js, css, install, provider } = selections;
+
+  $: isCDN = $js === 'cdn' || ($js === 'javascript' && $install === 'cdn');
 
   $: basePath = `docs/player/getting-started/installation/styles${
-    $js === 'cdn' ? '/cdn' : $js === 'react' ? '/react' : ''
+    isCDN ? '/cdn' : $js === 'react' ? '/react' : ''
   }`;
 
   $: styleId =

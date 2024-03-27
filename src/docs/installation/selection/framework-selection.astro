@@ -1,5 +1,6 @@
 ---
 import HTMLIcon from '~/icons/html-icon.svelte';
+import JSIcon from '~/icons/js-icon.svelte';
 import AngularLogo from '~/icons/logos/angular-logo.svelte';
 import JSDelivrLogo from '~/icons/logos/jsdelivr-logo.svelte';
 import ReactLogo from '~/icons/logos/react-logo.svelte';
@@ -9,6 +10,7 @@ import VueLogo from '~/icons/logos/vue-logo.svelte';
 
 import AngularInfo from './info/frameworks/angular-info.mdx';
 import CDNInfo from './info/frameworks/cdn-info.mdx';
+import JSInfo from './info/frameworks/js-info.mdx';
 import ReactInfo from './info/frameworks/react-info.mdx';
 import SolidInfo from './info/frameworks/solid-info.mdx';
 import SvelteInfo from './info/frameworks/svelte-info.mdx';
@@ -22,6 +24,12 @@ import Selections from './selections.astro';
   type="js"
   label="Frameworks"
   options={[
+    {
+      label: 'JavaScript',
+      Info: JSInfo,
+      Icon: JSIcon,
+      color: 'yellow',
+    },
     {
       label: 'Angular',
       Info: AngularInfo,

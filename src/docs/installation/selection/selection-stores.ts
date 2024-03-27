@@ -3,6 +3,7 @@ import { IS_BROWSER } from '~/utils/env';
 import { get, writable } from 'svelte/store';
 
 export type JSSelection =
+  | 'javascript'
   | 'angular'
   | 'react'
   | 'svelte'
@@ -10,6 +11,8 @@ export type JSSelection =
   | 'web-components'
   | 'cdn'
   | 'solid';
+
+export type InstallMethod = 'npm' | 'cdn';
 
 export type CSSSelection =
   | 'css'
@@ -33,6 +36,7 @@ export const videoProviders = new Set<ProviderSelection>(['hls', 'youtube', 'vim
 
 export const selections = {
   js: writable<JSSelection>(initJSSelection()),
+  install: writable<InstallMethod>(initInstallSelection()),
   css: writable<CSSSelection>(initCSSSelection()),
   provider: writable<ProviderSelection>('video'),
   bundler: writable<BundlerSelection>(initBundlerSelection()),
@@ -67,7 +71,9 @@ function initJSSelection(): JSSelection {
 
   pathname = pathname.replace(/\/$/, '');
 
-  if (pathname.endsWith('angular')) {
+  if (pathname.endsWith('javascript')) {
+    return 'javascript';
+  } else if (pathname.endsWith('angular')) {
     return 'angular';
   } else if (pathname.endsWith('svelte')) {
     return 'svelte';
@@ -82,6 +88,17 @@ function initJSSelection(): JSSelection {
   }
 
   return pathname.includes('docs/wc') ? 'web-components' : 'react';
+}
+
+function initInstallSelection(): InstallMethod {
+  let href = IS_BROWSER ? location.href : undefined;
+
+  if (!href) return 'npm';
+
+  const url = new URL(href),
+    param = url.searchParams.get('install');
+
+  return (param as CSSSelection) ?? 'npm';
 }
 
 function initCSSSelection(): CSSSelection {
