@@ -6,18 +6,21 @@ description: This provider enables streaming media using the HTTP Live Streaming
 This provider is used to embed streamable video content into documents using the
 native `<video>` element, and supports streaming media using the HTTP Live Streaming (HLS) protocol.
 The provider will prefer using [`hls.js`][hlsjs] over the native engine when supported to enable a
-consistent and configurable experience across vendors.
+consistent and configurable experience across vendors. It works anywhere
+[Media Source Extensions][can-i-mse] (MSE) or [Managed Media Source][can-i-mms] (MMS) is supported.
 
 :::info
-Please refer to the [Player component][player] if you're looking for props, methods, and events.
+Refer to the [Player component][player] if you're looking for props, methods, and events.
 :::
 
+[player]: /docs/player/components/core/player
 [hlsjs]: https://github.com/video-dev/hls.js
+[can-i-mse]: https://caniuse.com/mediasource
+[can-i-mms]: https://caniuse.com/mdn-api_managedmediasource
 
 ## Install
 
-You'll need to install [`hls.js`][hlsjs] if you're using the HLS provider
-locally (i.e., not over a CDN):
+You'll need to install [`hls.js`][hlsjs] if you're using the provider locally (i.e., not over a CDN):
 
 ::code[./install]{copy=true}
 
@@ -44,7 +47,7 @@ The following are valid as they have a file extension or type hint:
 
 ## Loading
 
-The HLS provider will default to loading `hls.js` from [JSDelivr][jsdelivr]. We load the default
+The provider will default to loading `hls.js` from [JSDelivr][jsdelivr]. We load the default
 bundle in development, and the minified version in production:
 
 ::code[./loading]
@@ -66,11 +69,9 @@ property on the provider like so:
 ### Load Events
 
 Regardless how you decide to load `hls.js` (NPM/CDN), the provider will fire the following
-events on the [player][player] while loading hls.js:
+events on the [player][player] while loading the library:
 
 ::code[./load-events]
-
-[player]: /docs/player/components/core/player
 
 ## Configuring
 

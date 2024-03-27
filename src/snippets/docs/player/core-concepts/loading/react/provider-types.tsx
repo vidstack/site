@@ -1,5 +1,6 @@
 import {
   isAudioProvider,
+  isDASHProvider,
   isGoogleCastProvider,
   isHLSProvider,
   isVideoProvider,
@@ -8,6 +9,7 @@ import {
   MediaPlayer,
   MediaProvider,
   type AudioProvider,
+  type DASHProvider,
   type GoogleCastProvider,
   type HLSProvider,
   type MediaProviderAdapter,
@@ -30,6 +32,13 @@ function Player() {
     if (isHLSProvider(provider)) {
       provider.config = { lowLatencyMode: true };
       provider.onInstance((hls) => {
+        // ...
+      });
+    }
+
+    if (isDASHProvider(provider)) {
+      provider.config = {};
+      provider.onInstance((dash) => {
         // ...
       });
     }

@@ -8,6 +8,7 @@
   $: packages = [
     $js === 'react' ? '@vidstack/react@next' : 'vidstack@next',
     $provider === 'hls' && 'hls.js',
+    $provider === 'dash' && 'dashjs',
     $provider === 'remotion' && 'remotion',
   ].filter(Boolean) as string[];
 </script>

@@ -21,7 +21,14 @@ export type CSSSelection =
   | 'plyr-layout'
   | 'tailwind-css';
 
-export type ProviderSelection = 'audio' | 'video' | 'hls' | 'youtube' | 'vimeo' | 'remotion';
+export type ProviderSelection =
+  | 'audio'
+  | 'video'
+  | 'hls'
+  | 'dash'
+  | 'youtube'
+  | 'vimeo'
+  | 'remotion';
 
 export type BundlerSelection =
   | 'astro'
@@ -32,7 +39,13 @@ export type BundlerSelection =
   | 'webpack'
   | 'none';
 
-export const videoProviders = new Set<ProviderSelection>(['hls', 'youtube', 'vimeo', 'remotion']);
+export const videoProviders = new Set<ProviderSelection>([
+  'hls',
+  'dash',
+  'youtube',
+  'vimeo',
+  'remotion',
+]);
 
 export const selections = {
   js: writable<JSSelection>(initJSSelection()),

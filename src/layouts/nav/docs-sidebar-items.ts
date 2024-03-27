@@ -48,6 +48,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/providers/audio.mdx',
     'player/api/providers/video.mdx',
     'player/api/providers/hls.mdx',
+    'player/api/providers/dash.mdx',
     'player/api/providers/youtube.mdx',
     'player/api/providers/vimeo.mdx',
     'player/api/providers/google-cast.mdx',

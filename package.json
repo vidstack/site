@@ -44,6 +44,7 @@
     "@types/node": "^20.8.0",
     "@types/react": "^18.0.0",
     "astro-auto-import": "^0.4.2",
+    "dashjs": "^4.7.4",
     "globby": "^13.2.2",
     "hast": "^1.0.0",
     "hast-util-to-html": "^9.0.0",

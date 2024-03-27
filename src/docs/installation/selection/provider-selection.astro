@@ -1,5 +1,6 @@
 ---
 import AudioIcon from '../icons/audio-file-icon.svelte';
+import DASHIcon from '../icons/dash-icon.svelte';
 import HLSIcon from '../icons/hls-icon.svelte';
 import RemotionIcon from '../icons/remotion-icon.svelte';
 import VideoIcon from '../icons/video-file-icon.svelte';
@@ -7,6 +8,7 @@ import VimeoIcon from '../icons/vimeo-icon.svelte';
 import YouTubeIcon from '../icons/youtube-icon.svelte';
 import Selections from '../selection/selections.astro';
 import AudioInfo from './info/providers/audio-info.mdx';
+import DASHInfo from './info/providers/dash-info.mdx';
 import HLSInfo from './info/providers/hls-info.mdx';
 import RemotionInfo from './info/providers/remotion-info.mdx';
 import VideoInfo from './info/providers/video-info.mdx';
@@ -23,19 +25,25 @@ import VimeoInfo from './info/providers/youtube-info.mdx';
       label: 'Audio',
       Info: AudioInfo,
       Icon: AudioIcon,
-      color: 'green',
+      color: 'pink',
     },
     {
       label: 'Video',
       Info: VideoInfo,
       Icon: VideoIcon,
-      color: 'blue',
+      color: 'green',
     },
     {
       label: 'HLS',
       Info: HLSInfo,
       Icon: HLSIcon,
       color: 'orange',
+    },
+    {
+      label: 'DASH',
+      Info: DASHInfo,
+      Icon: DASHIcon,
+      color: 'blue',
     },
     {
       label: 'YouTube',

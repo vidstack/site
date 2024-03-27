@@ -211,6 +211,7 @@ is a table of supported media file extensions and types for each provider:
 | **Audio** | m4a, m4b, mp4a, mpga, mp2, mp2a, mp3, m2a, m3a, wav, weba, aac, oga, spx | audio/mpeg, audio/ogg, audio/3gp, audio/mp4, audio/webm, audio/flac, audio/object                                                         |
 | **Video** | mp4, ogg, ogv, webm, mov, m4v                                            | video/mp4, video/webm, video/3gp, video/ogg, video/avi, video/mpeg                                                                        |
 | **HLS**   | m3u8                                                                     | application/vnd.apple.mpegurl, audio/mpegurl, audio/x-mpegurl, application/x-mpegurl, video/x-mpegurl, video/mpegurl, application/mpegurl |
+| **DASH**  | mpd                                                                      | application/dash+xml                                                                                                                      |
 
 :::yes
 The following are valid as they have a file extension (e.g, `video.mp4`) or type
@@ -219,8 +220,10 @@ hint (e.g., `video/mp4`):
 
 - `src="https://example.com/video.mp4"`
 - `src="https://example.com/hls.m3u8"`
+- `src="https://example.com/dash.mpd"`
 - `src = { src: "https://example.com/video", type: "video/mp4"  }`
 - `src = { src: "https://example.com/hls", type: "application/x-mpegurl"  }`
+- `src = { src: "https://example.com/dash", type: "application/dash+xml"  }`
 
 :::no
 The following are invalid as they are missing a file extension and type hint:
@@ -228,6 +231,7 @@ The following are invalid as they are missing a file extension and type hint:
 
 - `src="https://example.com/video"`
 - `src="https://example.com/hls"`
+- `src="https://example.com/dash"`
 
 [source-selection]: /docs/player/getting-started/architecture#source-selection
 
@@ -247,8 +251,8 @@ static media files, see the [Video Qualities](#video-qualities) section for more
 
 Vidstack Player relies on the native browser runtime to handle media playback, hence it's
 important you review what containers and codecs are supported by them. This also applies to
-libraries like [`hls.js`][hlsjs] which we use for HLS playback in browsers that don't support
-it natively.
+libraries like [`hls.js`][hlsjs] and [`dash.js`][dashjs] which we use for HLS/DASH playback in
+browsers that don't support it natively.
 
 While there are a vast number of media container formats, the ones listed below are the ones
 you are most likely to encounter. Some support only audio while others support both audio and
@@ -263,6 +267,7 @@ Please review the following links for what's supported and where:
 - [Video Codecs][video-codecs]
 
 [hlsjs]: https://github.com/video-dev/hls.js
+[dashjs]: https://github.com/Dash-Industry-Forum/dash.js
 [media-containers]: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers
 [audio-codecs]: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs
 [video-codecs]: https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs
@@ -276,6 +281,7 @@ are supported at this time:
 - [Audio][audio-provider]
 - [Video][video-provider]
 - [HLS][hls-provider]
+- [DASH][dash-provider]
 - [YouTube][youtube-provider]
 - [Vimeo][vimeo-provider]
 - [Remotion][remotion-provider]
@@ -288,6 +294,7 @@ See [source types](#source-types) for how to ensure the correct media provider i
 [audio-provider]: /docs/player/api/providers/audio
 [video-provider]: /docs/player/api/providers/video
 [hls-provider]: /docs/player/api/providers/hls
+[dash-provider]: /docs/player/api/providers/dash
 [youtube-provider]: /docs/player/api/providers/youtube
 [vimeo-provider]: /docs/player/api/providers/vimeo
 [remotion-provider]: /docs/player/api/providers/remotion
@@ -515,10 +522,10 @@ Provide objects directly like so:
 
 ## Video Qualities
 
-Adaptive streaming protocols like [HLS][hls-wiki] not only enable streaming media in chunks, but
-also have the ability to adapt playback quality based on the device size, network conditions, and
-other information. Adaptive qualities is important for speeding up initial delivery and to
-avoid loading excessive amounts of data which cause painful buffering delays.
+Adaptive streaming protocols like [HLS][hls-wiki] and [DASH][dash-wiki] not only enable streaming
+media in chunks, but also have the ability to adapt playback quality based on the device size,
+network conditions, and other information. Adaptive qualities is important for speeding up
+initial delivery and to avoid loading excessive amounts of data which cause painful buffering delays.
 
 Video streaming platforms such as [Cloudflare Stream][cf-stream] and [Mux][mux] will take an input
 video file (e.g., awesome-video.mp4) and create multiple renditions out of the box for you,
@@ -532,13 +539,13 @@ with multiple resolutions (width/height) and bit rates:
   style="aspect-ratio: 2 / 1"
 />
 
-By default, the best quality is automatically selected by the streaming engine such as [hls.js][hlsjs].
-You'll usually see this as an "Auto" option in the player quality menu. It can also be manually set
-if the engine is not making optimal decisions, as they're generally more conservative to avoid
-excessive bandwidth usage.
+By default, the best quality is automatically selected by the streaming engine such as [hls.js][hlsjs] or
+[dash.js][dashjs]. You'll usually see this as an "Auto" option in the player quality menu. It can
+also be manually set if the engine is not making optimal decisions, as they're generally more
+conservative to avoid excessive bandwidth usage.
 
-Once you have your HLS playlist by either creating it yourself using [FFMPEG][ffmpeg] or using
-a streaming provider, you can pass it to the player like so:
+Once you have your HLS or DASH playlist by either creating it yourself using [FFMPEG][ffmpeg] or
+using a streaming provider, you can pass it to the player like so:
 
 ::code[./play-hls]
 
@@ -550,5 +557,6 @@ programmatically.
 [ffmpeg]: https://www.ffmpeg.org
 [video-quality-api]: /docs/player/api/video-quality
 [hls-wiki]: https://en.wikipedia.org/wiki/HTTP_Live_Streaming
+[dash-wiki]: https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP
 [cf-stream]: https://www.cloudflare.com/products/cloudflare-stream
 [mux]: https://www.mux.com

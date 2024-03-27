@@ -1,0 +1,114 @@
+---
+title: DASH
+description: This provider enables streaming media using Dynamic Adaptive Streaming over HTTP (DASH) protocol.
+---
+
+This provider is used to embed streamable video content into documents using the
+native `<video>` element, and supports streaming media using the Dynamic Adaptive Streaming over
+HTTP (DASH) protocol. The provider will use [`dash.js`][dashjs] to add support for DASH as
+it's not supported natively in any browser. It works anywhere [Media Source Extensions][can-i-mse]
+(MSE) or [Managed Media Source][can-i-mms] (MMS) is supported.
+
+:::info
+Refer to the [Player component][player] if you're looking for props, methods, and events.
+:::
+
+[player]: /docs/player/components/core/player
+[dashjs]: https://github.com/Dash-Industry-Forum/dash.js
+[can-i-mse]: https://caniuse.com/mediasource
+[can-i-mms]: https://caniuse.com/mdn-api_managedmediasource
+
+## Install
+
+You'll need to install [`dash.js`][dashjs] if you're using the provider locally (i.e., not
+over a CDN):
+
+::code[./install]{copy=true}
+
+# Source
+
+You can set a DASH source on the player like so:
+
+::code[./source]
+
+### Source Types
+
+The DASH source URL should include the `.mpd` file extension.
+
+If the source URL **does not** contain a file extension, you must provide the **application/dash+xml**
+type hint.
+
+:::yes
+The following are valid as they have a file extension or type hint:
+:::
+
+- `src="https://example.com/dash.mpd"`
+- `src = { src: "https://example.com/dash", type: "application/dash+xml" }`
+
+## Loading
+
+The provider will default to loading `dashjs` from [JSDelivr][jsdelivr]. We load the default
+bundle in development, and the minified version in production:
+
+::code[./loading]
+
+:::info
+You can point library at any URL that re-exports `dashjs@^4.0`. This means you can use your own
+server or CDN if desired.
+:::
+
+[jsdelivr]: https://www.jsdelivr.com
+
+### Importing
+
+You can also load `dashjs` by statically, or dynamically importing it and setting the `library`
+property on the provider like so:
+
+::code[./importing]
+
+### Load Events
+
+Regardless how you decide to load `dashjs` (NPM/CDN), the provider will fire the following
+events on the [player][player] while loading the library:
+
+::code[./load-events]
+
+## Configuring
+
+You can configure `dashjs` using the `config` property on the provider like so:
+
+::code[./configure]
+
+## Instance
+
+You can obtain a reference to the `dashjs` instance like so:
+
+::code[./instance]
+
+## Events
+
+All dashjs events can be listened to directly off the [player][player] component:
+
+::code[./events]
+
+All DASH event types are prefixed with `DASH` and end with `Event` like so:
+
+::code[./event-types]
+
+:::info
+You can find a complete list of [player events][player-events] in the component API reference.
+:::
+
+[player-events]: /docs/player/components/core/player#mediaplayer.callbacks
+
+## Element
+
+You can obtain a reference to the underlying `HTMLVideoElement` element like so:
+
+::code[./element]
+
+### Event Target
+
+The `HTMLVideoElement` can also be referenced on all media events like so:
+
+::code[./event-target]

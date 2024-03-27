@@ -4,12 +4,13 @@ description: A guide on using and configuring live media playback.
 
 import liveEdgeImage from '~/images/live-edge-start.png';
 
-Live streams are currently supported via the [HLS provider][hls-provider] which uses [hls.js][hlsjs],
-and in browsers that [natively support HLS][native-hls-support]. The player will prefer using
-hls.js over the native engine when supported to enable a consistent and configurable experience
-across vendors.
+Live streams are supported by the [HLS Provider][hls-provider] which uses [hls.js][hlsjs], in
+browsers that [natively support HLS][native-hls-support], and the [DASH Provider][dash-provider]. The
+player will prefer using hls.js over the native engine when supported to enable a consistent and
+configurable experience across vendors.
 
 [hls-provider]: /docs/player/api/providers/hls
+[dash-provider]: /docs/player/api/providers/dash
 [hlsjs]: https://github.com/video-dev/hls.js/
 [native-hls-support]: https://caniuse.com/http-live-streaming
 

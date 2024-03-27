@@ -1,11 +1,11 @@
 Embed video content into documents via the native video element. This provider enables
-streaming video using the HTTP Live Streaming (HLS) protocol.
+streaming video using the Dynamic Adaptive Streaming over HTTP (DASH) protocol.
 
-[HLS isn't widely supported yet][can-i-hls], but we use the popular [hls.js][hlsjs] library to
+[DASH isn't supported in any browser][can-i-dash], but we use the popular [dash.js][dashjs] library to
 ensure it works anywhere [Media Source Extensions][can-i-mse] (MSE) or [Managed Media Source][can-i-mms]
 (MMS) is supported.
 
-[hlsjs]: https://github.com/video-dev/hls.js
-[can-i-hls]: https://caniuse.com/?search=hls
+[dashjs]: https://github.com/Dash-Industry-Forum/dash.js
+[can-i-dash]: https://caniuse.com/?search=dash
 [can-i-mse]: https://caniuse.com/mediasource
 [can-i-mms]: https://caniuse.com/mdn-api_managedmediasource

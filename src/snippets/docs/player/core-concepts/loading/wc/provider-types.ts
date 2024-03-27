@@ -1,10 +1,12 @@
 import {
   isAudioProvider,
+  isDashProvider,
   isHLSProvider,
   isVideoProvider,
   isVimeoProvider,
   isYouTubeProvider,
   type AudioProvider,
+  type DASHProvider,
   type HLSProvider,
   type MediaProvider,
   type VideoProvider,
@@ -26,6 +28,13 @@ player.addEventListener('provider-change', (event) => {
   if (isHLSProvider(provider)) {
     provider.config = { lowLatencyMode: true };
     provider.onInstance((hls) => {
+      // ...
+    });
+  }
+
+  if (isDASHProvider(provider)) {
+    provider.config = {};
+    provider.onInstance((dash) => {
       // ...
     });
   }

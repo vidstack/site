@@ -40,6 +40,8 @@
         return 'youtube/_cMxraX_5RE';
       case 'hls':
         return 'https://files.vidstack.io/sprite-fight/hls/stream.m3u8';
+      case 'dash':
+        return 'https://files.vidstack.io/sprite-fight/dash/stream.mpd';
       default:
         return '';
     }
