@@ -20,6 +20,20 @@ The same is true for the [stream type][stream-type]:
 
 [stream-type]: /docs/player/core-concepts/loading#stream-type
 
+## Color Scheme
+
+Both the audio and video layout accept color scheme to be either light or dark themed. By default
+it will use the user's [preferred color scheme][prefers-color-scheme]. You can set a specific
+theme by setting the `color-scheme` attribute on the layout like so:
+
+::code[./color-scheme]
+
+You can also set the color scheme by setting a `light` or `dark` class on a parent element:
+
+::code[./parent-color-scheme]
+
+[prefers-color-scheme]: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
+
 ## Size
 
 Both the audio and video layout will adapt to small containers to ensure an optimal user experience.
