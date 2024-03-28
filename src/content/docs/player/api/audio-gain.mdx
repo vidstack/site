@@ -1,0 +1,46 @@
+---
+description: An overview on requesting and tracking audio gain changes.
+---
+
+## Requesting
+
+The player will use the [`GainNode`][gain-node] interface on the `HTMLMediaElement` to apply a
+gain to audio output. The gain value is a float that represents the amount of gain to apply. The
+default is `1`, setting it to `1.5` will increase volume by `50%`, `2` will increase volume by
+`100%`, and so on.
+
+You can request audio gain changes by using the [audio gain slider][gain-slider],
+[remote control](#remote-control), or via [methods](#methods) on the player instance.
+
+[gain-node]: https://developer.mozilla.org/en-US/docs/Web/API/GainNode
+[gain-slider]: /docs/player/components/sliders/audio-gain-slider
+
+### Remote Control
+
+The [media remote][media-remote] provides methods for dispatching `media-audio-gain-change-request`
+request events like so:
+
+::code[./remote-control]
+
+[media-remote]: /docs/player/core-concepts/state-management#updating
+
+### Methods
+
+The `setAudioGain()` method is available on the player component instance for requesting changes:
+
+::code[./method]
+
+## State
+
+The following audio gain properties are available on the media store:
+
+- `canSetAudioGain`: Whether audio gain is supported by the current browser and provider.
+- `audioGain`: The current audio gain.
+
+::code[./state]
+
+## Events
+
+The following events are available for detecting audio gain changes:
+
+::code[./events]
