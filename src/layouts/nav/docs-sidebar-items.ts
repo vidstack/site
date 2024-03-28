@@ -127,6 +127,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/menus/menu.mdx',
     'player/components/menus/radio-group.mdx',
     'player/components/menus/wc/audio-radio-group.mdx',
+    'player/components/menus/wc/audio-gain-radio-group.mdx',
     'player/components/menus/wc/captions-radio-group.mdx',
     'player/components/menus/wc/chapters-radio-group.mdx',
     'player/components/menus/wc/quality-radio-group.mdx',

@@ -151,7 +151,10 @@ const { pathname } = Astro.url,
           ]);
 
         const dataPartUsageCode = dataParts
-          ? ['<!-- Example -->', `<div data-part="${dataParts[0]?.[0]}"></div>`].join('\n')
+          ? [
+              '<!-- Example -->',
+              `<div data-part="${dataParts[0]?.[0]?.expressions[1]}"></div>`,
+            ].join('\n')
           : '';
 
         const cssVars = component.instance?.cssvars?.map((cssvar) => [
