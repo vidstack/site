@@ -1,18 +1,18 @@
 <media-menu>
   <!-- Button -->
-  <media-menu-button class="vds-menu-button">
-    <media-icon type="chevron-left" class="vds-menu-button-close-icon"></media-icon>
-    <media-icon type="closed-captions" class="vds-menu-button-icon"></media-icon>
-    <span class="vds-menu-button-label">Captions</span>
-    <span class="vds-menu-button-hint" data-part="hint"></span>
-    <media-icon type="chevron-right" class="vds-menu-button-open-icon"></media-icon>
+  <media-menu-button class="vds-menu-item">
+    <media-icon type="chevron-left" class="vds-menu-close-icon"></media-icon>
+    <media-icon type="closed-captions" class="vds-icon"></media-icon>
+    <span class="vds-menu-item-label">Captions</span>
+    <span class="vds-menu-item-hint" data-part="hint"></span>
+    <media-icon type="chevron-right" class="vds-menu-open-icon"></media-icon>
   </media-menu-button>
   <!-- Items -->
   <media-menu-items class="vds-menu-items">
     <media-captions-radio-group class="vds-radio-group" off-label="Off">
       <template>
         <media-radio class="vds-radio">
-          <div class="vds-radio-check"></div>
+          <media-icon class="vds-icon" type="check"></media-icon>
           <span class="vds-radio-label" data-part="label"></span>
         </media-radio>
       </template>

@@ -16,7 +16,7 @@
     <media-menu-button class="vds-menu-button vds-button text-inverse" aria-label="Settings">
       <media-icon type="settings" class="vds-rotate-icon vds-icon"></media-icon>
     </media-menu-button>
-    <media-menu-items class="vds-menu-items h-auto" placement="top" offset="8">
+    <media-menu-items class="vds-menu-items" placement="top" offset="8">
       <div>Menu items and submenus here.</div>
     </media-menu-items>
   </media-menu>

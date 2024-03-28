@@ -2,7 +2,12 @@ import { type ReactElement } from 'react';
 
 import { Menu, useVideoQualityOptions } from '@vidstack/react';
 // See "Icons" component page for setup before importing the following:
-import { ChevronLeftIcon, ChevronRightIcon, SettingsMenuIcon } from '@vidstack/react/icons';
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SettingsMenuIcon,
+} from '@vidstack/react/icons';
 
 function QualitySubmenu() {
   const options = useVideoQualityOptions(),
@@ -23,7 +28,7 @@ function QualitySubmenu() {
         <Menu.RadioGroup className="media-radio-group" value={options.selectedValue}>
           {options.map(({ label, value, bitrateText, select }) => (
             <Menu.Radio className="media-radio" value={value} onSelect={select} key={value}>
-              <div className="media-radio-check" />
+              <CheckIcon className="media-radio-icon" />
               <span className="media-radio-label">{label}</span>
               {bitrateText ? <span className="media-radio-hint">{bitrateText}</span> : null}
             </Menu.Radio>

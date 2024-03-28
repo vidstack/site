@@ -40,6 +40,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/api/screen-orientation.mdx',
     'player/api/live.mdx',
     'player/api/keyboard.mdx',
+    'player/api/audio-gain.mdx',
     'player/api/audio-tracks.mdx',
     'player/api/remote-playback.mdx',
     'player/api/text-tracks.mdx',

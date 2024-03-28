@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 
 import { Menu, useAudioOptions } from '@vidstack/react';
 // See "Icons" component page for setup before importing the following:
-import { ChevronLeftIcon, ChevronRightIcon, MusicIcon } from '@vidstack/react/icons';
+import { CheckIcon, ChevronLeftIcon, ChevronRightIcon, MusicIcon } from '@vidstack/react/icons';
 
 function AudioSubmenu() {
   const options = useAudioOptions(),
@@ -14,7 +14,7 @@ function AudioSubmenu() {
         <Menu.RadioGroup className="media-radio-group" value={options.selectedValue}>
           {options.map(({ label, value, select }) => (
             <Menu.Radio className="media-radio" value={value} onSelect={select} key={value}>
-              <div className="media-radio-check" />
+              <CheckIcon className="media-radio-icon" />
               <span className="media-radio-label">{label}</span>
             </Menu.Radio>
           ))}

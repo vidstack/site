@@ -17,8 +17,6 @@
 
   let player: MediaPlayerElement;
 
-  $: console.log(type);
-
   onMount(() => {
     player.title = 'Sprite Fight';
     return () => {

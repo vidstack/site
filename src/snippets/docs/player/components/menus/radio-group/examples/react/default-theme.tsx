@@ -1,4 +1,6 @@
 import { RadioGroup } from '@vidstack/react';
+// See "Icons" component page for setup before importing the following:
+import { CheckIcon } from '@vidstack/react/icons';
 
 // @hl-start
 function CustomRadioGroup() {
@@ -7,7 +9,7 @@ function CustomRadioGroup() {
     <RadioGroup.Root className="vds-radio-group" aria-label="Custom Options">
       {options.map((option) => (
         <RadioGroup.Item className="vds-radio" value={option} key={option}>
-          <span className="vds-radio-check" />
+          <CheckIcon className="vds-icon" />
           <span className="vds-radio-label">{option}</span>
         </RadioGroup.Item>
       ))}

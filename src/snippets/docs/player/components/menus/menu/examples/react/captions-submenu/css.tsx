@@ -2,7 +2,12 @@ import { type ReactElement } from 'react';
 
 import { Menu, useCaptionOptions } from '@vidstack/react';
 // See "Icons" component page for setup before importing the following:
-import { ChevronLeftIcon, ChevronRightIcon, ClosedCaptionsIcon } from '@vidstack/react/icons';
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ClosedCaptionsIcon,
+} from '@vidstack/react/icons';
 
 function CaptionsSubmenu() {
   const options = useCaptionOptions(),
@@ -19,7 +24,7 @@ function CaptionsSubmenu() {
         <Menu.RadioGroup className="media-radio-group" value={options.selectedValue}>
           {options.map(({ label, value, select }) => (
             <Menu.Radio className="media-radio" value={value} onSelect={select} key={value}>
-              <div className="media-radio-check" />
+              <CheckIcon className="media-radio-icon" />
               <span className="media-radio-label">{label}</span>
             </Menu.Radio>
           ))}

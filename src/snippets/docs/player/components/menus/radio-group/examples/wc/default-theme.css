@@ -1,7 +1,12 @@
 .vds-radio {
   /* CSS variables available for customization (defaults shown). */
-  --media-menu-radio-check-size: 9px;
-  --media-menu-radio-check-inner-size: 4px;
-  --media-menu-radio-check-border: 2px solid rgb(245 245 245 / 0.5);
-  --media-menu-radio-check-active-color: var(--media-brand, #f5f5f5);
+  --media-menu-item-bg: transparent;
+  --media-menu-item-border-radius: 2px;
+  --media-menu-item-border: 0;
+  --media-menu-item-height: 40px;
+  --media-menu-item-hover-bg: var(--color-gray-50);
+  --media-menu-item-icon-size: 18px;
+  --media-menu-item-icon-spacing: 6px;
+  --media-menu-item-padding: 10px;
+  --media-menu-radio-icon-color: var(--text-color);
 }

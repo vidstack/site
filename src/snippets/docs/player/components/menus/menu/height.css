@@ -1,0 +1,11 @@
+/* Apply only to root menu. */
+.media-menu-items[data-root] {
+  height: var(--menu-height, auto);
+  transition: height 0.35s ease;
+}
+
+/* Hide scrollbar while transition is active. */
+.media-menu-items[data-transition='height'] {
+  pointer-events: none;
+  overflow: hidden;
+}

@@ -2,7 +2,12 @@ import { type ReactElement } from 'react';
 
 import { Menu, useVideoQualityOptions } from '@vidstack/react';
 // See "Icons" component page for setup before importing the following:
-import { ChevronLeftIcon, ChevronRightIcon, SettingsMenuIcon } from '@vidstack/react/icons';
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SettingsMenuIcon,
+} from '@vidstack/react/icons';
 
 function QualitySubmenu() {
   const options = useVideoQualityOptions(),
@@ -23,7 +28,7 @@ function QualitySubmenu() {
         <Menu.RadioGroup className="vds-radio-group" value={options.selectedValue}>
           {options.map(({ label, value, bitrateText, select }) => (
             <Menu.Radio className="vds-radio" value={value} onSelect={select} key={value}>
-              <div className="vds-radio-check" />
+              <CheckIcon className="vds-icon" />
               <span className="vds-radio-label">{label}</span>
               {bitrateText ? <span className="vds-radio-hint">{bitrateText}</span> : null}
             </Menu.Radio>
@@ -43,12 +48,12 @@ interface SubmenuButtonProps {
 
 function SubmenuButton({ label, hint, icon: Icon, disabled }: SubmenuButtonProps) {
   return (
-    <Menu.Button className="vds-menu-button" disabled={disabled}>
-      <ChevronLeftIcon className="vds-menu-button-close-icon" />
-      <Icon className="vds-menu-button-icon" />
-      <span className="vds-menu-button-label">{label}</span>
-      <span className="vds-menu-button-hint">{hint}</span>
-      <ChevronRightIcon className="vds-menu-button-open-icon" />
+    <Menu.Button className="vds-menu-item" disabled={disabled}>
+      <ChevronLeftIcon className="vds-menu-close-icon" />
+      <Icon className="vds-icon" />
+      <span className="vds-menu-item-label">{label}</span>
+      <span className="vds-menu-item-hint">{hint}</span>
+      <ChevronRightIcon className="vds-menu-open-icon" />
     </Menu.Button>
   );
 }

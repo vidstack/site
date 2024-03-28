@@ -152,77 +152,95 @@
   --media-slider-value-gap: 0px;
   --media-slider-value-padding: 1px 10px;
 
-  /* Menus. */
-  --media-menu-bg: rgb(10 10 10 / 0.95);
-  --media-menu-border-radius: 8px;
+  /* Menu Theme. */
+  --media-menu-color-gray-50: rgb(245 245 245 / 0.1);
+  --media-menu-color-gray-100: rgb(245 245 245 / 0.45);
+  --media-menu-color-gray-200: rgb(10 10 10 / 0.6);
+  --media-menu-color-gray-300: rgb(27 27 27);
+
+  /* Menu Text. */
+  --media-menu-text-color: #f5f5f5;
+  --media-menu-text-secondary-color: #6b6b6b;
+
+  /* Menu. */
+  --media-menu-bg: var(--media-menu-bg, var(--color-gray-400));
+  --media-menu-border-radius: 4px;
   --media-menu-border: 1px solid rgb(255 255 255 / 0.1);
   --media-menu-box-shadow: 1px 1px 1px rgb(10 10 10 / 0.5);
-  --media-menu-button-icon-rotate-deg: 90deg;
-  --media-menu-enter-animation: vds-menu-enter 0.3s ease-out;
-  --media-menu-exit-animation: vds-menu-exit 0.2s ease-out;
-  --media-menu-divider: 1px solid rgb(245 245 245 /0.15);
-  --media-menu-font-size: 15px;
+  --media-menu-divider: 1px solid var(--color-gray-50);
+  --media-menu-font-size: 14px;
   --media-menu-font-weight: 500;
   --media-menu-max-height: 250px;
   --media-menu-min-width: 220px;
-  --media-menu-padding: 10px;
-  --media-menu-scrollbar-thumb-bg: rgb(245 245 245 / 0.1);
-  --media-menu-scrollbar-track-bg: rgb(245 245 245 / 0.08);
+  --media-menu-padding: 12px;
   --media-menu-top-bar-bg: rgb(10 10 10 / 0.6);
+  --media-menu-arrow-icon-size: 18px;
+  --media-menu-icon-rotate-deg: 90deg;
+
+  --media-menu-enter-animation: vds-menu-enter 0.3s ease-out;
+  --media-menu-exit-animation: vds-menu-exit 0.2s ease-out;
+
+  --media-menu-scrollbar-track-bg: transparent;
+  --media-menu-scrollbar-thumb-bg: var(--color-gray-50);
+
   --media-sm-menu-landscape-max-height: min(70vh, 400px);
   --media-sm-menu-portrait-max-height: 40vh;
+
+  /* Menu Section. */
+  --media-menu-section-bg: var(--color-gray-300);
+  --media-menu-section-border: unset;
+  --media-menu-section-divider: var(--divider);
+  --media-menu-section-header-font-size: 12px;
+  --media-menu-section-header-font-weight: 500;
+  --media-menu-section-gap: 8px;
+  --media-menu-section-border-radius: 2px;
 
   /* Menu Item. */
   --media-menu-item-bg: transparent;
   --media-menu-item-border-radius: 2px;
   --media-menu-item-border: 0;
-  --media-menu-item-color: #f5f5f5;
-  --media-menu-item-hover-bg: rgb(245 245 245 / 0.08);
-  --media-menu-item-icon-size: 22px;
+  --media-menu-item-height: 40px;
+  --media-menu-item-hover-bg: var(--color-gray-50);
+  --media-menu-item-icon-size: 18px;
   --media-menu-item-icon-spacing: 6px;
-  --media-menu-item-info-color: rgb(168, 169, 171);
-  --media-menu-item-info-font-size: 13px;
-  --media-menu-item-padding: 12px;
-  --media-sm-menu-item-padding: 12px;
+  --media-menu-item-padding: 10px;
 
   /* Menu Radio. */
-  --media-menu-radio-check-active-color: #f5f5f5;
-  --media-menu-radio-check-border: 2px solid rgb(245 245 245 / 0.5);
-  --media-menu-radio-check-inner-size: 4px;
-  --media-menu-radio-check-size: 9px;
+  --media-menu-radio-icon-color: var(--text-color);
+
+  /* Menu Checkbox. */
+  --media-menu-checkbox-width: 40px;
+  --media-menu-checkbox-height: 18px;
+  --media-menu-checkbox-bg-active: #1ba13f;
+  --media-menu-checkbox-bg: var(--color-gray-100);
+  --media-menu-checkbox-handle-bg: #f5f5f5;
+  --media-menu-checkbox-handle-border: unset;
+  --media-menu-checkbox-handle-diameter: calc(var(--checkbox-height) - 2px);
+
+  /* Menu Slider. */
+  --media-menu-slider-height: 32px;
+  --media-menu-slider-track-bg: var(--color-gray-50);
+  --media-menu-slider-track-fill-bg: var(--color-inverse);
+  --media-menu-slider-step-color: rgb(124, 124, 124);
 
   /* Menu Hint. */
-  --media-menu-hint-color: rgb(245 245 245 / 0.5);
-  --media-menu-hint-font-size: 14px;
+  --media-menu-hint-color: var(--text-secondary-color);
+  --media-menu-hint-font-size: 13px;
+  --media-menu-hint-font-weight: 400;
 
   /* Chapters Menu. */
-  --media-chapters-divider: 1px solid rgb(245 245 245 / 0.1);
+  --media-chapters-divider: var(--divider);
   --media-chapters-duration-bg: unset;
   --media-chapters-duration-border-radius: 2px;
-  --media-chapters-duration-color: rgb(245 245 245 / 0.5);
-  --media-chapters-duration-font-size: 12px;
-  --media-chapters-duration-font-weight: 500;
-  --media-chapters-duration-gap: 6px;
   --media-chapters-focus-padding: 4px;
-  --media-chapters-item-active-bg: rgb(255 255 255 / 0.05);
+  --media-chapters-item-active-bg: var(--color-gray-50);
   --media-chapters-item-active-border-left: unset;
-  --media-chapters-label-active-color: #f5f5f5;
-  --media-chapters-label-active-font-weight: 500;
-  --media-chapters-label-color: rgb(245 245 245 / 0.64);
-  --media-chapters-label-font-size: 15px;
-  --media-chapters-label-font-weight: 500;
-  --media-chapters-label-white-space: nowrap;
-  --media-chapters-min-width: var(--media-menu-min-width: 220px);
+  --media-chapters-min-width: var(--media-menu-min-width, 220px);
   --media-chapters-padding: 0;
-  --media-chapters-progress-bg: var(--media-brand);
+  --media-chapters-progress-bg: var(--color-inverse);
   --media-chapters-progress-border-radius: 0;
-  --media-chapters-progress-height: 3px;
-  --media-chapters-start-time-bg: rgb(156 163 175 / 0.2);
+  --media-chapters-progress-height: 4px;
   --media-chapters-start-time-border-radius: 2px;
-  --media-chapters-start-time-color: rgb(168, 169, 171);
-  --media-chapters-start-time-font-size: 12px;
-  --media-chapters-start-time-font-weight: 500;
-  --media-chapters-start-time-gap: 6px;
   --media-chapters-start-time-letter-spacing: 0.4px;
   --media-chapters-start-time-padding: 1px 4px;
   --media-chapters-thumbnail-border: 0;
@@ -231,5 +249,8 @@
   --media-chapters-thumbnail-max-width: 120px;
   --media-chapters-thumbnail-min-height: 56px;
   --media-chapters-thumbnail-min-width: 100px;
+  --media-chapters-time-font-size: 12px;
+  --media-chapters-time-font-weight: 500;
+  --media-chapters-time-gap: 6px;
   --media-chapters-with-thumbnails-min-width: 300px;
 }

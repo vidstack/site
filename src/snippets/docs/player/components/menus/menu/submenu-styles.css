@@ -1,0 +1,9 @@
+/* Hide closed menus. */
+.media-menu:not([data-open]) {
+  display: none;
+}
+
+/* Attribute is applied to elements that should not be visible. */
+.media-menu [data-hidden] {
+  display: none !important;
+}

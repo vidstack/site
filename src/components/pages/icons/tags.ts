@@ -1,6 +1,7 @@
 import type { IconType } from 'media-icons';
 
 export const tags: Record<IconType, string[]> = {
+  accessibility: ['aria', 'human', 'help'],
   'add-note': ['write', 'pen', 'paper'],
   'add-playlist': [
     'create',
@@ -62,6 +63,7 @@ export const tags: Record<IconType, string[]> = {
     'speech-bubble',
     'chatroom',
   ],
+  check: ['checkmark', 'tick', 'yes', 'selected', 'vote'],
   'chevron-up': ['caret-up', 'menu', 'settings'],
   'chevron-left': ['next', 'back', 'caret-left', 'menu', 'settings'],
   'chevron-down': ['caret-down', 'menu', 'settings'],
@@ -141,6 +143,7 @@ export const tags: Record<IconType, string[]> = {
   ],
   'arrow-expand': ['arrow-right', 'enter', 'open-menu', 'side-menu', 'expand', 'grow', 'appear'],
   eye: ['see', 'watch', 'view', 'visible', 'count', 'people', 'viewers'],
+  'no-eye': ['not', 'invisible', 'hidden'],
   'fast-backward': [
     'seek',
     'skip',
