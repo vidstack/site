@@ -91,6 +91,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/layouts/default-layout.mdx',
     'player/components/layouts/plyr-layout.mdx',
     // Display
+    'player/components/display/announcer.mdx',
     'player/components/display/poster.mdx',
     'player/components/display/controls.mdx',
     'player/components/display/gesture.mdx',
