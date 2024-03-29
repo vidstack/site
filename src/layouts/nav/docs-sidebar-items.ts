@@ -126,6 +126,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/sliders/wc/slider-video.mdx',
     'player/components/sliders/wc/slider-thumbnail.mdx',
     'player/components/sliders/wc/slider-chapters.mdx',
+    'player/components/sliders/wc/slider-steps.mdx',
     // Menus
     'player/components/menus/menu.mdx',
     'player/components/menus/radio-group.mdx',
