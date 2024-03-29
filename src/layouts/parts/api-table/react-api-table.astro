@@ -106,7 +106,9 @@ const { pathname } = Astro.url,
             example?.replace(/\`\`\`.*?\n/, '').replace('\n```', '') ?? `<${component.name} />`;
 
         if (component.namespace?.endsWith('Slider')) {
-          exampleCode = exampleCode.replace(/Slider\./g, `${component.namespace}.`);
+          exampleCode = exampleCode
+            .replace(/\<Slider\./g, `<${component.namespace}.`)
+            .replace(/\<\/Slider\./g, `</${component.namespace}.`);
         }
 
         const instanceProps = ((hasInstance && component.instance?.members?.props) || [])

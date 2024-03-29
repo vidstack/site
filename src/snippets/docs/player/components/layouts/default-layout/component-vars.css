@@ -130,6 +130,10 @@
   --media-slider-focused-track-width: calc(var(--track-width) * 1.25);
   --media-slider-focused-track-width: var(--track-width);
 
+  /* Slider Steps. */
+  --media-slider-step-width: 2.5px;
+  --media-slider-step-color: rgb(124, 124, 124);
+
   /* Slider Chapter. */
   --media-slider-chapter-hover-transform: scaleY(2);
   --media-slider-chapter-hover-transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1);
@@ -221,7 +225,6 @@
   --media-menu-slider-height: 32px;
   --media-menu-slider-track-bg: var(--color-gray-50);
   --media-menu-slider-track-fill-bg: var(--color-inverse);
-  --media-menu-slider-step-color: rgb(124, 124, 124);
 
   /* Menu Hint. */
   --media-menu-hint-color: var(--text-secondary-color);

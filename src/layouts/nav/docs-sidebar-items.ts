@@ -116,6 +116,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/buttons/tooltip.mdx',
     // Sliders
     'player/components/sliders/slider.mdx',
+    'player/components/sliders/audio-gain-slider.mdx',
     'player/components/sliders/time-slider.mdx',
     'player/components/sliders/volume-slider.mdx',
     'player/components/sliders/wc/slider-preview.mdx',

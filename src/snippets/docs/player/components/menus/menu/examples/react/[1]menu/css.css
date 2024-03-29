@@ -22,7 +22,7 @@
   max-height: 250px;
 }
 
-.media-menu[data-resizing] {
+.media-menu[data-transition] {
   overflow: hidden;
   pointer-events: none;
 }

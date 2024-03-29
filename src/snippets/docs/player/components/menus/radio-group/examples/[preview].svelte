@@ -12,5 +12,7 @@
 <style>
   .vds-radio-group {
     --media-focus-ring: 0 0 0 3px rgb(78 156 246);
+    --item-icon-size: 18px;
+    --item-padding: 12px;
   }
 </style>

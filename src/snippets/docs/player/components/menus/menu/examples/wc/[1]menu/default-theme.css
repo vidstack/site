@@ -77,7 +77,6 @@ media-player {
   --media-menu-slider-height: 32px;
   --media-menu-slider-track-bg: var(--color-gray-50);
   --media-menu-slider-track-fill-bg: var(--color-inverse);
-  --media-menu-slider-step-color: rgb(124, 124, 124);
 
   /* Hint. */
   --media-menu-hint-color: var(--text-secondary-color);
