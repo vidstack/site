@@ -120,6 +120,7 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     'player/components/sliders/time-slider.mdx',
     'player/components/sliders/volume-slider.mdx',
     'player/components/sliders/speed-slider.mdx',
+    'player/components/sliders/quality-slider.mdx',
     'player/components/sliders/wc/slider-preview.mdx',
     'player/components/sliders/wc/slider-value.mdx',
     'player/components/sliders/wc/slider-video.mdx',
