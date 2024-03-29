@@ -1,6 +1,15 @@
 ---
 import clsx from 'clsx';
 
+import AnimatedBookIcon from '~/icons/animated/animated-book-icon.svelte';
+import AnimatedGithubIcon from '~/icons/animated/animated-github-icon.svelte';
+import AnimatedHeartHandshakeIcon from '~/icons/animated/animated-heart-handshake-icon.svelte';
+import AnimatedPackageIcon from '~/icons/animated/animated-package-icon.svelte';
+import NextIcon from '~/icons/logos/next-logo.svelte';
+import ReactIcon from '~/icons/logos/react-logo.svelte';
+import SvelteIcon from '~/icons/logos/svelte-logo.svelte';
+import TailwindIcon from '~/icons/logos/tailwind-logo.svelte';
+import VueIcon from '~/icons/logos/vue-logo.svelte';
 import FileVideoIcon from '~astro-icons/lucide/file-video-2';
 import TerminalIcon from '~astro-icons/lucide/terminal';
 
@@ -24,20 +33,13 @@ import FadeInWhenVisible from '../components/style/fade-in-when-visible.astro';
 import Style from '../components/style/style.svelte';
 import TypeWriter from '../components/style/type-writer.svelte';
 import TextGradient from '../components/text-gradient.svelte';
-import AnimatedBookIcon from '../icons/animated/animated-book-icon.svelte';
-import AnimatedGithubIcon from '../icons/animated/animated-github-icon.svelte';
-import AnimatedHeartHandshakeIcon from '../icons/animated/animated-heart-handshake-icon.svelte';
-import AnimatedPackageIcon from '../icons/animated/animated-package-icon.svelte';
-import NextIcon from '../icons/logos/next-logo.svelte';
-import ReactIcon from '../icons/logos/react-logo.svelte';
-import TailwindIcon from '../icons/logos/tailwind-logo.svelte';
 import DefaultLayout from '../layouts/default-layout.astro';
 import AnnouncementBar from '../layouts/parts/announcement-bar.astro';
 import SocialLink from '../layouts/parts/social-link.astro';
 
-const title = 'Vidstack: Video Platform for Next.js.';
+const title = 'Vidstack: Open-source video platform.';
 const description =
-  'The easiest way to manage, build, and ship video/audio experiences on the frontend. Starting with React & Next.js.';
+  'Open-source tools and services to manage, build, and ship video/audio experiences.';
 ---
 
 <DefaultLayout {title} {description}>
@@ -48,16 +50,15 @@ const description =
   <Style style="--from-color: var(--next-gradient-start); --to-color: var(--next-gradient-end);">
     <HeroSection>
       <Fragment slot="title">
-        Video Platform.
+        Open-Source.
         <br />
         <span class="mt-1 inline-block">
-          For
-          <TextGradient>Next.js.</TextGradient>
+          <TextGradient>Video Platform.</TextGradient>
         </span>
       </Fragment>
 
       <p slot="description">
-        The easiest way to manage, build, and ship video/audio experiences on the frontend. Starting
+        Open-source tools and services to manage, build, and ship video/audio experiences. Starting
         with React & Next.js.
       </p>
 
@@ -92,6 +93,24 @@ const description =
           target="_blank"
         >
           <NextIcon class="h-9 w-9" />
+        </a>
+
+        <a
+          class="rounded-md text-soft transition hocus:scale-105 hocus:text-inverse"
+          href="https://vuejs.org/"
+          aria-label="Vue"
+          target="_blank"
+        >
+          <VueIcon class="h-9 w-9" />
+        </a>
+
+        <a
+          class="rounded-md text-soft transition hocus:scale-105 hocus:text-inverse"
+          href="https://svelte.dev"
+          aria-label="Svelte"
+          target="_blank"
+        >
+          <SvelteIcon class="h-9 w-9" />
         </a>
       </Fragment>
     </HeroSection>
