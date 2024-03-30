@@ -4,6 +4,7 @@ description: Instructions to get your player installed and on-screen using JavaS
 ---
 
 import IfLayout from '~/docs/installation/conditions/if-layout.svelte';
+import IfNpm from '~/docs/installation/conditions/if-npm.svelte';
 import BrowserSupport from '~/docs/installation/partials/browser-support.mdx';
 import ImportStyles from '~/docs/installation/partials/import-styles.mdx';
 import InstallPackages from '~/docs/installation/partials/install-packages.mdx';
@@ -29,6 +30,10 @@ import StylingSelection from '~/docs/installation/selection/styling-selection.as
 ## 4. Install Method
 
 <InstallSelection />
+
+<IfNpm client:load>
+  <InstallPackages />
+</IfNpm>
 
 ## 5. Check Support
 
