@@ -3,7 +3,7 @@
   {/* ... */}
   <MediaPlayer>
     {/* ... */}
-    <DefaultAudioLayout />
-    <DefaultVideoLayout />
+    <DefaultAudioLayout colorScheme="default" />
+    <DefaultVideoLayout colorScheme="default" />
   </MediaPlayer>
 </html>;
