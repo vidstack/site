@@ -2,7 +2,8 @@ The JavaScript option works with any framework and allows constructing the playe
 imperatively like so:
 
 ```ts
-VidstackPlayer.create('#player', {
+VidstackPlayer.create({
+  target: '#player',
   src: '...',
   layout: new VidstackPlayerLayout(),
 });
