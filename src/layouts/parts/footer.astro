@@ -6,17 +6,17 @@ import FooterLinks from './footer-links.astro';
 
 <div class="mt-12"></div>
 
-<div class="w-full flex mb-8 768:mb-16 pr-4 768:pr-6 992:pr-10">
+<div class="mb-8 flex w-full pr-4 768:mb-16 768:pr-6 992:pr-10">
   <div class="flex-1"></div>
-  <div class="rounded-full w-20 h-6 border-border/90 border-2 shadow-sm"></div>
-  <div class="rounded-full w-6 h-6 border-border/90 border-2 ml-3 shadow-sm"></div>
+  <div class="h-6 w-20 rounded-full border-2 border-border/90 shadow-sm"></div>
+  <div class="ml-3 h-6 w-6 rounded-full border-2 border-border/90 shadow-sm"></div>
 </div>
 
-<footer class="w-full px-4 768:px-6 pt-10 pb-6 text-base border-t border-border/80">
+<footer class="w-full border-t border-border/80 px-4 pb-6 pt-10 text-base 768:px-6">
   <div class="mx-auto w-full max-w-[var(--content-max-width)]">
     <div class="flex flex-col">
-      <div class="768:flex-row 768:space-y-0 768:space-x-16 flex flex-col space-y-10">
-        <div class="768:flex-col 768:items-start flex flex-row items-center">
+      <div class="flex flex-col space-y-10 768:flex-row 768:space-x-16 768:space-y-0">
+        <div class="flex flex-row items-center 768:flex-col 768:items-start">
           <div class="768:hidden">
             <VidstackSymbol />
           </div>
@@ -32,7 +32,7 @@ import FooterLinks from './footer-links.astro';
             >
               Vime
             </a>
-             &
+            &
             <a
               class="font-medium text-inverse hocus:underline"
               href="https://plyr.io"
@@ -43,20 +43,11 @@ import FooterLinks from './footer-links.astro';
           </div>
         </div>
 
-        <div class="768:inline-block 768:flex-1 pointer-events-none hidden"></div>
+        <div class="pointer-events-none hidden 768:inline-block 768:flex-1"></div>
 
         <div
-          class="grid grid-cols-1 gap-y-16 420:grid-cols-3 gap-x-14 576:gap-x-16 576:px-4 420:mx-auto"
+          class="grid grid-cols-1 gap-x-14 gap-y-16 420:mx-auto 420:grid-cols-2 576:gap-x-16 576:px-4"
         >
-          <FooterLinks
-            title="Player"
-            links={[
-              { title: 'HTML', href: '/docs/wc/player' },
-              { title: 'React', href: '/docs/player' },
-              { title: 'Tailwind', href: '/docs/player/styling/tailwind' },
-            ]}
-          />
-
           <FooterLinks
             title="Socials"
             links={[
@@ -78,7 +69,7 @@ import FooterLinks from './footer-links.astro';
         </div>
       </div>
 
-      <div class="flex items-center text-soft w-full text-xs py-2.5 mt-12 768:mt-0">
+      <div class="mt-12 flex w-full items-center py-2.5 text-xs text-soft 768:mt-0">
         © {new Date().getFullYear()} Vidstack
       </div>
     </div>

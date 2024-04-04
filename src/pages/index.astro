@@ -39,7 +39,7 @@ import SocialLink from '../layouts/parts/social-link.astro';
 
 const title = 'Vidstack: Open-source video platform.';
 const description =
-  'Open-source tools and services to manage, build, and ship video/audio experiences.';
+  'Vidstack is an open-source platform that helps you manage, build, and ship video.';
 ---
 
 <DefaultLayout {title} {description}>
@@ -47,25 +47,19 @@ const description =
     <span class="font-semibold">Player:</span> 1.0-RC!
   </AnnouncementBar>
 
-  <Style style="--from-color: var(--next-gradient-start); --to-color: var(--next-gradient-end);">
+  <Style style="--from-color: var(--git-gradient-start); --to-color: var(--git-gradient-end);">
     <HeroSection>
       <Fragment slot="title">
-        Open-Source.
+        Your video.
         <br />
         <span class="mt-1 inline-block">
-          <TextGradient>Video Platform.</TextGradient>
+          <TextGradient>Your Platform.</TextGradient>
         </span>
       </Fragment>
 
       <p slot="description">
-        Open-source tools and services to manage, build, and ship video/audio experiences. Starting
-        with React & Next.js.
+        Vidstack is an open-source platform that helps you manage, build, and ship video.
       </p>
-
-      <Fragment slot="cta">
-        <JoinWaitlist primary client:load />
-        <Button arrow href="/docs/player" gradient>Try Player</Button>
-      </Fragment>
 
       <Fragment slot="frameworks">
         <a
@@ -96,7 +90,7 @@ const description =
         </a>
 
         <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-inverse"
+          class="rounded-md text-soft transition hocus:scale-105 hocus:text-green-500"
           href="https://vuejs.org/"
           aria-label="Vue"
           target="_blank"
@@ -105,7 +99,7 @@ const description =
         </a>
 
         <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-inverse"
+          class="rounded-md text-soft transition hocus:scale-105 hocus:text-red-500"
           href="https://svelte.dev"
           aria-label="Svelte"
           target="_blank"
@@ -130,45 +124,6 @@ const description =
       <JoinWaitlist gradient slot="cta" client:load />
 
       <MockDashboard slot="content" />
-    </FeatureSection>
-  </Style>
-
-  <Style
-    style="--from-color: var(--player-gradient-start); --to-color: var(--player-gradient-end);"
-  >
-    <FeatureSection title="Player." subtitle="Built for React." align="center">
-      <ReactIcon class="h-full w-full" slot="icon" />
-
-      <p slot="description">
-        Build a production-ready player in minutes using our free and open-source UI library. Use
-        the tools you know and love to build beautiful media experiences.
-      </p>
-
-      <Button arrow href="/docs/player" gradient slot="cta">Try Player</Button>
-
-      <MockCodeEditor
-        files={[
-          { path: 'app/page.tsx', snippet: 'home/editor/page' },
-          { path: 'app/player/player.tsx', snippet: 'home/editor/player' },
-          { path: 'app/player/buttons.tsx', snippet: 'home/editor/player-buttons' },
-          { path: 'app/player/sliders.tsx', snippet: 'home/editor/player-sliders' },
-          {
-            path: 'app/player/poster.webp',
-            imgSrc: 'https://files.vidstack.io/sprite-fight/poster.webp',
-            imgAlt: 'Fake Video Poster',
-          },
-          {
-            path: 'app/player/video.mp4',
-            videoSrc: 'https://files.vidstack.io/sprite-fight/720p.mp4',
-          },
-          { path: 'app/player/menus.tsx', snippet: 'home/editor/player-menus' },
-        ]}
-        openFile="app/player/player.tsx"
-        nextTemplate
-        slot="content"
-      >
-        <VideoPlayer slot="preview" client:load />
-      </MockCodeEditor>
     </FeatureSection>
   </Style>
 
