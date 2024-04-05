@@ -1,10 +1,13 @@
 <script lang="ts">
+  import clsx from 'clsx';
+
   export let size = 28;
   export let noBg = false;
 </script>
 
 <svg
   {...$$restProps}
+  class={clsx($$restProps.class, !noBg && 'rounded-md bg-[#030712] p-0.5')}
   width={size}
   height={size}
   viewBox="0 0 48 48"
@@ -12,9 +15,6 @@
   aria-hidden="true"
   role="presentation"
 >
-  {#if !noBg}
-    <rect width="100%" height="100%" rx="3" ry="3" fill="#030712"></rect>
-  {/if}
   <path
     d="M13.3706 36.0395C13.3181 36.067 13.2852 36.1213 13.2852 36.1804V40.2336C13.2852 40.2994 13.3258 40.3585 13.3874 40.382L16.6022 41.6103C16.6516 41.6292 16.7069 41.6222 16.7501 41.5919L29.2883 32.8031C29.3924 32.7303 29.373 32.5707 29.2546 32.5248L24.0739 30.5165C24.0312 30.5001 23.9834 30.5027 23.9428 30.5239L13.3706 36.0395Z"
     fill="white"

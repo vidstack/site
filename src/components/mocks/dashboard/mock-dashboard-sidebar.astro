@@ -1,7 +1,6 @@
 ---
 import clsx from 'clsx';
 
-import AreaChartIcon from '~astro-icons/lucide/area-chart';
 import ArrowDownUpIcon from '~astro-icons/lucide/arrow-down-up';
 import BookOpenIcon from '~astro-icons/lucide/book-open';
 import FileVideoIcon from '~astro-icons/lucide/file-video-2';
@@ -11,11 +10,8 @@ import KeyIcon from '~astro-icons/lucide/key-round';
 import MoreHorizontalIcon from '~astro-icons/lucide/more-horizontal';
 import SettingsIcon from '~astro-icons/lucide/settings';
 
-import VidstackSymbol from '../../../icons/logos/vidstack-symbol.svelte';
-
 const sidebar = [
   { title: 'Media', Icon: FileVideoIcon, active: true },
-  { title: 'Analytics', Icon: AreaChartIcon },
   { title: 'Domains', Icon: GlobeIcon },
   { title: 'API Keys', Icon: KeyIcon },
   { title: 'Webhooks', Icon: ArrowDownUpIcon },
@@ -24,20 +20,19 @@ const sidebar = [
 ---
 
 <div
-  class="flex flex-col flex-1 max-w-[48px] @xl:max-w-[132px] items-start h-full border-r border-border/90 px-2 py-2.5 pb-4"
+  class="flex h-full max-w-[48px] flex-1 flex-col items-start border-r border-border/90 px-2 py-2.5 pb-4 @xl:max-w-[132px]"
 >
-  <VidstackSymbol class="dark:-ml-0.5 mb-4" size={24} />
   {
     sidebar.map(({ title, Icon, active }) => {
       return (
         <div
           class={clsx(
-            'flex mt-1.5 items-center px-1.5 py-1.5 rounded-sm w-full',
+            'mt-1.5 flex w-full items-center rounded-sm px-1.5 py-1.5',
             active ? 'bg-inverse/10 text-inverse' : 'text-soft',
           )}
         >
-          <Icon class="w-5 h-5 @xl:w-4 @xl:h-4" />
-          <span class="hidden @xl:inline-block text-xs ml-1.5">{title}</span>
+          <Icon class="h-5 w-5 @xl:h-4 @xl:w-4" />
+          <span class="ml-1.5 hidden text-xs @xl:inline-block">{title}</span>
         </div>
       );
     })
@@ -45,29 +40,29 @@ const sidebar = [
 
   <div class="flex-1"></div>
 
-  <div class="flex flex-col space-y-2.5 mb-4 w-full items-center @xl:items-start ml-0.5 @xl:px-0">
-    <div class="flex items-center text-soft text-[10px]">
-      <BookOpenIcon class="w-5 h-5 @xl:w-3 @xl:h-3 mr-1" />
+  <div class="mb-4 ml-0.5 flex w-full flex-col items-center space-y-2.5 @xl:items-start @xl:px-0">
+    <div class="flex items-center text-[10px] text-soft">
+      <BookOpenIcon class="mr-1 h-5 w-5 @xl:h-3 @xl:w-3" />
       <span class="hidden @xl:inline-block">Docs</span>
     </div>
-    <div class="flex items-center text-soft text-[10px]">
-      <HelpCircleIcon class="w-5 h-5 @xl:w-3 @xl:h-3 mr-1" />
+    <div class="flex items-center text-[10px] text-soft">
+      <HelpCircleIcon class="mr-1 h-5 w-5 @xl:h-3 @xl:w-3" />
       <span class="hidden @xl:inline-block">Support</span>
     </div>
   </div>
 
-  <div class="flex items-center justify-center w-full">
+  <div class="flex w-full items-center justify-center">
     <img
-      class="w-6 h-6 rounded-full"
+      class="h-6 w-6 rounded-full"
       src="https://api.dicebear.com/6.x/thumbs/svg?seed=Charlie"
       decoding="async"
       loading="lazy"
       aria-hidden="true"
     />
-    <div class="flex-col ml-1 hidden @xl:flex items-center @xl:items-start w-full">
-      <span class="text-inverse text-[10px]">Charlie's Site</span>
-      <span class="text-soft text-[9px] -mt-0.5">react-casts.gg</span>
+    <div class="ml-1 hidden w-full flex-col items-center @xl:flex @xl:items-start">
+      <span class="text-[10px] text-inverse">Charlie's Site</span>
+      <span class="-mt-0.5 text-[9px] text-soft">casts.gg</span>
     </div>
-    <MoreHorizontalIcon class="w-6 h-6 ml-2 hidden @xl:flex" />
+    <MoreHorizontalIcon class="ml-2 hidden h-6 w-6 @xl:flex" />
   </div>
 </div>

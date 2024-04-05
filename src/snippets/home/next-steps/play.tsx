@@ -10,7 +10,7 @@ function WatchPage() {
     currentMedia,
     setMedia
   } = useMediaPlaylist({
-    projectId: 'react-casts',
+    projectId: 'casts',
     filter: {
       tags: ['react-course'],
     },

@@ -14,25 +14,25 @@ const { categories, activeCategory } = Astro.props;
 <div class="categories">
   {
     categories?.map(({ title, href, Icon }) => (
-      <a class="group flex items-center px-2 py-1.5 mt-px -ml-1.5 rounded-md" {href}>
+      <a class="group -ml-1.5 mt-px flex items-center rounded-md px-2 py-1.5" {href}>
         {Icon && (
           <div
             class={clsx(
-              'p-[5px] flex items-center justify-center border rounded-md mr-2.5',
+              'mr-2.5 flex items-center justify-center rounded-md border p-[5px]',
               'shadow-sm',
               title === activeCategory
-                ? 'text-white dark:text-black bg-brand/90 border-brand/20 ring-brand/40 ring-2 ring-offset-1 ring-offset-body'
-                : 'text-soft/90 border-border/90 group-hocus:border-soft bg-elevate group-hocus:text-inverse',
+                ? 'border-brand/20 bg-inverse/90 text-body'
+                : 'border-border/90 bg-elevate text-soft/90 group-hocus:border-soft group-hocus:text-inverse',
             )}
           >
-            <Icon class="w-3.5 h-3.5" />
+            <Icon class="h-3.5 w-3.5" />
           </div>
         )}
 
         <span
           class={clsx(
             title === activeCategory
-              ? 'text-inverse font-medium'
+              ? 'font-medium text-inverse'
               : 'text-soft/90 group-hocus:text-inverse',
           )}
         >

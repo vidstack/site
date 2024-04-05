@@ -66,7 +66,7 @@ if (sidebar.deepMatch && !pagination.prev) {
 }
 ---
 
-<AppLayout {title} {description} theme="secondary" announcementBar>
+<AppLayout {title} {description} announcementBar>
   <VidstackLib client:idle />
 
   <AnnouncementBar href="https://old.vidstack.io" action="Go here" type="help">
@@ -80,7 +80,7 @@ if (sidebar.deepMatch && !pagination.prev) {
   <NavbarMobile navItems={sidebar.items} noSocials>
     {
       categories && (
-        <div class="px-6 mb-4" slot="popover-start">
+        <div class="mb-4 px-6" slot="popover-start">
           <LibSelect class="mb-6 w-full" client:visible />
           <SidebarCategories {categories} activeCategory={sidebar.root} />
         </div>
@@ -95,7 +95,7 @@ if (sidebar.deepMatch && !pagination.prev) {
   <!-- <Breadcrumbs {category} title={pageTitle} /> -->
 
   <div
-    class="docs flex items-stretch w-full h-screen pt-[var(--content-top)] max-w-[var(--content-max-width)] mx-auto"
+    class="docs mx-auto flex h-screen w-full max-w-[var(--content-max-width)] items-stretch pt-[var(--content-top)]"
   >
     <Sidebar
       {categories}
@@ -105,10 +105,10 @@ if (sidebar.deepMatch && !pagination.prev) {
     />
 
     <main
-      class="992:px-8 1200:px-10 flex flex-col flex-1 min-h-full pt-6 992:pt-8 px-6 nav-lg:ml-[var(--sidebar-width)] max-w-full"
+      class="flex min-h-full max-w-full flex-1 flex-col px-6 pt-6 nav-lg:ml-[var(--sidebar-width)] 992:px-8 992:pt-8 1200:px-10"
     >
-      <div class="flex-1 markdown prose dark:prose-invert w-full max-w-[var(--article-max-width)]">
-        <p class="category text-brand mb-2.5 text-[15px] font-semibold leading-6">
+      <div class="markdown prose dark:prose-invert w-full max-w-[var(--article-max-width)] flex-1">
+        <p class="category mb-2.5 text-[15px] font-semibold leading-6 text-inverse">
           {category}
         </p>
 

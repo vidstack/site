@@ -14,13 +14,12 @@ export interface Props {
   description: string;
   announcementBar?: boolean;
   breadcrumbBar?: boolean;
-  theme?: 'secondary';
 }
 
-const { title, description, announcementBar, breadcrumbBar, theme } = Astro.props;
+const { title, description, announcementBar, breadcrumbBar } = Astro.props;
 ---
 
-<html class={clsx(theme === 'secondary' && 'theme-secondary')} lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -58,7 +57,7 @@ const { title, description, announcementBar, breadcrumbBar, theme } = Astro.prop
     </script>
   </head>
   <body
-    class="bg-body text-inverse min-w-screen min-h-screen overflow-x-hidden"
+    class="min-w-screen min-h-screen overflow-x-hidden bg-body text-inverse"
     data-announcement-bar={announcementBar}
     data-breadcrumb-bar={breadcrumbBar}
   >

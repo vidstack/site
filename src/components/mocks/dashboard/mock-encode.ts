@@ -9,7 +9,7 @@ export const mockEncodeProgress = writable<MockEncodeProgress[]>([]);
 
 export const mockVideoTitles = [
   'Installation',
-  'Thinking in React',
+  'Project Tour',
   'Your First Component',
   'Responding to Events',
   'Render and Commit',

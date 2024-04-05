@@ -11,13 +11,13 @@ const { rows } = Astro.props,
   cols = ['Name', 'Status', 'Preview', 'Updated'];
 ---
 
-<div class="overflow-x-auto scrollbar">
+<div class="scrollbar overflow-x-auto">
   <table class="w-full">
     <thead>
       <tr>
         {
           cols.map((name) => (
-            <th class="font-medium text-xs px-2 py-1 border-t border-b border-r first:border-l border-border/90 text-start">
+            <th class="border-b border-r border-t border-border/90 px-2 py-1 text-start text-xs font-medium first:border-l">
               {name}
             </th>
           ))
@@ -27,7 +27,7 @@ const { rows } = Astro.props,
     <tbody>
       {
         rows.map((data) => (
-          <tr class="text-xs border border-border/90 whitespace-nowrap">
+          <tr class="whitespace-nowrap border border-border/90 text-xs">
             {Object.entries({
               ...data,
               preview: 'See in Dashboard',
@@ -35,7 +35,7 @@ const { rows } = Astro.props,
             }).map(([title, value]) => (
               <td
                 class={clsx(
-                  'border-r border-border/90 last:border-0 px-2 py-1',
+                  'border-r border-border/90 px-2 py-1 last:border-0',
                   title === 'preview' && 'text-brand',
                 )}
               >

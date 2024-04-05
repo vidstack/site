@@ -13,7 +13,7 @@
     {
       type: TerminalPromptType.List,
       select: 1,
-      options: ['Create New Project', "Charlie's Site (react-casts.gg)"],
+      options: ['Create New Project', "Charlie's Site (casts.gg)"],
       process: ['Updated Pre-Push Hook.', 'Git LFS Initialized.'],
     },
     {
@@ -23,11 +23,11 @@
         'On branch main',
         'Changes not staged for commit:',
         { type: 'diff-neg', text: 'app/videos/installation.mp4' },
-        { type: 'diff-neg', text: 'app/videos/thinking-in-react.mp4' },
+        { type: 'diff-neg', text: 'app/videos/project-tour.mp4' },
       ],
     },
     'git add .',
-    'git commit -m "new react course videos"',
+    'git commit -m "new course videos"',
     {
       type: TerminalPromptType.Text,
       text: 'git push',
@@ -42,7 +42,7 @@
             return `Git LFS: (${files} of 2 files) ${totalUploaded.toFixed(0)} MB / 175 MB`;
           },
         },
-        'Uploaded to https://vidstack.io/react-casts',
+        'Uploaded to https://vidstack.io/casts',
       ],
     },
   ];

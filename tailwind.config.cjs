@@ -33,6 +33,7 @@ module.exports = {
       colors: {
         brand: 'rgb(var(--color-brand) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        focus: 'rgb(var(--color-focus) / <alpha-value>)',
         gray: {},
         border: 'rgb(var(--color-border) / <alpha-value>)',
         soft: 'rgb(var(--color-soft) / <alpha-value>)',

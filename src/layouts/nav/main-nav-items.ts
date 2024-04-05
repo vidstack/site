@@ -8,7 +8,7 @@ import WallpaperIcon from '~icons/lucide/wallpaper';
 import type { NavItem } from './nav-items';
 
 export const mainNavItems: NavItem[] = [
-  { title: 'Documentation', href: '/docs/player' },
+  { title: 'Docs', href: '/docs/player' },
   { title: 'Icons', href: '/media-icons' },
   {
     title: 'Releases',

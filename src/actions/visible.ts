@@ -12,6 +12,9 @@ export function visible(
   let observer = createObserver(el, options);
   observer.observe(el);
 
+  // TODO: remove
+  el.setAttribute('data-visible', '');
+
   return {
     update(init) {
       observer.disconnect();

@@ -56,7 +56,7 @@
   <span slot="trigger">Join Waitlist</span>
 
   <div
-    class="flex flex-col items-center w-full flex-1 px-4"
+    class="flex w-full flex-1 flex-col items-center px-4"
     style={clsx(
       success &&
         '--from-color: var(--form-success-gradient-start); --to-color: var(--form-success-gradient-end);',
@@ -64,11 +64,11 @@
         '--from-color: var(--form-error-gradient-start); --to-color: var(--form-error-gradient-end);',
       !success &&
         !failed &&
-        '--from-color: var(--form-neutral-gradient-start); --to-color: var(--form-neutral-gradient-end);',
+        '--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);',
     )}
     slot="content"
   >
-    <h1 class="font-bold text-4xl mb-1 text-center transition-colors duration-500">
+    <h1 class="mb-1 text-center text-4xl font-bold transition-colors duration-500">
       <TextGradient>
         {#if failed}
           Request Failed
@@ -80,7 +80,7 @@
       </TextGradient>
     </h1>
 
-    <p class="text-soft mt-2 max-w-[320px] text-center leading-snug">
+    <p class="mt-2 max-w-[320px] text-center leading-snug text-soft">
       {#if failed}
         Something went wrong. Please try again.
       {:else if success}
@@ -96,9 +96,9 @@
         id="email"
         type="email"
         class={clsx(
-          'bg-transparent text-inverse border border-border/90 rounded-sm w-full py-2 px-2.5',
+          'w-full rounded-sm border border-border/90 bg-transparent px-2.5 py-2 text-inverse',
           'text-sm placeholder:text-soft',
-          !readonly ? 'hocus:border-brand/90' : 'cursor-default',
+          !readonly ? 'hocus:border-inverse/90' : 'cursor-default',
         )}
         required
         placeholder="Email"
@@ -107,7 +107,7 @@
       />
 
       <Select
-        class="w-full mt-4"
+        class="mt-4 w-full"
         label="Interested products"
         state={submitAttempted && !products ? 'error' : 'default'}
         options={[
@@ -129,7 +129,7 @@
       />
 
       <Select
-        class="w-full mt-4"
+        class="mt-4 w-full"
         label="Current streaming provider"
         state={submitAttempted && !streamingProvider ? 'error' : 'default'}
         options={[
@@ -150,7 +150,7 @@
       />
 
       <Select
-        class="w-full mt-4 mb-6"
+        class="mb-6 mt-4 w-full"
         label="Number of uploads per month"
         state={submitAttempted && !uploadsPerMonth ? 'error' : 'default'}
         options={[
@@ -170,14 +170,14 @@
       {#if success}
         <!--  -->
       {:else if submitting}
-        <div class="flex items-center justify-center w-full px-5 py-2.5 rounded-md">
+        <div class="flex w-full items-center justify-center rounded-md px-5 py-2.5">
           <IndeterminateLoadingSpinner class="mr-2" size={20} />
           Submitting
         </div>
       {:else}
         <Button
           type="submit"
-          class={clsx('w-full justify-center mb-2')}
+          class={clsx('mb-2 w-full justify-center')}
           gradient={$isDarkColorScheme}
           primary={!$isDarkColorScheme}
         >

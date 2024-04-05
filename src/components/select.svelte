@@ -70,30 +70,30 @@
   {...$$restProps}
   class={clsx(
     'relative flex items-center',
-    'rounded-sm shadow-sm max-w-full',
+    'max-w-full rounded-sm shadow-sm',
     size === 'lg' ? 'px-2.5 py-2 text-sm' : 'px-[10px] py-1 text-xs',
     state === 'error' ? 'border-2 border-red-600 dark:border-red-400' : 'border border-border/90',
-    !disabled ? 'hocus:border-brand/90 hocus:bg-elevate' : 'cursor-default',
+    !disabled ? 'hover:border-inverse/90 hocus:bg-elevate' : 'cursor-default',
     currentLabel === label ? 'text-soft' : 'text-inverse',
     $$restProps.class,
   )}
   use:selectTrigger={label}
 >
   <span
-    class="flex items-center max-w-full truncate opacity-0 data-[visible]:opacity-100 transition-opacity"
+    class="flex max-w-full items-center truncate opacity-0 transition-opacity data-[visible]:opacity-100"
     use:visible
   >
     <slot name="icon" />
     {currentLabel || label}
   </span>
   <div class="flex-1"></div>
-  <ChevronDownIcon class={clsx('shrink-0', size === 'lg' ? 'w-5 h-5 ml-2' : 'w-4 h-4 ml-1.5')} />
+  <ChevronDownIcon class={clsx('shrink-0', size === 'lg' ? 'ml-2 h-5 w-5' : 'ml-1.5 h-4 w-4')} />
 </button>
 
 <div
   class={clsx(
     'z-50 rounded-sm border border-border/90 bg-elevate p-2',
-    'outline-none shadow-md fixed',
+    'fixed shadow-md outline-none',
     $isSelectOpen
       ? 'animate-in fade-in slide-in-from-top-4'
       : 'animate-out fade-out slide-out-to-top-2',
@@ -108,7 +108,7 @@
         class={clsx('flex flex-col', size === 'lg' ? 'pt-2.5' : 'pt-1')}
       >
         {#if group}
-          <h1 class="text-xs font-medium text-soft mb-2 ml-0.5">{group}</h1>
+          <h1 class="mb-2 ml-0.5 text-xs font-medium text-soft">{group}</h1>
         {/if}
 
         {#each groups[group] as { label, value }}
@@ -116,8 +116,8 @@
           <button
             type="button"
             class={clsx(
-              'relative flex items-center pr-2 py-2 w-full',
-              size === 'lg' ? 'text-sm pl-8' : 'text-xs pl-5',
+              'relative flex w-full items-center py-2 pr-2',
+              size === 'lg' ? 'pl-8 text-sm' : 'pl-5 text-xs',
               isSelected ? 'text-inverse' : 'text-soft hocus:bg-brand/10 hocus:text-inverse ',
             )}
             data-group={group}
@@ -126,8 +126,8 @@
             {#if isSelected}
               <CheckIcon
                 class={clsx(
-                  'absolute text-brand shrink-0',
-                  size === 'lg' ? 'w-4 h-4 left-2' : 'w-3 h-3 left-0',
+                  'absolute shrink-0 text-brand',
+                  size === 'lg' ? 'left-2 h-4 w-4' : 'left-0 h-3 w-3',
                 )}
               />
             {/if}

@@ -42,7 +42,7 @@
 
 .DocSearch-Form:focus-within {
   @apply outline-none !ring-2;
-  --tw-ring-color: rgb(var(--color-brand) / 0.9);
+  --tw-ring-color: rgb(var(--color-inverse) / 0.9);
 }
 
 .DocSearch-Input:focus,
@@ -56,7 +56,11 @@
 }
 
 .DocSearch-Hit {
-  @apply p-2;
+  @apply border border-transparent px-2 py-1;
+}
+
+.DocSearch-Hit:hover {
+  @apply border-border;
 }
 
 .DocSearch-Hit-title {
@@ -65,6 +69,10 @@
 
 .DocSearch-Hit-path {
   @apply order-1 mb-1 self-start text-xs;
+}
+
+.DocSearch-Hit:focus-within .DocSearch-Hit-path {
+  @apply text-inverse;
 }
 
 .DocSearch-Hit-Tree {
@@ -76,7 +84,11 @@
 }
 
 .DocSearch-Hit-icon {
-  @apply text-soft bg-brand/20 mr-1 flex h-10 w-10 items-center justify-center rounded-md;
+  @apply mr-1 flex h-10 w-10 items-center justify-center rounded-md bg-inverse/20 text-soft;
+}
+
+.DocSearch-Hit:focus-within .DocSearch-Hit-icon {
+  @apply text-inverse;
 }
 
 .DocSearch-Hit-source {
@@ -84,7 +96,7 @@
 }
 
 .DocSearch-Hit-source {
-  @apply text-inverse !py-2.5 !text-lg font-semibold;
+  @apply !py-2.5 !text-lg font-semibold text-inverse;
 }
 
 .DocSearch-Hit[aria-selected='true'] a {
@@ -113,7 +125,7 @@
 }
 
 .DocSearch-Form:focus-within .DocSearch-MagnifierLabel {
-  color: rgb(var(--color-brand));
+  color: rgb(var(--color-inverse));
 }
 
 .DocSearch-MagnifierLabel {

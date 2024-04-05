@@ -38,17 +38,17 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
         Astro.slots.has('icon') && (
           <div
             class={clsx(
-              'w-full flex justify-center text-inverse',
+              'flex w-full justify-center text-inverse',
               align === 'start' && '992:justify-start',
             )}
           >
-            <div class="relative w-10 h-10">
+            <div class="relative h-10 w-10">
               <Visible
                 class={clsx(
-                  'absolute top-0 left-0 bg-[var(--to-color)] opacity-0 duration-500',
+                  'absolute left-0 top-0 bg-inverse opacity-0 duration-500',
                   'data-[visible]:opacity-20 data-[visible]:dark:opacity-30',
                   'data-[visible]:translate-x-1 data-[visible]:translate-y-1',
-                  'w-10 h-10 rounded-sm',
+                  'h-10 w-10 rounded-sm',
                   'transition-all',
                 )}
                 style="transition-delay: 750ms"
@@ -57,11 +57,11 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
               />
               <div
                 class={clsx(
-                  'bg-[var(--from-color)] rounded-sm w-10 h-10 absolute top-0 left-0',
-                  'flex items-center justify-center z-10 opacity-80 backdrop-blur-sm shadow-md',
+                  'absolute left-0 top-0 h-10 w-10 rounded-sm bg-[var(--from-color)]',
+                  'z-10 flex items-center justify-center opacity-80 shadow-md backdrop-blur-sm',
                 )}
               />
-              <div class="w-[25px] h-[25px] text-white absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-20">
+              <div class="absolute left-1/2 top-1/2 z-20 h-[25px] w-[25px] -translate-x-1/2 -translate-y-1/2 text-body">
                 <slot name="icon" />
               </div>
             </div>
@@ -83,9 +83,9 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
               <br />
               <span
                 class={clsx(
-                  'inline-block',
+                  'inline-block text-soft',
                   Astro.slots.has('content')
-                    ? 'mt-2 576:mt-3 text-[2rem] 420:text-4xl 992:text-5xl'
+                    ? 'mt-2 text-[2rem] 420:text-4xl 576:mt-3 992:text-5xl'
                     : 'mt-3',
                 )}
               >
@@ -98,7 +98,7 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
 
       {
         Astro.slots.has('description') && (
-          <div class="text-soft mt-4 max-w-md mx-auto text-base 992:text-lg 992:mx-0 992:max-w-lg 1200:max-w-xl 1200:text-lg">
+          <div class="mx-auto mt-4 max-w-md text-base text-soft 992:mx-0 992:max-w-lg 992:text-lg 1200:max-w-xl 1200:text-lg">
             <slot name="description" />
           </div>
         )

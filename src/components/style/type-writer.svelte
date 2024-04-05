@@ -63,11 +63,10 @@
   {#if caret && !ended}
     <div
       class={clsx(
-        'w-2 h-[0.9em] transition-opacity inline-block translate-y-[0.1em]',
+        'inline-block h-[0.9em] w-2 translate-y-[0.1em] bg-soft transition-opacity',
         !typedText ? '-translate-x-[1em]' : '-translate-x-[0.1em]',
-        typing ? 'opacity-80' : 'opacity-20 animate-pulse',
+        typing ? 'opacity-80' : 'animate-pulse opacity-20',
       )}
-      style="background-color: var(--from-color, rgb(var(--color-brand)));"
     ></div>
   {/if}
 </span>

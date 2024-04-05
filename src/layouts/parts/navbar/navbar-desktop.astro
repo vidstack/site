@@ -27,10 +27,10 @@ const pathname = Astro.url.pathname;
     'transition-[margin-top] duration-200',
   )}
 >
-  <div class="flex w-full items-center mx-auto max-w-[var(--content-max-width)]">
+  <div class="mx-auto flex w-full max-w-[var(--content-max-width)] items-center">
     <div class="flex items-center">
-      <a class={clsx('rounded-md', navItems.length && 'mr-12')} href="/" aria-label="Go Home">
-        <VidstackSymbol class="h-8 hover:scale-110 transition-transform" />
+      <a class={clsx('rounded-md', navItems.length && 'mr-10')} href="/" aria-label="Go Home">
+        <VidstackSymbol class="transition-transform hover:scale-110" />
       </a>
 
       <NavManager client:media={NAV_DESKTOP_MIN_WIDTH_QUERY}>
@@ -40,7 +40,7 @@ const pathname = Astro.url.pathname;
       <slot name="start" />
     </div>
 
-    <div class="flex items-center justify-center flex-1">
+    <div class="flex flex-1 items-center justify-center">
       <slot name="center" />
     </div>
 

@@ -29,7 +29,7 @@ const icons = await loadIcons();
         Object.keys(icons).map((icon) => (
           <button
             class={clsx(
-              'flex flex-col items-center group justify-center cursor-pointer p-2 rounded-sm',
+              'group flex cursor-pointer flex-col items-center justify-center rounded-sm p-2',
             )}
             aria-haspopup="dialog"
             aria-expanded="false"
@@ -39,8 +39,8 @@ const icons = await loadIcons();
           >
             <div
               class={clsx(
-                'flex flex-col items-center justify-center text-soft/90 hocus:text-inverse w-full border border-border/80',
-                'group-hocus:bg-elevate group-hocus:border-2 group-hocus:border-brand/40 shadow-sm',
+                'flex w-full flex-col items-center justify-center border border-border/80 text-soft/90 hocus:text-inverse',
+                'shadow-sm group-hocus:border-2 group-hocus:border-brand/40 group-hocus:bg-elevate',
                 'h-[120px] rounded-md transition-colors duration-150',
               )}
             >
@@ -56,7 +56,7 @@ const icons = await loadIcons();
               />
             </div>
             <div
-              class="text-center text-soft/90 group-hocus:text-inverse text-sm mt-4 w-full opacity-0"
+              class="mt-4 w-full text-center text-sm text-soft/90 opacity-0 group-hocus:text-inverse"
               data-icon-name
             >
               X
