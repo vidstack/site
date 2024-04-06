@@ -17,10 +17,10 @@
 <div
   {...$$restProps}
   class={clsx(
-    'code-block relative text-sm leading-[var(--leading)] flex flex-col min-h-0 bg-elevate',
+    'code-block relative flex min-h-0 flex-col bg-elevate text-sm leading-[var(--leading)]',
     !flat
-      ? 'shadow-sm rounded-md border-border/90 border 576:max-h-[32rem] max-h-[60vh] mx-auto'
-      : 'w-full min-h-full max-h-[calc(var(--code-block-max-h,0px)-var(--code-block-gutters,0px))]',
+      ? 'mx-auto max-h-[60vh] rounded-md border border-border/90 shadow-sm 576:max-h-[32rem]'
+      : 'max-h-[calc(var(--code-block-max-h,0px)-var(--code-block-gutters,0px))] min-h-full w-full',
     _class,
   )}
   style={clsx(
@@ -31,9 +31,9 @@
   data-flat={flat ? '' : null}
 >
   {#if hasTopBar}
-    <div class="sticky top-0 z-10 flex items-center shrink-0 py-2.5 px-2 mb-1.5">
+    <div class="sticky top-0 z-10 mb-1.5 flex shrink-0 items-center px-2 py-2.5">
       {#if title}
-        <span class="font-mono text-sm text-soft ml-1">{title}</span>
+        <span class="ml-1 font-mono text-sm text-soft">{title}</span>
       {/if}
       <slot name="top-bar" />
     </div>
@@ -41,7 +41,7 @@
 
   <div
     class={clsx(
-      'flex scrollbar scrollbar-square overflow-auto flex-1',
+      'scrollbar scrollbar-square flex flex-1 overflow-auto',
       !flat && (title || showTopBar ? 'px-2 pb-2.5' : 'p-4'),
       flat && indent && 'px-4',
     )}
@@ -51,7 +51,7 @@
 </div>
 
 <style>
-  .code-block :global(pre code[data-lang-bash] .line:not(:empty)::before) {
+  .code-block :global(pre[data-lang='bash'] .line:not(:empty)::before) {
     content: '> ';
     font-weight: bold;
     color: rgb(var(--color-brand));

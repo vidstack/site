@@ -4,7 +4,6 @@ import Table from '~/components/table.astro';
 import Heading from '~/docs/components/heading.svelte';
 import { camelToKebabCase } from '~/utils/string';
 import { Code } from 'astro:components';
-import { H } from 'vidstack/dist/types/vidstack-9f0b9c4c.js';
 
 import { findMDNLink, findWebComponents, getLinks } from './api-utils';
 import NameCell from './name-table-cell.astro';
@@ -174,11 +173,17 @@ const { pathname } = Astro.url,
 
             <CodeBlockWrapper class="not-prose text-sm font-normal">
               <div class="flex flex-col">
-                <Code code={importCode} lang="tsx" theme="github-dark" />
-                <Code code={importCode} lang="tsx" theme="github-light" />
+                <Code
+                  code={importCode}
+                  lang="tsx"
+                  themes={{ light: 'github-light', dark: 'github-dark' }}
+                />
                 <div class="mt-6">
-                  <Code code={html} lang="html" theme="github-dark" />
-                  <Code code={html} lang="html" theme="github-light" />
+                  <Code
+                    code={html}
+                    lang="html"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
                 </div>
               </div>
             </CodeBlockWrapper>
@@ -194,8 +199,11 @@ const { pathname } = Astro.url,
               <div>
                 <Heading title="State" slug={`${componentName}.state`} level={tableHeadingLevel} />
                 <CodeBlockWrapper class="not-prose text-sm font-normal">
-                  <Code code={stateUsageCode} lang="ts" theme="github-dark" />
-                  <Code code={stateUsageCode} lang="ts" theme="github-light" />
+                  <Code
+                    code={stateUsageCode}
+                    lang="ts"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
                 </CodeBlockWrapper>
                 <Table cols={['Prop', 'Type', 'Default']} rows={state} />{' '}
               </div>
@@ -220,8 +228,11 @@ const { pathname } = Astro.url,
                   level={tableHeadingLevel}
                 />
                 <CodeBlockWrapper class="not-prose text-sm font-normal">
-                  <Code code={instanceCode} lang="ts" theme="github-dark" />
-                  <Code code={instanceCode} lang="ts" theme="github-light" />
+                  <Code
+                    code={instanceCode}
+                    lang="ts"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
                 </CodeBlockWrapper>
                 <Table cols={['Prop', 'Type']} rows={[...instanceProps, ...instanceMethods]} />
               </div>
@@ -246,8 +257,11 @@ const { pathname } = Astro.url,
                   level={tableHeadingLevel}
                 />
                 <CodeBlockWrapper class="not-prose text-sm font-normal">
-                  <Code code={dataAttrsUsageCode} lang="css" theme="github-dark" />
-                  <Code code={dataAttrsUsageCode} lang="css" theme="github-light" />
+                  <Code
+                    code={dataAttrsUsageCode}
+                    lang="css"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
                 </CodeBlockWrapper>
                 <Table cols={['Name', 'Description']} rows={dataAttrs} />
               </div>
@@ -261,8 +275,11 @@ const { pathname } = Astro.url,
                   level={tableHeadingLevel}
                 />
                 <CodeBlockWrapper class="not-prose text-sm font-normal">
-                  <Code code={dataPartUsageCode} lang="html" theme="github-dark" />
-                  <Code code={dataPartUsageCode} lang="html" theme="github-light" />
+                  <Code
+                    code={dataPartUsageCode}
+                    lang="html"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
                 </CodeBlockWrapper>
                 <Table cols={['Name', 'Description']} rows={dataParts} />
               </div>

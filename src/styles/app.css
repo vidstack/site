@@ -212,3 +212,17 @@ body[data-breadcrumb-bar] {
 .font-bold {
   font-family: var(--font-cal);
 }
+
+.shiki,
+.astro-code {
+  display: inline-flex !important;
+  background-color: unset !important;
+}
+
+html.dark .shiki,
+html.dark .shiki span,
+html.dark .astro-code,
+html.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: unset !important;
+}

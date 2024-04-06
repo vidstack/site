@@ -36,8 +36,7 @@ declare module ':code_snippets' {
     source: string;
     code: {
       lang: string;
-      light: () => Promise<CodeHighlightModule>;
-      dark: () => Promise<CodeHighlightModule>;
+      loader: () => Promise<CodeHighlightModule>;
     };
   }
 

@@ -6,7 +6,6 @@
   import { tick } from 'svelte';
 
   import { codeSnippets } from '../../stores/code-snippets';
-  import { isDarkColorScheme } from '../../stores/color-scheme';
   import IndeterminateLoadingSpinner from '../style/indeterminate-loading-spinner.svelte';
   import { isHighlightLine, resolveHighlightedLines } from './highlight';
   import { getLoadedCodeSnippet, registerCodeSnippet } from './registry';
@@ -38,8 +37,8 @@
     registerCodeSnippet(id, snippet);
   }
 
-  async function loadCode(snippet: CodeSnippet, darkTheme: boolean) {
-    code = (await snippet.code[darkTheme ? 'dark' : 'light']()).default;
+  async function loadCode(snippet: CodeSnippet) {
+    code = (await snippet.code.loader()).default;
 
     await tick();
 
@@ -58,8 +57,7 @@
 
       if (snippet) {
         Object.assign(snippet.code, {
-          light: () => import(/* @vite-ignore */ imports.code.light),
-          dark: () => import(/* @vite-ignore */ imports.code.dark),
+          loader: () => import(/* @vite-ignore */ imports.code.loader),
         });
       }
 
@@ -75,15 +73,16 @@
 
   $: if (loader && IS_BROWSER) loadSnippet(loader);
 
-  $: if (snippet && IS_BROWSER) loadCode(snippet, $isDarkColorScheme);
+  $: if (snippet && IS_BROWSER) loadCode(snippet);
 </script>
 
-<pre class={clsx('code-display min-h-full inline-flex not-prose', _class)} bind:this={root}>
-  {#if loader && !code}
-    <IndeterminateLoadingSpinner class="absolute top-2 right-4" />
+{#if loader && !code}
+  <pre class={clsx('code-display not-prose inline-flex min-h-full', _class)} bind:this={root}>
+    <IndeterminateLoadingSpinner class="absolute right-4 top-2" />
     <code
       class="inline-block"
       style={`width: ${loader.width * 9.48}px; height: ${loader.lines * 22}px;`}></code>
-  {/if}
-  {@html transform(code)}
 </pre>
+{:else}
+  {@html transform(code)}
+{/if}

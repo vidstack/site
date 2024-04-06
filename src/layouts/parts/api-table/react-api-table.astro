@@ -163,6 +163,10 @@ const { pathname } = Astro.url,
             desc,
           ]);
 
+        const dataAttrsUsageCode = dataAttrs
+          ? ['/* Example. */', `.component[data-foo] {}`].join('\n')
+          : '';
+
         const cssVars = component.instance?.cssvars?.map((cssvar) => [
           <NameCell
             id={`${fullComponentName}.cssvars.${cssvar.name}`.toLowerCase()}
@@ -202,8 +206,11 @@ const { pathname } = Astro.url,
                   level={tableHeadingLevel}
                 />
                 <CodeBlockWrapper class="not-prose text-sm font-normal">
-                  <Code code={stateUsageCode} lang="tsx" theme="github-dark" />
-                  <Code code={stateUsageCode} lang="tsx" theme="github-light" />
+                  <Code
+                    code={stateUsageCode}
+                    lang="tsx"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
                 </CodeBlockWrapper>
                 <Table cols={['Prop', 'Type', 'Default']} rows={state} />{' '}
               </div>
@@ -228,8 +235,11 @@ const { pathname } = Astro.url,
                   level={tableHeadingLevel}
                 />
                 <CodeBlockWrapper class="not-prose mt-6 text-sm">
-                  <Code code={instanceUsageCode} lang="tsx" theme="github-dark" />
-                  <Code code={instanceUsageCode} lang="tsx" theme="github-light" />
+                  <Code
+                    code={instanceUsageCode}
+                    lang="tsx"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
                 </CodeBlockWrapper>
                 <Table cols={['Prop', 'Type']} rows={[...instanceProps, ...instanceMethods]} />
               </div>
@@ -253,6 +263,13 @@ const { pathname } = Astro.url,
                   slug={`${fullComponentName}.attrs`}
                   level={tableHeadingLevel}
                 />
+                <CodeBlockWrapper class="not-prose text-sm font-normal">
+                  <Code
+                    code={dataAttrsUsageCode}
+                    lang="css"
+                    themes={{ light: 'github-light', dark: 'github-dark' }}
+                  />
+                </CodeBlockWrapper>
                 <Table cols={['Name', 'Description']} rows={dataAttrs} />
               </div>
             ) : null}

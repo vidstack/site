@@ -19,12 +19,12 @@ const { title, slug, description, importCode, exampleCode, badges } = Astro.prop
   hasBadges = badges?.filter(Boolean).length;
 ---
 
-<div class="flex flex-col mb-4">
+<div class="mb-4 flex flex-col">
   {title ? <Heading title={title} {slug} level={3} /> : null}
 
   {
     hasBadges ? (
-      <div class={clsx('flex space-x-2 items-center not-prose -mt-2')}>
+      <div class={clsx('not-prose -mt-2 flex items-center space-x-2')}>
         <Badge color="blue">
           <code class="text-xs">{badges[0]}</code>
         </Badge>
@@ -47,14 +47,20 @@ const { title, slug, description, importCode, exampleCode, badges } = Astro.prop
 
   {
     importCode && (
-      <CodeBlockWrapper class="text-sm font-normal not-prose w-full">
+      <CodeBlockWrapper class="not-prose w-full text-sm font-normal">
         <div class="flex flex-col">
-          <Code code={importCode} lang="tsx" theme="github-dark" />
-          <Code code={importCode} lang="tsx" theme="github-light" />
+          <Code
+            code={importCode}
+            lang="tsx"
+            themes={{ light: 'github-light', dark: 'github-dark' }}
+          />
           {exampleCode && (
             <div class="mt-6">
-              <Code code={exampleCode} lang="tsx" theme="github-dark" />
-              <Code code={exampleCode} lang="tsx" theme="github-light" />
+              <Code
+                code={exampleCode}
+                lang="tsx"
+                themes={{ light: 'github-light', dark: 'github-dark' }}
+              />
             </div>
           )}
         </div>

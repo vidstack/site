@@ -1,36 +1,50 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { getHighlighter, renderToHtml, type Highlighter } from 'shiki';
+import { codeToHtml, type BundledLanguage } from 'shiki';
 import type { Plugin } from 'vite';
 
 import { resolveCodeHighlights, snippetsMap, stripComments } from './code-snippets.js';
 
 export default (): Plugin => {
-  let shiki: Highlighter,
-    dev = false;
+  let dev = false;
 
   const fileToId = new Map(),
     highlightQueryRE = /\?highlight.*/;
 
-  function highlight(code: string, lang: string, colorScheme: 'light' | 'dark') {
+  async function highlight(code: string, lang: string) {
     if (lang === 'cjs' || lang === 'mjs') lang = 'js';
 
-    const theme = `github-${colorScheme}`,
-      tokens = shiki.codeToThemedTokens(
-        /(j|t)sx/.test(lang) ? code.replace(/>;$/, '>') : code,
-        lang,
-        theme,
-      );
+    return await codeToHtml(/(j|t)sx/.test(lang) ? code.replace(/>;$/, '>') : code, {
+      lang: lang as BundledLanguage,
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      transformers: [
+        {
+          name: 'pre',
+          pre(node) {
+            node.properties.class += ' code-display not-prose min-h-full';
+            node.properties['data-lang'] = lang;
+            if (typeof node.properties.style === 'string') {
+              node.properties.style = node.properties.style
+                .replace(/background-color:.*?;/, '')
+                .replace(/--shiki-dark.*?;?$/, '');
 
-    return renderToHtml(tokens, {
-      fg: shiki.getForegroundColor(theme),
-      // bg: shiki.getBackgroundColor(theme),
-    })
-      .replace(/^<pre(.*?)>/, '')
-      .replace(/<\/pre(.*?)>$/, '')
-      .replace('<code', `<code data-${colorScheme} data-lang-${lang}`)
-      .trim();
+              if (!node.properties.style) {
+                delete node.properties.style;
+              }
+            }
+          },
+          span(node) {
+            if (typeof node.properties.style === 'string') {
+              node.properties.style = node.properties.style.replace(/background-color:.*?;/, '');
+            }
+          },
+        },
+      ],
+    });
   }
 
   return {
@@ -38,10 +52,6 @@ export default (): Plugin => {
     enforce: 'pre',
     async configResolved(config) {
       dev = config.mode === 'dev';
-      shiki = await getHighlighter({
-        theme: 'github-light',
-        themes: ['github-light', 'github-dark'],
-      });
     },
     async resolveId(id, importer) {
       if (id.includes(':')) id = id.replace(/^.*\:/, ':');
@@ -72,12 +82,9 @@ export default (): Plugin => {
         return snippetId;
       }
     },
-    load(id) {
+    async load(id) {
       if (id.startsWith(':code_tokens/')) {
         id = id.replace(':code_tokens/', '');
-
-        const theme = id.endsWith('?dark') ? 'dark' : 'light';
-        id = id.replace(/\?dark$/, '');
 
         const snippetId = id.replace('~', '.'),
           snippet = snippetsMap.get(snippetId);
@@ -85,7 +92,7 @@ export default (): Plugin => {
         if (!snippet) return;
 
         const { ext, source } = snippet;
-        return `export default ${JSON.stringify(highlight(source, ext.slice(1), theme))};`;
+        return `export default ${JSON.stringify(await highlight(source, ext.slice(1)))};`;
       }
 
       if (id.startsWith(':code_snippet/')) {
@@ -101,11 +108,9 @@ export default (): Plugin => {
 
         return `export default { ${[
           `source: ${JSON.stringify(source)}`,
-          `code: { ${[
-            `lang: "${ext.slice(1)}"`,
-            `light: () => import(":code_tokens/${id}")`,
-            `dark: () => import(":code_tokens/${id}?dark")`,
-          ].join('\n, ')} }`,
+          `code: { ${[`lang: "${ext.slice(1)}"`, `loader: () => import(":code_tokens/${id}")`].join(
+            '\n, ',
+          )} }`,
         ].join(',\n ')} };`;
       }
 
@@ -141,8 +146,7 @@ export default (): Plugin => {
             imports: {
               snippet: `/@id/${id}?t=${Date.now()}`,
               code: {
-                light: `/@id/${tokensId}?t=${Date.now()}`,
-                dark: `/@id/${tokensId}?dark&t=${Date.now()}`,
+                loader: `/@id/${tokensId}?t=${Date.now()}`,
               },
             },
           },

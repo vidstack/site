@@ -18,8 +18,7 @@ const { concise, full } = Astro.props;
   {
     full && concise !== full && (
       <InfoPopup class="ml-px" label="Show more info" center>
-        <Code code={full} lang="tsx" theme="github-dark" />
-        <Code code={full} lang="tsx" theme="github-light" />
+        <Code code={full} lang="tsx" themes={{ light: 'github-light', dark: 'github-dark' }} />
       </InfoPopup>
     )
   }
