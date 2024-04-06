@@ -7,7 +7,7 @@
 
 <svg
   {...$$restProps}
-  class={clsx($$restProps.class, !noBg && 'rounded-md bg-[#030712] p-0.5')}
+  class={clsx($$restProps.class, !noBg && 'shrink-0 rounded-md bg-[#030712] p-0.5')}
   width={size}
   height={size}
   viewBox="0 0 48 48"

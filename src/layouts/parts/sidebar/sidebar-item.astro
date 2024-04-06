@@ -1,0 +1,27 @@
+---
+import clsx from 'clsx';
+
+interface Props {
+  href: string;
+  title: string;
+  isActive: boolean;
+}
+
+const { href, title, isActive } = Astro.props;
+---
+
+<a
+  class={clsx(
+    '-ml-1 mt-px flex items-center rounded-md border px-2 py-1.5',
+    isActive
+      ? 'bg-inverse/90 font-medium text-body shadow-sm'
+      : clsx(
+          'border-transparent text-soft/90',
+          'hocus:border-soft/20 hocus:bg-elevate hocus:text-inverse hocus:shadow-sm',
+        ),
+  )}
+  href={href}
+  data-active={isActive ? '' : null}
+>
+  {title}
+</a>

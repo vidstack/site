@@ -10,6 +10,8 @@
   export let title: string;
   export let items: NavMenuItems;
   export let pathname = '';
+
+  pathname = pathname.replace(/\/$/, '');
 </script>
 
 <NavMenuTrigger {title} />
@@ -22,7 +24,7 @@
       <NavMenuItem
         class={clsx(
           !item.description &&
-            (item.href === pathname ? 'text-brand font-medium' : 'text-soft hocus:text-inverse'),
+            (item.href === pathname ? 'font-medium text-brand' : 'text-soft hocus:text-inverse'),
         )}
         {item}
         as={item.href ? 'a' : 'div'}

@@ -1,10 +1,11 @@
 ---
 import clsx from 'clsx';
 
-import { isSidebarGroup, type SidebarItem } from '../../nav/sidebar-items';
+import { isSidebarGroup, type SidebarItem as TSidebarItem } from '../../nav/sidebar-items';
+import SidebarItem from './sidebar-item.astro';
 
 interface Props {
-  items: SidebarItem[];
+  items: TSidebarItem[];
   deepMatch?: boolean;
   depth?: number;
 }
@@ -31,25 +32,13 @@ pathname = pathname.replace(/\/$/, '');
             pathname.startsWith(item.href))
         : item.href === pathname;
 
-      const link = (
-        <a
-          class={clsx(
-            '-ml-1 mt-px flex items-center rounded-md border px-2 py-1.5',
-            isActive
-              ? 'bg-inverse/90 font-medium text-body shadow-sm'
-              : clsx(
-                  'border-transparent text-soft/90',
-                  'hocus:border-soft/20 hocus:bg-elevate hocus:text-inverse hocus:shadow-sm',
-                ),
-          )}
-          href={item.href}
-          data-active={isActive ? '' : null}
-        >
-          {item.title}
-        </a>
+      return depth == 0 ? (
+        <SidebarItem {...item} {isActive} />
+      ) : (
+        <li>
+          <SidebarItem {...item} {isActive} />
+        </li>
       );
-
-      return depth == 0 ? link : <li>{link}</li>;
     }
   })
 }

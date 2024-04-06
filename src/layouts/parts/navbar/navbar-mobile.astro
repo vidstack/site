@@ -25,13 +25,13 @@ const { noSocials = false, navItems = [] } = Astro.props;
   <div class="flex w-full items-center">
     <div class="flex items-center">
       <a class="rounded-md" href="/" aria-label="Go Home">
-        <VidstackSymbol class="h-[32px] hover:scale-110 transition-transform" />
+        <VidstackSymbol class="transition-transform hover:scale-110" />
       </a>
 
       <slot name="start" />
     </div>
 
-    <div class="flex items-center flex-1">
+    <div class="flex flex-1 items-center">
       <slot name="center" />
     </div>
 
