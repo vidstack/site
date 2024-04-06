@@ -9,6 +9,7 @@
     type JSLibrary,
   } from '~/stores/libraries';
   import { kebabToTitleCase } from '~/utils/string';
+  import Cookies from 'js-cookie';
 
   let _class: string | undefined = undefined;
   export { _class as class };
@@ -38,6 +39,9 @@
       url.searchParams.set('styling', cssLib);
       window.history.pushState({}, '', url);
     }
+
+    Cookies.set('js-lib', jsLib, { secure: true });
+    Cookies.set('css-lib', cssLib, { secure: true });
   }
 </script>
 
