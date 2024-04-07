@@ -38,7 +38,7 @@ export default defineConfig({
       },
     },
     // Throwing some annoying type errors for src/snippets directory, just get rid of it for now.
-    optimizeDeps: { disabled: true, noDiscovery: true, include: null },
+    optimizeDeps: { noDiscovery: true, include: null },
     plugins: [codeHighlight(), codeSnippets(), codePreviews(), icons({ compiler: 'svelte' })],
   },
   experimental: {
