@@ -27,7 +27,7 @@ dependencies:
     specifier: ^1.11.11
     version: 1.11.11(@types/react@18.2.74)(react@18.2.0)
   astro:
-    specifier: ^4.5.15
+    specifier: ^4.5.16
     version: 4.5.16(@types/node@20.12.5)(typescript@5.4.4)
   clsx:
     specifier: ^1.2.0

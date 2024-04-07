@@ -21,6 +21,8 @@ import {
 import { jsLibraries } from '../../stores/libraries';
 import { kebabToTitleCase } from '../../utils/string';
 
+export const prerender = true;
+
 interface Props extends DocsLayoutProps {}
 
 export async function getStaticPaths() {
