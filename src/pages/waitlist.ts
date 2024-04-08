@@ -1,8 +1,6 @@
 import { db } from '@vercel/postgres';
 import type { APIRoute } from 'astro';
 
-export const prerender = false;
-
 if (import.meta.env.DEV) {
   process.env.POSTGRES_URL = import.meta.env.POSTGRES_URL;
 }

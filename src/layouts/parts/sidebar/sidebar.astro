@@ -31,8 +31,9 @@ const { categories, activeCategory, items, deepMatch } = Astro.props;
       'w-full h-full flex flex-col mt-4 992:mt-6 px-6 1460:pl-2 pb-8',
       'scrollbar scroll-contain overflow-auto',
     )}
+    style="scroll-behavior: auto;"
   >
-    <LibSelect class="w-full mb-5 mt-px" client:load />
+    <LibSelect class="mb-5 mt-px w-full" client:load />
     {
       categories && activeCategory && (
         <>

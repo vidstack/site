@@ -3,6 +3,10 @@
 import '../styles/prose.css';
 import '../styles/docs.css';
 
+import OverviewIcon from '~icons/lucide/book';
+import APIIcon from '~icons/lucide/code-2';
+import ComponentsIcon from '~icons/lucide/network';
+
 import LibSelect from '~/docs/components/lib-select.svelte';
 import type { CollectionEntry } from 'astro:content';
 
@@ -10,7 +14,7 @@ import Algolia from '../components/algolia/algolia.astro';
 import { currentJSLibrary, getJSLibraryFromPathname, type JSLibrary } from '../stores/libraries';
 import { kebabToTitleCase } from '../utils/string';
 import AppLayout from './app-layout.astro';
-import type { DocsPagination } from './nav/docs-sidebar-items';
+import { type DocsPagination } from './nav/docs-sidebar-items';
 import type { SidebarFeatureItem, SidebarItem } from './nav/sidebar-items';
 import AnnouncementBar from './parts/announcement-bar.astro';
 import NavbarDesktop from './parts/navbar/navbar-desktop.astro';
@@ -27,7 +31,6 @@ export interface Props {
   page: CollectionEntry<'docs'>;
   pagination: DocsPagination;
   category?: string;
-  categories?: SidebarFeatureItem[];
   sidebar: {
     id: string;
     root: string;
@@ -37,10 +40,9 @@ export interface Props {
 }
 
 const { pathname } = Astro.url,
-  { categories, category, page, pageTitle, pagination, sidebar } = Astro.props,
+  { category, page, pageTitle, pagination, sidebar, jsLibrary } = Astro.props,
   { description } = page.data,
-  { headings, Content } = await page.render(),
-  jsLibrary = getJSLibraryFromPathname(pathname);
+  { headings, Content } = await page.render();
 
 currentJSLibrary.set(jsLibrary);
 
@@ -64,6 +66,12 @@ if (sidebar.deepMatch && !pagination.prev) {
   if (prevItem) pagination.prev = prevItem;
   if (nextItem) pagination.next = nextItem;
 }
+
+const categories = [
+  { title: 'Overview', href: '/docs/player', Icon: OverviewIcon },
+  { title: 'API', href: '/docs/player/api/autoplay', Icon: APIIcon },
+  { title: 'Components', href: '/docs/player/components/core/player', Icon: ComponentsIcon },
+];
 ---
 
 <AppLayout {title} {description} announcementBar>

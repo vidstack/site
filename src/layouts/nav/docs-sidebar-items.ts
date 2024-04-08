@@ -1,9 +1,5 @@
 import { basename, extname } from 'node:path';
 
-import BookIcon from '~icons/lucide/book';
-import CodeIcon from '~icons/lucide/code-2';
-import NetworkIcon from '~icons/lucide/network';
-
 import type { CollectionEntry } from 'astro:content';
 
 import { kebabToCamelCase, kebabToTitleCase } from '../../utils/string';
@@ -90,9 +86,12 @@ export const sidebarItemsOrder: Record<string, DocsFileIdentifiers[]> = {
     // Layouts
     'player/components/layouts/default-layout.mdx',
     'player/components/layouts/plyr-layout.mdx',
+    'player/components/layouts/react/default-layout.mdx',
+    'player/components/layouts/react/plyr-layout.mdx',
     // Display
     'player/components/display/announcer.mdx',
     'player/components/display/poster.mdx',
+    'player/components/display/react/poster.mdx',
     'player/components/display/controls.mdx',
     'player/components/display/gesture.mdx',
     'player/components/display/icons.mdx',
@@ -163,15 +162,4 @@ export function resolvePageTitle(page: CollectionEntry<'docs'>) {
   }
 
   return kebabToTitleCase(fileName);
-}
-
-export function resolveFeatureIcon(title: string) {
-  switch (title) {
-    case 'Overview':
-      return BookIcon;
-    case 'API':
-      return CodeIcon;
-    case 'Components':
-      return NetworkIcon;
-  }
 }

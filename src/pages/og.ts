@@ -1,8 +1,6 @@
 import { ImageResponse } from '@vercel/og';
 import type { APIRoute } from 'astro';
 
-export const prerender = false;
-
 const host = import.meta.env.DEV ? 'http://localhost:4321' : 'https://vidstack.io',
   Logo = createLogo();
 

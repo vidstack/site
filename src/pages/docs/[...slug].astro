@@ -1,142 +1,166 @@
 ---
 import { join } from 'node:path';
 
+import {
+  isSidebarGroup,
+  type SidebarGroup,
+  type SidebarItem,
+  type SidebarLink,
+} from '~/layouts/nav/sidebar-items';
+import { kebabToTitleCase } from '~/utils/string';
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 import DocsLayout, { type Props as DocsLayoutProps } from '../../layouts/docs-layout.astro';
 import {
-  resolveFeatureIcon,
   resolvePageTitle,
   resolveRootCategory,
   resolveSubCategory,
   sidebarItemsOrder,
 } from '../../layouts/nav/docs-sidebar-items';
-import {
-  isSidebarGroup,
-  type SidebarFeatureItem,
-  type SidebarGroup,
-  type SidebarItems,
-  type SidebarLink,
-} from '../../layouts/nav/sidebar-items';
-import { jsLibraries } from '../../stores/libraries';
-import { kebabToTitleCase } from '../../utils/string';
+import type { DocsFileIdentifiers, DocsPagination } from '../../layouts/nav/docs-sidebar-items';
+import { getJSLibraryFromPathname } from '../../stores/libraries';
 
-export const prerender = true;
+let { pathname } = Astro.url,
+  jsLibrary = getJSLibraryFromPathname(pathname),
+  jsLibPrefix = jsLibrary === 'react' ? '' : 'wc',
+  jsLibSegment = '/' + (jsLibrary === 'web-components' ? 'wc' : jsLibrary) + '/',
+  overviewRE = /^(.*?)\/overview/,
+  jsLibRE = /\/(wc|react)\//,
+  indexRE = /index\..+$/,
+  basePath = '/docs',
+  slug = pathname.replace(/\/$/, ''),
+  pages = await getPages(),
+  page = findPage(pages, slug),
+  props = page ? buildProps(pages, page) : null;
 
-interface Props extends DocsLayoutProps {}
+async function getPages() {
+  const pages = await getCollection('docs');
+  return pages.filter((page) => !jsLibRE.test(page.slug) || page.slug.includes(jsLibSegment));
+}
 
-export async function getStaticPaths() {
-  const pages = await getCollection('docs'),
-    pagePropsMap = new Map<string, Props>(),
-    overviewFilterRE = /^(.*?)\/overview/,
-    jsLibraryFilterRE = /\/(wc|react)\//,
-    indexFileRE = /index\..+$/,
-    basePath = '/docs';
+function buildProps(
+  pages: CollectionEntry<'docs'>[],
+  currentPage: CollectionEntry<'docs'>,
+): DocsLayoutProps {
+  const sidebarId = resolveSidebarId(currentPage.id),
+    rootCategory = resolveRootCategory(sidebarId),
+    { items, pagination } = buildSidebarItems(pages, currentPage, rootCategory);
+  return {
+    jsLibrary,
+    page: { ...currentPage, slug: slug as any },
+    pageTitle: resolvePageTitle(currentPage),
+    pagination,
+    category: resolveSubCategory(sidebarId) || rootCategory,
+    sidebar: {
+      id: sidebarId,
+      root: rootCategory,
+      items,
+      deepMatch: currentPage.slug.includes('/installation'),
+    },
+  };
+}
 
-  return jsLibraries.flatMap((jsLibrary) => {
-    pagePropsMap.clear();
+function resolvePageSlug(page: CollectionEntry<'docs'>) {
+  const filteredPageSlug = page.slug.replace(jsLibRE, '/').replace(overviewRE, '$1');
+  return `${basePath}/${filteredPageSlug.includes('installation') ? filteredPageSlug : join(jsLibPrefix, filteredPageSlug)}`;
+}
 
-    const jsLibPrefix = jsLibrary === 'react' ? '' : 'wc',
-      jsLibSegment = '/' + (jsLibrary === 'web-components' ? 'wc' : jsLibrary) + '/',
-      categories: SidebarFeatureItem[] = [],
-      sidebarItems: SidebarItems = { Overview: [], API: [], Components: [] };
+function resolveSidebarId(id: string) {
+  return id.replace(jsLibRE, '/').replace(/.*?\//, '');
+}
 
-    const staticPaths = pages
-      .filter((page) => !jsLibraryFilterRE.test(page.slug) || page.slug.includes(jsLibSegment))
-      .map((page) => {
-        const filteredSlug = page.slug
-            .replace(jsLibraryFilterRE, '/')
-            .replace(overviewFilterRE, '$1'),
-          slug = join(jsLibPrefix, filteredSlug) as any,
-          sidebarId = page.id.replace(jsLibraryFilterRE, '/').replace(/.*?\//, ''),
-          rootCategory = resolveRootCategory(sidebarId),
-          subCategory = resolveSubCategory(sidebarId),
-          props: DocsLayoutProps = {
-            jsLibrary,
-            page: { ...page, slug },
-            pageTitle: resolvePageTitle(page),
-            pagination: {}, // Set below.
-            categories,
-            category: subCategory || rootCategory,
-            sidebar: {
-              id: sidebarId,
-              root: rootCategory,
-              items: sidebarItems[rootCategory],
-              deepMatch: page.slug.includes('/installation'),
-            },
-          };
+function findPage(pages: CollectionEntry<'docs'>[], slug: string) {
+  for (const page of pages) {
+    if (resolvePageSlug(page) === slug) return page;
+  }
 
-        pagePropsMap.set(page.id, props);
+  return null;
+}
 
-        return {
-          params: { slug },
-          props,
-        };
-      });
+function isCategory(page: CollectionEntry<'docs'>, category: string) {
+  const sidebarId = resolveSidebarId(page.id);
+  return resolveRootCategory(sidebarId) === category;
+}
 
-    // Build sidebar nav items.
-    for (const category of Object.keys(sidebarItemsOrder)) {
-      const ids = sidebarItemsOrder[category],
-        items = sidebarItems[category],
-        firstPageProps = pagePropsMap.get(ids[0]);
+function buildSidebarItems(
+  pages: CollectionEntry<'docs'>[],
+  currentPage: CollectionEntry<'docs'>,
+  currentCategory: string,
+) {
+  // Pages that belong to this category.
+  const validPages: CollectionEntry<'docs'>[] = [],
+    items: SidebarItem[] = [],
+    pagination: DocsPagination = {},
+    seen = new Set<string>(),
+    skip = new Set<DocsFileIdentifiers>(['player/components/index.mdx']);
 
-      if (firstPageProps) {
-        categories.push({
-          title: category,
-          href: `${basePath}/${firstPageProps.page.slug}`,
-          Icon: resolveFeatureIcon(category),
-        });
+  for (const page of pages) {
+    const id = page.id.replace(jsLibRE, '/');
+    if (!skip.has(page.id) && !seen.has(id) && isCategory(page, currentCategory)) {
+      validPages.push(page);
+      seen.add(id);
+    }
+  }
+
+  const orderedItems = sidebarItemsOrder[currentCategory];
+  validPages.sort((a, b) => orderedItems.indexOf(a.id) - orderedItems.indexOf(b.id));
+
+  for (let i = 0; i < validPages.length; i++) {
+    const page = validPages[i],
+      sidebarId = resolveSidebarId(page.id);
+
+    // TODO: trying to avoid deep matches showing up multiple times, this is really lazy.
+    if (!page.data.title?.includes('Installation Guide')) {
+      let segments = sidebarId.split('/').slice(1, indexRE.test(sidebarId) ? -2 : -1),
+        sidebarTitle = page.data.sidebar_title || resolvePageTitle(page),
+        group = items;
+
+      for (const segment of segments) {
+        let title = kebabToTitleCase(segment),
+          next = group.find((item) => isSidebarGroup(item) && item.title === title) as
+            | SidebarGroup
+            | undefined;
+
+        if (!next) group.push((next = { title, items: [] }));
+
+        group = next.items;
       }
 
-      for (let i = 0; i < ids.length; i++) {
-        const props = pagePropsMap.get(ids[i]);
+      const item: SidebarLink = {
+        title: sidebarTitle,
+        href: resolvePageSlug(page),
+      };
 
-        if (!props || props.sidebar.root !== category) continue;
-
-        let { page, sidebar } = props,
-          segments = sidebar.id.split('/').slice(1, indexFileRE.test(sidebar.id) ? -2 : -1),
-          sidebarTitle = page.data.sidebar_title || props.pageTitle,
-          prevPage = pagePropsMap.get(ids[i - 1]),
-          nextPage = pagePropsMap.get(ids[i + 1]);
-
-        let group = items;
-        for (const segment of segments) {
-          let title = kebabToTitleCase(segment),
-            next = group.find((item) => isSidebarGroup(item) && item.title === title) as
-              | SidebarGroup
-              | undefined;
-
-          if (!next) group.push((next = { title, items: [] }));
-
-          group = next.items;
-        }
-
-        const item: SidebarLink = {
-          title: sidebarTitle,
-          href: `${basePath}/${page.slug}`,
-        };
-
-        group.push(item);
-
-        if (prevPage) {
-          props.pagination.prev = {
-            title: prevPage.pageTitle,
-            href: `${basePath}/${prevPage.page.slug}`,
-          };
-        }
-
-        if (nextPage) {
-          props.pagination.next = {
-            title: nextPage.pageTitle,
-            href: `${basePath}/${nextPage.page.slug}`,
-          };
-        }
-      }
+      group.push(item);
     }
 
-    return staticPaths;
-  });
+    if (page === currentPage) {
+      const prevPage = validPages[i - 1],
+        nextPage = validPages[i + 1];
+
+      if (prevPage) {
+        pagination.prev = {
+          title: resolvePageTitle(prevPage),
+          href: resolvePageSlug(prevPage),
+        };
+      }
+
+      if (nextPage) {
+        pagination.next = {
+          title: resolvePageTitle(nextPage),
+          href: resolvePageSlug(nextPage),
+        };
+      }
+    }
+  }
+
+  return { items, pagination };
+}
+
+if (!props) {
+  return new Response(null, { status: 404 });
 }
 ---
 
-<DocsLayout {...Astro.props} />
+<DocsLayout {...props} />
