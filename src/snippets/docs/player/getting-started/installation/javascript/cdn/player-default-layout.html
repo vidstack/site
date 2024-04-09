@@ -1,12 +1,12 @@
 <script type="module">
-  import '{SCRIPT_SRC}';
+  import { VidstackPlayer, VidstackPlayerLayout } from '{SCRIPT_SRC}';
 
   const player = await VidstackPlayer.create({
     target: '#target',
     title: '{TITLE}',
     src: '{SRC}',
     poster: '{POSTER}',
-    layout: new VidstackPlayer.Layout.Default({
+    layout: new VidstackPlayerLayout({
       thumbnails: '{THUMBNAILS}',
     }),
   });
