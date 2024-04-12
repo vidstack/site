@@ -81,6 +81,7 @@ export default defineConfig({
     ],
   },
   redirects: {
+    '/player': '/',
     '/docs': '/docs/player',
     '/docs/react': '/docs/player',
     '/docs/wc': '/docs/wc/player',

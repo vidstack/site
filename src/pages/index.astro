@@ -2,7 +2,6 @@
 import clsx from 'clsx';
 
 import AnimatedBookIcon from '~/icons/animated/animated-book-icon.svelte';
-import AnimatedGithubIcon from '~/icons/animated/animated-github-icon.svelte';
 import AnimatedHeartHandshakeIcon from '~/icons/animated/animated-heart-handshake-icon.svelte';
 import AnimatedPackageIcon from '~/icons/animated/animated-package-icon.svelte';
 import NextIcon from '~/icons/logos/next-logo.svelte';
@@ -11,27 +10,17 @@ import ReactIcon from '~/icons/logos/react-logo.svelte';
 import SvelteIcon from '~/icons/logos/svelte-logo.svelte';
 import TailwindIcon from '~/icons/logos/tailwind-logo.svelte';
 import VueIcon from '~/icons/logos/vue-logo.svelte';
-import FileVideoIcon from '~astro-icons/lucide/file-video-2';
 import TerminalIcon from '~astro-icons/lucide/terminal';
+
+import LazyMediaPlayer from '~/components/players/lazy-media-player.svelte';
 
 import Button from '../components/button.svelte';
 import CodeSnippet from '../components/code-snippet/code-snippet.astro';
-import GitHubCommentTable from '../components/github-comment-table.astro';
-import GitHubComment from '../components/github-comment.svelte';
 import GradientBorder from '../components/gradient-border.svelte';
-import JoinWaitlist from '../components/join-waitlist.svelte';
-import MockCodeEditor from '../components/mocks/code-editor/mock-code-editor.astro';
-import MockDashboard from '../components/mocks/dashboard/mock-dashboard.astro';
-import GitTerminalProcess from '../components/pages/home/git-terminal-process.svelte';
 import { openSourceProjects } from '../components/pages/home/oss-projects';
-import VideoPlayer from '../components/players/lazy-media-player.svelte';
 import FeatureSection from '../components/sections/feature-section.astro';
 import GridContent from '../components/sections/grid-content.astro';
 import HeroSection from '../components/sections/hero-section.astro';
-import Step from '../components/steps/step.svelte';
-import Steps from '../components/steps/steps.svelte';
-import FadeInWhenVisible from '../components/style/fade-in-when-visible.astro';
-import Style from '../components/style/style.svelte';
 import TypeWriter from '../components/style/type-writer.svelte';
 import TextGradient from '../components/text-gradient.svelte';
 import DefaultLayout from '../layouts/default-layout.astro';
@@ -49,289 +38,134 @@ const title = 'Vidstack: Open-source video platform.',
     <span class="font-semibold">Player:</span> 1.0-RC!
   </AnnouncementBar>
 
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <HeroSection>
-      <Fragment slot="title">
-        Your video.
-        <br />
-        <span class="mt-1 inline-block">
-          <TextGradient>Your Platform.</TextGradient>
-        </span>
-      </Fragment>
+  <HeroSection>
+    <Fragment slot="title">
+      Build your <TextGradient>player.</TextGradient>
+    </Fragment>
 
-      <p slot="description">
-        Vidstack is an open-source platform that helps you manage, build, and ship video.
-      </p>
+    <p slot="description">
+      UI components and hooks for building media players on the web. Robust, customizable, and
+      accessible.
+    </p>
 
-      <Fragment slot="frameworks">
-        <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-[#00D8FF]"
-          href="https://react.dev"
-          aria-label="React"
-          target="_blank"
-        >
-          <ReactIcon class="h-9 w-9" />
-        </a>
+    <Fragment slot="cta">
+      <Button arrow href="/docs/player" primary>Get Started</Button>
+      <Button arrow href="/docs/player" gradient>Components</Button>
+    </Fragment>
 
-        <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-[#06B6D4]"
-          href="https://tailwindcss.com"
-          aria-label="Tailwind CSS"
-          target="_blank"
-        >
-          <TailwindIcon class="h-11 w-11" />
-        </a>
+    <Fragment slot="frameworks">
+      <a
+        class="rounded-md text-soft transition hocus:scale-105 hocus:text-[#00D8FF]"
+        href="https://react.dev"
+        aria-label="React"
+        target="_blank"
+      >
+        <ReactIcon class="h-9 w-9" />
+      </a>
 
-        <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-inverse"
-          href="https://nextjs.org"
-          aria-label="Next.js"
-          target="_blank"
-        >
-          <NextIcon class="h-9 w-9" />
-        </a>
+      <a
+        class="rounded-md text-soft transition hocus:scale-105 hocus:text-[#06B6D4]"
+        href="https://tailwindcss.com"
+        aria-label="Tailwind CSS"
+        target="_blank"
+      >
+        <TailwindIcon class="h-11 w-11" />
+      </a>
 
-        <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-green-500"
-          href="https://vuejs.org/"
-          aria-label="Vue"
-          target="_blank"
-        >
-          <VueIcon class="h-8 w-8" />
-        </a>
+      <a
+        class="rounded-md text-soft transition hocus:scale-105 hocus:text-inverse"
+        href="https://nextjs.org"
+        aria-label="Next.js"
+        target="_blank"
+      >
+        <NextIcon class="h-9 w-9" />
+      </a>
 
-        <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-lime-500"
-          href="https://nuxt.com"
-          aria-label="Nuxt"
-          target="_blank"
-        >
-          <NuxtIcon class="h-11 w-11" />
-        </a>
+      <a
+        class="rounded-md text-soft transition hocus:scale-105 hocus:text-green-500"
+        href="https://vuejs.org/"
+        aria-label="Vue"
+        target="_blank"
+      >
+        <VueIcon class="h-8 w-8" />
+      </a>
 
-        <a
-          class="rounded-md text-soft transition hocus:scale-105 hocus:text-red-500"
-          href="https://svelte.dev"
-          aria-label="Svelte"
-          target="_blank"
-        >
-          <SvelteIcon class="h-8 w-8" />
-        </a>
-      </Fragment>
-    </HeroSection>
-  </Style>
+      <a
+        class="rounded-md text-soft transition hocus:scale-105 hocus:text-lime-500"
+        href="https://nuxt.com"
+        aria-label="Nuxt"
+        target="_blank"
+      >
+        <NuxtIcon class="h-11 w-11" />
+      </a>
 
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <FeatureSection title="Manage." subtitle="Built for video." align="start">
-      <FileVideoIcon width="100%" height="100%" slot="icon" />
+      <a
+        class="rounded-md text-soft transition hocus:scale-105 hocus:text-red-500"
+        href="https://svelte.dev"
+        aria-label="Svelte"
+        target="_blank"
+      >
+        <SvelteIcon class="h-8 w-8" />
+      </a>
+    </Fragment>
+  </HeroSection>
 
-      <p slot="description">
-        Move faster with everything in one place. Create projects for each site, manage video/audio
-        assets, streams, collections, thumbnails, captions, and more.
-      </p>
+  <FeatureSection title="Layouts." subtitle="Built to ship." align="center">
+    <AnimatedPackageIcon class="h-full w-full" delay={3000} client:visible slot="icon" />
 
-      <JoinWaitlist gradient slot="cta" client:load />
+    <p slot="description">Robust, customizable, and accessible layouts so you can ship fast.</p>
 
-      <MockDashboard slot="content" />
-    </FeatureSection>
-  </Style>
-
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <FeatureSection title="Player." subtitle="Built for devs." align="center">
-      <AnimatedPackageIcon class="h-full w-full" delay={3000} client:visible slot="icon" />
-
-      <p slot="description">
-        We provide robust, accessible UI components and hooks for building media players on the web.
-      </p>
-
-      <div class="relative" slot="cta">
-        <GradientBorder class="rounded-full" />
-        <div
-          class={clsx(
-            'w-[240px] h-[38px] z-10 bg-body flex items-center rounded-full relative',
-            'bg-clip-padding border-2 border-transparent font-medium font-mono text-sm',
-          )}
-        >
-          <TerminalIcon
-            class="absolute left-[18px] top-2.5 h-4 w-4 text-[var(--from-color)] dark:text-[var(--to-color)]"
-          />
-          <div class="translate-x-10">
-            <TypeWriter text="npm i @vidstack/react" speed={50} delay={1200} caret client:visible />
-          </div>
+    <div class="relative" slot="cta">
+      <GradientBorder class="rounded-full" />
+      <div
+        class={clsx(
+          'w-[240px] h-[38px] z-10 bg-body flex items-center rounded-full relative',
+          'bg-clip-padding border-2 border-transparent font-medium font-mono text-sm',
+        )}
+      >
+        <TerminalIcon
+          class="absolute left-[18px] top-2.5 h-4 w-4 text-[var(--from-color)] dark:text-[var(--to-color)]"
+        />
+        <div class="translate-x-10">
+          <TypeWriter text="npm i @vidstack/react" speed={50} delay={1200} caret client:visible />
         </div>
-        <div class="absolute left-0.5 top-0.5 h-[40px] w-[242px] rounded-full bg-brand/10"></div>
       </div>
+      <div class="absolute left-0.5 top-0.5 h-[40px] w-[242px] rounded-full bg-brand/10"></div>
+    </div>
 
-      <div class="flex w-full items-center justify-center" slot="content">
-        <CodeSnippet id="home/default-layout" class="w-full max-w-3xl" numbered />
-      </div>
-    </FeatureSection>
-  </Style>
+    <div class="flex w-full items-center justify-center" slot="content">
+      <CodeSnippet id="home/default-layout" class="w-full max-w-3xl" numbered />
+    </div>
+  </FeatureSection>
 
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <FeatureSection title="Next.js." subtitle="Built to be seamless." align="start">
-      <NextIcon class="h-full w-full" slot="icon" />
+  <FeatureSection title="Open Source." subtitle="Built transparently." align="center">
+    <AnimatedBookIcon class="h-full w-full" delay={1000} client:visible slot="icon" />
 
-      <p slot="description">
-        We're building Vidstack for a seamless start-to-finish workflow. No setup headaches, no
-        state management, and no backend APIs. Flexible hooks and components are waiting for you.
-      </p>
+    <p slot="description">
+      Our entire journey is rooted in open-source and you can find all of our work on GitHub. If you
+      like what we're doing, remember to follow and give us a star!
+    </p>
 
-      <JoinWaitlist slot="cta" gradient client:load />
+    <Button arrow href="https://github.com/vidstack" gradient target="_blank" slot="cta">
+      Follow on GitHub
+    </Button>
 
-      <div class="flex w-full items-center justify-center" slot="content">
-        <Steps
-          class="w-full"
-          stepListClass="max-w-xl"
-          label="Next.js Integration Steps"
-          steps={['Setup', 'Play', 'Analyze']}
-          animated
-          initialDelay={2000}
-          client:visible
-        >
-          <div class="min-w-full max-w-3xl">
-            <!-- Setup -->
-            <Step>
-              <div class="relative min-h-[512px] w-full overflow-hidden">
-                <CodeSnippet
-                  title=".env"
-                  id="home/next-steps/setup-env"
-                  class="w-[80%] max-w-md overflow-hidden"
-                />
-                <div class="-translate-y-3 transform">
-                  <CodeSnippet
-                    title="app/layout.tsx"
-                    id="home/next-steps/setup"
-                    class="w-full max-w-lg"
-                    numbered
-                  />
-                </div>
-              </div>
-            </Step>
-            <!-- Play -->
-            <Step>
-              <CodeSnippet
-                class="max-w-xl"
-                title="app/watch/page.tsx"
-                id="home/next-steps/play"
-                numbered
-              />
-            </Step>
-            <!-- Analyze -->
-            <Step>
-              <CodeSnippet
-                class="max-w-xl"
-                title="app/watch/page.tsx"
-                id="home/next-steps/analyze"
-                numbered
-              />
-            </Step>
-          </div>
-        </Steps>
-      </div>
-    </FeatureSection>
-  </Style>
+    <GridContent label="Open-Source Projects" content={openSourceProjects} slot="content" />
+  </FeatureSection>
 
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <FeatureSection title="Git." subtitle="Built to commit." align="center">
-      <AnimatedGithubIcon
-        class="h-[110%] w-[110%] dark:text-black"
-        delay={1800}
-        client:visible
-        slot="icon"
-      />
+  <FeatureSection title="Community." subtitle="Built for us." align="center">
+    <AnimatedHeartHandshakeIcon class="h-full w-full" delay={2000} client:visible slot="icon" />
 
-      <p slot="description">
-        Manage your media files inside your repository and when you're ready, just push. Our Git
-        integration will handle the rest for you.
-      </p>
+    <p slot="description">
+      We're a community of frontend devs working with video & audio. Join in on the discussions,
+      share your designs and knowledge, ask for help, and connect with others building awesome
+      experiences.
+    </p>
 
-      <JoinWaitlist gradient slot="cta" client:load />
-
-      <div class="flex w-full flex-col items-center justify-center" slot="content">
-        <div class="mx-auto w-full max-w-3xl">
-          <GitTerminalProcess client:visible />
-        </div>
-
-        <div
-          class="my-6 h-20 w-px animate-[levitate_16s_ease_infinite] border border-dashed border-border/90 992:my-8 992:h-28"
-        >
-        </div>
-
-        <FadeInWhenVisible>
-          <div class="mx-auto w-full max-w-xl">
-            <GitHubComment>
-              <GitHubCommentTable
-                rows={[
-                  { name: 'Installation', status: '✅ Uploaded' },
-                  { name: 'Project Tour', status: '🔄 Encoding' },
-                ]}
-              />
-            </GitHubComment>
-          </div>
-        </FadeInWhenVisible>
-      </div>
-    </FeatureSection>
-  </Style>
-
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <FeatureSection title="Open Source." subtitle="Built transparently." align="center">
-      <AnimatedBookIcon class="h-full w-full" delay={1000} client:visible slot="icon" />
-
-      <p slot="description">
-        Our entire journey is rooted in open-source and you can find all of our work on GitHub. If
-        you like what we're doing, remember to follow and give us a star!
-      </p>
-
-      <Button arrow href="https://github.com/vidstack" gradient target="_blank" slot="cta">
-        Follow on GitHub
-      </Button>
-
-      <GridContent label="Open-Source Projects" content={openSourceProjects} slot="content" />
-    </FeatureSection>
-  </Style>
-
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <FeatureSection title="Community." subtitle="Built for us." align="center">
-      <AnimatedHeartHandshakeIcon class="h-full w-full" delay={2000} client:visible slot="icon" />
-
-      <p slot="description">
-        We're a community of frontend devs working with video & audio. Join in on the discussions,
-        share your designs and knowledge, ask for help, and connect with others building awesome
-        experiences.
-      </p>
-
-      <div class="flex w-full items-center justify-center" slot="cta">
-        <SocialLink class="mr-4 768:mr-8" type="twitter" iconSize={40} />
-        <SocialLink class="mr-4 768:mr-8" type="discord" iconSize={40} />
-        <SocialLink type="gitHub" iconSize={40} />
-      </div>
-    </FeatureSection>
-  </Style>
-
-  <Style
-    style="--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);"
-  >
-    <FeatureSection
-      title="Better video workflows."
-      subtitle="Built for frontend devs."
-      align="center"
-    >
-      <JoinWaitlist primary client:visible slot="cta" />
-    </FeatureSection>
-  </Style>
+    <div class="flex w-full items-center justify-center" slot="cta">
+      <SocialLink class="mr-4 768:mr-8" type="twitter" iconSize={40} />
+      <SocialLink class="mr-4 768:mr-8" type="discord" iconSize={40} />
+      <SocialLink type="gitHub" iconSize={40} />
+    </div>
+  </FeatureSection>
 </DefaultLayout>

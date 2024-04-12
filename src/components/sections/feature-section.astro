@@ -10,10 +10,17 @@ interface Props {
   title: string;
   subtitle?: string;
   align?: 'start' | 'center';
+  style?: string;
   noTextGradient?: boolean;
 }
 
-const { title, subtitle, align = 'center', noTextGradient = false } = Astro.props;
+const {
+  title,
+  subtitle,
+  style = '--from-color: var(--default-gradient-start); --to-color: var(--default-gradient-end);',
+  align = 'center',
+  noTextGradient = false,
+} = Astro.props;
 ---
 
 <FadeInWhenVisible>
@@ -25,6 +32,7 @@ const { title, subtitle, align = 'center', noTextGradient = false } = Astro.prop
       align === 'start' ? '992:flex-row 992:items-center 992:justify-start' : 'justify-center',
       !subtitle ? 'pb-32 992:pb-40' : 'py-20 992:py-28 1200:py-40',
     )}
+    style={style}
   >
     <div
       class={clsx(
