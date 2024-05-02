@@ -1,5 +1,7 @@
 <script lang="ts">
+  import Slider from './slider.svelte';
+
   export let animate: boolean;
 </script>
 
-X
+<Slider {animate} chapters />

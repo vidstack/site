@@ -8,7 +8,7 @@
     'ラドクリフマラソンわたしワタシんょンョたばこタバコとうきょうトウキョウ0123456789±!@#$%^&*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 </script>
 
-<div class="font-mono text-xl" class:animate>
+<div class="font-mono text-xl tracking-tighter" class:animate>
   {#each text.split('') as char, i}
     <span
       class="relative text-transparent"

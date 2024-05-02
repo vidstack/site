@@ -17,16 +17,12 @@
       height="0.8"
       x="2"
       y={7 + (i - 1) * 3}
+      rx="1"
+      ry="1"
       style={`--i: ${i}`}
     />
   {/each}
-  <g
-    fill="none"
-    stroke="currentColor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="0.4"
-  >
+  <g fill="none" stroke="currentColor" stroke-width="0.4">
     <rect width="24" height="16" x="0" y="4" rx="1" ry="1" />
     <path d="m17 -4l-5 8l-3-5" />
   </g>
