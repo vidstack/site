@@ -19,7 +19,7 @@
   {/if}
 
   <div
-    class="thumb absolute left-1/2 top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-soft"
+    class="thumb absolute left-1/2 top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border/10 bg-soft"
     class:animate
   ></div>
   {#if $$slots.preview}
@@ -38,7 +38,7 @@
 
 <style>
   .animate {
-    animation: slide 1.5s;
+    animation: slide 1s;
   }
 
   .thumb.animate {
@@ -48,10 +48,10 @@
 
   @keyframes slide {
     33% {
-      left: 32%;
+      left: 45%;
     }
     66% {
-      left: 68%;
+      left: 55%;
     }
     100% {
       left: 50%;

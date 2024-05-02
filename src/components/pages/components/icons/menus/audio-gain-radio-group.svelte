@@ -5,6 +5,6 @@
 </script>
 
 <RadioGroup
-  items={[{ name: 'English', checked: true, badge: 'CC' }, { name: 'Spanish' }, { name: 'German' }]}
+  items={[{ name: '100%' }, { name: '200%' }, { name: '300%', checked: true }]}
   {animate}
 />

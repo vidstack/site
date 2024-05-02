@@ -61,7 +61,13 @@ export const componentsCatalog: ComponentsCatalog = {
       description: `Used to provide users with a real-time or interactive preview of the value or selection they are making as they move the slider thumb.`,
       icon: 'sliders/slider-preview',
     },
-    'player/components/sliders/wc/slider-value.mdx',
+    {
+      title: 'Slider Value',
+      id: 'player/components/sliders/slider.mdx',
+      description:
+        'This component is used to display the current value of a slider in various formats such as a raw value, percentage, or time.',
+      icon: 'sliders/slider-value',
+    },
     {
       title: 'Slider Video',
       id: 'player/components/sliders/time-slider.mdx',
@@ -103,16 +109,21 @@ export const componentsCatalog: ComponentsCatalog = {
     },
     {
       title: 'Menu Portal',
-      description: `Portals menu items into a specified location.`,
+      description: `Portals menu items into a specified location, generally the document body.`,
       id: 'player/components/menus/menu.mdx',
       icon: 'menus/menu-portal',
     },
     'player/components/menus/radio-group.mdx',
-    'player/components/menus/wc/audio-radio-group.mdx',
     {
       title: 'Audio Radio Group',
-      id: 'player/api/react/hooks/use-audio-gain-options.mdx',
+      id: 'player/api/react/hooks/use-audio-options.mdx',
       icon: 'menus/audio-radio-group',
+    },
+    'player/components/menus/wc/audio-radio-group.mdx',
+    {
+      title: 'Audio Gain Radio Group',
+      id: 'player/api/react/hooks/use-audio-gain-options.mdx',
+      icon: 'menus/audio-gain-radio-group',
     },
     'player/components/menus/wc/audio-gain-radio-group.mdx',
     {

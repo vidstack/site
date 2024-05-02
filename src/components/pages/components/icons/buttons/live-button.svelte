@@ -11,7 +11,7 @@
 
 <style>
   .animate {
-    animation: color 250ms ease-in;
+    animation: color 200ms ease-in;
     animation-fill-mode: forwards;
   }
 
