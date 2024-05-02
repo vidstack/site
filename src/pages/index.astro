@@ -1,27 +1,35 @@
 ---
-import clsx from 'clsx';
-
-import AnimatedBookIcon from '~/icons/animated/animated-book-icon.svelte';
-import AnimatedHeartHandshakeIcon from '~/icons/animated/animated-heart-handshake-icon.svelte';
-import AnimatedPackageIcon from '~/icons/animated/animated-package-icon.svelte';
+import IconsSection from '~/components/pages/home/sections/icons/icons-section.astro';
 import NextIcon from '~/icons/logos/next-logo.svelte';
 import NuxtIcon from '~/icons/logos/nuxt-logo.svelte';
 import ReactIcon from '~/icons/logos/react-logo.svelte';
 import SvelteIcon from '~/icons/logos/svelte-logo.svelte';
 import TailwindIcon from '~/icons/logos/tailwind-logo.svelte';
 import VueIcon from '~/icons/logos/vue-logo.svelte';
-import TerminalIcon from '~astro-icons/lucide/terminal';
+import AccessibilityIcon from '~astro-icons/lucide/accessibility';
+import BlocksIcon from '~astro-icons/lucide/blocks';
+import BookIcon from '~astro-icons/lucide/book';
+import HeartHandshakeIcon from '~astro-icons/lucide/heart-handshake';
+import PackageIcon from '~astro-icons/lucide/package';
+import PaintBrushIcon from '~astro-icons/lucide/paintbrush';
+import ShuffleIcon from '~astro-icons/lucide/shuffle';
+import SquareStackIcon from '~astro-icons/lucide/square-stack';
+import TvIcon from '~astro-icons/lucide/tv';
+import WandSparklesIcon from '~astro-icons/lucide/wand-sparkles';
 
-import LazyMediaPlayer from '~/components/players/lazy-media-player.svelte';
+import AccessibilitySection from '~/components/pages/home/sections/accessibility/accessibility-section.astro';
+import ComponentsSection from '~/components/pages/home/sections/components/components-section.astro';
+import DesignSection from '~/components/pages/home/sections/design/design-section.astro';
+import FeaturesContentSection from '~/components/pages/home/sections/features/features-section.astro';
+import LayoutSection from '~/components/pages/home/sections/layout/layout-section.astro';
+import ProviderSection from '~/components/pages/home/sections/provider/provider-section.astro';
+import StateSection from '~/components/pages/home/sections/state/state-section.astro';
 
 import Button from '../components/button.svelte';
-import CodeSnippet from '../components/code-snippet/code-snippet.astro';
-import GradientBorder from '../components/gradient-border.svelte';
 import { openSourceProjects } from '../components/pages/home/oss-projects';
 import FeatureSection from '../components/sections/feature-section.astro';
 import GridContent from '../components/sections/grid-content.astro';
 import HeroSection from '../components/sections/hero-section.astro';
-import TypeWriter from '../components/style/type-writer.svelte';
 import TextGradient from '../components/text-gradient.svelte';
 import DefaultLayout from '../layouts/default-layout.astro';
 import AnnouncementBar from '../layouts/parts/announcement-bar.astro';
@@ -50,7 +58,7 @@ const title = 'Vidstack: Open-source video platform.',
 
     <Fragment slot="cta">
       <Button arrow href="/docs/player" primary>Get Started</Button>
-      <Button arrow href="/docs/player" gradient>Components</Button>
+      <Button arrow href="/player/components" gradient>Components</Button>
     </Fragment>
 
     <Fragment slot="frameworks">
@@ -110,41 +118,50 @@ const title = 'Vidstack: Open-source video platform.',
     </Fragment>
   </HeroSection>
 
+  <FeatureSection title="Components." subtitle="Built to compose." align="center">
+    <BlocksIcon class="h-full w-full" slot="icon" />
+    <Button arrow href="/player/components" gradient slot="cta">Discover More</Button>
+    <ComponentsSection slot="content" />
+  </FeatureSection>
+
+  <FeatureSection title="Design." subtitle="Built to be styled." align="start">
+    <PaintBrushIcon class="h-full w-full" slot="icon" />
+    <DesignSection slot="content" />
+  </FeatureSection>
+
   <FeatureSection title="Layouts." subtitle="Built to ship." align="center">
-    <AnimatedPackageIcon class="h-full w-full" delay={3000} client:visible slot="icon" />
+    <PackageIcon class="h-full w-full" slot="icon" />
+    <LayoutSection slot="content" />
+  </FeatureSection>
 
-    <p slot="description">Robust, customizable, and accessible layouts so you can ship fast.</p>
+  <FeatureSection title="Providers." subtitle="Built to adapt." align="start">
+    <TvIcon class="h-full w-full" slot="icon" />
+    <ProviderSection slot="content" />
+  </FeatureSection>
 
-    <div class="relative" slot="cta">
-      <GradientBorder class="rounded-full" />
-      <div
-        class={clsx(
-          'w-[240px] h-[38px] z-10 bg-body flex items-center rounded-full relative',
-          'bg-clip-padding border-2 border-transparent font-medium font-mono text-sm',
-        )}
-      >
-        <TerminalIcon
-          class="absolute left-[18px] top-2.5 h-4 w-4 text-[var(--from-color)] dark:text-[var(--to-color)]"
-        />
-        <div class="translate-x-10">
-          <TypeWriter text="npm i @vidstack/react" speed={50} delay={1200} caret client:visible />
-        </div>
-      </div>
-      <div class="absolute left-0.5 top-0.5 h-[40px] w-[242px] rounded-full bg-brand/10"></div>
-    </div>
+  <FeatureSection title="State." subtitle="Built to be reactive." align="center">
+    <ShuffleIcon class="h-full w-full" slot="icon" />
+    <StateSection slot="content" />
+  </FeatureSection>
 
-    <div class="flex w-full items-center justify-center" slot="content">
-      <CodeSnippet id="home/default-layout" class="w-full max-w-3xl" numbered />
-    </div>
+  <FeatureSection title="Accessible." subtitle="Built for all." align="start">
+    <AccessibilityIcon class="h-full w-full" slot="icon" />
+    <AccessibilitySection slot="content" />
+  </FeatureSection>
+
+  <FeatureSection title="Features." align="start">
+    <WandSparklesIcon class="h-full w-full" slot="icon" />
+    <FeaturesContentSection slot="content" />
+  </FeatureSection>
+
+  <FeatureSection title="Icons." align="center">
+    <SquareStackIcon class="h-full w-full" slot="icon" />
+    <Button arrow href="/icons" gradient slot="cta">Discover More</Button>
+    <IconsSection slot="content" />
   </FeatureSection>
 
   <FeatureSection title="Open Source." subtitle="Built transparently." align="center">
-    <AnimatedBookIcon class="h-full w-full" delay={1000} client:visible slot="icon" />
-
-    <p slot="description">
-      Our entire journey is rooted in open-source and you can find all of our work on GitHub. If you
-      like what we're doing, remember to follow and give us a star!
-    </p>
+    <BookIcon class="h-full w-full" slot="icon" />
 
     <Button arrow href="https://github.com/vidstack" gradient target="_blank" slot="cta">
       Follow on GitHub
@@ -154,7 +171,7 @@ const title = 'Vidstack: Open-source video platform.',
   </FeatureSection>
 
   <FeatureSection title="Community." subtitle="Built for us." align="center">
-    <AnimatedHeartHandshakeIcon class="h-full w-full" delay={2000} client:visible slot="icon" />
+    <HeartHandshakeIcon class="h-full w-full" slot="icon" />
 
     <p slot="description">
       We're a community of frontend devs working with video & audio. Join in on the discussions,

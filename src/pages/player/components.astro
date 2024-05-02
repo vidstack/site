@@ -1,0 +1,45 @@
+---
+import clsx from 'clsx';
+
+import ComponentLibSelect from '~/components/pages/components/component-lib-select.svelte';
+import ComponentsGrid from '~/components/pages/components/components-grid.astro';
+import ComponentsSearch from '~/components/pages/components/components-search.svelte';
+
+import DefaultLayout from '../../layouts/default-layout.astro';
+
+export const prerender = true;
+
+const title = 'Components | Vidstack Player',
+  description = 'Preview the entire collection of our media player components.';
+---
+
+<DefaultLayout {title} {description}>
+  <section class="mt-10 w-full px-4 text-center 768:mt-24">
+    <h1
+      class={clsx(
+        'text-[40px] leading-[1.25] max-w-[375px] text-center font-bold',
+        '576:text-[60px] 576:leading-[1.15] 576:max-w-[480px]',
+        '768:text-[72px] 768:max-w-[580px] mx-auto',
+      )}
+    >
+      Components
+    </h1>
+    <p class="mx-auto mt-8 max-w-3xl text-center text-base leading-relaxed text-soft 992:text-lg">
+      Robust, accessible, and customizable media player components.
+    </p>
+  </section>
+
+  <div class="mx-auto mb-24 max-w-[1440px] px-4 768:px-8">
+    <section
+      class="mx-auto mb-16 mt-12 flex max-w-xl items-center justify-center px-2 992:mb-20"
+      aria-label="Search"
+    >
+      <div class="mr-5 mt-1">
+        <ComponentLibSelect client:load />
+      </div>
+      <ComponentsSearch client:load />
+    </section>
+
+    <ComponentsGrid />
+  </div>
+</DefaultLayout>

@@ -7,11 +7,10 @@ import IconsSearchManager from './icons-search-manager.svelte';
 import { loadIcons } from './loader';
 
 interface Props {
-  label: string;
   compact?: boolean;
 }
 
-const { label, compact } = Astro.props;
+const { compact } = Astro.props;
 
 const icons = await loadIcons();
 ---
@@ -23,7 +22,7 @@ const icons = await loadIcons();
         'icons-grid grid gap-4 grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]',
         compact ? '768:gap-6' : '768:gap-10',
       )}
-      aria-label={label}
+      aria-label="Icons Collection"
     >
       {
         Object.keys(icons).map((icon) => (

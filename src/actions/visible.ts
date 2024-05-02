@@ -8,7 +8,7 @@ export interface VisibleActionOptions extends IntersectionObserverInit {
 export function visible(
   el: HTMLElement,
   options?: VisibleActionOptions,
-): ActionReturn<IntersectionObserverInit> {
+): ActionReturn<VisibleActionOptions> {
   let observer = createObserver(el, options);
   observer.observe(el);
 

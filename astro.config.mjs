@@ -85,6 +85,7 @@ export default defineConfig({
     '/docs': '/docs/player',
     '/docs/react': '/docs/player',
     '/docs/wc': '/docs/wc/player',
+    '/media-icons': '/icons',
     ...['', 'react/']
       .flatMap((lib) => {
         const base = `/docs/${lib}player`;

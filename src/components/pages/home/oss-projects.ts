@@ -17,7 +17,7 @@ export const openSourceProjects: GridContentItem[] = [
   {
     title: 'Icons',
     stage: 1,
-    href: '/media-icons',
+    href: '/icons',
     description: 'Beautifully hand-crafted collection of media icons designed for players.',
   },
   {

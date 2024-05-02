@@ -10,7 +10,7 @@ import DefaultLayout from '../layouts/default-layout.astro';
 
 export const prerender = true;
 
-const title = 'Vidstack: Media Icons',
+const title = 'Vidstack Icons',
   description =
     'A beautifully hand-crafted collection of icons specifically designed for video/audio players.';
 ---
@@ -19,16 +19,17 @@ const title = 'Vidstack: Media Icons',
   <section class="mt-10 w-full px-4 text-center 768:mt-24">
     <h1
       class={clsx(
-        '992:mt-6 768:text-5xl 768:leading-[3.5rem] 768:max-w-3xl mx-auto 992:text-6xl 992:leading-[4.5rem]',
-        '992:max-w-5xl mt-8 text-center text-4xl font-extrabold leading-[3rem]',
+        'text-[40px] leading-[1.25] max-w-[375px] text-center font-bold',
+        '576:text-[60px] 576:leading-[1.15] 576:max-w-[480px]',
+        '768:text-[72px] 768:max-w-[580px] mx-auto',
       )}
     >
-      A bold, consistent, and clean collection of media icons.
+      Vidstack Icons
     </h1>
     <p class="mx-auto mt-8 max-w-3xl text-center text-base leading-relaxed text-soft 992:text-lg">
-      Media Icons is an open-source and beautifully hand-crafted collection of icons, designed by
-      the Vidstack team specifically for building audio and video players. All of the icons are free
-      for both personal and commercial use.
+      Open-source and beautifully hand-crafted collection of icons, designed by our team
+      specifically for building audio and video players. All of the icons are free for both personal
+      and commercial use.
     </p>
     <div class="mt-8 flex w-full flex-row items-center justify-center text-soft">
       <a
@@ -42,7 +43,7 @@ const title = 'Vidstack: Media Icons',
       </a>
       <a
         class="ml-6 flex items-center hover:text-brand hover:underline"
-        href="https://github.com/vidstack/media-icons"
+        href="https://github.com/vidstack/icons"
         target="_blank"
         rel="noreferrer"
       >
@@ -63,6 +64,6 @@ const title = 'Vidstack: Media Icons',
       <IconsSearch client:load />
     </section>
 
-    <IconsGrid label="Icons Collection" compact />
+    <IconsGrid compact />
   </div>
 </DefaultLayout>

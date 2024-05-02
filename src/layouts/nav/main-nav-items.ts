@@ -3,7 +3,8 @@ import type { NavItem } from './nav-items';
 export const mainNavItems: NavItem[] = [
   { title: 'Docs', href: '/docs/player' },
   { title: 'Components', href: '/player/components' },
-  { title: 'Icons', href: '/media-icons' },
+  { title: 'Hooks', href: '/docs/player/api/hooks/use-state' },
+  { title: 'Icons', href: '/icons' },
   { title: 'Examples', href: 'https://github.com/vidstack/examples' },
   {
     title: 'Releases',

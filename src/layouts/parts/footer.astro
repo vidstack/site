@@ -46,23 +46,47 @@ import FooterLinks from './footer-links.astro';
         <div class="pointer-events-none hidden 768:inline-block 768:flex-1"></div>
 
         <div
-          class="grid grid-cols-1 gap-x-14 gap-y-16 420:mx-auto 420:grid-cols-2 576:gap-x-16 576:px-4"
+          class="grid grid-cols-1 gap-x-14 gap-y-16 420:mx-auto 420:grid-cols-3 576:gap-x-16 576:px-4"
         >
           <FooterLinks
-            title="Socials"
+            title="Player"
+            links={[
+              {
+                title: 'Installation',
+                href: '/docs/player/getting-started/installation',
+              },
+              {
+                title: 'API',
+                href: '/docs/player/api/autoplay',
+              },
+              {
+                title: 'Providers',
+                href: '/docs/player/api/providers/audio',
+              },
+              {
+                title: 'Components',
+                href: '/player/components',
+              },
+              {
+                title: 'Hooks',
+                href: '/docs/player/api/hooks/use-state',
+              },
+            ]}
+          />
+          <FooterLinks
+            title="Community"
             links={[
               { title: 'Twitter', href: 'https://twitter.com/vidstackjs?lang=en' },
               { title: 'Discord', href: 'https://discord.gg/QAjfh2gZE4' },
               { title: 'GitHub', href: 'https://github.com/vidstack' },
             ]}
           />
-
           <FooterLinks
             title="Resources"
             links={[
               { title: 'Docs', href: '/docs' },
-              { title: 'Media', href: 'https://github.com/vidstack/media-files' },
-              { title: 'Icons', href: '/media-icons' },
+              { title: 'Files', href: 'https://github.com/vidstack/media-files' },
+              { title: 'Icons', href: '/icons' },
               { title: 'Captions', href: 'https://github.com/vidstack/media-captions' },
             ]}
           />

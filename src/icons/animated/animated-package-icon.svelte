@@ -2,7 +2,6 @@
   import clsx from 'clsx';
 
   import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
 
   let _class = '';
   export { _class as class };

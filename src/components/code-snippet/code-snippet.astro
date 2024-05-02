@@ -80,12 +80,12 @@ const defaultTitle =
   snippet &&
     (copy ? (
       <CodeBlock title={defaultTitle} {...codeBlockProps} copy>
-        <CopyCodeButton id={snippetId} {highlights} class="ml-auto" slot="top-bar" client:visible />
-        <CodeSnippetLoader id={snippetId} {highlights} client:visible />
+        <CopyCodeButton id={snippetId} {highlights} class="ml-auto" slot="top-bar" client:load />
+        <CodeSnippetLoader id={snippetId} {highlights} client:load />
       </CodeBlock>
     ) : (
       <CodeBlock title={defaultTitle} {...codeBlockProps}>
-        <CodeSnippetLoader id={snippetId} {highlights} client:visible />
+        <CodeSnippetLoader id={snippetId} {highlights} client:load />
       </CodeBlock>
     ))
 }

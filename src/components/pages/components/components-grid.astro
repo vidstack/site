@@ -1,0 +1,80 @@
+---
+import clsx from 'clsx';
+
+import { resolvePageTitle } from '~/layouts/nav/docs-sidebar-items';
+import { isString } from '~/utils/unit';
+import { getCollection } from 'astro:content';
+
+import { componentsCatalog } from './catalog';
+import ComponentSearchManager from './component-search-manager.svelte';
+import IconLoader from './icon-loader.svelte';
+
+const pages = await getCollection('docs'),
+  jsLibSegmentRE = /\/(wc|react)\//g;
+---
+
+<ComponentSearchManager client:load>
+  <section
+    class={clsx(
+      'components-grid grid gap-10 grid-cols-2 768:grid-cols-[repeat(auto-fill,minmax(16rem,1fr))]',
+    )}
+    aria-label="Components Collection"
+  >
+    {
+      Object.keys(componentsCatalog).flatMap((category) => {
+        const items = componentsCatalog[category];
+        return items.map((item) => {
+          const data = !isString(item) ? item : null,
+            id = data?.id ?? (item as string),
+            page = pages.find((page) => page.id === id);
+
+          if (!page) return null;
+
+          const title = data?.title ?? resolvePageTitle(page),
+            description = data?.description ?? page.data.description,
+            inferredFramework = page.id.includes('/wc/')
+              ? 'web-components'
+              : page.id.includes('/react/')
+                ? 'react'
+                : null,
+            framework = data?.framework ?? inferredFramework;
+
+          return (
+            <a
+              class={clsx(
+                'group flex cursor-pointer flex-col items-center justify-center rounded-sm p-2',
+              )}
+              href="#"
+              style={clsx(
+                'border: 0; box-shadow: none;',
+                jsLibSegmentRE.test(page.id) && 'display: none;',
+              )}
+              data-title={title}
+              data-slug={page.slug.replace(jsLibSegmentRE, '/')}
+              data-framework={framework}
+              data-hash={data?.hash}
+            >
+              <div
+                class={clsx(
+                  'flex w-full flex-col items-center justify-center border border-border/80 text-soft/80 hocus:text-inverse',
+                  'shadow-sm group-hocus:border-2 group-hocus:border-brand/40 group-hocus:bg-elevate',
+                  'h-[180px] overflow-hidden rounded-md',
+                )}
+                aria-hidden="true"
+              >
+                <IconLoader id={data?.icon ?? id.replace(jsLibSegmentRE, '/')} client:visible />
+              </div>
+              <div class="mt-4 flex w-full flex-col justify-start text-base font-semibold">
+                <>
+                  <span class="text-xs text-soft/90">{category}</span>
+                  <span class="mt-1 text-inverse">{title}</span>
+                </>
+              </div>
+              {description ? <p class="mt-2 w-full text-xs text-soft/90">{description}</p> : null}
+            </a>
+          );
+        });
+      })
+    }
+  </section>
+</ComponentSearchManager>

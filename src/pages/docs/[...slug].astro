@@ -29,7 +29,7 @@ export async function getStaticPaths() {
   const pages = await getCollection('docs'),
     pagePropsMap = new Map<string, Props>(),
     overviewFilterRE = /^(.*?)\/overview/,
-    jsLibraryFilterRE = /\/(wc|react)\//,
+    jsLibSegmentRE = /\/(wc|react)\//,
     indexFileRE = /index\..+$/,
     basePath = '/docs';
 
@@ -42,13 +42,11 @@ export async function getStaticPaths() {
       sidebarItems: SidebarItems = { Overview: [], API: [], Components: [] };
 
     const staticPaths = pages
-      .filter((page) => !jsLibraryFilterRE.test(page.slug) || page.slug.includes(jsLibSegment))
+      .filter((page) => !jsLibSegmentRE.test(page.slug) || page.slug.includes(jsLibSegment))
       .map((page) => {
-        const filteredSlug = page.slug
-            .replace(jsLibraryFilterRE, '/')
-            .replace(overviewFilterRE, '$1'),
+        const filteredSlug = page.slug.replace(jsLibSegmentRE, '/').replace(overviewFilterRE, '$1'),
           slug = join(jsLibPrefix, filteredSlug) as any,
-          sidebarId = page.id.replace(jsLibraryFilterRE, '/').replace(/.*?\//, ''),
+          sidebarId = page.id.replace(jsLibSegmentRE, '/').replace(/.*?\//, ''),
           rootCategory = resolveRootCategory(sidebarId),
           subCategory = resolveSubCategory(sidebarId),
           props: DocsLayoutProps = {
