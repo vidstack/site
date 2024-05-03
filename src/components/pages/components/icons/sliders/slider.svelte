@@ -6,7 +6,7 @@
   export let noPreviewBorder = false;
 </script>
 
-<div class="relative flex h-4 w-40 items-center justify-center">
+<div class="relative flex h-4 max-w-[160px] flex-1 items-center justify-center">
   {#if chapters}
     {#each [25, 35, 10, 30] as width}
       <div

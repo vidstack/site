@@ -3,7 +3,7 @@
 </script>
 
 <div
-  class="flex w-[60%] items-center rounded-md border border-soft/20 bg-elevate px-2 py-1.5 dark:border-soft/40"
+  class="flex max-w-[200px] flex-1 items-center rounded-md border border-soft/20 bg-elevate px-2 py-1.5 dark:border-soft/40"
   class:animate
 >
   <span class="font-mono text-xs">Item</span>

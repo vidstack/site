@@ -8,19 +8,21 @@
   let seconds = 90,
     intervalId = -1;
 
-  $: if (animate) {
-    window.clearInterval(intervalId);
-    intervalId = window.setInterval(() => {
-      seconds += 1;
-    }, 100);
-  } else if (IS_BROWSER) {
+  function stop() {
     window.clearInterval(intervalId);
     intervalId = -1;
   }
 
-  onDestroy(() => {
-    window.clearInterval(intervalId);
-  });
+  $: if (animate) {
+    stop();
+    intervalId = window.setInterval(() => {
+      seconds += 1;
+    }, 100);
+  } else if (IS_BROWSER) {
+    stop();
+  }
+
+  onDestroy(stop);
 </script>
 
 <span class="font-mono text-xl">{formatTime(seconds)}</span>

@@ -160,13 +160,13 @@ export const componentsCatalog: ComponentsCatalog = {
 
 export type ComponentsCatalog = Record<string, ComponentCatalogItem[]>;
 
-export type ComponentCatalogItem =
-  | CollectionEntry<'docs'>['id']
-  | {
-      title: string;
-      id: CollectionEntry<'docs'>['id'];
-      description?: string;
-      hash?: string;
-      framework?: ComponentLibrary;
-      icon?: string;
-    };
+export type ComponentCatalogItem = CollectionEntry<'docs'>['id'] | ComponentCatalogEntry;
+
+export type ComponentCatalogEntry = {
+  title: string;
+  id: CollectionEntry<'docs'>['id'];
+  description?: string;
+  hash?: string;
+  framework?: ComponentLibrary;
+  icon?: string;
+};

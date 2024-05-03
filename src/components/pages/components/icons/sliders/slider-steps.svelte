@@ -6,7 +6,7 @@
   export let animate: boolean;
 </script>
 
-<div class="relative">
+<div class="relative max-w-[160px] flex-1">
   <Slider {animate} />
 
   <div class="absolute right-0 top-0 z-10 flex h-full w-full items-center justify-between">

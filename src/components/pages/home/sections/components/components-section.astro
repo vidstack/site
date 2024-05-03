@@ -1,1 +1,46 @@
-<div class="flex w-full items-center justify-center">Display/Buttons/Sliders/Menus</div>
+---
+import {
+  componentsCatalog,
+  type ComponentCatalogItem,
+} from '~/components/pages/components/catalog';
+import { resolvePageTitle } from '~/layouts/nav/docs-sidebar-items';
+import { isString } from '~/utils/unit';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+import ComponentDisplayGroup from './component-display-group.svelte';
+
+const { Display, Buttons, Sliders, Menus } = componentsCatalog;
+
+const pages = await getCollection('docs'),
+  jsLibSegmentRE = /\/(wc|react)\//g;
+
+function toEntries(items: ComponentCatalogItem[]) {
+  return items.map((item) => {
+    const data = !isString(item) ? item : null,
+      id = data?.id ?? (item as CollectionEntry<'docs'>['id']),
+      page = findPage(id)!,
+      title = data?.title ?? resolvePageTitle(page);
+    return {
+      id: data?.icon ?? id.replace(jsLibSegmentRE, '/'),
+      title,
+    };
+  });
+}
+
+function findPage(id: string) {
+  return pages.find((p) => p.id === id);
+}
+---
+
+<div class="flex w-full flex-wrap items-center justify-center">
+  <ComponentDisplayGroup
+    items={{
+      Display: toEntries(Display),
+      Buttons: toEntries(Buttons),
+      Sliders: toEntries(Sliders),
+      Menus: toEntries(Menus),
+    }}
+    client:visible
+  />
+</div>

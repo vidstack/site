@@ -16,10 +16,10 @@
   const shouldDraw = useShouldDraw(animate);
 </script>
 
-<div class="flex w-full flex-col items-center justify-center space-y-1.5">
+<div class="flex max-w-[200px] flex-1 flex-col items-center justify-center space-y-1.5">
   {#each items as item}
     <div
-      class="flex w-[60%] items-center rounded-md border border-soft/20 bg-elevate px-1 py-1 dark:border-soft/40"
+      class="flex w-full items-center rounded-md border border-soft/20 bg-elevate px-1 py-1 dark:border-soft/40"
     >
       {#if item.checked}
         <svg
