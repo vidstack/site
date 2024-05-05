@@ -4,14 +4,17 @@
   export let text: string;
   export let animate: boolean;
 
+  let _class = '';
+  export { _class as class };
+
   const glyphs =
     'ラドクリフマラソンわたしワタシんょンョたばこタバコとうきょうトウキョウ0123456789±!@#$%^&*()_+ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 </script>
 
-<div class="font-mono text-lg tracking-tighter" class:animate>
+<div class={_class} class:animate>
   {#each text.split('') as char, i}
     <span
-      class="relative text-transparent"
+      class="relative inline-block"
       data-char={char}
       style={[
         `--i: ${i}`,
@@ -20,21 +23,21 @@
         ),
       ].join(';')}
     >
-      {char}
+      <span class="text-transparent">{char}</span>
     </span>
   {/each}
 </div>
 
 <style>
-  span::after {
+  div > span::after {
     content: attr(data-char);
     position: absolute;
     display: inline-block;
     inset: 0;
-    color: rgb(var(--color-soft) / 80);
+    color: inherit;
   }
 
-  .animate span::after {
+  div.animate > span::after {
     color: rgb(var(--color-inverse));
     animation: glyphs 500ms calc(var(--i) * 50ms) steps(1, end);
   }

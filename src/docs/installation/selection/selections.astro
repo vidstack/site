@@ -86,7 +86,8 @@ const { pathname } = Astro.url,
         );
 
         return (
-          <Style
+          <div
+            class="contents"
             style={`--from-color: var(--js-${color}-gradient-start); --to-color: var(--js-${color}-gradient-end);`}
           >
             {param ? (
@@ -102,7 +103,7 @@ const { pathname } = Astro.url,
                 {title}
               </div>
             )}
-          </Style>
+          </div>
         );
       })
     }

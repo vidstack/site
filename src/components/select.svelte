@@ -71,7 +71,7 @@
   class={clsx(
     'relative flex items-center',
     'max-w-full rounded-sm shadow-sm',
-    size === 'lg' ? 'px-2.5 py-2 text-sm' : 'px-[10px] py-1 text-xs',
+    size === 'lg' ? 'px-2.5 py-1.5 text-sm' : 'px-[10px] py-1 text-xs',
     state === 'error' ? 'border-2 border-red-600 dark:border-red-400' : 'border border-border/90',
     !disabled ? 'hover:border-inverse/90 hocus:bg-elevate' : 'cursor-default',
     currentLabel === label ? 'text-soft' : 'text-inverse',

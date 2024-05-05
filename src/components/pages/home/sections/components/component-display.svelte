@@ -1,4 +1,5 @@
 <script lang="ts">
+  import GlyphText from '~/components/style/glyph-text.svelte';
   import { IS_BROWSER } from '~/utils/env';
   import { onDestroy, tick } from 'svelte';
   import { get } from 'svelte/store';
@@ -28,7 +29,10 @@
   $: loader = icons[importId] ?? (() => ({ default: null }));
 
   async function update() {
-    if (!firstRun) {
+    const shouldRotate = !firstRun,
+      isLastGroupItem = groupIndex === get(groupLength) - 1;
+
+    if (shouldRotate) {
       rotate = true;
       animate = false;
       await tick();
@@ -38,13 +42,24 @@
       firstRun = false;
     }
 
-    window.setTimeout(() => {
-      rotate = false;
-      animate = true;
-      window.setTimeout(() => {
-        activeGroupIndex.update((n) => (n + 1) % $groupLength);
-      }, 1000);
-    }, 800);
+    window.setTimeout(
+      () => {
+        rotate = false;
+        window.setTimeout(
+          () => {
+            animate = true;
+          },
+          shouldRotate ? 400 : 50,
+        );
+        window.setTimeout(
+          () => {
+            activeGroupIndex.update((n) => (n + 1) % $groupLength);
+          },
+          shouldRotate || isLastGroupItem ? 1300 : 500,
+        );
+      },
+      shouldRotate ? 600 : 0,
+    );
   }
 
   $: if (IS_BROWSER && groupIndex === $activeGroupIndex) {
@@ -59,7 +74,7 @@
 
 <div class="flex aspect-[4/3] w-1/2 flex-col p-2 768:max-w-[250px] 768:flex-1">
   <div
-    class="flex h-full w-full items-center justify-center rounded-sm border border-border/90 bg-elevate p-4 shadow-sm"
+    class="card flex h-full w-full items-center justify-center rounded-sm border border-border/90 bg-elevate p-4 shadow-sm"
     class:rotate
   >
     {#await loader() then { default: Component }}
@@ -70,15 +85,26 @@
   </div>
   {#if current.title}
     <span class="mt-3 text-xs text-soft/90">{category}</span>
-    <span class="mt-1 text-base font-semibold">{current.title}</span>
+    <GlyphText
+      class="mt-1 text-base font-semibold tracking-wide text-inverse"
+      text={current.title}
+      animate={rotate}
+    />
   {/if}
 </div>
 
 <style>
-  .rotate {
-    transition: transform 0.8s;
+  .card {
+    transition:
+      transform 0.6s,
+      filter 0.2s ease;
+    filter: blur(0);
+  }
+
+  .card.rotate {
     transform-style: preserve-3d;
     perspective: 1000px;
-    transform: rotateY(360deg);
+    transform: rotateY(180deg);
+    filter: blur(1px);
   }
 </style>

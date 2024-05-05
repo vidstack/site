@@ -19,11 +19,11 @@ import WandSparklesIcon from '~astro-icons/lucide/wand-sparkles';
 
 import AccessibilitySection from '~/components/pages/home/sections/accessibility/accessibility-section.astro';
 import ComponentsSection from '~/components/pages/home/sections/components/components-section.astro';
-import DesignSection from '~/components/pages/home/sections/design/design-section.astro';
+import DesignSection from '~/components/pages/home/sections/design/design-section.svelte';
 import FeaturesContentSection from '~/components/pages/home/sections/features/features-section.astro';
 import LayoutSection from '~/components/pages/home/sections/layout/layout-section.astro';
 import ProviderSection from '~/components/pages/home/sections/provider/provider-section.astro';
-import StateSection from '~/components/pages/home/sections/state/state-section.astro';
+import StateSection from '~/components/pages/home/sections/state/state-section.svelte';
 
 import Button from '../components/button.svelte';
 import { openSourceProjects } from '../components/pages/home/oss-projects';
@@ -118,17 +118,6 @@ const title = 'Vidstack: Open-source video platform.',
     </Fragment>
   </HeroSection>
 
-  <FeatureSection title="Components." subtitle="Built to compose." align="center">
-    <BlocksIcon class="h-full w-full" slot="icon" />
-    <Button arrow href="/player/components" gradient slot="cta">Discover More</Button>
-    <ComponentsSection slot="content" />
-  </FeatureSection>
-
-  <FeatureSection title="Design." subtitle="Built to be styled." align="start">
-    <PaintBrushIcon class="h-full w-full" slot="icon" />
-    <DesignSection slot="content" />
-  </FeatureSection>
-
   <FeatureSection title="Layouts." subtitle="Built to ship." align="center">
     <PackageIcon class="h-full w-full" slot="icon" />
     <LayoutSection slot="content" />
@@ -139,9 +128,20 @@ const title = 'Vidstack: Open-source video platform.',
     <ProviderSection slot="content" />
   </FeatureSection>
 
+  <FeatureSection title="Components." subtitle="Built to compose." align="center">
+    <BlocksIcon class="h-full w-full" slot="icon" />
+    <Button arrow href="/player/components" gradient slot="cta">Discover More</Button>
+    <ComponentsSection slot="content" />
+  </FeatureSection>
+
+  <FeatureSection title="Design." subtitle="Built to be styled." align="start">
+    <PaintBrushIcon class="h-full w-full" slot="icon" />
+    <DesignSection slot="content" client:load />
+  </FeatureSection>
+
   <FeatureSection title="State." subtitle="Built to be reactive." align="center">
     <ShuffleIcon class="h-full w-full" slot="icon" />
-    <StateSection slot="content" />
+    <StateSection slot="content" client:load />
   </FeatureSection>
 
   <FeatureSection title="Accessible." subtitle="Built for all." align="start">

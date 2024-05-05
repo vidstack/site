@@ -1,58 +1,71 @@
 <script lang="ts">
   import clsx from 'clsx';
 
+  import { isString } from '~/utils/unit';
+
   import { useARIATabs } from '../../aria/tabs';
 
   export let label: string;
-  export let tabs: string[] = [];
-  export let color: 'brand' | 'orange' = 'brand';
+  export let tabs: Array<string | { label: string; Icon: any }> = [];
+  export let block = false;
+  export let justify: 'start' | 'center' | 'end' = 'start';
+
+  let container: HTMLElement;
 
   const { tabsRoot, tabList, tab, selectedTab, tabRefs } = useARIATabs();
 
   $: isReady = $tabRefs.length;
   $: selectedTabWidth = isReady ? $tabRefs[$selectedTab].offsetWidth + 'px' : 0;
   $: selectedTabLeft = isReady ? $tabRefs[$selectedTab].offsetLeft + 'px' : 0;
+  $: containerWidth = container ? container.getBoundingClientRect().width : 0;
 </script>
 
 <div class="w-full" use:tabsRoot>
   <div
-    class="flex items-center relative w-full overflow-x-auto no-scrollbar p-0.5"
+    class={clsx(
+      'no-scrollbar relative items-center overflow-x-auto p-0.5 ',
+      block ? 'flex w-full' : 'inline-flex',
+    )}
+    style={`justify-content: ${justify}`}
     use:tabList={label}
+    bind:this={container}
   >
-    {#each tabs as title}
+    {#each tabs as option}
+      {@const data = !isString(option) ? option : null}
       <button
         class={clsx(
-          'flex items-center justify-center outline-none px-6 py-2.5 mx-1 first:ml-0 last:mr-0 text-[15px] font-semibold group',
-          'border-b-2 border-transparent z-10 transition-colors duration-300 text-soft rounded-sm',
-          color === 'brand' && 'hocus:border-brand/30 aria-selected:text-brand',
+          'group mx-1 flex items-center justify-center px-6 py-2.5 text-[15px] font-semibold outline-none first:ml-0 last:mr-0',
+          'z-10 rounded-sm border-b-2 border-transparent text-soft transition-colors duration-200',
+          'aria-selected:text-inverse hocus:border-inverse/60 hocus:text-inverse/80',
         )}
         use:tab
       >
-        {title}
+        {#if data?.Icon}
+          <svelte:component this={data.Icon} class="mr-2" width={24} height={24} />
+        {/if}
+        {data?.label ?? option}
       </button>
     {/each}
 
     <div
-      class={clsx(
-        'absolute top-[44px] left-0 right-0 h-0.5 w-full z-0',
-        color === 'orange' && 'bg-[#f9700b]/10',
-        color === 'brand' && 'bg-brand/10',
-      )}
+      class={clsx('absolute left-0 top-[45px] z-0 h-0.5 w-full bg-inverse/10')}
+      style={`right: ${block ? 0 : `${containerWidth}px`}`}
     ></div>
 
     <div
       class={clsx(
-        'absolute top-[44px] left-0 h-0.5 duration-200 transition-[left,opacity] ease-out',
-        'pointer-events-none z-20',
+        'absolute left-0 top-[44px] h-0.5 transition-[left,opacity] duration-200 ease-out',
+        'pointer-events-none z-20 bg-inverse',
         isReady ? 'opacity-100' : 'opacity-0',
-        color === 'orange' && 'bg-[#f9700b]',
-        color === 'brand' && 'bg-brand',
       )}
       style={`width: ${selectedTabWidth}; left: ${selectedTabLeft};`}
     ></div>
   </div>
 
-  <div class={clsx('w-full max-h-[680px] overflow-auto scrollbar scrollbar-square mt-8')}>
+  <div
+    class={clsx('scrollbar scrollbar-square mt-8 max-h-[680px] w-full overflow-auto')}
+    style={`max-width: ${block ? 'none' : `${containerWidth}px`}`}
+  >
     <slot />
   </div>
 </div>

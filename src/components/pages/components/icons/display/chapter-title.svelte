@@ -4,4 +4,4 @@
   export let animate: boolean;
 </script>
 
-<GlyphText text="Chapter" {animate} />
+<GlyphText class="font-mono text-lg tracking-widest text-soft/80" text="Chapter" {animate} />
