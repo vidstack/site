@@ -45,7 +45,7 @@
 
 <div
   class={clsx(
-    'flex items-center relative overflow-hidden',
+    'relative flex items-center overflow-hidden',
     !square && 'rounded-full',
     !compact && 'border border-border/90',
   )}
@@ -55,7 +55,7 @@
     {@const label = option.label ?? option.value}
     <button
       class={clsx(
-        'flex items-center outline-none hocus:bg-brand/10 focus-visible:border focus-visible:border-inverse',
+        'flex items-center outline-none focus-visible:border focus-visible:border-inverse hocus:bg-brand/10',
         square ? !compact && 'rounded-sm' : 'rounded-full',
         compact ? 'px-2.5 py-[7px]' : 'px-3 py-2',
         ready && _value === option.value
@@ -65,13 +65,13 @@
       use:radio={option.value}
       aria-label={label}
     >
-      <svelte:component this={option.Icon} class={clsx('w-4 h-4', option.iconClass)} />
+      <svelte:component this={option.Icon} class={clsx('h-4 w-4', option.iconClass)} />
     </button>
   {/each}
 
   <div
     class={clsx(
-      'absolute top-0 left-0 bg-brand/20 h-8 duration-200 transition-[left,opacity] ease-out',
+      'absolute left-0 top-0 h-8 bg-brand/20 transition-[left,opacity] duration-200 ease-out',
       !square && 'rounded-full',
       !ready ? 'opacity-0' : 'opacity-100',
       'pointer-events-none',

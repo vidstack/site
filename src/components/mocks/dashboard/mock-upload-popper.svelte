@@ -44,7 +44,7 @@
       if (intervalId === -1) {
         intervalId = window.setInterval(onIntervalTick, 100);
       }
-    }, 2500);
+    }, 800);
   }
 
   function startEncodingTimer(index: number) {
@@ -104,10 +104,10 @@
 
 <div
   class={clsx(
-    'flex flex-col absolute bottom-0 right-5 rounded-sm min-w-[240px] shadow-md z-20',
-    'opacity-0 data-[visible]:opacity-100 transition-opacity ease-in duration-400',
+    'absolute bottom-0 right-5 z-20 flex min-w-[240px] flex-col rounded-sm shadow-md',
+    'duration-400 opacity-0 transition-opacity ease-in data-[visible]:opacity-100',
   )}
-  style="transition-delay: 1500ms;"
+  style="transition-delay: 500ms;"
   bind:this={popper}
   use:visible={{
     once: true,
@@ -117,8 +117,8 @@
   <button
     id="mock-uploader"
     class={clsx(
-      'flex flex-col text-xs border border-border/90 bg-elevate/90 backdrop-blur-md',
-      'px-3 py-2 rounded-sm',
+      'flex flex-col border border-border/90 bg-elevate/90 text-xs backdrop-blur-md',
+      'rounded-sm px-3 py-2',
       expanded && 'rounded-b-none',
     )}
     aria-expanded={ariaBool(expanded)}
@@ -135,14 +135,14 @@
     on:pointerup={onPress}
     on:keydown={(e) => isKeyboardPress(e) && onPress()}
   >
-    <div class="flex items-center w-full">
+    <div class="flex w-full items-center">
       {#if isUploadComplete}
-        <CheckCircleIcon class="w-4 h-4 text-green-600 dark:text-green-400 mr-1" />
+        <CheckCircleIcon class="mr-1 h-4 w-4 text-green-600 dark:text-green-400" />
       {/if}
 
       <span>{isUploadComplete ? 'Uploaded' : 'Uploading'}</span>
 
-      <span class="text-soft ml-1.5">
+      <span class="ml-1.5 text-soft">
         {#if !isUploadComplete}
           {Math.round(uploadProgressPercent)}% -
         {/if}
@@ -152,13 +152,13 @@
       <div class="flex-1"></div>
 
       <ChevronDownIcon
-        class={clsx('w-4 h-4 transition-transform duration-300', expanded && 'rotate-180')}
+        class={clsx('h-4 w-4 transition-transform duration-300', expanded && 'rotate-180')}
       />
     </div>
 
     <div
       class={clsx(
-        'w-full h-1 bg-green-600 dark:bg-green-400 transition-[width] duration-300 mt-2 rounded-sm',
+        'mt-2 h-1 w-full rounded-sm bg-green-600 transition-[width] duration-300 dark:bg-green-400',
         uploadProgressPercent === 0 && 'hidden',
       )}
       style={`width: ${uploadProgressPercent}%;`}
@@ -168,19 +168,19 @@
   <div
     id="mock-uploader-items"
     class={clsx(
-      'transition-[height,opacity] bg-elevate/90 backdrop-blur-md border-t-0',
-      'duration-300 rounded-b-sm overflow-hidden',
-      expanded ? 'h-[190px] px-3 py-4 border border-border/90 ease-in' : 'h-0 ease-out',
+      'border-t-0 bg-elevate/90 backdrop-blur-md transition-[height,opacity]',
+      'overflow-hidden rounded-b-sm duration-300',
+      expanded ? 'h-[190px] border border-border/90 px-3 py-4 ease-in' : 'h-0 ease-out',
     )}
     aria-describedby="mock-uploader"
     aria-hidden={!ariaBool(expanded)}
   >
-    <div class="w-full flex flex-col space-y-3">
+    <div class="flex w-full flex-col space-y-3">
       {#each mockVideoTitles as title, i (title)}
         {@const percent = $mockEncodeProgress[i]?.upload || 0}
         <div class="flex flex-row items-center">
           {#if percent === 100}
-            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600 dark:text-green-400" />
+            <CheckCircleIcon class="mr-2 h-4 w-4 text-green-600 dark:text-green-400" />
           {:else}
             <ProgressCircle
               class="mr-2"
@@ -190,9 +190,9 @@
               fillClass="text-green-600 dark:text-green-400 opacity-75"
             />
           {/if}
-          <span class="font-semibold text-xs">{title} </span>
+          <span class="text-xs font-semibold">{title} </span>
           <div class="flex-1"></div>
-          <span class="text-xs text-soft ml-1">{Math.round(percent)}%</span>
+          <span class="ml-1 text-xs text-soft">{Math.round(percent)}%</span>
         </div>
       {/each}
     </div>

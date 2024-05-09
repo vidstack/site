@@ -1,4 +1,4 @@
-// Over 34 methods on remote control!
+// Over 34 methods available!
 const remote = useMediaRemote();
 
 function onClick({ nativeEvent }: PointerEvent) {

@@ -14,9 +14,9 @@
 <!-- Link -->
 <a
   class={clsx(
-    'flex items-center text-base p-2 rounded-md',
+    'relative flex items-center rounded-md p-2 text-base',
     item.href === pathname
-      ? 'text-brand font-medium underline'
+      ? 'font-medium text-brand underline'
       : 'text-soft hocus:text-inverse hocus:underline',
   )}
   href={item.href}

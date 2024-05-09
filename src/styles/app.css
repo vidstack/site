@@ -226,3 +226,8 @@ html.dark .astro-code span {
   color: var(--shiki-dark) !important;
   background-color: unset !important;
 }
+
+::selection {
+  color: rgb(var(--color-brand));
+  background: rgb(var(--color-brand) / 0.1);
+}

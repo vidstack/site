@@ -15,9 +15,13 @@
   $: dispatch($isMenuVisible ? 'show' : 'hide');
 </script>
 
-<Button action={menuTrigger} {...$$restProps}>
-  <slot name="trigger" />
-</Button>
+{#if $$slots.trigger}
+  <Button action={menuTrigger} {...$$restProps}>
+    <slot name="trigger" />
+  </Button>
+{:else}
+  <slot action={menuTrigger} />
+{/if}
 
 <!-- Menu -->
 <DialogPopup open={$isMenuOpen} visible={$isMenuVisible} action={menu}>

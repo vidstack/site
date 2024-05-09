@@ -29,7 +29,11 @@ const pathname = Astro.url.pathname;
 >
   <div class="mx-auto flex w-full max-w-[var(--content-max-width)] items-center">
     <div class="flex items-center">
-      <a class={clsx('rounded-md', navItems.length && 'mr-10')} href="/" aria-label="Go Home">
+      <a
+        class={clsx('rounded-md', navItems.length && 'mr-3 992:mr-10')}
+        href="/"
+        aria-label="Go Home"
+      >
         <VidstackSymbol class="transition-transform hover:scale-110" />
       </a>
 

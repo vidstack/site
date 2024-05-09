@@ -2,6 +2,7 @@
   import clsx from 'clsx';
 
   import { isString } from '~/utils/unit';
+  import { createEventDispatcher } from 'svelte';
 
   import { useARIATabs } from '../../aria/tabs';
 
@@ -9,6 +10,8 @@
   export let tabs: Array<string | { label: string; Icon: any }> = [];
   export let block = false;
   export let justify: 'start' | 'center' | 'end' = 'start';
+
+  const dispatch = createEventDispatcher();
 
   let container: HTMLElement;
 
@@ -18,6 +21,7 @@
   $: selectedTabWidth = isReady ? $tabRefs[$selectedTab].offsetWidth + 'px' : 0;
   $: selectedTabLeft = isReady ? $tabRefs[$selectedTab].offsetLeft + 'px' : 0;
   $: containerWidth = container ? container.getBoundingClientRect().width : 0;
+  $: dispatch('change', $selectedTab);
 </script>
 
 <div class="w-full" use:tabsRoot>

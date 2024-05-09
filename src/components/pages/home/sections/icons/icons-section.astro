@@ -1,1 +1,36 @@
-<div class="flex w-full items-center justify-center">Grid of icons with gradient fade out</div>
+---
+import { loadIcons } from '~/components/pages/icons/loader';
+
+const icons = await loadIcons();
+---
+
+<div
+  class="relative mx-auto -mt-2 grid max-w-[800px] grid-cols-[repeat(auto-fill,minmax(4rem,1fr))] gap-4"
+>
+  {
+    Object.keys(icons)
+      .slice(30, 100)
+      .map((icon) => (
+        <div class="group relative flex h-full w-full items-center justify-center">
+          <svg
+            class="shrink-0"
+            role="img"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            set:html={icons[icon]}
+          />
+          <div class="ease pointer-events-none absolute left-1/2 top-0 z-30 -translate-x-1/2 -translate-y-10 whitespace-nowrap text-nowrap rounded-sm border border-border/90 bg-elevate px-2 py-px opacity-0 shadow-sm transition-all group-hover:opacity-100">
+            {icon}
+          </div>
+        </div>
+      ))
+  }
+  <div
+    class="pointer-events-none absolute bottom-0 right-0 z-10 h-[150%] w-full bg-gradient-to-t from-body to-transparent"
+  >
+  </div>
+</div>

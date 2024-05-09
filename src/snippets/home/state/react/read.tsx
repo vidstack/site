@@ -5,8 +5,5 @@ const { paused, playing, ... } = useMediaStore();
 useEffect(() => {
   return player.subscribe(({ currentTime }) => {
     // ...
-    return () => {
-      // Cleanup here if needed.
-    };
   });
 }, []);

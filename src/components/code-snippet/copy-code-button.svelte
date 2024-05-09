@@ -14,6 +14,7 @@
   export let id: string;
   export let highlights = '';
   export let transform: (code: string) => string = (s) => s;
+  export let hidden = false;
 
   let _class = '';
   export { _class as class };
@@ -60,28 +61,30 @@
   }
 </script>
 
-<button
-  type="button"
-  class={clsx(
-    'border rounded-sm px-2 py-1 flex items-center justify-center',
-    'transition-opacity duration-300',
-    copied
-      ? clsx(
-          'text-green-600 bg-green-600/20 border-green-600/10',
-          'dark:text-green-400 dark:bg-green-400/20 dark:border-green-600/10',
-        )
-      : 'text-brand bg-brand/20 border-brand/10 hocus:border-brand/90',
-    loading ? 'opacity-0' : 'opacity-100',
-    _class,
-  )}
-  on:pointerup={onCopy}
-  on:keydown={(e) => isKeyboardPress(e) && onCopy()}
->
-  {#if copied}
-    <CheckIcon class="w-4 h-4" />
-  {:else}
-    <CopyIcon class="w-4 h-4" />
-  {/if}
+{#if !hidden}
+  <button
+    type="button"
+    class={clsx(
+      'flex items-center justify-center rounded-sm border px-2 py-1',
+      'transition-opacity duration-300',
+      copied
+        ? clsx(
+            'border-green-600/10 bg-green-600/20 text-green-600',
+            'dark:border-green-600/10 dark:bg-green-400/20 dark:text-green-400',
+          )
+        : 'border-brand/10 bg-brand/20 text-brand hocus:border-brand/90',
+      loading ? 'opacity-0' : 'opacity-100',
+      _class,
+    )}
+    on:pointerup={onCopy}
+    on:keydown={(e) => isKeyboardPress(e) && onCopy()}
+  >
+    {#if copied}
+      <CheckIcon class="h-4 w-4" />
+    {:else}
+      <CopyIcon class="h-4 w-4" />
+    {/if}
 
-  <span class="sr-only">Copy</span>
-</button>
+    <span class="sr-only">Copy</span>
+  </button>
+{/if}

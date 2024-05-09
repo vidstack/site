@@ -20,7 +20,7 @@
     "@vercel/og": "^0.5.17",
     "@vercel/postgres": "^0.5.1",
     "@vidstack/react": "^1.11.18",
-    "astro": "^4.7.0",
+    "astro": "^4.8.0",
     "clsx": "^1.2.0",
     "d3-interpolate": "^3.0.1",
     "html-entities": "^2.4.0",

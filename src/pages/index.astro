@@ -22,7 +22,7 @@ import ComponentsSection from '~/components/pages/home/sections/components/compo
 import DesignSection from '~/components/pages/home/sections/design/design-section.svelte';
 import FeaturesContentSection from '~/components/pages/home/sections/features/features-section.astro';
 import LayoutSection from '~/components/pages/home/sections/layout/layout-section.astro';
-import ProviderSection from '~/components/pages/home/sections/provider/provider-section.astro';
+import ProviderSection from '~/components/pages/home/sections/provider/provider-section.svelte';
 import StateSection from '~/components/pages/home/sections/state/state-section.svelte';
 
 import Button from '../components/button.svelte';
@@ -37,8 +37,8 @@ import SocialLink from '../layouts/parts/social-link.astro';
 
 export const prerender = true;
 
-const title = 'Vidstack: Open-source video platform.',
-  description = 'Vidstack is an open-source platform that helps you manage, build, and ship video.';
+const title = 'Vidstack Player',
+  description = 'A collection UI components and hooks for building media players on the web.';
 ---
 
 <DefaultLayout {title} {description}>
@@ -118,25 +118,25 @@ const title = 'Vidstack: Open-source video platform.',
     </Fragment>
   </HeroSection>
 
-  <FeatureSection title="Layouts." subtitle="Built to ship." align="center">
-    <PackageIcon class="h-full w-full" slot="icon" />
-    <LayoutSection slot="content" />
-  </FeatureSection>
-
-  <FeatureSection title="Providers." subtitle="Built to adapt." align="start">
-    <TvIcon class="h-full w-full" slot="icon" />
-    <ProviderSection slot="content" />
-  </FeatureSection>
-
   <FeatureSection title="Components." subtitle="Built to compose." align="center">
     <BlocksIcon class="h-full w-full" slot="icon" />
     <Button arrow href="/player/components" gradient slot="cta">Discover More</Button>
     <ComponentsSection slot="content" />
   </FeatureSection>
 
-  <FeatureSection title="Design." subtitle="Built to be styled." align="start">
+  <FeatureSection title="Design." subtitle="Built to be styled." align="center">
     <PaintBrushIcon class="h-full w-full" slot="icon" />
     <DesignSection slot="content" client:load />
+  </FeatureSection>
+
+  <FeatureSection title="Layouts." subtitle="Built to ship." align="center">
+    <PackageIcon class="h-full w-full" slot="icon" />
+    <LayoutSection slot="content" />
+  </FeatureSection>
+
+  <FeatureSection title="Providers." subtitle="Built to adapt." align="center">
+    <TvIcon class="h-full w-full" slot="icon" />
+    <ProviderSection slot="content" client:load />
   </FeatureSection>
 
   <FeatureSection title="State." subtitle="Built to be reactive." align="center">
@@ -149,12 +149,12 @@ const title = 'Vidstack: Open-source video platform.',
     <AccessibilitySection slot="content" />
   </FeatureSection>
 
-  <FeatureSection title="Features." align="start">
+  <FeatureSection title="Features." subtitle="Built to satisfy." align="start">
     <WandSparklesIcon class="h-full w-full" slot="icon" />
     <FeaturesContentSection slot="content" />
   </FeatureSection>
 
-  <FeatureSection title="Icons." align="center">
+  <FeatureSection title="Icons." subtitle="Built by us." align="center">
     <SquareStackIcon class="h-full w-full" slot="icon" />
     <Button arrow href="/icons" gradient slot="cta">Discover More</Button>
     <IconsSection slot="content" />

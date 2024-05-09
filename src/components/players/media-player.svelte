@@ -1,3 +1,76 @@
+<script lang="ts" context="module">
+  export type SourceType =
+    | 'audio'
+    | 'video'
+    | 'live'
+    | 'hls'
+    | 'dash'
+    | 'youtube'
+    | 'vimeo'
+    | 'custom';
+
+  export type LayoutType = 'default' | 'plyr';
+
+  export type TextTracks = Record<string, any>[];
+
+  export const sourceTypes = [
+    'Audio',
+    'Video',
+    'HLS',
+    'DASH',
+    'Live',
+    'YouTube',
+    'Vimeo',
+    'Custom',
+  ];
+
+  export const defaultTitle = 'Sprite Fight';
+  export const defaultPoster = 'https://files.vidstack.io/sprite-fight/poster.webp';
+  export const defaultThumbnails = 'https://files.vidstack.io/sprite-fight/thumbnails.vtt';
+  export const defaultTextTracks = [
+    {
+      src: 'https://files.vidstack.io/sprite-fight/subs/english.vtt',
+      label: 'English',
+      srclang: 'en-US',
+      kind: 'subtitles',
+      default: true,
+    },
+    {
+      src: 'https://files.vidstack.io/sprite-fight/subs/spanish.vtt',
+      label: 'Spanish',
+      srclang: 'es-ES',
+      kind: 'subtitles',
+    },
+    {
+      src: 'https://files.vidstack.io/sprite-fight/chapters.vtt',
+      srclang: 'en-US',
+      kind: 'chapters',
+      default: true,
+    },
+  ];
+
+  export function getDefaultSource(type: SourceType) {
+    switch (type) {
+      case 'audio':
+        return 'https://files.vidstack.io/sprite-fight/audio.mp3';
+      case 'video':
+        return 'https://files.vidstack.io/sprite-fight/720p.mp4';
+      case 'hls':
+        return 'https://files.vidstack.io/sprite-fight/hls/stream.m3u8';
+      case 'dash':
+        return 'https://files.vidstack.io/sprite-fight/dash/stream.mpd';
+      case 'youtube':
+        return 'youtube/_cMxraX_5RE';
+      case 'vimeo':
+        return 'vimeo/640499893';
+      case 'live':
+        return 'https://stream.mux.com/v69RSHhFelSm4701snP22dYz2jICy4E4FUyk02rW4gxRM.m3u8';
+      case 'custom':
+        return '';
+    }
+  }
+</script>
+
 <script lang="ts">
   // Styles
   import 'vidstack/player/styles/default/theme.css';
@@ -12,70 +85,62 @@
   import { onMount } from 'svelte';
   import type { MediaPlayerElement } from 'vidstack/elements';
 
-  export let type: 'audio' | 'video' | 'live' = 'video';
-  export let layout: 'default' | 'plyr' = 'default';
+  export let src: string | undefined = undefined;
+  export let title: string = defaultTitle;
+  export let poster: string | null = defaultPoster;
+  export let thumbnails: string | null = defaultThumbnails;
+  export let type: SourceType = 'video';
+  export let layout: LayoutType = 'default';
+  export let textTracks: TextTracks = [];
 
   let player: MediaPlayerElement;
 
   onMount(() => {
-    player.title = 'Sprite Fight';
+    player.title = title;
     return () => {
       player?.destroy();
     };
   });
 
-  const audioSrc = 'https://files.vidstack.io/sprite-fight/audio.mp3',
-    videoSrc = 'https://files.vidstack.io/sprite-fight/hls/stream.m3u8',
-    liveSrc = 'https://stream.mux.com/v69RSHhFelSm4701snP22dYz2jICy4E4FUyk02rW4gxRM.m3u8';
-
-  $: thumbnails = type === 'live' ? '' : 'https://files.vidstack.io/sprite-fight/thumbnails.vtt';
+  $: if (player) player.title = title;
+  $: defaultSrc = getDefaultSource(type);
+  $: currentSrc = type === 'custom' ? src : defaultSrc;
+  $: isDefaultLive = currentSrc === getDefaultSource('live');
+  $: isDefaultPoster = poster === defaultPoster;
+  $: isDefaultSrc = currentSrc === defaultSrc;
+  $: currentThumbnails = !isDefaultLive ? thumbnails : null;
+  $: currentTextTracks =
+    isDefaultSrc && !isDefaultLive && !textTracks.length ? defaultTextTracks : textTracks;
+  $: posterAlt = isDefaultPoster
+    ? 'Girl walks into sprite gnomes around her friend on a campfire in danger!'
+    : null;
 </script>
 
 <media-player
   title="Sprite Fight"
-  src={type === 'audio' ? audioSrc : type === 'video' ? videoSrc : liveSrc}
+  src={currentSrc}
   class="w-full"
   crossorigin
   playsinline
   keep-alive
-  poster="https://files.vidstack.io/sprite-fight/poster.webp"
-  style={type === 'audio' ? '' : 'aspect-ratio: 16/9;'}
+  {poster}
   bind:this={player}
 >
   <media-provider class="block">
-    {#if type === 'video' && layout === 'default'}
-      <media-poster
-        class="vds-poster"
-        alt="Girl walks into sprite gnomes around her friend on a campfire in danger!"
-      ></media-poster>
+    {#if layout === 'default'}
+      <media-poster class="vds-poster" alt={posterAlt}></media-poster>
     {/if}
-    {#if type !== 'live'}
-      <track
-        src="https://files.vidstack.io/sprite-fight/subs/english.vtt"
-        label="English"
-        srclang="en-US"
-        kind="subtitles"
-        default
-      />
-      <track
-        src="https://files.vidstack.io/sprite-fight/subs/spanish.vtt"
-        label="Spanish"
-        srclang="es-ES"
-        kind="subtitles"
-      />
-      <track
-        src="https://files.vidstack.io/sprite-fight/chapters.vtt"
-        srclang="en-US"
-        kind="chapters"
-        default
-      />
+    {#if !isDefaultLive}
+      {#each currentTextTracks as track}
+        <track {...track} />
+      {/each}
     {/if}
   </media-provider>
   {#if layout === 'default'}
     <media-audio-layout />
-    <media-video-layout {thumbnails} />
+    <media-video-layout thumbnails={currentThumbnails} />
   {:else if layout === 'plyr'}
-    <media-plyr-layout thumbnails={type === 'video' ? thumbnails : null} />
+    <media-plyr-layout thumbnails={currentThumbnails} />
   {/if}
 </media-player>
 
@@ -87,5 +152,9 @@
   media-player :global(img),
   media-player :global(video) {
     margin: 0 !important;
+  }
+
+  :global(media-player[data-view-type='audio'] media-poster) {
+    display: none;
   }
 </style>

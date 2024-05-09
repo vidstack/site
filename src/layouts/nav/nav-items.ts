@@ -8,6 +8,7 @@ export interface NavLink {
   id?: string;
   title: string;
   href: string;
+  badge?: string;
 }
 
 export interface NavMenu {

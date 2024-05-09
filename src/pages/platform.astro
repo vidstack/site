@@ -1,0 +1,186 @@
+---
+import AnimatedGithubIcon from '~/icons/animated/animated-github-icon.svelte';
+import NextIcon from '~/icons/logos/next-logo.svelte';
+import FileVideoIcon from '~astro-icons/lucide/file-video-2';
+import HeartHandshakeIcon from '~astro-icons/lucide/heart-handshake';
+
+import CodeSnippet from '../components/code-snippet/code-snippet.astro';
+import GitHubCommentTable from '../components/github-comment-table.astro';
+import GitHubComment from '../components/github-comment.svelte';
+import JoinWaitlist from '../components/join-waitlist.svelte';
+import MockDashboard from '../components/mocks/dashboard/mock-dashboard.astro';
+import GitTerminalProcess from '../components/pages/home/git-terminal-process.svelte';
+import FeatureSection from '../components/sections/feature-section.astro';
+import HeroSection from '../components/sections/hero-section.astro';
+import Step from '../components/steps/step.svelte';
+import Steps from '../components/steps/steps.svelte';
+import FadeInWhenVisible from '../components/style/fade-in-when-visible.astro';
+import TextGradient from '../components/text-gradient.svelte';
+import DefaultLayout from '../layouts/default-layout.astro';
+import AnnouncementBar from '../layouts/parts/announcement-bar.astro';
+import SocialLink from '../layouts/parts/social-link.astro';
+
+export const prerender = true;
+
+const title = 'Vidstack Platform',
+  description = 'An open-source platform that helps you manage, build, and ship video.';
+---
+
+<DefaultLayout {title} {description}>
+  <AnnouncementBar href="https://github.com/vidstack/player/discussions/1220" slot="announcement">
+    <span class="font-semibold">Player:</span> 1.0-RC!
+  </AnnouncementBar>
+
+  <HeroSection>
+    <Fragment slot="title">
+      Your video.
+      <br />
+      <span class="mt-1 inline-block">
+        <TextGradient>Your Platform.</TextGradient>
+      </span>
+    </Fragment>
+
+    <p slot="description">
+      Our open-source platform helps you manage, build, and ship video. Own your platform.
+    </p>
+  </HeroSection>
+
+  <FeatureSection title="Manage." subtitle="Built for video." align="start">
+    <FileVideoIcon width="100%" height="100%" slot="icon" />
+
+    <p slot="description">
+      Move faster with everything in one place. Create projects for each site, manage video/audio
+      assets, streams, collections, thumbnails, captions, and more.
+    </p>
+
+    <JoinWaitlist gradient slot="cta" client:load />
+
+    <MockDashboard slot="content" />
+  </FeatureSection>
+
+  <FeatureSection title="Next.js" subtitle="Built to be seamless." align="start">
+    <NextIcon class="h-full w-full" slot="icon" />
+
+    <p slot="description">
+      We're building Vidstack for a seamless start-to-finish workflow. No setup headaches, no state
+      management, and no backend APIs. Flexible hooks and components are waiting for you.
+    </p>
+
+    <JoinWaitlist slot="cta" gradient client:load />
+
+    <div class="flex w-full items-center justify-center" slot="content">
+      <Steps
+        class="w-full"
+        stepListClass="max-w-xl"
+        label="Next.js Integration Steps"
+        steps={['Setup', 'Play', 'Analyze']}
+        animated
+        initialDelay={1500}
+        client:visible
+      >
+        <div class="min-w-full max-w-3xl">
+          <!-- Setup -->
+          <Step>
+            <div class="relative min-h-[512px] w-full overflow-hidden">
+              <CodeSnippet
+                title=".env"
+                id="home/next-steps/setup-env"
+                class="w-[80%] max-w-md overflow-hidden"
+              />
+              <div class="-translate-y-3 transform">
+                <CodeSnippet
+                  title="app/layout.tsx"
+                  id="home/next-steps/setup"
+                  class="w-full max-w-lg"
+                  numbered
+                />
+              </div>
+            </div>
+          </Step>
+          <!-- Play -->
+          <Step>
+            <CodeSnippet
+              class="max-w-xl"
+              title="app/watch/page.tsx"
+              id="home/next-steps/play"
+              numbered
+            />
+          </Step>
+          <!-- Analyze -->
+          <Step>
+            <CodeSnippet
+              class="max-w-xl"
+              title="app/watch/page.tsx"
+              id="home/next-steps/analyze"
+              numbered
+            />
+          </Step>
+        </div>
+      </Steps>
+    </div>
+  </FeatureSection>
+
+  <FeatureSection title="Git." subtitle="Built to commit." align="center">
+    <AnimatedGithubIcon
+      class="h-[110%] w-[110%] dark:text-black"
+      delay={1800}
+      client:visible
+      slot="icon"
+    />
+
+    <p slot="description">
+      Manage your media files inside your repository and when you're ready, just push. Our Git
+      integration will handle the rest for you.
+    </p>
+
+    <JoinWaitlist gradient slot="cta" client:load />
+
+    <div class="flex w-full flex-col items-center justify-center" slot="content">
+      <div class="mx-auto w-full max-w-3xl">
+        <GitTerminalProcess client:visible />
+      </div>
+
+      <div
+        class="my-6 h-20 w-px animate-[levitate_16s_ease_infinite] border border-dashed border-border/90 992:my-8 992:h-28"
+      >
+      </div>
+
+      <FadeInWhenVisible>
+        <div class="mx-auto w-full max-w-xl">
+          <GitHubComment>
+            <GitHubCommentTable
+              rows={[
+                { name: 'Installation', status: '✅ Uploaded' },
+                { name: 'Project Tour', status: '🔄 Encoding' },
+              ]}
+            />
+          </GitHubComment>
+        </div>
+      </FadeInWhenVisible>
+    </div>
+  </FeatureSection>
+
+  <FeatureSection title="Community." subtitle="Built for us." align="center">
+    <HeartHandshakeIcon class="h-full w-full" slot="icon" />
+
+    <p slot="description">
+      We're a community of frontend devs working with video & audio. Join in on the discussions,
+      share your designs and knowledge, ask for help, and connect with others building awesome
+      experiences.
+    </p>
+
+    <div class="flex w-full items-center justify-center" slot="cta">
+      <SocialLink class="mr-4 768:mr-8" type="twitter" iconSize={40} />
+      <SocialLink class="mr-4 768:mr-8" type="discord" iconSize={40} />
+      <SocialLink type="gitHub" iconSize={40} />
+    </div>
+  </FeatureSection>
+
+  <FeatureSection
+    title="Better video workflows."
+    subtitle="Built for frontend devs."
+    align="center"
+  >
+    <JoinWaitlist primary client:visible slot="cta" />
+  </FeatureSection>
+</DefaultLayout>

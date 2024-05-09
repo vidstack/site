@@ -37,31 +37,31 @@
     : `⌘ + ${shortcutKeys[0].replace('meta+', '')}`;
 </script>
 
-<div class="relative flex-auto group">
+<div class="group relative flex-auto">
   <SearchIcon
     class={clsx(
-      'w-5 h-full pointer-events-none absolute inset-y-0 left-1 text-soft',
-      'group-focus-within:text-brand transition-colors duration-200 -mt-px',
+      'pointer-events-none absolute inset-y-0 left-1 h-full w-5 text-soft',
+      '-mt-px transition-colors duration-200 group-focus-within:text-brand',
     )}
   />
 
   <input
     class={clsx(
-      'border-b-2 focus:border-brand font-base text-base placeholder:text-soft',
-      'border-border/90 w-full p-2 pl-8 pr-4.5 block appearance-none transition-colors duration-200',
+      'font-base border-b-2 text-base placeholder:text-soft focus:border-brand',
+      'pr-4.5 block w-full appearance-none border-border/90 p-2 pl-8 transition-colors duration-200',
     )}
     type="search"
     {placeholder}
     bind:value
     bind:this={input}
-    style="background: none;"
+    style="background: none;box-shadow: none;"
     on:input
   />
 
   <div
     class={clsx(
-      'px-2 py-px font-mono text-sm font-bold border-border/90 bg-inverse text-inverse',
-      'flex items-center justify-center absolute right-1 top-2 rounded-sm shadow-sm',
+      'border-border/90 bg-inverse px-2 py-px font-mono text-sm font-bold text-inverse',
+      'absolute right-1 top-2 flex items-center justify-center rounded-sm shadow-sm',
     )}
   >
     {shortcutKeyText}

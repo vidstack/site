@@ -3,8 +3,15 @@
 
   import { onMount } from 'svelte';
 
-  export let type: 'audio' | 'video' | 'live' = 'video';
-  export let layout: 'default' | 'plyr' = 'default';
+  import type { LayoutType, SourceType, TextTracks } from './media-player.svelte';
+
+  export let src: string | undefined;
+  export let type: SourceType;
+  export let layout: LayoutType;
+  export let title: string | null | undefined;
+  export let poster: string | null | undefined;
+  export let thumbnails: string | undefined;
+  export let textTracks: TextTracks | undefined;
 
   let playerImport: any;
 
@@ -21,7 +28,7 @@
 >
   {#if playerImport}
     {#await playerImport then { default: Player }}
-      <Player {type} {layout} />
+      <Player {src} {type} {title} {poster} {thumbnails} {textTracks} {layout} />
     {/await}
   {/if}
 </div>
