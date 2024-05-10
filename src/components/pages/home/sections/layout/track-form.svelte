@@ -77,7 +77,7 @@
   </Label>
 
   <button
-    class="rounded-md border border-border/90 bg-elevate px-2 py-2 text-sm shadow-md"
+    class="rounded-md border border-border/90 bg-elevate px-2 py-2 text-sm shadow-md hocus:bg-inverse/10"
     data-close
     on:click={onSave}
   >

@@ -28,7 +28,16 @@
 >
   {#if playerImport}
     {#await playerImport then { default: Player }}
-      <Player {src} {type} {title} {poster} {thumbnails} {textTracks} {layout} />
+      <Player
+        {src}
+        {type}
+        {title}
+        {poster}
+        {thumbnails}
+        {textTracks}
+        {layout}
+        on:view-type-change
+      />
     {/await}
   {/if}
 </div>

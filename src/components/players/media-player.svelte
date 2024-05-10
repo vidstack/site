@@ -82,6 +82,7 @@
   import 'vidstack/player/layouts';
   import 'vidstack/player/ui';
 
+  import { isArray } from '~/utils/unit';
   import { onMount } from 'svelte';
   import type { MediaPlayerElement } from 'vidstack/elements';
 
@@ -91,7 +92,7 @@
   export let thumbnails: string | null = defaultThumbnails;
   export let type: SourceType = 'video';
   export let layout: LayoutType = 'default';
-  export let textTracks: TextTracks = [];
+  export let textTracks: TextTracks | null = null;
 
   let player: MediaPlayerElement;
 
@@ -110,7 +111,7 @@
   $: isDefaultSrc = currentSrc === defaultSrc;
   $: currentThumbnails = !isDefaultLive ? thumbnails : null;
   $: currentTextTracks =
-    isDefaultSrc && !isDefaultLive && !textTracks.length ? defaultTextTracks : textTracks;
+    isDefaultSrc && !isDefaultLive && !isArray(textTracks) ? defaultTextTracks : textTracks;
   $: posterAlt = isDefaultPoster
     ? 'Girl walks into sprite gnomes around her friend on a campfire in danger!'
     : null;
@@ -124,6 +125,7 @@
   playsinline
   keep-alive
   {poster}
+  on:view-type-change
   bind:this={player}
 >
   <media-provider class="block">

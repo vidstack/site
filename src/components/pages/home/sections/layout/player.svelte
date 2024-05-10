@@ -9,10 +9,13 @@
   import SolidLogo from '~/icons/logos/solid-logo.svelte';
   import SvelteLogo from '~/icons/logos/svelte-logo.svelte';
   import VueLogo from '~/icons/logos/vue-logo.svelte';
+  import CodeIcon from '~icons/lucide/code-xml';
   import EditIcon from '~icons/lucide/pencil';
+  import PlayIcon from '~icons/lucide/play';
   import AddIcon from '~icons/lucide/plus';
   import DeleteIcon from '~icons/lucide/trash-2';
 
+  import Shiki from '~/components/code-snippet/shiki.svelte';
   import Dialog from '~/components/dialog.svelte';
   import LazyMediaPlayer from '~/components/players/lazy-media-player.svelte';
   import {
@@ -27,6 +30,9 @@
     type TextTracks,
   } from '~/components/players/media-player.svelte';
   import Select from '~/components/select.svelte';
+  import Switch from '~/components/switch.svelte';
+  import { writable } from 'svelte/store';
+  import type { MediaViewType } from 'vidstack';
 
   import Input from './input.svelte';
   import Label from './label.svelte';
@@ -38,10 +44,15 @@
     title = defaultTitle,
     type: SourceType = 'video',
     layout: LayoutType = 'default',
-    textTracks: TextTracks = defaultTextTracks;
+    textTracks: TextTracks = defaultTextTracks,
+    codeSwitch = writable<'code' | 'player'>('player'),
+    viewType: MediaViewType = 'video',
+    jsFramework: 'js' | 'wc' | 'react' = 'react';
 
   // @ts-ignore
   $: currentSrc = type === 'custom' ? src : getDefaultSource(type);
+
+  $: showCode = $codeSwitch === 'code';
 
   function onSourceTypeChange({ detail }: CustomEvent) {
     const newType = detail[0] as SourceType;
@@ -80,7 +91,7 @@
   <div class="-mt-8 mb-10 flex w-full items-center justify-center space-x-2">
     {#each displayIcons as { Icon, framework, size }}
       <a
-        class="rounded-md p-2 transition-transform duration-300 hocus:scale-110 hocus:bg-elevate"
+        class="rounded-md p-2 transition-transform duration-300 hocus:scale-110"
         href={`/docs/player/getting-started/installation/${framework}?bundler=none&provider=${type}&styling=${layout === 'default' ? 'default-layout' : 'plyr-layout'}`}
       >
         <svelte:component this={Icon} width={size} height={size} />
@@ -89,16 +100,41 @@
   </div>
 
   <div class="flex w-full flex-col items-center justify-center text-soft/80 992:flex-row">
-    <div class="relative inline-flex flex-1">
-      <LazyMediaPlayer
-        src={currentSrc}
-        {poster}
-        {thumbnails}
-        {title}
-        {type}
-        {layout}
-        {textTracks}
-      />
+    <div class="relative inline-flex flex-1 flex-col">
+      <div class={clsx('aspect-video w-full', !showCode && 'hidden')}>
+        <Shiki code="const a = 10;" lang="tsx" />
+        <!-- title, poster, source, thumbnails, layout, textTracks -->
+      </div>
+
+      <div class={showCode ? 'hidden' : 'contents'}>
+        <LazyMediaPlayer
+          src={currentSrc}
+          {poster}
+          {thumbnails}
+          {title}
+          {type}
+          {layout}
+          {textTracks}
+          on:view-type-change={(event) => {
+            viewType = event.detail;
+          }}
+        />
+      </div>
+
+      <div class="mt-4 flex w-full justify-center">
+        <Switch
+          label="Layout View"
+          defaultValue="player"
+          value={codeSwitch}
+          options={[
+            { label: 'Show Player', value: 'player', Icon: PlayIcon },
+            { label: 'Show Code', value: 'code', Icon: CodeIcon },
+          ]}
+          on:select={(e) => {
+            codeSwitch.set(e.detail);
+          }}
+        />
+      </div>
     </div>
 
     <div
@@ -196,7 +232,11 @@
               <button
                 class="ml-1 rounded-full p-1 hocus:text-red-500"
                 on:click={() => {
-                  textTracks = textTracks.filter((t) => t !== track);
+                  if (textTracks.length <= 1) {
+                    textTracks = [];
+                  } else {
+                    textTracks = textTracks.filter((t) => t !== track);
+                  }
                 }}
               >
                 <span class="sr-only">delete {title}</span>

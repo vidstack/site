@@ -55,11 +55,11 @@
     {@const label = option.label ?? option.value}
     <button
       class={clsx(
-        'flex items-center outline-none focus-visible:border focus-visible:border-inverse hocus:bg-brand/10',
+        'flex items-center outline-none focus-visible:border focus-visible:border-inverse hocus:bg-inverse/10',
         square ? !compact && 'rounded-sm' : 'rounded-full',
         compact ? 'px-2.5 py-[7px]' : 'px-3 py-2',
         ready && _value === option.value
-          ? 'text-brand transition-colors'
+          ? 'bg-inverse transition-colors'
           : 'text-soft/90 hocus:text-inverse',
       )}
       use:radio={option.value}
@@ -71,7 +71,7 @@
 
   <div
     class={clsx(
-      'absolute left-0 top-0 h-8 bg-brand/20 transition-[left,opacity] duration-200 ease-out',
+      'absolute left-0 top-0 h-8 bg-inverse/20 transition-[left,opacity] duration-200 ease-out',
       !square && 'rounded-full',
       !ready ? 'opacity-0' : 'opacity-100',
       'pointer-events-none',
