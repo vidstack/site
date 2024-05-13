@@ -2,16 +2,18 @@
   import clsx from 'clsx';
 
   import { onMount } from 'svelte';
+  import type { PlayerSrc } from 'vidstack';
 
   import type { LayoutType, SourceType, TextTracks } from './media-player.svelte';
 
-  export let src: string | undefined;
+  export let src: PlayerSrc | undefined;
   export let type: SourceType;
   export let layout: LayoutType;
   export let title: string | null | undefined;
   export let poster: string | null | undefined;
   export let thumbnails: string | undefined;
   export let textTracks: TextTracks | undefined;
+  export let theme: string | undefined = undefined;
 
   let playerImport: any;
 
@@ -36,6 +38,7 @@
         {thumbnails}
         {textTracks}
         {layout}
+        {theme}
         on:view-type-change
       />
     {/await}

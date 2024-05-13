@@ -11,7 +11,8 @@
   import { isHighlightLine, resolveHighlightedLines } from './highlight';
   import { getLoadedCodeSnippet } from './registry';
 
-  export let id: string;
+  export let id: string | null = null;
+  export let code: string = '';
   export let highlights = '';
   export let transform: (code: string) => string = (s) => s;
   export let hidden = false;
@@ -23,8 +24,13 @@
     loading = true;
 
   onMount(() => {
+    if (!id) {
+      loading = false;
+      return;
+    }
+
     const intervalId = window.setInterval(() => {
-      if (getLoadedCodeSnippet(id)) {
+      if (id && getLoadedCodeSnippet(id)) {
         loading = false;
         window.clearInterval(intervalId);
         return;
@@ -34,8 +40,8 @@
 
   async function onCopy() {
     try {
-      const snippet = getLoadedCodeSnippet(id),
-        source = transform(snippet?.source || ''),
+      const snippet = id ? getLoadedCodeSnippet(id)?.source : code,
+        source = transform(snippet || ''),
         highlightedLines =
           highlights && resolveHighlightedLines(source.split(/\n/g).length, highlights),
         decoded = decodeHTML(source),

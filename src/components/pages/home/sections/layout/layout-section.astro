@@ -1,9 +1,45 @@
 ---
-import Player from './player.svelte';
+import HTMLIcon from '~/icons/html-icon.svelte';
+import JSIcon from '~/icons/js-icon.svelte';
+import AngularLogo from '~/icons/logos/angular-logo.svelte';
+import JSDelivrLogo from '~/icons/logos/jsdelivr-logo.svelte';
+import ReactLogo from '~/icons/logos/react-logo.svelte';
+import SolidLogo from '~/icons/logos/solid-logo.svelte';
+import SvelteLogo from '~/icons/logos/svelte-logo.svelte';
+import VueLogo from '~/icons/logos/vue-logo.svelte';
+
+import CodeSnippet from '~/components/code-snippet/code-snippet.astro';
+
+const displayIcons = [
+  { Icon: JSIcon, size: 32, framework: 'javascript' },
+  { Icon: HTMLIcon, size: 32, framework: 'web-components' },
+  { Icon: JSDelivrLogo, size: 32, framework: 'cdn' },
+  { Icon: AngularLogo, size: 32, framework: 'angular' },
+  { Icon: ReactLogo, size: 30, framework: 'react' },
+  { Icon: SolidLogo, size: 30, framework: 'solid' },
+  { Icon: SvelteLogo, size: 28, framework: 'svelte' },
+  { Icon: VueLogo, size: 28, framework: 'vue' },
+];
 ---
 
 <div class="flex w-full items-center justify-center">
   <div class="mx-auto w-full max-w-[1200px]">
-    <Player client:visible />
+    <!-- <CodeSnippet  /> -->
+    <!-- js/wc/react -->
+
+    <div class="flex flex-col">
+      <div class="flex w-full items-center justify-center space-x-2">
+        {
+          displayIcons.map(({ Icon, size, framework }) => (
+            <a
+              class="rounded-md p-2 transition-transform duration-300 hocus:scale-110"
+              href={`/docs/player/getting-started/installation/${framework}?bundler=none&provider=video&styling=default-layout`}
+            >
+              <Icon width={size} height={size} />
+            </a>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </div>

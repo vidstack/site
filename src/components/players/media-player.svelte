@@ -84,15 +84,17 @@
 
   import { isArray } from '~/utils/unit';
   import { onMount } from 'svelte';
+  import type { PlayerSrc } from 'vidstack';
   import type { MediaPlayerElement } from 'vidstack/elements';
 
-  export let src: string | undefined = undefined;
+  export let src: PlayerSrc | undefined = undefined;
   export let title: string = defaultTitle;
   export let poster: string | null = defaultPoster;
   export let thumbnails: string | null = defaultThumbnails;
   export let type: SourceType = 'video';
   export let layout: LayoutType = 'default';
   export let textTracks: TextTracks | null = null;
+  export let theme: string | null = null;
 
   let player: MediaPlayerElement;
 
@@ -139,8 +141,8 @@
     {/if}
   </media-provider>
   {#if layout === 'default'}
-    <media-audio-layout />
-    <media-video-layout thumbnails={currentThumbnails} />
+    <media-audio-layout color-scheme={theme} />
+    <media-video-layout thumbnails={currentThumbnails} color-scheme={theme} />
   {:else if layout === 'plyr'}
     <media-plyr-layout thumbnails={currentThumbnails} />
   {/if}

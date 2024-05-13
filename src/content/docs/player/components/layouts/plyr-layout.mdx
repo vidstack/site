@@ -4,6 +4,10 @@ description: A guide on how to setup the Plyr audio/video layout and available c
 
 import MediaPlayer from '~/components/players/lazy-media-player.svelte';
 
+:::tip
+Try out the Plyr Layout on our [player demo](/player/demo?layout=plyr&framework=wc) page.
+:::
+
 The Plyr Layout ships with support for audio, video, and live streams:
 
 ::code[./usage]
@@ -52,21 +56,5 @@ The following snippet contains a complete list of CSS variables and their respec
 They can all be adjusted by you to customize the layout as desired.
 
 ::code[./layout-vars]{copy=true}
-
-## Previews
-
-The following demos show how the Plyr Layout adapts to audio, video, and live streams:
-
-### Audio
-
-<MediaPlayer type="audio" layout="plyr" client:load />
-
-### Video
-
-<MediaPlayer type="video" layout="plyr" client:load />
-
-### Live
-
-<MediaPlayer type="live" layout="plyr" client:load />
 
 ::component_api

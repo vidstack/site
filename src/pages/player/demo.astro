@@ -1,0 +1,16 @@
+---
+import PlayerDemo from '~/components/players/player-demo.svelte';
+
+import DefaultLayout from '../../layouts/default-layout.astro';
+
+export const prerender = true;
+
+const title = 'Demo | Vidstack Player',
+  description = 'Play with our default player layouts.';
+---
+
+<DefaultLayout {title} {description}>
+  <div class="mx-auto mt-40 max-w-[1440px] px-4 768:mt-24 768:px-8">
+    <PlayerDemo client:load />
+  </div>
+</DefaultLayout>

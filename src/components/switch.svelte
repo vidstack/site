@@ -55,7 +55,7 @@
     {@const label = option.label ?? option.value}
     <button
       class={clsx(
-        'flex items-center outline-none focus-visible:border focus-visible:border-inverse hocus:bg-inverse/10',
+        'flex items-center outline-none focus-visible:m-1 focus-visible:border focus-visible:border-inverse hocus:bg-inverse/10',
         square ? !compact && 'rounded-sm' : 'rounded-full',
         compact ? 'px-2.5 py-[7px]' : 'px-3 py-2',
         ready && _value === option.value

@@ -1,18 +1,18 @@
 <script lang="ts">
+  import Input from '~/components/input.svelte';
+  import Label from '~/components/label.svelte';
   import Select from '~/components/select.svelte';
   import { createEventDispatcher } from 'svelte';
 
-  import Input from './input.svelte';
-  import Label from './label.svelte';
-
-  export let track: Record<string, any> | null = null;
+  export let track: any = undefined;
+  export let docsURL: string;
 
   const dispatch = createEventDispatcher();
 
   let src = track?.src,
     label = track?.label ?? 'English',
     srclang = track?.srclang ?? 'en-US',
-    type = 'vtt',
+    type = track?.['data-type'] ?? 'vtt',
     kind: TextTrackKind = track?.kind ?? 'captions',
     isDefault = track?.default;
 
@@ -41,12 +41,15 @@
     <Input label="Language" placeholder="en-US" bind:value={srclang} />
   </Label>
 
-  <Label label="Type" info="/docs/player/core-concepts/loading#text-track-formats">
+  <Label label="Type" info={`${docsURL}/core-concepts/loading#text-track-formats`}>
     <Select
       class="mt-3"
       label="Type"
       size="sm"
-      bind:value={type}
+      value={type}
+      on:change={({ detail }) => {
+        type = detail[0];
+      }}
       options={['VTT', 'SRT', 'ASS', 'JSON'].map((kind) => ({
         label: kind,
         value: kind.toLowerCase(),
@@ -54,12 +57,15 @@
     />
   </Label>
 
-  <Label label="Kind" info="/docs/player/core-concepts/loading#text-track-kinds">
+  <Label label="Kind" info={`${docsURL}/core-concepts/loading#text-track-kinds`}>
     <Select
       class="mt-3"
       label="Kind"
       size="sm"
-      bind:value={kind}
+      value={kind}
+      on:change={({ detail }) => {
+        kind = detail[0];
+      }}
       options={['Captions', 'Subtitles', 'Chapters', 'Descriptions', 'Metadata'].map((kind) => ({
         label: kind,
         value: kind.toLowerCase(),
@@ -67,7 +73,7 @@
     />
   </Label>
 
-  <Label label="Default" info="/docs/player/core-concepts/loading#text-track-default">
+  <Label label="Default" info={`${docsURL}/core-concepts/loading#text-track-default`}>
     <input
       class="mt-2 h-4 w-4 rounded-md accent-brand"
       type="checkbox"

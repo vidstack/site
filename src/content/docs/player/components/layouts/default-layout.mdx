@@ -4,6 +4,10 @@ description: A guide on how to setup the default audio/video layout and availabl
 
 import MediaPlayer from '~/components/players/lazy-media-player.svelte';
 
+:::tip
+Try out the Default Layout on our [player demo](/player/demo?layout=default&framework=wc) page.
+:::
+
 The Default Layout ships with support for audio, video, and live streams. You can include both
 layouts at the same time, only one will be matched depending on the view type.
 
@@ -94,21 +98,5 @@ The following variables can be used to specifically customize the video layout. 
 ### Components
 
 ::code[./component-vars]{copy=true}
-
-## Previews
-
-The following demos show how the Default Layout adapts to audio, video, and live streams:
-
-### Audio
-
-<MediaPlayer type="audio" client:load />
-
-### Video
-
-<MediaPlayer type="video" client:load />
-
-### Live
-
-<MediaPlayer type="live" client:load />
 
 ::component_api

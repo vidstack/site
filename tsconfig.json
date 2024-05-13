@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
-    },
+      "monaco-editor/esm": ["./node_modules/monaco-editor"]
+    }
   },
-  "exclude": ["./src/snippets/**"],
+  "exclude": ["./src/snippets/**"]
 }

@@ -5,9 +5,12 @@
 
   export let label: string;
   export let info: string | null = null;
+
+  let _class = '';
+  export { _class as class };
 </script>
 
-<div class="flex w-full flex-col items-start">
+<div class={clsx('flex w-full flex-col items-start', _class)}>
   <div class={clsx('flex w-full items-center', $$slots.option ? 'mb-2' : 'mb-1')}>
     <span
       class="shrink-0 whitespace-nowrap text-sm font-semibold text-soft group-focus-within:text-inverse"

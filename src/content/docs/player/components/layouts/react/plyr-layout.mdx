@@ -4,6 +4,10 @@ description: A guide on how to setup the Plyr audio/video layout and available c
 
 import MediaPlayer from '~/components/players/lazy-media-player.svelte';
 
+:::tip
+Try out the Plyr Layout on our [player demo](/player/demo?layout=plyr&framework=react) page.
+:::
+
 The Plyr Layout ships with support for audio, video, and live streams:
 
 ::code[./usage]
@@ -90,21 +94,5 @@ Any slot position can be prefixed with either `before` or `after` to insert cont
 after that position. For example, `afterCaptionButton` will insert content after the caption
 button.
 :::
-
-## Previews
-
-The following demos show how the Plyr Layout adapts to audio, video, and live streams:
-
-### Audio
-
-<MediaPlayer type="audio" layout="plyr" client:load />
-
-### Video
-
-<MediaPlayer type="video" layout="plyr" client:load />
-
-### Live
-
-<MediaPlayer type="live" layout="plyr" client:load />
 
 ::component_api
