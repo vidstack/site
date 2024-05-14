@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { updateSearchParams } from '~/utils/history';
   import { get } from 'svelte/store';
 
   import { IS_BROWSER } from '../../../utils/env';
@@ -15,9 +16,7 @@
 
   function updateURL(value: string) {
     currentIconLibrary.set(value as IconLibrary);
-    const url = new URL(location.href);
-    url.searchParams.set('lib', value);
-    window.history.pushState({}, '', url);
+    updateSearchParams({ lib: value });
   }
 </script>
 

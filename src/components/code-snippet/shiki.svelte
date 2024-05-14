@@ -103,4 +103,6 @@
       {@html highlightedCode}
     </div>
   {/if}
+
+  <slot />
 </CodeBlockWrapper>

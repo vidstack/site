@@ -2,166 +2,387 @@
   import clsx from 'clsx';
 
   import CodeIcon from '~icons/lucide/code-xml';
-  import EditIcon from '~icons/lucide/pencil';
+  import LinkIcon from '~icons/lucide/link';
   import PlayIcon from '~icons/lucide/play';
-  import AddIcon from '~icons/lucide/plus';
-  import DeleteIcon from '~icons/lucide/trash-2';
 
   import Shiki from '~/components/code-snippet/shiki.svelte';
-  import Dialog from '~/components/dialog.svelte';
-  import Input from '~/components/input.svelte';
   import Label from '~/components/label.svelte';
   import LazyMediaPlayer from '~/components/players/lazy-media-player.svelte';
   import Select from '~/components/select.svelte';
   import Switch from '~/components/switch.svelte';
+  import { isDarkColorScheme } from '~/stores/color-scheme';
   import { IS_BROWSER } from '~/utils/env';
-  import { onMount } from 'svelte';
+  import { updateSearchParams } from '~/utils/history';
+  import debounce from 'just-debounce-it';
+  // @ts-ignore
+  import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
+  // @ts-ignore
+  import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+  import { onDestroy, onMount } from 'svelte';
   import { writable } from 'svelte/store';
-  import type { MediaViewType } from 'vidstack';
 
-  import { generateCode } from './code-gen';
+  import IndeterminateLoadingSpinner from '../style/indeterminate-loading-spinner.svelte';
+  import { generateCode, type PlayerDemoFramework } from './code-gen';
   import {
-    defaultPoster,
-    defaultTextTracks,
-    defaultThumbnails,
-    defaultTitle,
-    getDefaultSource,
-    sourceTypes,
-    type LayoutType,
-    type SourceType,
-    type TextTracks,
-  } from './media-player.svelte';
-  import TrackForm from './track-form.svelte';
+    getSpriteFightSource,
+    liveStream,
+    sourcePresets,
+    spriteFight,
+    type LayoutProps,
+    type PlayerProps,
+    type SourcePresetType,
+  } from './defaults';
 
-  let src = getDefaultSource('video'),
-    srcType: any = '',
-    poster = defaultPoster,
-    thumbnails = defaultThumbnails,
-    title = defaultTitle,
-    type: SourceType = 'video',
-    layout: LayoutType = 'default',
-    textTracks: TextTracks = defaultTextTracks,
-    codeSwitch = writable<'code' | 'player'>('code'),
-    viewType: MediaViewType = 'video',
-    theme = 'dark',
-    framework: 'js' | 'wc' | 'react' = 'react',
-    monacoContainer: HTMLElement;
+  export let playerSchema: Record<string, any> = {};
+  export let defaultLayoutSchema: Record<string, any> = {};
+  export let plyrLayoutSchema: Record<string, any> = {};
+  export let playerEventsEnum: string[] = [];
+
+  const defaultPlayerProps = {
+    src: getSpriteFightSource('video'),
+    viewType: 'video',
+    streamType: 'on-demand',
+    logLevel: 'warn',
+    crossOrigin: true,
+    playsInline: true,
+    ...spriteFight.player,
+  };
+
+  const defaultLayoutProps = spriteFight.layout;
+
+  let preset: SourcePresetType = 'video',
+    playerProps: PlayerProps = { ...defaultPlayerProps },
+    layoutProps: LayoutProps = { type: 'default', ...defaultLayoutProps },
+    hlsConfig = {},
+    dashConfig = {},
+    events: string[] = ['can-play'],
+    codeSwitch = writable<'code' | 'player'>('player'),
+    framework: PlayerDemoFramework = 'react',
+    monacoContainer: HTMLElement,
+    editor: any,
+    editorLangs: any,
+    hasMounted = false;
 
   onMount(async () => {
     const url = new URL(location.href),
-      jsFrameworkParam = url.searchParams.get('framework'),
-      layoutParam = url.searchParams.get('layout'),
-      themeParam = url.searchParams.get('theme');
+      frameworkParam = url.searchParams.get('framework'),
+      configParam = url.searchParams.get('config'),
+      switchParam = url.searchParams.get('switch'),
+      presetParam = url.searchParams.get('preset');
 
-    if (jsFrameworkParam) framework = jsFrameworkParam as 'js';
-    if (layoutParam) layout = layoutParam as 'default' | 'plyr';
-    if (themeParam) theme = themeParam;
+    if (switchParam) $codeSwitch = switchParam as 'code' | 'player';
+    if (frameworkParam) framework = frameworkParam as PlayerDemoFramework;
+    if (presetParam) preset = presetParam as SourcePresetType;
+    if (configParam) onEditorContentChange(configParam);
 
-    const { editor: monaco } = await import('monaco-editor/esm');
-    monaco.create(monacoContainer, {
-      value: `{ src: "", }`,
-      language: 'js',
+    window.MonacoEnvironment = {
+      getWorker: function (_, label) {
+        if (label === 'json') return new jsonWorker();
+        return new editorWorker();
+      },
+    };
+
+    const { editor: monaco, languages } = await import('monaco-editor/esm');
+    editorLangs = languages;
+
+    const value = generateEditorValue();
+
+    const codeEditor = monaco.create(monacoContainer, {
+      value,
+      language: 'json',
       automaticLayout: true,
+      theme: 'hc-black',
+      minimap: { enabled: false },
+      lineNumbers: 'off',
+      selectionHighlight: false,
+      padding: { top: 12, bottom: 12 },
+      scrollBeyondLastLine: true,
+      formatOnType: true,
+      formatOnPaste: true,
+      scrollbar: { verticalScrollbarSize: 6, horizontalScrollbarSize: 6 },
+      renderLineHighlight: 'none',
+      guides: { indentation: false },
+      showFoldingControls: 'mouseover',
+      fontSize: 12,
     });
+
+    fold(codeEditor, value);
+
+    const onChange = debounce(() => onEditorContentChange(codeEditor.getValue()), 500);
+    codeEditor.onDidChangeModelContent(onChange);
+
+    editor = codeEditor;
+    hasMounted = true;
   });
 
-  $: layoutName = layout === 'default' ? 'default-layout' : 'plyr-layout';
-  $: docsURL = `/docs${framework === 'react' ? '' : '/wc'}/player`;
+  onDestroy(() => editor?.dispose());
 
-  $: if (IS_BROWSER) {
-    const url = new URL(location.href);
-    url.searchParams.set('framework', framework);
-    history.replaceState(null, '', url);
+  $: if (IS_BROWSER && hasMounted) {
+    updateSearchParams({
+      framework,
+      switch: $codeSwitch,
+    });
   }
 
-  $: if (IS_BROWSER) {
-    const url = new URL(location.href);
-    url.searchParams.set('layout', layout);
-    history.replaceState(null, '', url);
+  function generateEditorValue() {
+    return JSON.stringify(
+      {
+        $schema: 'https://vidstack.io/player/schema',
+        player: playerProps,
+        layout: layoutProps,
+        hls: hlsConfig,
+        dash: dashConfig,
+        events,
+      },
+      null,
+      2,
+    );
   }
 
-  $: if (IS_BROWSER) {
-    const url = new URL(location.href);
-    url.searchParams.set('theme', theme);
-    history.replaceState(null, '', url);
-  }
+  function onEditorContentChange(content: string) {
+    try {
+      const json = JSON.parse(content);
 
-  // @ts-ignore
-  $: currentSrc = type === 'custom' ? src : getDefaultSource(type);
+      playerProps = json.player;
+      layoutProps = json.layout;
+      hlsConfig = json.hls;
+      dashConfig = json.dash;
+      events = json.events;
 
-  $: showCode = $codeSwitch === 'code';
-
-  function onFrameworkChange({ detail }: CustomEvent) {
-    const newFramework = detail[0] as 'js' | 'wc' | 'react';
-    framework = newFramework;
-  }
-
-  function onSourceTypeChange({ detail }: CustomEvent) {
-    const newType = detail[0] as SourceType;
-    type = newType;
-    src = getDefaultSource(newType);
-  }
-
-  function onLayoutChange({ detail }: CustomEvent) {
-    const newLayout = detail[0] as LayoutType;
-    layout = newLayout;
-  }
-
-  function onThemeChange({ detail }: CustomEvent) {
-    theme = detail[0];
+      updateSearchParams({
+        config: JSON.stringify({
+          player: playerProps,
+          layout: layoutProps,
+          hls: hlsConfig,
+          dash: dashConfig,
+          events,
+        }),
+      });
+    } catch (e) {
+      console.warn('failed to parse editor content');
+    }
   }
 
   function onReset() {
-    src = getDefaultSource('video');
-    poster = defaultPoster;
-    thumbnails = defaultThumbnails;
-    title = defaultTitle;
-    type = 'video';
-    layout = 'default';
-    theme = 'dark';
-    textTracks = defaultTextTracks;
+    playerProps = defaultPlayerProps;
+    layoutProps = { type: 'default', ...defaultLayoutProps };
+    updateEditor(true);
   }
 
+  function onSourcePresetChange({ detail }: CustomEvent) {
+    const newType = detail[0] as SourcePresetType;
+    preset = newType;
+
+    if (newType === 'live') {
+      playerProps = {
+        ...liveStream.player,
+        viewType: 'video',
+        streamType: 'live',
+        logLevel: 'warn',
+        crossOrigin: true,
+        playsInline: true,
+      };
+
+      layoutProps = {
+        type: layoutProps.type,
+      };
+    } else {
+      playerProps = {
+        src: getSpriteFightSource(newType),
+        ...spriteFight.player,
+        viewType: preset === 'audio' ? 'audio' : 'video',
+      };
+
+      layoutProps = {
+        type: layoutProps.type,
+        ...defaultLayoutProps,
+      };
+    }
+
+    updateEditor(true);
+    updateSearchParams({ preset });
+  }
+
+  function onFrameworkChange({ detail }: CustomEvent<string[]>) {
+    framework = detail[0] as PlayerDemoFramework;
+  }
+
+  function updateEditor(shouldFold = false) {
+    const value = generateEditorValue();
+    editor?.setValue(value);
+    if (shouldFold) fold(editor, value);
+  }
+
+  $: viewType = playerProps.viewType;
+  $: if (editorLangs) updateSchema(editorLangs, framework, layoutProps.type, viewType);
+  function updateSchema(
+    languages: any,
+    framework: PlayerDemoFramework,
+    layoutType: string,
+    viewType: string,
+  ) {
+    const docsURL = `https://vidstack.io/docs/${framework === 'react' ? '' : 'wc/'}player`;
+
+    const playerId = framework === 'react' ? 'mediaplayer' : 'player',
+      layoutId = layoutType === 'plyr' ? 'plyrlayout' : `default${viewType}layout`,
+      callbackId = framework === 'react' ? 'callbacks' : 'events';
+
+    for (const prop of Object.keys(playerSchema)) {
+      playerSchema[prop].markdownDescription =
+        `[Link](${docsURL}/components/core/player#${playerId}.props.${prop.toLowerCase()})`;
+    }
+
+    for (const prop of Object.keys(defaultLayoutSchema)) {
+      defaultLayoutSchema[prop].markdownDescription =
+        `[Link](${docsURL}/components/layouts/${layoutType}-layout#${layoutId}.props.${prop.toLowerCase()})`;
+    }
+
+    languages.json.jsonDefaults.setDiagnosticsOptions({
+      schemas: [
+        {
+          uri: 'https://vidstack.io/player/schema',
+          fileMatch: ['*.json'],
+          schema: {
+            type: 'object',
+            properties: {
+              player: {
+                type: 'object',
+                properties: playerSchema,
+                markdownDescription: `[Link](${docsURL}/components/core/player)`,
+              },
+              layout: {
+                type: 'object',
+                markdownDescription: `[Link](${docsURL}/components/layouts/${layoutType}-layout)`,
+                properties: {
+                  type: { enum: ['default', 'plyr'] },
+                  ...(layoutType === 'plyr' ? plyrLayoutSchema : defaultLayoutSchema),
+                },
+              },
+              hls: {
+                type: 'object',
+                markdownDescription:
+                  '[Link](https://github.com/video-dev/hls.js/blob/master/docs/API.md#fine-tuning)',
+              },
+              dash: {
+                type: 'object',
+                markdownDescription:
+                  '[Link](https://cdn.dashjs.org/latest/jsdoc/module-Settings.html)',
+              },
+              events: {
+                type: 'array',
+                markdownDescription: `[Link](${docsURL}/components/core/player#${playerId}.${callbackId})`,
+                items: { enum: playerEventsEnum },
+                uniqueItems: true,
+              },
+            },
+          },
+        },
+      ],
+      validate: true,
+      allowComments: true,
+      trailingCommas: 'ignore',
+    });
+  }
+
+  function fold(editor: any, value: string) {
+    const lines = value.split('\n');
+    editor?.trigger('fold', 'editor.fold', {
+      direction: 'down',
+      selectionLines: [lines.findIndex((s) => s.includes('"textTracks":'))],
+    });
+  }
+
+  $: showCode = $codeSwitch === 'code';
+
   $: code = generateCode({
-    src,
-    srcType,
-    type,
-    title,
-    poster,
-    thumbnails,
-    viewType,
-    textTracks,
-    theme,
     framework,
-    layout,
+    playerProps,
+    layoutProps,
+    hlsConfig,
+    dashConfig,
   });
+
+  $: if (editor) {
+    editor.updateOptions({
+      theme: $isDarkColorScheme ? 'hc-black' : 'vs',
+    });
+  }
+
+  $: docsURL = `/docs/${framework === 'react' ? '' : 'wc/'}player`;
+
+  $: links = [
+    { label: 'Player', href: `${docsURL}/components/core/player#api-reference` },
+    { label: 'Default Layout', href: `${docsURL}/components/layouts/default-layout#api-reference` },
+    { label: 'Plyr Layout', href: `${docsURL}/components/layouts/plyr-layout#api-reference` },
+    {
+      label: 'HLS',
+      href: `https://github.com/video-dev/hls.js/blob/master/docs/API.md#fine-tuning`,
+    },
+    { label: 'DASH', href: `https://cdn.dashjs.org/latest/jsdoc/module-Settings.html` },
+  ];
 </script>
 
-<div class="flex w-full flex-col items-center justify-center text-soft/80 992:flex-row">
-  <div class="relative inline-flex max-w-[980px] flex-1 flex-col">
+<div class="flex w-full flex-col justify-center text-soft/80 992:flex-row">
+  <div
+    class="relative inline-flex aspect-video min-w-full max-w-[980px] flex-col 768:min-w-[400px] 1200:min-w-[600px] 1440:min-w-[744px]"
+  >
+    {#if !hasMounted}
+      <div class="flex aspect-video w-full items-center justify-center">
+        <IndeterminateLoadingSpinner size={56} />
+      </div>
+    {/if}
+
     <div class={clsx('w-full', !showCode && 'hidden')}>
-      <Shiki class="w-full shadow-sm" {code} lang="tsx" numbered copy />
+      {#if hasMounted}
+        <Shiki
+          class="w-full shadow-sm"
+          {code}
+          lang={framework === 'js' || framework === 'react' || framework === 'solid'
+            ? 'tsx'
+            : 'html'}
+          numbered
+          copy
+        >
+          <div class="absolute right-16 top-2">
+            <Select
+              class="backdrop-blur-sm"
+              label="JS Framework"
+              size="sm"
+              value={framework}
+              on:change={onFrameworkChange}
+              options={[
+                { label: 'JavaScript', value: 'js' },
+                { label: 'Web Components', value: 'wc' },
+                { label: 'React', value: 'react' },
+                { label: 'Vue', value: 'vue' },
+                { label: 'Svelte', value: 'svelte' },
+                { label: 'Solid', value: 'solid' },
+              ]}
+            />
+          </div>
+        </Shiki>
+      {/if}
     </div>
 
     <div class={showCode ? 'hidden' : 'contents'}>
-      <LazyMediaPlayer
-        src={srcType ? { src: currentSrc, type: srcType } : currentSrc}
-        {poster}
-        {thumbnails}
-        {title}
-        {type}
-        {layout}
-        {textTracks}
-        {theme}
-        on:view-type-change={(event) => {
-          viewType = event.detail;
-        }}
-      />
+      {#if hasMounted}
+        {#key playerProps}
+          {#key layoutProps}
+            <LazyMediaPlayer
+              {...playerProps}
+              layout={layoutProps}
+              hls={hlsConfig}
+              dash={dashConfig}
+              {events}
+            />
+          {/key}
+        {/key}
+      {/if}
     </div>
 
     <div class="mt-4 flex w-full items-center justify-center">
       <Switch
-        label="Layout View"
+        label="Layout"
         defaultValue="player"
         value={codeSwitch}
         options={[
@@ -176,154 +397,44 @@
   </div>
 
   <div
-    class="mt-8 flex w-full flex-1 flex-col space-y-6 rounded-md border border-border/90 bg-elevate p-4 shadow-sm 992:ml-8 992:mt-0 992:max-w-[350px]"
+    class="mt-8 flex w-full flex-1 flex-col 992:ml-8 992:mt-0 992:max-w-[400px] 1200:max-w-[600px]"
   >
-    <button class="-mb-6 self-end rounded-sm p-1 text-[13px] hocus:text-inverse" on:click={onReset}>
-      Reset
-    </button>
-
-    <Label label="Title">
-      <Input label="Title" bind:value={title} />
-    </Label>
-
-    <Label label="Source" info={`${docsURL}/core-concepts/loading#sources`}>
-      <Select
-        label="Source Preset"
-        size="sm"
-        value={type}
-        on:change={onSourceTypeChange}
-        options={sourceTypes.map((type) => ({ label: type, value: type.toLowerCase() }))}
-        slot="option"
-      />
-      <Input
-        label="Source"
-        bind:value={src}
-        on:change={() => {
-          type = 'custom';
-        }}
-      />
-    </Label>
-
-    <Label label="Source Type" info={`${docsURL}/core-concepts/loading#source-types`}>
-      <Input label="Source Type" placeholder="Example: video/mp4" bind:value={srcType} />
-    </Label>
-
-    <Label label="Poster">
-      <Input label="Poster" bind:value={poster} />
-    </Label>
-
-    <Label label="Thumbnails" info={`${docsURL}/core-concepts/loading#thumbnails`}>
-      <Input label="Thumbnails" bind:value={thumbnails} />
-    </Label>
-
-    <div class="mt-2 flex w-full flex-wrap items-center">
-      <Label class="flex-1" label="Framework">
-        <Select
-          class="mr-1 mt-2"
-          label="JS Framework"
-          size="sm"
-          value={framework}
-          defaultValue="default"
-          on:change={onFrameworkChange}
-          options={[
-            { label: 'JavaScript', value: 'js' },
-            { label: 'Web Components', value: 'wc' },
-            { label: 'React', value: 'react' },
-          ]}
-        />
-      </Label>
-
-      <Label class="flex-1" label="Layout" info={`${docsURL}/components/layouts/${layoutName}`}>
-        <Select
-          class="mr-1 mt-2"
-          label="Layout"
-          size="sm"
-          value={layout}
-          defaultValue="default"
-          on:change={onLayoutChange}
-          options={[
-            { label: 'Default', value: 'default' },
-            { label: 'Plyr', value: 'plyr' },
-          ]}
-        />
-      </Label>
-
-      {#if layout === 'default'}
-        <Label
-          class="flex-1"
-          label="Theme"
-          info={`${docsURL}/components/layouts/${layoutName}#color-scheme`}
-        >
+    <div
+      class="flex w-full flex-1 flex-col rounded-md border border-border/90 bg-elevate shadow-sm"
+    >
+      <div class="flex w-full items-center px-4 py-2">
+        <Label label="Source Preset">
           <Select
-            class="mt-2"
-            label="Theme"
+            class="ml-3"
+            label="Source Preset"
             size="sm"
-            value={theme}
-            defaultValue="dark"
-            on:change={onThemeChange}
-            options={[
-              { label: 'Light', value: 'light' },
-              { label: 'Dark', value: 'dark' },
-              { label: 'System', value: 'system' },
-            ]}
+            value={preset}
+            on:change={onSourcePresetChange}
+            options={sourcePresets.map((type) => ({ label: type, value: type.toLowerCase() }))}
           />
         </Label>
-      {/if}
+        <button class="ml-auto rounded-sm p-1 text-[13px] hocus:text-inverse" on:click={onReset}>
+          Reset
+        </button>
+      </div>
+
+      <div class="h-[500px] w-full rounded-md" bind:this={monacoContainer}></div>
     </div>
 
-    <Label label="Text Tracks" info={`${docsURL}/core-concepts/loading#text-tracks`}>
-      <Dialog slot="option">
-        <svelte:fragment let:action>
-          <button class="rounded-full p-1 hocus:text-inverse" use:action>
-            <span class="sr-only">add text track</span>
-            <AddIcon width={14} height={14} />
-          </button>
-        </svelte:fragment>
-        <TrackForm
-          {docsURL}
-          slot="content"
-          on:save={({ detail: track }) => {
-            textTracks = [...textTracks, track];
-          }}
-        />
-      </Dialog>
-
-      {#each textTracks as track, i}
-        {@const title = `${track.kind}${track.label ? ` (${track.label.toLowerCase()})` : ''}`}
-        <ul class="mt-4 flex w-full flex-col space-y-4">
-          <li class="flex items-center font-mono text-xs">
-            {title}
-            <div class="flex-1"></div>
-            <Dialog let:action>
-              <button class="rounded-full p-1 hocus:text-green-500" use:action>
-                <span class="sr-only">edit {title}</span>
-                <EditIcon width={14} height={14} />
-              </button>
-              <TrackForm
-                {docsURL}
-                {track}
-                slot="content"
-                on:save={({ detail: track }) => {
-                  textTracks[i] = track;
-                }}
-              />
-            </Dialog>
-            <button
-              class="ml-1 rounded-full p-1 hocus:text-red-500"
-              on:click={() => {
-                if (textTracks.length <= 1) {
-                  textTracks = [];
-                } else {
-                  textTracks = textTracks.filter((t) => t !== track);
-                }
-              }}
-            >
-              <span class="sr-only">delete {title}</span>
-              <DeleteIcon width={14} height={14} />
-            </button>
-          </li>
-        </ul>
+    <ul class="mt-10 flex flex-col space-y-2 992:mt-6">
+      <h2 class="flex items-center text-lg font-semibold text-inverse">
+        <LinkIcon class="mr-1.5" width={16} height={16} /> API References
+      </h2>
+      {#each links as { label, href }}
+        <a
+          class="text-sm font-medium text-soft hocus:text-inverse hocus:underline"
+          {href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {label}
+        </a>
       {/each}
-    </Label>
+    </ul>
   </div>
 </div>

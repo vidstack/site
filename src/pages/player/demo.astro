@@ -1,16 +1,46 @@
 ---
 import PlayerDemo from '~/components/players/player-demo.svelte';
+import wcAnalysis from 'vidstack/analyze.json';
 
 import DefaultLayout from '../../layouts/default-layout.astro';
 
 export const prerender = true;
 
 const title = 'Demo | Vidstack Player',
-  description = 'Play with our default player layouts.';
+  description = 'A playground for testing our player and layouts.';
+
+const playerSchema = buildSchema('MediaPlayer'),
+  defaultLayoutSchema = buildSchema('DefaultVideoLayout'),
+  plyrLayoutSchema = buildSchema('PlyrLayout');
+
+const playerEventsEnum = wcAnalysis.components
+  .find((i) => i.name === 'MediaPlayer')!
+  .events!.map((e) => e.name);
+
+function buildSchema(componentName: string) {
+  const component = wcAnalysis.components.find((i) => i.name === componentName),
+    schema: Record<string, any> = {};
+
+  if (component?.props) {
+    for (const prop of component.props) {
+      schema[prop.name] = {
+        type: prop.type.primitive === 'mixed' ? '' : prop.type.primitive,
+      };
+    }
+  }
+
+  return schema;
+}
 ---
 
 <DefaultLayout {title} {description}>
-  <div class="mx-auto mt-40 max-w-[1440px] px-4 768:mt-24 768:px-8">
-    <PlayerDemo client:load />
+  <div class="mx-auto mt-10 max-w-[1440px] px-4 768:mt-24 768:px-8">
+    <PlayerDemo
+      {playerSchema}
+      {playerEventsEnum}
+      {defaultLayoutSchema}
+      {plyrLayoutSchema}
+      client:load
+    />
   </div>
 </DefaultLayout>

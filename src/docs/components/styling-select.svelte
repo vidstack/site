@@ -1,6 +1,7 @@
 <script lang="ts">
   import Select, { type Option } from '~/components/select.svelte';
   import { cssLibraries, currentCSSLibrary, type CSSLibrary } from '~/stores/libraries';
+  import { updateSearchParams } from '~/utils/history';
   import { kebabToTitleCase } from '~/utils/string';
 
   const options: Option[] = [
@@ -13,14 +14,12 @@
   function onChange({ detail: [cssLib] }: CustomEvent<string[]>) {
     if ($currentCSSLibrary === cssLib) return;
     $currentCSSLibrary = cssLib as CSSLibrary;
-    const url = new URL(location.href);
-    url.searchParams.set('styling', cssLib);
-    window.history.pushState({}, '', url);
+    updateSearchParams({ styling: cssLib });
   }
 </script>
 
 <Select
-  class="px-4 py-1 text-xs ml-1"
+  class="ml-1 px-4 py-1 text-xs"
   label="Styling Preference"
   size="sm"
   {options}

@@ -7,6 +7,7 @@
 
   import DownloadIcon from '~icons/lucide/download';
 
+  import { updateSearchParams } from '~/utils/history';
   import { onMount } from 'svelte';
 
   import { createAriaDialog } from '../../../aria/dialog';
@@ -94,10 +95,7 @@
   }
 
   function updateIconSearchParam(iconName: string) {
-    const url = new URL(location.href);
-    if (iconName) url.searchParams.set('icon', iconName);
-    else url.searchParams.delete('icon');
-    window.history.pushState({}, '', url);
+    updateSearchParams({ icon: iconName });
   }
 
   $: downloadURL =

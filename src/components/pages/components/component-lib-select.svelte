@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { updateSearchParams } from '~/utils/history';
   import { get } from 'svelte/store';
 
   import { IS_BROWSER } from '../../../utils/env';
@@ -19,9 +20,9 @@
 
   function updateURL(value: string) {
     currentComponentLibrary.set(value as ComponentLibrary);
-    const url = new URL(location.href);
-    url.searchParams.set('lib', value);
-    window.history.pushState({}, '', url);
+    updateSearchParams({
+      lib: value,
+    });
   }
 </script>
 

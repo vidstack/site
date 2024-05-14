@@ -8,6 +8,7 @@
     type CSSLibrary,
     type JSLibrary,
   } from '~/stores/libraries';
+  import { updateSearchParams } from '~/utils/history';
   import { kebabToTitleCase } from '~/utils/string';
 
   let _class: string | undefined = undefined;
@@ -34,9 +35,7 @@
 
     if ($currentCSSLibrary !== cssLib) {
       $currentCSSLibrary = cssLib as CSSLibrary;
-      const url = new URL(location.href);
-      url.searchParams.set('styling', cssLib);
-      window.history.pushState({}, '', url);
+      updateSearchParams({ styling: cssLib });
     }
   }
 </script>

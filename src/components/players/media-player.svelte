@@ -1,76 +1,3 @@
-<script lang="ts" context="module">
-  export type SourceType =
-    | 'audio'
-    | 'video'
-    | 'live'
-    | 'hls'
-    | 'dash'
-    | 'youtube'
-    | 'vimeo'
-    | 'custom';
-
-  export type LayoutType = 'default' | 'plyr';
-
-  export type TextTracks = Record<string, any>[];
-
-  export const sourceTypes = [
-    'Audio',
-    'Video',
-    'HLS',
-    'DASH',
-    'Live',
-    'YouTube',
-    'Vimeo',
-    'Custom',
-  ];
-
-  export const defaultTitle = 'Sprite Fight';
-  export const defaultPoster = 'https://files.vidstack.io/sprite-fight/poster.webp';
-  export const defaultThumbnails = 'https://files.vidstack.io/sprite-fight/thumbnails.vtt';
-  export const defaultTextTracks = [
-    {
-      src: 'https://files.vidstack.io/sprite-fight/subs/english.vtt',
-      label: 'English',
-      srclang: 'en-US',
-      kind: 'subtitles',
-      default: true,
-    },
-    {
-      src: 'https://files.vidstack.io/sprite-fight/subs/spanish.vtt',
-      label: 'Spanish',
-      srclang: 'es-ES',
-      kind: 'subtitles',
-    },
-    {
-      src: 'https://files.vidstack.io/sprite-fight/chapters.vtt',
-      srclang: 'en-US',
-      kind: 'chapters',
-      default: true,
-    },
-  ];
-
-  export function getDefaultSource(type: SourceType) {
-    switch (type) {
-      case 'audio':
-        return 'https://files.vidstack.io/sprite-fight/audio.mp3';
-      case 'video':
-        return 'https://files.vidstack.io/sprite-fight/720p.mp4';
-      case 'hls':
-        return 'https://files.vidstack.io/sprite-fight/hls/stream.m3u8';
-      case 'dash':
-        return 'https://files.vidstack.io/sprite-fight/dash/stream.mpd';
-      case 'youtube':
-        return 'youtube/_cMxraX_5RE';
-      case 'vimeo':
-        return 'vimeo/640499893';
-      case 'live':
-        return 'https://stream.mux.com/v69RSHhFelSm4701snP22dYz2jICy4E4FUyk02rW4gxRM.m3u8';
-      case 'custom':
-        return '';
-    }
-  }
-</script>
-
 <script lang="ts">
   // Styles
   import 'vidstack/player/styles/default/theme.css';
@@ -82,69 +9,119 @@
   import 'vidstack/player/layouts';
   import 'vidstack/player/ui';
 
-  import { isArray } from '~/utils/unit';
-  import { onMount } from 'svelte';
-  import type { PlayerSrc } from 'vidstack';
+  import { DisposalBin, listenEvent } from '~/utils/events';
+  import { pascalToKebabCase } from '~/utils/string';
+  import { onDestroy, onMount } from 'svelte';
+  import { isDASHProvider, isHLSProvider, type MediaProviderChangeEvent } from 'vidstack';
   import type { MediaPlayerElement } from 'vidstack/elements';
 
-  export let src: PlayerSrc | undefined = undefined;
-  export let title: string = defaultTitle;
-  export let poster: string | null = defaultPoster;
-  export let thumbnails: string | null = defaultThumbnails;
-  export let type: SourceType = 'video';
-  export let layout: LayoutType = 'default';
-  export let textTracks: TextTracks | null = null;
-  export let theme: string | null = null;
+  import { type LayoutProps, type TextTracks } from './defaults';
 
-  let player: MediaPlayerElement;
+  export let viewType: 'audio' | 'video' = 'video';
+  export let layout: LayoutProps = { type: 'default' };
+  export let textTracks: TextTracks = [];
+  export let hls: Record<string, any> = {};
+  export let dash: Record<string, any> = {};
+  export let events: string[] = [];
+
+  let playerRef: MediaPlayerElement,
+    layoutRef: HTMLElement,
+    hasMounted = false;
 
   onMount(() => {
-    player.title = title;
-    return () => {
-      player?.destroy();
-    };
+    setTimeout(() => {
+      // No idea...
+      if (playerRef) playerRef.title = $$restProps.title;
+    }, 0);
+
+    const disposal = new DisposalBin();
+
+    if (playerRef) {
+      function log(event: Event) {
+        console.groupCollapsed(`🔔 ${event.type}`);
+        console.log(event);
+        console.groupEnd();
+      }
+
+      for (let event of events) {
+        if (event.startsWith('on')) {
+          event = pascalToKebabCase(event.slice(2));
+        }
+
+        disposal.add(listenEvent(playerRef, event as any, log));
+      }
+    }
+
+    hasMounted = true;
+    return () => disposal.dispose();
   });
 
-  $: if (player) player.title = title;
-  $: defaultSrc = getDefaultSource(type);
-  $: currentSrc = type === 'custom' ? src : defaultSrc;
-  $: isDefaultLive = currentSrc === getDefaultSource('live');
-  $: isDefaultPoster = poster === defaultPoster;
-  $: isDefaultSrc = currentSrc === defaultSrc;
-  $: currentThumbnails = !isDefaultLive ? thumbnails : null;
-  $: currentTextTracks =
-    isDefaultSrc && !isDefaultLive && !isArray(textTracks) ? defaultTextTracks : textTracks;
-  $: posterAlt = isDefaultPoster
-    ? 'Girl walks into sprite gnomes around her friend on a campfire in danger!'
-    : null;
+  onDestroy(() => playerRef?.destroy());
+
+  function setProp(el: any, prop: string, value: any) {
+    if (prop in el) {
+      el[prop] = value;
+    } else {
+      playerRef.setAttribute(prop, value + '');
+    }
+  }
+
+  $: if (playerRef && hasMounted) {
+    for (const prop of Object.keys($$restProps)) {
+      const value = $$restProps[prop];
+      setProp(playerRef, prop, value);
+    }
+  }
+
+  $: if (playerRef && hasMounted) {
+    playerRef.viewType = viewType;
+  }
+
+  $: if (layoutRef && hasMounted) {
+    for (const prop of Object.keys($$restProps)) {
+      const value = $$restProps[prop];
+      setProp(layoutRef, prop, value);
+    }
+  }
+
+  $: if (playerRef && hasMounted) {
+    playerRef.textTracks.clear();
+
+    for (const track of textTracks) {
+      playerRef.textTracks.add(track as any);
+    }
+  }
+
+  function onProviderChange(event: MediaProviderChangeEvent) {
+    const provider = event.detail;
+    if (isHLSProvider(provider)) {
+      provider.config = hls;
+    } else if (isDASHProvider(provider)) {
+      provider.config = dash;
+    }
+  }
 </script>
 
 <media-player
-  title="Sprite Fight"
-  src={currentSrc}
   class="w-full"
-  crossorigin
-  playsinline
   keep-alive
-  {poster}
   on:view-type-change
-  bind:this={player}
+  bind:this={playerRef}
+  on:provider-change={onProviderChange}
 >
   <media-provider class="block">
-    {#if layout === 'default'}
-      <media-poster class="vds-poster" alt={posterAlt}></media-poster>
-    {/if}
-    {#if !isDefaultLive}
-      {#each currentTextTracks as track}
-        <track {...track} />
-      {/each}
+    {#if layout.type !== 'plyr' && viewType !== 'audio'}
+      <media-poster class="vds-poster"></media-poster>
     {/if}
   </media-provider>
-  {#if layout === 'default'}
-    <media-audio-layout color-scheme={theme} />
-    <media-video-layout thumbnails={currentThumbnails} color-scheme={theme} />
-  {:else if layout === 'plyr'}
-    <media-plyr-layout thumbnails={currentThumbnails} />
+  {#if layout.type === 'default'}
+    {#if viewType === 'audio'}
+      <media-audio-layout {...layout} bind:this={layoutRef} />
+    {:else}
+      <media-video-layout {...layout} bind:this={layoutRef} />
+    {/if}
+  {:else if layout.type === 'plyr'}
+    <media-plyr-layout {...layout} bind:this={layoutRef} />
   {/if}
 </media-player>
 
