@@ -78,8 +78,8 @@
   }
 
   $: if (layoutRef && hasMounted) {
-    for (const prop of Object.keys($$restProps)) {
-      const value = $$restProps[prop];
+    for (const prop of Object.keys(layout)) {
+      const value = layout[prop];
       setProp(layoutRef, prop, value);
     }
   }
@@ -103,7 +103,7 @@
 </script>
 
 <media-player
-  class="w-full"
+  class="media-player w-full"
   keep-alive
   on:view-type-change
   bind:this={playerRef}

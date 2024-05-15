@@ -13,11 +13,14 @@
   import { isDarkColorScheme } from '~/stores/color-scheme';
   import { IS_BROWSER } from '~/utils/env';
   import { updateSearchParams } from '~/utils/history';
+  import { data } from 'dist/server/chunks/accessibility_Bd2iMs-I.mjs';
   import debounce from 'just-debounce-it';
   // @ts-ignore
-  import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
+  import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
   // @ts-ignore
-  import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+  import CSSWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
+  // @ts-ignore
+  import JSONWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
   import { onDestroy, onMount } from 'svelte';
   import { writable } from 'svelte/store';
 
@@ -50,45 +53,79 @@
 
   const defaultLayoutProps = spriteFight.layout;
 
+  const defaultCSS = [
+    '.media-player[data-view-type="video"] {',
+    '  aspect-ratio: 16 / 9;',
+    '}',
+    '',
+    '.vds-video-layout {',
+    '  --video-brand: #f5f5f5;',
+    '  /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#video-layout  */',
+    '  /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */',
+    '}',
+    '',
+    '.vds-audio-layout {',
+    '  --audio-brand: #f5f5f5;',
+    '  /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#audio-layout */',
+    '  /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */',
+    '}',
+    '',
+    '.plyr {',
+    '  --plyr-color-main: hsl(198, 100%, 50%);',
+    '  /* CSS Vars: https://vidstack.io/docs/player/components/layouts/plyr-layout#css-variables */',
+    '}',
+    '',
+  ].join('\n');
+
   let preset: SourcePresetType = 'video',
     playerProps: PlayerProps = { ...defaultPlayerProps },
     layoutProps: LayoutProps = { type: 'default', ...defaultLayoutProps },
+    css = defaultCSS,
+    style: HTMLStyleElement,
     hlsConfig = {},
     dashConfig = {},
     events: string[] = ['can-play'],
     codeSwitch = writable<'code' | 'player'>('player'),
     framework: PlayerDemoFramework = 'react',
+    playerContainer: HTMLElement,
     monacoContainer: HTMLElement,
     editor: any,
     editorLangs: any,
-    hasMounted = false;
+    hasMounted = false,
+    activeTab = 0,
+    editorData: any = {
+      json: {},
+      css: {},
+    };
 
   onMount(async () => {
     const url = new URL(location.href),
       frameworkParam = url.searchParams.get('framework'),
       configParam = url.searchParams.get('config'),
+      cssParam = url.searchParams.get('css'),
       switchParam = url.searchParams.get('switch'),
-      presetParam = url.searchParams.get('preset');
+      presetParam = url.searchParams.get('preset'),
+      tabParam = url.searchParams.get('tab');
 
     if (switchParam) $codeSwitch = switchParam as 'code' | 'player';
     if (frameworkParam) framework = frameworkParam as PlayerDemoFramework;
     if (presetParam) preset = presetParam as SourcePresetType;
-    if (configParam) onEditorContentChange(configParam);
+    if (tabParam) activeTab = Number(tabParam);
+    if (configParam) onConfigChange(configParam);
+    if (cssParam) css = cssParam;
 
     window.MonacoEnvironment = {
       getWorker: function (_, label) {
-        if (label === 'json') return new jsonWorker();
-        return new editorWorker();
+        if (label === 'json') return new JSONWorker();
+        if (label === 'css') return new CSSWorker();
+        return new EditorWorker();
       },
     };
 
     const { editor: monaco, languages } = await import('monaco-editor/esm');
     editorLangs = languages;
 
-    const value = generateEditorValue();
-
     const codeEditor = monaco.create(monacoContainer, {
-      value,
       language: 'json',
       automaticLayout: true,
       theme: 'hc-black',
@@ -106,25 +143,43 @@
       fontSize: 12,
     });
 
-    fold(codeEditor, value);
+    const configValue = generateEditorConfigValue();
+    editorData.json.model = monaco.createModel(configValue, 'json');
+
+    editorData.css.model = monaco.createModel(css, 'css');
+
+    codeEditor.setModel(activeTab === 0 ? editorData.json.model : editorData.css.model);
+    if (activeTab === 0) fold(codeEditor, configValue);
 
     const onChange = debounce(() => onEditorContentChange(codeEditor.getValue()), 500);
     codeEditor.onDidChangeModelContent(onChange);
 
     editor = codeEditor;
+
+    if (playerContainer) {
+      style = document.createElement('style');
+      style.type = 'text/css';
+      style.textContent = css;
+      document.head.append(style);
+    }
+
     hasMounted = true;
   });
 
-  onDestroy(() => editor?.dispose());
+  onDestroy(() => {
+    style?.remove();
+    editor?.dispose();
+  });
 
   $: if (IS_BROWSER && hasMounted) {
     updateSearchParams({
       framework,
       switch: $codeSwitch,
+      tab: activeTab,
     });
   }
 
-  function generateEditorValue() {
+  function generateEditorConfigValue() {
     return JSON.stringify(
       {
         $schema: 'https://vidstack.io/player/schema',
@@ -140,6 +195,14 @@
   }
 
   function onEditorContentChange(content: string) {
+    if (isConfigModel()) {
+      onConfigChange(content);
+    } else {
+      onCSSChange(content);
+    }
+  }
+
+  function onConfigChange(content: string) {
     try {
       const json = JSON.parse(content);
 
@@ -163,14 +226,24 @@
     }
   }
 
+  function onCSSChange(content: string) {
+    css = content;
+    updateSearchParams({ css: content });
+  }
+
   function onReset() {
     playerProps = defaultPlayerProps;
     layoutProps = { type: 'default', ...defaultLayoutProps };
-    updateEditor(true);
+    css = defaultCSS;
+    onSelectTab(0);
+    updateConfigContent(true);
   }
 
   function onSourcePresetChange({ detail }: CustomEvent) {
     const newType = detail[0] as SourcePresetType;
+
+    if (newType === preset) return;
+
     preset = newType;
 
     if (newType === 'live') {
@@ -188,8 +261,8 @@
       };
     } else {
       playerProps = {
+        ...defaultPlayerProps,
         src: getSpriteFightSource(newType),
-        ...spriteFight.player,
         viewType: preset === 'audio' ? 'audio' : 'video',
       };
 
@@ -199,7 +272,7 @@
       };
     }
 
-    updateEditor(true);
+    updateConfigContent(true);
     updateSearchParams({ preset });
   }
 
@@ -207,14 +280,38 @@
     framework = detail[0] as PlayerDemoFramework;
   }
 
-  function updateEditor(shouldFold = false) {
-    const value = generateEditorValue();
-    editor?.setValue(value);
-    if (shouldFold) fold(editor, value);
+  function updateConfigContent(shouldFold = false) {
+    const configValue = generateEditorConfigValue();
+
+    editorData.json.model.setValue(configValue);
+
+    if (shouldFold && isConfigModel()) fold(editor, configValue);
+  }
+
+  function isConfigModel() {
+    const currentModel = editor?.getModel();
+    return currentModel === editorData.json.model;
+  }
+
+  function onSelectTab(i: number) {
+    if (!editor) return;
+
+    const currentState = editor.saveViewState(),
+      currentData = activeTab === 0 ? editorData.json : editorData.css,
+      desiredData = activeTab === 0 ? editorData.css : editorData.json;
+
+    currentData.state = currentState;
+
+    editor.setModel(desiredData.model);
+    editor.restoreViewState(desiredData.state);
+    editor.focus();
+
+    activeTab = i;
   }
 
   $: viewType = playerProps.viewType;
   $: if (editorLangs) updateSchema(editorLangs, framework, layoutProps.type, viewType);
+
   function updateSchema(
     languages: any,
     framework: PlayerDemoFramework,
@@ -308,6 +405,10 @@
     });
   }
 
+  $: if (style) {
+    style.textContent = css;
+  }
+
   $: docsURL = `/docs/${framework === 'react' ? '' : 'wc/'}player`;
 
   $: links = [
@@ -320,11 +421,13 @@
     },
     { label: 'DASH', href: `https://cdn.dashjs.org/latest/jsdoc/module-Settings.html` },
   ];
+
+  $: playerKey = { ...playerProps, ...layoutProps };
 </script>
 
 <div class="flex w-full flex-col justify-center text-soft/80 992:flex-row">
   <div
-    class="relative inline-flex aspect-video min-w-full max-w-[980px] flex-col 768:min-w-[400px] 1200:min-w-[600px] 1440:min-w-[744px]"
+    class="relative inline-flex aspect-video min-w-full max-w-[980px] flex-col 768:min-w-[400px] 992:mt-8 1200:min-w-[600px] 1440:min-w-[744px]"
   >
     {#if !hasMounted}
       <div class="flex aspect-video w-full items-center justify-center">
@@ -364,18 +467,16 @@
       {/if}
     </div>
 
-    <div class={showCode ? 'hidden' : 'contents'}>
+    <div class={showCode ? 'hidden' : 'contents'} bind:this={playerContainer}>
       {#if hasMounted}
-        {#key playerProps}
-          {#key layoutProps}
-            <LazyMediaPlayer
-              {...playerProps}
-              layout={layoutProps}
-              hls={hlsConfig}
-              dash={dashConfig}
-              {events}
-            />
-          {/key}
+        {#key playerKey}
+          <LazyMediaPlayer
+            {...playerProps}
+            layout={layoutProps}
+            hls={hlsConfig}
+            dash={dashConfig}
+            {events}
+          />
         {/key}
       {/if}
     </div>
@@ -399,21 +500,37 @@
   <div
     class="mt-8 flex w-full flex-1 flex-col 992:ml-8 992:mt-0 992:max-w-[400px] 1200:max-w-[600px]"
   >
+    <div class="mb-2 flex w-full items-center">
+      <div class="flex-1"></div>
+      <Label label="Preset">
+        <Select
+          class="mx-3"
+          label="Source Preset"
+          size="sm"
+          value={preset}
+          on:change={onSourcePresetChange}
+          options={sourcePresets.map((type) => ({ label: type, value: type.toLowerCase() }))}
+        />
+      </Label>
+    </div>
+
     <div
       class="flex w-full flex-1 flex-col rounded-md border border-border/90 bg-elevate shadow-sm"
     >
       <div class="flex w-full items-center px-4 py-2">
-        <Label label="Source Preset">
-          <Select
-            class="ml-3"
-            label="Source Preset"
-            size="sm"
-            value={preset}
-            on:change={onSourcePresetChange}
-            options={sourcePresets.map((type) => ({ label: type, value: type.toLowerCase() }))}
-          />
-        </Label>
-        <button class="ml-auto rounded-sm p-1 text-[13px] hocus:text-inverse" on:click={onReset}>
+        {#each ['config.json', 'styles.css'] as tab, i}
+          <button
+            class={clsx(
+              'border-b px-4 py-1 font-mono text-xs hocus:text-inverse',
+              activeTab === i && 'border-inverse/90 text-inverse',
+            )}
+            on:click={() => onSelectTab(i)}
+          >
+            {tab}
+          </button>
+        {/each}
+        <div class="flex-1"></div>
+        <button class="rounded-sm p-1 text-[13px] hocus:text-inverse" on:click={onReset}>
           Reset
         </button>
       </div>
@@ -421,19 +538,22 @@
       <div class="h-[500px] w-full rounded-md" bind:this={monacoContainer}></div>
     </div>
 
-    <ul class="mt-10 flex flex-col space-y-2 992:mt-6">
-      <h2 class="flex items-center text-lg font-semibold text-inverse">
-        <LinkIcon class="mr-1.5" width={16} height={16} /> API References
-      </h2>
+    <h2 class="mt-10 flex items-center text-lg font-semibold text-inverse 992:mt-6">
+      <LinkIcon class="mr-1.5" width={16} height={16} /> API References
+    </h2>
+
+    <ul class="mt-2 flex list-disc flex-col space-y-2 pl-4">
       {#each links as { label, href }}
-        <a
-          class="text-sm font-medium text-soft hocus:text-inverse hocus:underline"
-          {href}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {label}
-        </a>
+        <li>
+          <a
+            class="text-sm font-medium text-soft hocus:text-inverse hocus:underline"
+            {href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {label}
+          </a>
+        </li>
       {/each}
     </ul>
   </div>
