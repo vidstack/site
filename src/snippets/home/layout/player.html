@@ -1,0 +1,18 @@
+<script type="module">
+  // Styles
+  import 'vidstack/player/styles/default/theme.css';
+  import 'vidstack/player/styles/default/layouts/video.css';
+  // Elements
+  import 'vidstack/player';
+  import 'vidstack/player/layouts/default';
+  import 'vidstack/player/ui';
+</script>
+
+<media-player title="Title" src="stream.m3u8">
+  <media-provider>
+    <media-poster src="poster.webp" alt="..." .></media-poster>
+    <track src="..." kind="captions" ... />
+  </media-provider>
+
+  <media-video-layout thumbnails="thumbnails.vtt"></media-video-layout>
+</media-player>

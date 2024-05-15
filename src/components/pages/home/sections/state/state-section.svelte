@@ -14,7 +14,10 @@
     { label: 'Update', Icon: WriteIcon },
   ];
 
-  $: id = `home/state/react`.replace(/\/(wc|react)/, `/${$jsFramework}`);
+  $: id = `home/state/react`.replace(
+    /\/(wc|react)/,
+    `/${$jsFramework === 'react' ? 'react' : 'wc'}`,
+  );
 
   $: ext = $jsFramework === 'react' ? 'tsx' : 'ts';
 </script>
@@ -28,5 +31,6 @@
       <CodeSnippet id={`${id}/write.${ext}`} />
     </TabPanel>
   </Tabs>
-  <JsFrameworkSelect />
+
+  <JsFrameworkSelect class="absolute right-4 top-[90px] z-50" />
 </div>

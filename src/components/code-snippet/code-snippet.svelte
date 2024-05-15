@@ -16,4 +16,5 @@
 <CodeBlockWrapper class={_class} {title} {flat} showTopBar={!!title || copy} {copy}>
   <CopyCodeButton {id} class="ml-auto" hidden={!copy} slot="top-bar" {transform} />
   <CodeSnippetLoader {id} {transform} />
+  <slot />
 </CodeBlockWrapper>

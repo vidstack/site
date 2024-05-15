@@ -52,6 +52,10 @@
       }
     }
 
+    for (const track of textTracks) {
+      playerRef.textTracks.add(track as any);
+    }
+
     hasMounted = true;
     return () => disposal.dispose();
   });
@@ -81,14 +85,6 @@
     for (const prop of Object.keys(layout)) {
       const value = layout[prop];
       setProp(layoutRef, prop, value);
-    }
-  }
-
-  $: if (playerRef && hasMounted) {
-    playerRef.textTracks.clear();
-
-    for (const track of textTracks) {
-      playerRef.textTracks.add(track as any);
     }
   }
 

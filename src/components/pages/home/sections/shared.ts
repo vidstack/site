@@ -1,3 +1,5 @@
 import { writable } from 'svelte/store';
 
-export const jsFramework = writable<'react' | 'wc'>('react');
+export type JSFramework = 'js' | 'react' | 'wc';
+
+export const jsFramework = writable<JSFramework>('react');

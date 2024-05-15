@@ -59,13 +59,13 @@
     '}',
     '',
     '.vds-video-layout {',
-    '  --video-brand: #f5f5f5;',
+    '  --video-brand: hsl(0, 0%, 96%);',
     '  /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#video-layout  */',
     '  /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */',
     '}',
     '',
     '.vds-audio-layout {',
-    '  --audio-brand: #f5f5f5;',
+    '  --audio-brand: hsl(0, 0%, 96%);',
     '  /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#audio-layout */',
     '  /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */',
     '}',
@@ -85,7 +85,7 @@
     hlsConfig = {},
     dashConfig = {},
     events: string[] = ['can-play'],
-    codeSwitch = writable<'code' | 'player'>('player'),
+    view = writable<'code' | 'player'>('player'),
     framework: PlayerDemoFramework = 'react',
     playerContainer: HTMLElement,
     monacoContainer: HTMLElement,
@@ -103,11 +103,11 @@
       frameworkParam = url.searchParams.get('framework'),
       configParam = url.searchParams.get('config'),
       cssParam = url.searchParams.get('css'),
-      switchParam = url.searchParams.get('switch'),
+      viewParam = url.searchParams.get('view'),
       presetParam = url.searchParams.get('preset'),
       tabParam = url.searchParams.get('tab');
 
-    if (switchParam) $codeSwitch = switchParam as 'code' | 'player';
+    if (viewParam) $view = viewParam as 'code' | 'player';
     if (frameworkParam) framework = frameworkParam as PlayerDemoFramework;
     if (presetParam) preset = presetParam as SourcePresetType;
     if (tabParam) activeTab = Number(tabParam);
@@ -174,7 +174,7 @@
   $: if (IS_BROWSER && hasMounted) {
     updateSearchParams({
       framework,
-      switch: $codeSwitch,
+      view: $view,
       tab: activeTab,
     });
   }
@@ -389,7 +389,7 @@
     });
   }
 
-  $: showCode = $codeSwitch === 'code';
+  $: showCode = $view === 'code';
 
   $: code = generateCode({
     framework,
@@ -485,13 +485,13 @@
       <Switch
         label="Layout"
         defaultValue="player"
-        value={codeSwitch}
+        value={view}
         options={[
           { label: 'Show Player', value: 'player', Icon: PlayIcon },
           { label: 'Show Code', value: 'code', Icon: CodeIcon },
         ]}
         on:select={(e) => {
-          codeSwitch.set(e.detail);
+          view.set(e.detail);
         }}
       />
     </div>

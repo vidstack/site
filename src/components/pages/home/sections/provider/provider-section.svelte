@@ -8,7 +8,10 @@
 
   let options = ['Audio', 'Video', 'Blob', 'HLS', 'DASH', 'YouTube', 'Vimeo'];
 
-  $: id = `home/provider/react`.replace(/\/(wc|react)/, `/${$jsFramework}`);
+  $: id = `home/provider/react`.replace(
+    /\/(wc|react)/,
+    `/${$jsFramework === 'react' ? 'react' : 'wc'}`,
+  );
 
   $: ext = $jsFramework === 'react' ? 'tsx' : 'html';
 
@@ -30,5 +33,6 @@
       {/each}
     </Tabs>
   {/key}
-  <JsFrameworkSelect />
+
+  <JsFrameworkSelect class="absolute right-4 top-[90px] z-50" />
 </div>
