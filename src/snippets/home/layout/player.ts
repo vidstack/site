@@ -5,7 +5,7 @@ import { VidstackPlayer, VidstackPlayerLayout } from 'vidstack/player';
 
 const player = await VidstackPlayer.create({
   target: '#target',
-  title: 'Title',
+  title: '...',
   src: 'stream.m3u8',
   poster: 'poster.webp',
   layout: new VidstackPlayerLayout({

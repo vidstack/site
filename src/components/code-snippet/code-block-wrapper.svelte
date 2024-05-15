@@ -17,7 +17,7 @@
 <div
   {...$$restProps}
   class={clsx(
-    'code-block relative flex min-h-0 flex-col bg-elevate text-sm leading-[var(--leading)]',
+    'code-block relative flex min-h-0 min-w-0 flex-col bg-elevate text-sm leading-[var(--leading)]',
     !flat
       ? 'mx-auto max-h-[60vh] rounded-md border border-border/90 shadow-sm 576:max-h-[32rem]'
       : 'max-h-[calc(var(--code-block-max-h,0px)-var(--code-block-gutters,0px))] min-h-full w-full',

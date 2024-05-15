@@ -34,5 +34,5 @@
     </Tabs>
   {/key}
 
-  <JsFrameworkSelect class="absolute right-4 top-[90px] z-50" />
+  <JsFrameworkSelect class="absolute right-3 top-[90px] z-50" />
 </div>
