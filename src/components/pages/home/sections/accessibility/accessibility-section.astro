@@ -1,1 +1,111 @@
-<div class="flex w-full items-center justify-center">Grid: Title+Animated Icon</div>
+---
+import ArrowRightIcon from '~astro-icons/lucide/arrow-right';
+import AudioIcon from '~astro-icons/lucide/audio-lines';
+import CaptionsIcon from '~astro-icons/lucide/captions';
+import CompliantIcon from '~astro-icons/lucide/circle-check-big';
+import FocusIcon from '~astro-icons/lucide/focus';
+import KeyboardIcon from '~astro-icons/lucide/keyboard';
+import TooltipsIcon from '~astro-icons/lucide/message-square-text';
+import ColorIcon from '~astro-icons/lucide/palette';
+import LabelIcon from '~astro-icons/lucide/rectangle-ellipsis';
+import MotionIcon from '~astro-icons/lucide/rotate-3d';
+import CustomizationIcon from '~astro-icons/lucide/settings-2';
+import AnnouncerIcon from '~astro-icons/lucide/speech';
+
+const items = [
+  {
+    title: 'Announcements',
+    description: 'Informative screen reader updates for media state changes.',
+    Icon: AnnouncerIcon,
+    link: '/docs/player/components/display/announcer',
+  },
+  {
+    title: 'Labels',
+    description: 'Clear semantic labels and roles for screen readers.',
+    Icon: LabelIcon,
+    link: '/docs/player/getting-started/accessibility#labels',
+  },
+  {
+    title: 'Captions',
+    description: 'Consistent and customizable captions.',
+    Icon: CaptionsIcon,
+    link: '/docs/player/getting-started/accessibility#captions',
+  },
+  {
+    title: 'Audio',
+    description: 'Multitrack audio support for i18n and descriptions.',
+    Icon: AudioIcon,
+    link: '/docs/player/getting-started/accessibility#audio-descriptions',
+  },
+  {
+    title: 'Keyboard',
+    description: 'Full keyboard navigation support across all interactable components.',
+    Icon: KeyboardIcon,
+    link: '/docs/player/getting-started/accessibility#keyboard-navigation',
+  },
+  {
+    title: 'Focus',
+    description: 'Focus management and clear indicators.',
+    Icon: FocusIcon,
+    link: '/docs/player/getting-started/accessibility#focus-management',
+  },
+  {
+    title: 'Color',
+    description: 'Accessible contrasts and theme options.',
+    Icon: ColorIcon,
+    link: '/docs/player/components/layouts/default-layout#color-scheme',
+  },
+  {
+    title: 'Tooltips',
+    description: 'Popover text to provide helpful descriptions.',
+    Icon: TooltipsIcon,
+    link: '/docs/player/components/buttons/tooltip',
+  },
+  {
+    title: 'Motion',
+    description: 'Reduced motion support for vestibular disorders.',
+    Icon: MotionIcon,
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion',
+  },
+  {
+    title: 'Customize',
+    description: 'Tailored user settings for all preferences.',
+    Icon: CustomizationIcon,
+    link: 'https://x.com/mihar_22/status/1764864228052345167',
+  },
+  {
+    title: 'Compliant',
+    description: 'WCAG 2.2, WAI-ARIA, and CVAA compliant.',
+    Icon: CompliantIcon,
+    link: '/docs/player/getting-started/accessibility#guidelines',
+  },
+];
+---
+
+<div class="mx-auto grid grid-cols-2 gap-16 px-4 768:grid-cols-3 992:grid-cols-4">
+  {
+    items.map(({ title, description, link, Icon }) => (
+      <div class="flex flex-col">
+        <div class="flex items-center">
+          {Icon ? <Icon class="mr-2.5" width={22} height={22} /> : null}
+          <h2 class="text-base font-medium">{title}</h2>
+        </div>
+        <p class="mt-3 max-w-[240px] text-sm font-normal text-soft">{description}</p>
+        {link && (
+          <a
+            class="group mt-3 flex items-center text-sm font-medium text-soft hocus:text-inverse"
+            href={link}
+            target="_blank"
+          >
+            Learn More
+            <ArrowRightIcon
+              class="ml-1 opacity-0 transition-opacity group-hocus:opacity-100"
+              width={14}
+              height={14}
+            />
+          </a>
+        )}
+      </div>
+    ))
+  }
+</div>

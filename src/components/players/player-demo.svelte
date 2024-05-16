@@ -1,6 +1,12 @@
 <script lang="ts">
   import clsx from 'clsx';
 
+  import HTMLLogo from '~/icons/html-icon.svelte';
+  import JSLogo from '~/icons/js-icon.svelte';
+  import ReactLogo from '~/icons/logos/react-logo.svelte';
+  import SolidLogo from '~/icons/logos/solid-logo.svelte';
+  import SvelteLogo from '~/icons/logos/svelte-logo.svelte';
+  import VueLogo from '~/icons/logos/vue-logo.svelte';
   import CodeIcon from '~icons/lucide/code-xml';
   import LinkIcon from '~icons/lucide/link';
   import PlayIcon from '~icons/lucide/play';
@@ -76,6 +82,15 @@
     '}',
     '',
   ].join('\n');
+
+  const frameworkIcons = {
+    js: JSLogo,
+    wc: HTMLLogo,
+    react: ReactLogo,
+    vue: VueLogo,
+    solid: SolidLogo,
+    svelte: SvelteLogo,
+  };
 
   let preset: SourcePresetType = 'video',
     playerProps: PlayerProps = { ...defaultPlayerProps },
@@ -461,7 +476,15 @@
                 { label: 'Svelte', value: 'svelte' },
                 { label: 'Solid', value: 'solid' },
               ]}
-            />
+            >
+              <svelte:component
+                this={frameworkIcons[framework]}
+                class="mr-1.5"
+                width={15}
+                height={15}
+                slot="icon"
+              />
+            </Select>
           </div>
         </Shiki>
       {/if}
