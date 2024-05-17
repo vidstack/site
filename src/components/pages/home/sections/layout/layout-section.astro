@@ -11,21 +11,20 @@ import VueLogo from '~/icons/logos/vue-logo.svelte';
 import CodeSnippet from './code-snippet.svelte';
 
 const displayIcons = [
-  { Icon: JSIcon, size: 32, framework: 'javascript' },
-  { Icon: HTMLIcon, size: 32, framework: 'web-components' },
-  { Icon: JSDelivrLogo, size: 32, framework: 'cdn' },
-  { Icon: AngularLogo, size: 32, framework: 'angular' },
-  { Icon: ReactLogo, size: 30, framework: 'react' },
-  { Icon: SolidLogo, size: 30, framework: 'solid' },
-  { Icon: SvelteLogo, size: 28, framework: 'svelte' },
-  { Icon: VueLogo, size: 28, framework: 'vue' },
+  { Icon: JSIcon, size: 38, framework: 'javascript' },
+  { Icon: HTMLIcon, size: 38, framework: 'web-components' },
+  { Icon: JSDelivrLogo, size: 34, framework: 'cdn' },
+  { Icon: AngularLogo, size: 36, framework: 'angular' },
+  { Icon: ReactLogo, size: 34, framework: 'react' },
+  { Icon: SolidLogo, size: 34, framework: 'solid' },
+  { Icon: SvelteLogo, size: 32, framework: 'svelte' },
+  { Icon: VueLogo, size: 32, framework: 'vue' },
 ];
 ---
 
-<div class="flex w-full items-center justify-center">
+<div class="-mt-6 flex w-full items-center justify-center">
   <div class="mx-auto w-full max-w-[1200px]">
     <CodeSnippet client:visible />
-
     <div class="mt-12 flex flex-col">
       <div class="flex w-full items-center justify-center space-x-2">
         {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import clsx from 'clsx';
 
+  import { resize } from '~/actions/resize';
   import { isString } from '~/utils/unit';
   import { createEventDispatcher } from 'svelte';
 
@@ -22,9 +23,15 @@
   $: selectedTabLeft = isReady ? $tabRefs[$selectedTab].offsetLeft + 'px' : 0;
   $: containerWidth = container ? container.getBoundingClientRect().width : 0;
   $: dispatch('change', $selectedTab);
+
+  function onResize() {
+    selectedTabWidth = $tabRefs[$selectedTab].offsetWidth + 'px';
+    selectedTabLeft = $tabRefs[$selectedTab].offsetLeft + 'px';
+    containerWidth = container.getBoundingClientRect().width;
+  }
 </script>
 
-<div class="w-full" use:tabsRoot>
+<div class="w-full" use:tabsRoot use:resize={{ onResize }}>
   <div
     class={clsx(
       'no-scrollbar relative items-center overflow-x-auto p-0.5 ',

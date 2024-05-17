@@ -96,9 +96,7 @@ const {
             <span
               class={clsx(
                 'inline-block text-soft',
-                Astro.slots.has('content')
-                  ? 'mt-2 text-[2rem] 420:text-4xl 576:mt-3 992:text-5xl'
-                  : 'mt-3',
+                Astro.slots.has('content') ? 'mt-2 text-[2rem] 576:mt-3 576:text-5xl' : 'mt-3',
               )}
             >
               {subtitle}

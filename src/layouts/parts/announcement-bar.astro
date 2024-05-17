@@ -25,9 +25,9 @@ const { href, action = 'Learn more', type } = Astro.props;
 >
   {
     type === 'help' ? (
-      <HelpIcon class="mr-1.5 w-4 h-4" />
+      <HelpIcon class="mr-1.5 h-4 w-4" />
     ) : (
-      <MegaphoneIcon class="mr-1.5 mb-0.5 w-5 h-5" />
+      <MegaphoneIcon class="mb-0.5 mr-1.5 h-5 w-5" />
     )
   }
 
@@ -36,14 +36,14 @@ const { href, action = 'Learn more', type } = Astro.props;
   </span>
 
   <a
-    class="flex items-center text-brand group font-medium p-0.5 rounded-md"
+    class="group flex items-center rounded-md p-0.5 text-brand"
     {href}
     target="_blank"
     rel="noreferrer"
   >
     {action}
     <ArrowRightIcon
-      class="-translate-x-2 opacity-0 group-hocus:opacity-100 group-hocus:translate-x-px transition-all w-3.5 h-3.5"
+      class="h-3.5 w-3.5 -translate-x-2 opacity-0 transition-all group-hocus:translate-x-px group-hocus:opacity-100"
     />
   </a>
 </div>

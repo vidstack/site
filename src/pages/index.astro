@@ -43,7 +43,7 @@ const title = 'Vidstack Player',
 
 <DefaultLayout {title} {description}>
   <AnnouncementBar href="https://github.com/vidstack/player/discussions/1220" slot="announcement">
-    <span class="font-semibold">Player:</span> 1.0-RC!
+    Player: 1.0-RC
   </AnnouncementBar>
 
   <HeroSection>
@@ -126,6 +126,9 @@ const title = 'Vidstack Player',
 
   <FeatureSection title="Design." subtitle="Built to be styled.">
     <PaintBrushIcon class="h-full w-full" slot="icon" />
+    <Button arrow href="/docs/player/styling/introduction" gradient target="_blank" slot="cta">
+      Learn More
+    </Button>
     <DesignSection slot="content" client:load />
   </FeatureSection>
 
@@ -137,11 +140,29 @@ const title = 'Vidstack Player',
 
   <FeatureSection title="Providers." subtitle="Built to adapt.">
     <TvIcon class="h-full w-full" slot="icon" />
+    <Button
+      arrow
+      href="/docs/player/core-concepts/loading#providers"
+      gradient
+      target="_blank"
+      slot="cta"
+    >
+      Learn More
+    </Button>
     <ProviderSection slot="content" client:load />
   </FeatureSection>
 
   <FeatureSection title="State." subtitle="Built to be reactive.">
     <ShuffleIcon class="h-full w-full" slot="icon" />
+    <Button
+      arrow
+      href="/docs/player/core-concepts/state-management"
+      gradient
+      target="_blank"
+      slot="cta"
+    >
+      Learn More
+    </Button>
     <StateSection slot="content" client:load />
   </FeatureSection>
 

@@ -22,7 +22,7 @@
   $: ext = $jsFramework === 'react' ? 'tsx' : 'ts';
 </script>
 
-<div class="relative mx-auto -mt-6 flex w-full max-w-[680px] items-center justify-center">
+<div class="relative mx-auto -mt-4 flex w-full max-w-[680px] items-center justify-center">
   <Tabs label="state usage options" tabs={options} block justify="center">
     <TabPanel>
       <CodeSnippet id={`${id}/read.${ext}`} />

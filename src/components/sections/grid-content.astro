@@ -16,6 +16,7 @@ export interface GridContentItem {
   stars?: { owner: string; repo: string };
   description: string;
   href?: string | { title: string; href: string };
+  Icon?: any;
 }
 
 interface Props {
@@ -36,46 +37,47 @@ function getHref(href: GridContentItem['href']) {
     class={clsx(
       align === 'start' ? 'grid' : 'inline-grid 576:justify-items-center',
       'w-full gap-12 px-4 grid-cols-1 text-left',
-      '576:grid-cols-2 576:gap-16 576:w-auto',
+      '576:grid-cols-2 576:gap-12 576:w-auto',
       '768:grid-cols-3',
     )}
     aria-label={label}
   >
     {
-      content.map(({ title, badge, stage, stars, href, description }) => {
+      content.map(({ title, badge, stage, stars, href, description, Icon }) => {
         const isExternal = !!getHref(href)?.startsWith('http');
         return (
-          <li class="flex flex-col space-y-2 text-inverse w-full">
+          <li class="flex w-full flex-col space-y-2.5 text-inverse">
             <div class="flex flex-row items-center justify-start">
-              <span class="font-medium text-inverse">{title}</span>
-              {stage && <StageBadge class="text-xs ml-2" stage={stage} client:visible />}
+              {Icon ? <Icon class="mr-2.5" width={22} height={22} /> : null}
+              <span class="font-semibold text-inverse">{title}</span>
+              {stage && <StageBadge class="ml-2 text-xs" stage={stage} client:visible />}
               {badge && (
                 <Badge
-                  class="text-xs ml-2"
+                  class="ml-2 text-xs"
                   color={typeof badge === 'string' ? undefined : badge.color}
                 >
                   {typeof badge === 'string' ? badge : badge.title}
                 </Badge>
               )}
               {stars && (
-                <div class="ml-auto text-xs font-medium flex items-center">
-                  <StarIcon class="w-3 h-3 mr-1" />
+                <div class="ml-auto flex items-center text-xs font-medium">
+                  <StarIcon class="mr-1 h-3 w-3" />
                   <GithubStars owner={stars.owner} repo={stars.repo} flat client:load />
                 </div>
               )}
             </div>
 
-            <p class="text-soft text-sm w-full">{description}</p>
+            <p class="w-full text-sm text-soft">{description}</p>
 
             {href && (
               <a
-                class="flex items-center text-brand group p-0.5 rounded-md text-sm"
+                class="group flex items-center rounded-md p-0.5 text-sm text-brand"
                 href={getHref(href)}
                 target={isExternal ? '_blank' : null}
                 rel={isExternal ? 'noreferrer' : null}
               >
                 {typeof href === 'string' ? 'Learn more' : href.title}
-                <ArrowRightIcon class="-translate-x-2 opacity-0 group-hocus:opacity-100 group-hocus:translate-x-px transition-all w-3.5 h-3.5" />
+                <ArrowRightIcon class="h-3.5 w-3.5 -translate-x-2 opacity-0 transition-all group-hocus:translate-x-px group-hocus:opacity-100" />
               </a>
             )}
           </li>

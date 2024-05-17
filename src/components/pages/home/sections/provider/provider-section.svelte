@@ -22,7 +22,9 @@
   }
 </script>
 
-<div class="relative mx-auto -mt-6 flex w-full max-w-[795px] items-center justify-center">
+<div
+  class="relative mx-auto -mt-6 flex w-full min-w-0 max-w-[772px] flex-1 items-center justify-center"
+>
   {#key $jsFramework}
     <Tabs label="providers" tabs={options} block>
       {#each options as option}
