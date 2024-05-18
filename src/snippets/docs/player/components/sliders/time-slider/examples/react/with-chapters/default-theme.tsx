@@ -6,9 +6,9 @@ import { TimeSlider } from '@vidstack/react';
     {(cues, forwardRef) =>
       cues.map((cue) => (
         <div className="vds-slider-chapter" key={cue.startTime} ref={forwardRef}>
-          <TimeSlider.Track className="media-slider-track">
-            <TimeSlider.TrackFill className="media-slider-track-fill media-slider-track" />
-            <TimeSlider.Progress className="media-slider-progress media-slider-track" />
+          <TimeSlider.Track className="vds-slider-track">
+            <TimeSlider.TrackFill className="vds-slider-track-fill vds-slider-track" />
+            <TimeSlider.Progress className="vds-slider-progress vds-slider-track" />
           </TimeSlider.Track>
         </div>
       ))
