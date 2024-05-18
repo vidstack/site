@@ -23,9 +23,10 @@ interface Props {
   label: string;
   align?: 'start' | 'center';
   content: GridContentItem[];
+  newTab?: boolean;
 }
 
-const { label, align = 'center', content } = Astro.props;
+const { label, align = 'center', content, newTab = false } = Astro.props;
 
 function getHref(href: GridContentItem['href']) {
   return typeof href === 'string' ? href : href?.href;
@@ -39,6 +40,7 @@ function getHref(href: GridContentItem['href']) {
       'w-full gap-12 px-4 grid-cols-1 text-left',
       '576:grid-cols-2 576:gap-12 576:w-auto',
       '768:grid-cols-3',
+      'auto-rows-fr',
     )}
     aria-label={label}
   >
@@ -46,7 +48,7 @@ function getHref(href: GridContentItem['href']) {
       content.map(({ title, badge, stage, stars, href, description, Icon }) => {
         const isExternal = !!getHref(href)?.startsWith('http');
         return (
-          <li class="flex w-full flex-col space-y-2.5 text-inverse">
+          <li class="flex w-full flex-col space-y-3 text-inverse" data-grid-item>
             <div class="flex flex-row items-center justify-start">
               {Icon ? <Icon class="mr-2.5" width={22} height={22} /> : null}
               <span class="font-semibold text-inverse">{title}</span>
@@ -69,11 +71,13 @@ function getHref(href: GridContentItem['href']) {
 
             <p class="w-full text-sm text-soft">{description}</p>
 
+            <div class="flex-1" />
+
             {href && (
               <a
                 class="group flex items-center rounded-md p-0.5 text-sm text-brand"
                 href={getHref(href)}
-                target={isExternal ? '_blank' : null}
+                target={isExternal || newTab ? '_blank' : null}
                 rel={isExternal ? 'noreferrer' : null}
               >
                 {typeof href === 'string' ? 'Learn more' : href.title}

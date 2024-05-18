@@ -1,1 +1,262 @@
-<div class="flex w-full items-center justify-center">Grid: Title+AnimatedIcon</div>
+---
+import TailwindIcon from '~/icons/logos/tailwind-logo.svelte';
+import TypeScriptIcon from '~/icons/logos/typescript.svelte';
+import AccessibleIcon from '~astro-icons/lucide/accessibility';
+import RemotePlaybackIcon from '~astro-icons/lucide/airplay';
+import TriggerIcon from '~astro-icons/lucide/arrow-left-right';
+import AudioGainIcon from '~astro-icons/lucide/audio-lines';
+import EventIcon from '~astro-icons/lucide/bell';
+import ComponentsIcon from '~astro-icons/lucide/blocks';
+import FrameworkIcon from '~astro-icons/lucide/boxes';
+import CaptionsIcon from '~astro-icons/lucide/captions';
+import LiveIcon from '~astro-icons/lucide/cctv';
+import StorageIcon from '~astro-icons/lucide/database';
+import TextTracksIcon from '~astro-icons/lucide/file-text';
+import FullscreenIcon from '~astro-icons/lucide/fullscreen';
+import ArchitectureIcon from '~astro-icons/lucide/hammer';
+import ThumbnailIcon from '~astro-icons/lucide/image';
+import KeyboardIcon from '~astro-icons/lucide/keyboard';
+import I18nIcon from '~astro-icons/lucide/languages';
+import ChaptersIcon from '~astro-icons/lucide/layout-list';
+import LayoutIcon from '~astro-icons/lucide/layout-panel-top';
+import LoadIcon from '~astro-icons/lucide/loader';
+import GestureIcon from '~astro-icons/lucide/mouse-pointer-click';
+import AudioTracksIcon from '~astro-icons/lucide/music';
+import ThemeIcon from '~astro-icons/lucide/paint-bucket';
+import StylingIcon from '~astro-icons/lucide/paintbrush';
+import PIPIcon from '~astro-icons/lucide/picture-in-picture-2';
+import BundlerIcon from '~astro-icons/lucide/plug';
+import ScreenOrientIcon from '~astro-icons/lucide/rotate-cw';
+import ClipIcon from '~astro-icons/lucide/scissors';
+import SSRIcon from '~astro-icons/lucide/server';
+import HookIcon from '~astro-icons/lucide/shuffle';
+import QualitiesIcon from '~astro-icons/lucide/signal-high';
+import IDEIcon from '~astro-icons/lucide/square-code';
+import ProviderIcon from '~astro-icons/lucide/tv';
+import UnifiedIcon from '~astro-icons/lucide/view';
+import StateIcon from '~astro-icons/lucide/workflow';
+
+import GridContent from '~/components/sections/grid-content.astro';
+
+import ShowMore from './show-more.svelte';
+
+const items = [
+  {
+    title: 'TypeScript',
+    description: 'First-class TS support including types for multiple frameworks.',
+    Icon: TypeScriptIcon,
+  },
+  {
+    title: 'Player API',
+    description: 'Comprehensive set of props, methods, events, and more.',
+    Icon: UnifiedIcon,
+    href: '/docs/player/components/core/player#api-reference',
+  },
+  {
+    title: 'Components',
+    description: 'Modular and reusable player components, ready to compose.',
+    Icon: ComponentsIcon,
+    href: '/player/components',
+  },
+  {
+    title: 'Hooks',
+    description: 'Convenient player hooks for React.',
+    Icon: HookIcon,
+    href: '/docs/player/api/hooks/use-state',
+  },
+  {
+    title: 'Architecture',
+    description: 'Robust player architecture tested at scale at Reddit.',
+    Icon: ArchitectureIcon,
+    href: '/docs/player/getting-started/architecture',
+  },
+  {
+    title: 'Accessible',
+    description: 'Built-in accessibility features.',
+    Icon: AccessibleIcon,
+    href: '/docs/player/getting-started/accessibility',
+  },
+  {
+    title: 'Frameworks',
+    description: 'Support for multiple JS frameworks.',
+    Icon: FrameworkIcon,
+    href: '/docs/player/getting-started/installation',
+  },
+  {
+    title: 'Bundler Plugins',
+    description: 'Auto-setup for various bundlers including Vite, SvelteKit, Nuxt, and more.',
+    Icon: BundlerIcon,
+    href: '/docs/player/getting-started/installation',
+  },
+  {
+    title: 'VS Code',
+    description: 'IDE plugin for auto-completions and docs.',
+    Icon: IDEIcon,
+  },
+  {
+    title: 'Providers',
+    description: 'Load various source types including HLS, DASH, and more.',
+    Icon: ProviderIcon,
+    href: '/docs/player/core-concepts/loading',
+  },
+  {
+    title: 'Live Streams',
+    description: 'Extensive live streaming support and API.',
+    Icon: LiveIcon,
+    href: '/docs/player/api/live',
+  },
+  {
+    title: 'SSR',
+    description: 'Server-side rendering support.',
+    Icon: SSRIcon,
+  },
+  {
+    title: 'State Management',
+    description: 'Easily manage reading and updating media state.',
+    Icon: StateIcon,
+    href: '/docs/player/core-concepts/state-management',
+  },
+  {
+    title: 'Styling',
+    description: 'Customizable headless components, style your way.',
+    Icon: StylingIcon,
+    href: '/docs/player/styling/introduction',
+  },
+  {
+    title: 'Tailwind CSS',
+    description: 'Seamless Tailwind integration with our plugin and components.',
+    Icon: TailwindIcon,
+    href: '/docs/player/styling/tailwind',
+  },
+  {
+    title: 'Layouts',
+    description: 'Use production-ready layouts or build your own.',
+    Icon: LayoutIcon,
+    href: '/docs/player/styling/responsive-design#layouts',
+  },
+  {
+    title: 'Themes',
+    description: 'Light and dark mode support.',
+    Icon: ThemeIcon,
+    href: '/docs/player/components/layouts/default-layout#color-scheme',
+  },
+  {
+    title: 'I18n',
+    description: 'Custom language translations support.',
+    Icon: I18nIcon,
+    href: '/docs/player/components/layouts/default-layout#language',
+  },
+  {
+    title: 'Events',
+    description: 'Rich set of normalized media events.',
+    Icon: EventIcon,
+    href: '/docs/player/core-concepts/events',
+  },
+  {
+    title: 'Triggers',
+    description: 'Trace events back to their origin.',
+    Icon: TriggerIcon,
+    href: '/docs/player/core-concepts/events#event-triggers',
+  },
+  {
+    title: 'Load Stratagies',
+    description: 'Specify when media should begin loading.',
+    Icon: LoadIcon,
+    href: '/docs/player/core-concepts/loading#load-strategies',
+  },
+  {
+    title: 'Captions',
+    description: 'Customizable captions with support for various formats.',
+    Icon: CaptionsIcon,
+    href: '/docs/player/core-concepts/loading#text-track-formats',
+  },
+  {
+    title: 'Chapters',
+    description: 'Easily navigate content sections.',
+    Icon: ChaptersIcon,
+    href: '/docs/player/components/sliders/time-slider#timeslider.chapters',
+  },
+  {
+    title: 'Thumbnails',
+    description: 'Preview and navigate content with images.',
+    Icon: ThumbnailIcon,
+    href: '/docs/player/core-concepts/loading#thumbnails',
+  },
+  {
+    title: 'Clipping',
+    description: 'Trim start and end of media client-side.',
+    Icon: ClipIcon,
+    href: '/docs/player/core-concepts/loading#clipping',
+  },
+  {
+    title: 'Storage',
+    description: 'Save player and media settings.',
+    Icon: StorageIcon,
+    href: '/docs/player/core-concepts/loading#storage',
+  },
+  {
+    title: 'Gestures',
+    description: 'Perform actions based on user gestures.',
+    Icon: GestureIcon,
+    href: '/docs/player/components/display/gesture',
+  },
+  {
+    title: 'Keyboard',
+    description: 'Control player state and components with keyboard input.',
+    Icon: KeyboardIcon,
+    href: '/docs/player/api/keyboard',
+  },
+  {
+    title: 'Fullscreen',
+    description: 'Normalized API across browsers and providers.',
+    Icon: FullscreenIcon,
+    href: '/docs/player/api/fullscreen',
+  },
+  {
+    title: 'PIP',
+    description: 'Mutli-task with mini floating players.',
+    Icon: PIPIcon,
+    href: '/docs/player/api/picture-in-picture',
+  },
+  {
+    title: 'Screen Orientation',
+    description: 'Rotate screen for an immersive experience.',
+    Icon: ScreenOrientIcon,
+    href: '/docs/player/api/screen-orientation',
+  },
+  {
+    title: 'Audio Gain',
+    description: 'Apply gain to output to increase volume.',
+    Icon: AudioGainIcon,
+    href: '/docs/player/api/audio-gain',
+  },
+  {
+    title: 'Audio Tracks',
+    description: 'Manage multiple audio tracks.',
+    Icon: AudioTracksIcon,
+    href: '/docs/player/api/audio-tracks',
+  },
+  {
+    title: 'Text Tracks',
+    description: 'Manage captions, subtitles, chapters, and more.',
+    Icon: TextTracksIcon,
+    href: '/docs/player/api/text-tracks',
+  },
+  {
+    title: 'Qualities',
+    description: 'Manage multiple playback video qualities.',
+    Icon: QualitiesIcon,
+    href: '/docs/player/api/video-quality',
+  },
+  {
+    title: 'Remote Playback',
+    description: 'Play media on a remote device such as a TV.',
+    Icon: RemotePlaybackIcon,
+    href: '/docs/player/api/remote-playback',
+  },
+];
+---
+
+<ShowMore client:load>
+  <GridContent label="Player Features" content={items} newTab />
+</ShowMore>

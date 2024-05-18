@@ -19,7 +19,6 @@
   import { isDarkColorScheme } from '~/stores/color-scheme';
   import { IS_BROWSER } from '~/utils/env';
   import { updateSearchParams } from '~/utils/history';
-  import { data } from 'dist/server/chunks/accessibility_Bd2iMs-I.mjs';
   import debounce from 'just-debounce-it';
   // @ts-ignore
   import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';

@@ -25,9 +25,14 @@
   $: dispatch('change', $selectedTab);
 
   function onResize() {
-    selectedTabWidth = $tabRefs[$selectedTab].offsetWidth + 'px';
-    selectedTabLeft = $tabRefs[$selectedTab].offsetLeft + 'px';
-    containerWidth = container.getBoundingClientRect().width;
+    if ($tabRefs[$selectedTab]) {
+      selectedTabWidth = $tabRefs[$selectedTab].offsetWidth + 'px';
+      selectedTabLeft = $tabRefs[$selectedTab].offsetLeft + 'px';
+    }
+
+    if (container) {
+      containerWidth = container.getBoundingClientRect().width;
+    }
   }
 </script>
 

@@ -1,5 +1,4 @@
 ---
-import ArrowRightIcon from '~astro-icons/lucide/arrow-right';
 import AudioIcon from '~astro-icons/lucide/audio-lines';
 import CaptionsIcon from '~astro-icons/lucide/captions';
 import CompliantIcon from '~astro-icons/lucide/circle-check-big';
@@ -29,7 +28,7 @@ const items = [
   },
   {
     title: 'Captions',
-    description: 'Consistent and customizable captions.',
+    description: 'Consistent and customizable captions across browsers.',
     Icon: CaptionsIcon,
     href: '/docs/player/getting-started/accessibility#captions',
   },
@@ -41,25 +40,25 @@ const items = [
   },
   {
     title: 'Keyboard',
-    description: 'Full keyboard navigation support across all interactable components.',
+    description: 'Full keyboard navigation support and shortcuts.',
     Icon: KeyboardIcon,
     href: '/docs/player/getting-started/accessibility#keyboard-navigation',
   },
   {
     title: 'Focus',
-    description: 'Focus management and clear indicators.',
+    description: 'Robust focus management and clear indicators.',
     Icon: FocusIcon,
     href: '/docs/player/getting-started/accessibility#focus-management',
   },
   {
     title: 'Color',
-    description: 'Accessible contrasts and theme options.',
+    description: 'Accessible contrasts and color scheme options.',
     Icon: ColorIcon,
     href: '/docs/player/components/layouts/default-layout#color-scheme',
   },
   {
     title: 'Tooltips',
-    description: 'Popover text to provide helpful descriptions.',
+    description: 'Popover text to provide more helpful descriptions.',
     Icon: TooltipsIcon,
     href: '/docs/player/components/buttons/tooltip',
   },
@@ -71,17 +70,17 @@ const items = [
   },
   {
     title: 'Customize',
-    description: 'Tailored user settings for all preferences.',
+    description: 'Tailored user settings for all player preferences.',
     Icon: CustomizationIcon,
     href: 'https://x.com/mihar_22/status/1764864228052345167',
   },
   {
     title: 'Compliant',
-    description: 'WCAG 2.2, WAI-ARIA, and CVAA compliant.',
+    description: 'WCAG 2.2, WAI-ARIA, and CVAA spec-compliant.',
     Icon: CompliantIcon,
     href: '/docs/player/getting-started/accessibility#guidelines',
   },
 ];
 ---
 
-<GridContent label="Accessibility Features" content={items} />
+<GridContent label="Accessibility Features" content={items} newTab />

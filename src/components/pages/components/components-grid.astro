@@ -17,6 +17,7 @@ const pages = await getCollection('docs'),
   <section
     class={clsx(
       'components-grid grid gap-10 grid-cols-2 768:grid-cols-[repeat(auto-fill,minmax(16rem,1fr))]',
+      'auto-rows-fr',
     )}
     aria-label="Components Collection"
   >
@@ -56,7 +57,7 @@ const pages = await getCollection('docs'),
             >
               <div
                 class={clsx(
-                  'flex w-full flex-col items-center justify-center border border-border/80 text-soft/80 hocus:text-inverse',
+                  'flex w-full flex-col border border-border/80 text-soft/80 hocus:text-inverse',
                   'shadow-sm group-hocus:border-2 group-hocus:border-brand/40 group-hocus:bg-elevate',
                   'h-[180px] overflow-hidden rounded-md p-4',
                 )}
@@ -71,6 +72,7 @@ const pages = await getCollection('docs'),
                 </>
               </div>
               {description ? <p class="mt-2 w-full text-xs text-soft/90">{description}</p> : null}
+              <div class="flex-1" />
             </a>
           );
         });

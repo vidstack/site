@@ -210,7 +210,7 @@
     </div>
 
     <div class="mt-2 flex w-full py-4">
-      <Tabs label="Icon Formats" color="brand" tabs={['Component', 'SVG', 'Raw', 'Unplugin']}>
+      <Tabs label="Icon Formats" tabs={['Component', 'SVG', 'Raw', 'Unplugin']} block>
         <TabPanel>
           {#if $currentIconLibrary === 'html'}
             <CodeSnippet title="html" id="media-icons/wc" copy transform={transformWCSnippet} />
