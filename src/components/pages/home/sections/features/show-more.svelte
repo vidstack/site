@@ -1,21 +1,20 @@
 <script lang="ts">
   import clsx from 'clsx';
 
+  import { resize } from '~/actions/resize';
   import { onMount } from 'svelte';
 
-  let cursor = 12,
+  let cursor = 0,
     total = 0,
-    batch = 6,
+    cols = 6,
     root: HTMLElement;
 
   onMount(() => {
-    const items = getItems();
+    total = getItems().length;
 
-    total = items.length;
-
-    for (let i = cursor; i < items.length; i++) {
-      items[i].style.display = 'none';
-    }
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   });
 
   function getItems() {
@@ -23,20 +22,44 @@
   }
 
   function onShowMore() {
-    const items = getItems();
-
-    for (let i = cursor; i < cursor + batch; i++) {
-      const item = items[i];
-      if (item) item.style.display = 'flex';
+    if (cursor === 0) {
+      cursor = cols * 3;
     }
 
-    cursor += batch;
+    cursor += cols * 2;
+  }
+
+  function onResize() {
+    const width = window.innerWidth;
+    if (width < 576) {
+      cols = 1;
+    } else if (width >= 576 && width < 768) {
+      cols = 2;
+    } else {
+      cols = 3;
+    }
+  }
+
+  $: end = cursor === 0 ? cols * 3 : cursor;
+
+  $: if (root) {
+    const items = getItems();
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (item) {
+        item.style.display = i < end ? 'flex' : 'none';
+      }
+    }
   }
 
   $: remaining = Math.max(0, total - cursor);
 </script>
 
-<div class="relative flex h-full w-full flex-col justify-center" bind:this={root}>
+<div
+  class="relative flex h-full w-full flex-col justify-center"
+  bind:this={root}
+  use:resize={{ onResize }}
+>
   <slot />
 
   {#if remaining > 0}
@@ -51,7 +74,7 @@
         )}
         on:pointerup={onShowMore}
       >
-        Show More ({remaining})
+        Show More
       </button>
     </div>
   {/if}

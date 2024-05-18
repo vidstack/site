@@ -13,6 +13,8 @@ import AnnouncerIcon from '~astro-icons/lucide/speech';
 
 import GridContent from '~/components/sections/grid-content.astro';
 
+import ShowMore from '../features/show-more.svelte';
+
 const items = [
   {
     title: 'Announcements',
@@ -83,4 +85,6 @@ const items = [
 ];
 ---
 
-<GridContent label="Accessibility Features" content={items} newTab />
+<ShowMore client:load>
+  <GridContent label="Accessibility Features" content={items} newTab />
+</ShowMore>

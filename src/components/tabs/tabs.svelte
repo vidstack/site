@@ -8,9 +8,8 @@
   import { useARIATabs } from '../../aria/tabs';
 
   export let label: string;
-  export let tabs: Array<string | { label: string; Icon: any }> = [];
+  export let tabs: Array<string | { label: string; Icon?: any }> = [];
   export let block = false;
-  export let justify: 'start' | 'center' | 'end' = 'start';
 
   const dispatch = createEventDispatcher();
 
@@ -42,7 +41,6 @@
       'no-scrollbar relative items-center overflow-x-auto p-0.5 ',
       block ? 'flex w-full' : 'inline-flex',
     )}
-    style={`justify-content: ${justify}`}
     use:tabList={label}
     bind:this={container}
   >
@@ -53,6 +51,7 @@
           'group mx-1 flex items-center justify-center px-6 py-2.5 text-[15px] font-semibold outline-none first:ml-0 last:mr-0',
           'z-10 rounded-sm border-b-2 border-transparent text-soft transition-colors duration-200',
           'aria-selected:text-inverse hocus:border-inverse/60 hocus:text-inverse/80',
+          'whitespace-nowrap',
         )}
         use:tab
       >

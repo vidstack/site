@@ -23,7 +23,7 @@
 </script>
 
 <div class="relative mx-auto -mt-4 flex w-full max-w-[680px] items-center justify-center">
-  <Tabs label="state usage options" tabs={options} block justify="center">
+  <Tabs label="state usage options" tabs={options} block>
     <TabPanel>
       <CodeSnippet id={`${id}/read.${ext}`} />
     </TabPanel>

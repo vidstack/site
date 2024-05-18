@@ -40,6 +40,9 @@ export function useARIATabs({ onSelect }: AriaTabsOptions = {}) {
 
     selectedTab.set(index);
     onSelect?.(index, trigger);
+    requestAnimationFrame(() => {
+      if (nextTab) nextTab.scrollIntoView({ inline: 'center', block: 'nearest' });
+    });
   }
 
   function selectTab(tab: HTMLButtonElement, isSelected: boolean) {

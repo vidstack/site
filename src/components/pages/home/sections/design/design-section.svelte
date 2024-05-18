@@ -25,17 +25,21 @@
 </script>
 
 <div class="relative mx-auto -mt-6 flex w-full max-w-[680px] items-center justify-center">
-  <Tabs label="styling options" tabs={options} block justify="center">
+  <Tabs label="styling options" tabs={options} block>
     <TabPanel>
-      <CodeSnippet title={`time-slider.${ext}`} id={`${id}/default-theme.${ext}`} />
+      <CodeSnippet title={`time-slider.${ext}`} id={`${id}/default-theme.${ext}`}>
+        <JsFrameworkSelect class="absolute right-2 top-2 z-50" />
+      </CodeSnippet>
     </TabPanel>
     <TabPanel>
-      <CodeSnippet title="time-slider.css" id={`${id}/css.css`} />
+      <CodeSnippet title="time-slider.css" id={`${id}/css.css`}>
+        <JsFrameworkSelect class="absolute right-2 top-2 z-50" />
+      </CodeSnippet>
     </TabPanel>
     <TabPanel>
-      <CodeSnippet title={`time-slider.${ext}`} id={`${id}/tailwind-css.${ext}`} />
+      <CodeSnippet title={`time-slider.${ext}`} id={`${id}/tailwind-css.${ext}`}>
+        <JsFrameworkSelect class="absolute right-2 top-2 z-50" />
+      </CodeSnippet>
     </TabPanel>
   </Tabs>
-
-  <JsFrameworkSelect class="absolute right-4 top-[90px] z-50" />
 </div>
