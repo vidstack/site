@@ -1,0 +1,49 @@
+---
+import { reactComponents, webComponents } from '~/api/component-api';
+import Table from '~/components/table.astro';
+
+import { findMDNLink, getLinks } from './api-utils';
+import NameCell from './name-table-cell.astro';
+import TypeCell from './type-table-cell.astro';
+
+interface Props {
+  component: string;
+  filter?: (event: { name: string }) => boolean;
+}
+
+const { component: name, filter = () => true } = Astro.props,
+  isWC = Astro.url.pathname.includes('/wc/'),
+  events = findEvents(name) ?? [];
+
+function findEvents(name: string) {
+  if (isWC) {
+    const elName = name + 'Element',
+      component = webComponents.find((c) => c.name === elName);
+
+    return component?.instance?.events;
+  } else {
+    const component = reactComponents.find((c) => c.name === name);
+    return component?.callbacks;
+  }
+}
+---
+
+<Table cols={[isWC ? 'Event' : 'Callback', 'Type']}>
+  {
+    events.filter(filter).map((cb) => (
+      <tr>
+        <td>
+          <NameCell
+            id={`callbacks.${cb.name}`.toLowerCase()}
+            name={cb.name}
+            docs={cb.docs}
+            mdnLink={findMDNLink(getLinks(cb))}
+          />
+        </td>
+        <td>
+          <TypeCell concise="function" full={cb.type.full} />
+        </td>
+      </tr>
+    ))
+  }
+</Table>

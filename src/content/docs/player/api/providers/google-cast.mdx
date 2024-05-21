@@ -42,3 +42,21 @@ the [`MediaProvider`][media-provider] with the Google Cast logo and the name of 
   loading="lazy"
   style="width: 480px; aspect-ratio: 16 / 9;"
 />
+
+## Events
+
+All Google Cast events can be listened to directly off the [player][player] component:
+
+::code[./events]
+
+import Events from '~/layouts/parts/api-table/events.astro';
+
+<Events component="MediaPlayer" filter={({ name }) => /^(onGoogle|google-)/i.test(name)} />
+
+[player]: /docs/player/components/core/player
+
+### Event Types
+
+All cast event types are prefixed with `GoogleCast` and end with `Event` like so:
+
+::code[./event-types]

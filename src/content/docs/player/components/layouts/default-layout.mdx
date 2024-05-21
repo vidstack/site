@@ -2,11 +2,17 @@
 description: A guide on how to setup the default audio/video layout and available customization options.
 ---
 
-import MediaPlayer from '~/components/players/lazy-media-player.svelte';
+## Installation
 
-:::tip
-Try out the Default Layout on our [player demo](/player/demo?layout=default&framework=wc) page.
-:::
+See the [installation guide][install] to setup the Default Layout.
+
+[install]: /docs/player/getting-started/installation?styling=default-layout&provider=video
+
+## Demo
+
+You can try out the Default Layout on our [player demo](/player/demo?layout=default&framework=wc) page.
+
+## Usage
 
 The Default Layout ships with support for audio, video, and live streams. You can include both
 layouts at the same time, only one will be matched depending on the view type.
@@ -23,6 +29,25 @@ The same is true for the [stream type][stream-type]:
 ::code[./stream-type]
 
 [stream-type]: /docs/player/core-concepts/loading#stream-type
+
+### JavaScript
+
+import StyleImports from '~/docs/installation/partials/import-styles-snippet.svelte';
+import JSPlayerCode from '~/docs/installation/partials/js-player-snippet.svelte';
+
+You can setup the player using JavaScript like so:
+
+<StyleImports type="default-layout" client:load />
+
+<JSPlayerCode type="default-layout" client:load />
+
+The `target` config option is a target element which can be a CSS string selector or a `HTMLElement`.
+The target can be any element but if it's a `<audio>`, `<video>`, or `<iframe>` element it will be
+replaced and enhanced (i.e., progressive enhancement).
+
+::code[docs/player/getting-started/installation/javascript/target-container]
+
+::code[docs/player/getting-started/installation/javascript/target-video]
 
 ## Color Scheme
 

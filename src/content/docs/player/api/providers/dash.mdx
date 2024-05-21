@@ -91,15 +91,15 @@ All dashjs events can be listened to directly off the [player][player] component
 
 ::code[./events]
 
+import Events from '~/layouts/parts/api-table/events.astro';
+
+<Events component="MediaPlayer" filter={({ name }) => /^(onDash|dash-)/i.test(name)} />
+
+### Event Types
+
 All DASH event types are prefixed with `DASH` and end with `Event` like so:
 
 ::code[./event-types]
-
-:::info
-You can find a complete list of [player events][player-events] in the component API reference.
-:::
-
-[player-events]: /docs/player/components/core/player#mediaplayer.callbacks
 
 ## Element
 

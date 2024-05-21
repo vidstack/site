@@ -97,13 +97,15 @@ All [hls.js events][hlsjs-events] can be listened to directly off the [player][p
 
 ::code[./events]
 
+import Events from '~/layouts/parts/api-table/events.astro';
+
+<Events component="MediaPlayer" filter={({ name }) => /^(onHls|hls-)/i.test(name)} />
+
+### Event Types
+
 All HLS event types are prefixed with `HLS` and end with `Event` like so:
 
 ::code[./event-types]
-
-:::info
-You can find a complete list of [player events][player-events] in the component API reference.
-:::
 
 [player-events]: /docs/player/components/core/player#mediaplayer.callbacks
 [hlsjs-events]: https://github.com/video-dev/hls.js/blob/master/docs/API.md#runtime-events

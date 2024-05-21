@@ -37,7 +37,7 @@
     : `⌘ + ${shortcutKeys[0].replace('meta+', '')}`;
 </script>
 
-<div class="group relative flex-auto">
+<div class="group relative w-full flex-auto">
   <SearchIcon
     class={clsx(
       'pointer-events-none absolute inset-y-0 left-1 h-full w-5 text-soft',

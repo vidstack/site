@@ -11,7 +11,8 @@ import TypeCell from './type-table-cell.astro';
 
 const { pathname } = Astro.url,
   components = findReactComponents(pathname),
-  tableHeadingLevel = components.length === 1 ? 3 : 4;
+  tableHeadingLevel = components.length === 1 ? 3 : 4,
+  ignoreCallbacksRE = /^on(Hls|Dash|Google)/;
 ---
 
 {
@@ -90,7 +91,7 @@ const { pathname } = Astro.url,
           : '';
 
         const callbacks = (component.callbacks || [])
-          .filter((cb) => !cb.internal)
+          .filter((cb) => !cb.internal && !ignoreCallbacksRE.test(cb.name))
           .map((cb) => [
             <NameCell
               id={`${fullComponentName}.callbacks.${cb.name}`.toLowerCase()}

@@ -11,7 +11,8 @@ import TypeCell from './type-table-cell.astro';
 
 const { pathname } = Astro.url,
   components = findWebComponents(pathname),
-  tableHeadingLevel = components.length === 1 ? 3 : 4;
+  tableHeadingLevel = components.length === 1 ? 3 : 4,
+  ignoreEventsRE = /^(hls|dash|google)-/;
 ---
 
 {
@@ -85,7 +86,7 @@ const { pathname } = Astro.url,
           : '';
 
         const events = (component.instance?.events || [])
-          .filter((event) => !event.internal)
+          .filter((event) => !event.internal && !ignoreEventsRE.test(event.name))
           .map((event) => [
             <NameCell
               id={`${componentName}.events.${event.name}`.toLowerCase()}

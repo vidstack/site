@@ -7,11 +7,12 @@
 
   export let cdn = false;
   export let plyr = false;
+  export let type: string | null = null;
 
   $: isCDN = cdn || $install === 'cdn';
 
   $: basePath = `docs/player/getting-started/installation/javascript/${plyr ? 'plyr/' : ''}${isCDN ? 'cdn/' : ''}player`;
-  $: layout = $css.includes('layout') ? `-${$css}` : '';
+  $: layout = type ? `-${type}` : $css.includes('layout') ? `-${$css}` : '';
   $: id = `${basePath}${layout}`;
 
   function getScriptSrc() {
@@ -58,5 +59,5 @@
 </script>
 
 {#key $provider + '::' + $css}
-  <CodeSnippet {id} copy {transform} />
+  <CodeSnippet title={!isCDN ? 'player.js' : undefined} {id} copy {transform} />
 {/key}

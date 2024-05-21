@@ -6,6 +6,7 @@
   const { js, provider, css } = selections;
 
   export let dev = false;
+  export let pinned = false;
 
   $: dir = $js === 'cdn' ? 'cdn' : $js === 'react' ? 'react' : 'wc';
   $: basePath = `docs/player/getting-started/installation/elements/${dir}`;
@@ -23,7 +24,7 @@
         : $css
       : `base${$provider === 'remotion' ? '-remotion' : ''}`;
 
-  $: id = `${basePath}/import-${importId}${dev ? '-dev' : ''}`;
+  $: id = `${basePath}/import-${importId}${dev ? '-dev' : ''}${pinned ? '-pinned' : ''}`;
 
   $: title = $js === 'cdn' ? 'html' : 'js';
 </script>

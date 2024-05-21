@@ -2,11 +2,17 @@
 description: A guide on how to setup the Plyr audio/video layout and available customization options.
 ---
 
-import MediaPlayer from '~/components/players/lazy-media-player.svelte';
+## Installation
 
-:::tip
-Try out the Plyr Layout on our [player demo](/player/demo?layout=plyr&framework=wc) page.
-:::
+See the [installation guide][install] to setup the Plyr Layout.
+
+[install]: /docs/player/getting-started/installation?styling=plyr-layout&provider=video
+
+## Demo
+
+You can try out the Plyr Layout on our [player demo](/player/demo?layout=plyr&framework=wc) page.
+
+## Usage
 
 The Plyr Layout ships with support for audio, video, and live streams:
 
@@ -22,6 +28,40 @@ The same is true for the [stream type][stream-type]:
 ::code[./stream-type]
 
 [stream-type]: /docs/player/core-concepts/loading#stream-type
+
+### JavaScript
+
+import StyleImports from '~/docs/installation/partials/import-styles-snippet.svelte';
+import JSPlayerCode from '~/docs/installation/partials/js-player-snippet.svelte';
+
+You can setup the player using JavaScript like so:
+
+<StyleImports type="plyr-layout" client:load />
+
+<JSPlayerCode type="plyr-layout" client:load />
+
+The `target` config option is a target element which can be a CSS string selector or a `HTMLElement`.
+The target can be any element but if it's a `<audio>`, `<video>`, or `<iframe>` element it will be
+replaced and enhanced (i.e., progressive enhancement).
+
+::code[docs/player/getting-started/installation/javascript/target-container]
+
+::code[docs/player/getting-started/installation/javascript/target-video]
+
+### Compat
+
+If you're coming over from [Plyr][plyr] and want a softer migration path, you can consider using our
+Plyr constructor which has about ~95% of the same features and API:
+
+<StyleImports type="plyr-layout" client:load />
+
+<JSPlayerCode plyr type="plyr-layout" client:load />
+
+See the Plyr GitHub repo for docs and usage. Do note, in general this API is more limited and
+doesn't have easy access to all player features. We strongly recommend upgrading to the newer API
+above.
+
+[plyr]: https://github.com/sampotts/plyr
 
 ## Icons
 
