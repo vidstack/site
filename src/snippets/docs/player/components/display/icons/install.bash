@@ -1,1 +1,1 @@
-npm i media-icons
+npm i media-icons@next
