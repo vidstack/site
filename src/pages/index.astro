@@ -15,10 +15,8 @@ import PaintBrushIcon from '~astro-icons/lucide/paintbrush';
 import ShuffleIcon from '~astro-icons/lucide/shuffle';
 import SquareStackIcon from '~astro-icons/lucide/square-stack';
 import TvIcon from '~astro-icons/lucide/tv';
-import VideoIcon from '~astro-icons/lucide/video';
 import WandSparklesIcon from '~astro-icons/lucide/wand-sparkles';
 
-import MockDashboard from '~/components/mocks/dashboard/mock-dashboard.astro';
 import AccessibilitySection from '~/components/pages/home/sections/accessibility/accessibility-section.astro';
 import ComponentsSection from '~/components/pages/home/sections/components/components-section.astro';
 import DesignSection from '~/components/pages/home/sections/design/design-section.svelte';
@@ -182,14 +180,6 @@ const title = 'Vidstack Player',
     <SquareStackIcon class="h-full w-full" slot="icon" />
     <Button arrow href="/icons" gradient slot="cta">Discover More</Button>
     <IconsSection slot="content" />
-  </FeatureSection>
-
-  <FeatureSection title="Platform." subtitle="Built to stream.">
-    <VideoIcon class="h-full w-full" slot="icon" />
-    <Button arrow href="/platform" gradient slot="cta">Learn More</Button>
-    <div class="mx-auto w-full max-w-[980px]" slot="content">
-      <MockDashboard />
-    </div>
   </FeatureSection>
 
   <FeatureSection title="Open Source." subtitle="Built transparently.">
