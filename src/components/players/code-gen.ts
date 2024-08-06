@@ -66,6 +66,7 @@ function generateJSCode({ playerProps, layoutProps, hlsConfig, dashConfig }: Pro
       target: '#target',
       ...playerConfig,
       layout: '__LAYOUT__',
+      tracks: textTracks,
     }).replace(`: '__LAYOUT__'`, '')});`,
   );
 
@@ -88,21 +89,6 @@ function generateJSCode({ playerProps, layoutProps, hlsConfig, dashConfig }: Pro
     }
 
     lines.push(`});`);
-  }
-
-  if (textTracks.length) {
-    lines.push('');
-    lines.push(
-      `const tracks = ${stringify(textTracks, (key, value) => {
-        if (key.startsWith('data-')) return undefined;
-        return value;
-      })};`,
-    );
-    lines.push('');
-
-    lines.push(`for (const track of textTracks) {`);
-    lines.push(`  player.textTracks.add(track);`);
-    lines.push(`}`);
   }
 
   return lines;
