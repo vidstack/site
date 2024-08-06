@@ -489,7 +489,10 @@
       {/if}
     </div>
 
-    <div class={showCode ? 'hidden' : 'contents'} bind:this={playerContainer}>
+    <div
+      class={clsx(showCode ? 'hidden' : 'contents', viewType === 'audio' && 'v-audio')}
+      bind:this={playerContainer}
+    >
       {#if hasMounted}
         {#key playerKey}
           <LazyMediaPlayer
@@ -580,3 +583,10 @@
     </ul>
   </div>
 </div>
+
+<style>
+  .v-audio > :global(*) {
+    margin-top: 50%;
+    transform: translateY(-100%);
+  }
+</style>
