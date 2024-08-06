@@ -91,6 +91,13 @@ See the [`hls.js fine tuning`][hls-fine-tuning] guide on how to configure the li
 
 [hls-fine-tuning]: https://github.com/video-dev/hls.js/blob/master/docs/API.md#fine-tuning
 
+### Custom Headers
+
+You can set custom request headers by using the `xhrSetup` configuration option. The following
+snippet shows how to set the `Authorization` header:
+
+::code[./custom-headers]
+
 ## Instance
 
 You can obtain a reference to the `hls.js` instance like so:
