@@ -45,6 +45,12 @@ The following are valid as they have a file extension or type hint:
 - `src="https://example.com/hls.m3u8"`
 - `src = { src: "https://example.com/hls", type: "application/x-mpegurl" }`
 
+### Client Playlist
+
+You can create HLS playlists client-side like so:
+
+::code[./client-playlist]
+
 ## Loading
 
 The provider will default to loading `hls.js` from [JSDelivr][jsdelivr]. We load the default
