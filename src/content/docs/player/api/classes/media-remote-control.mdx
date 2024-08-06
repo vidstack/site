@@ -126,6 +126,26 @@ Dispatch a `media-live-edge-request` event to seek to the [live edge][live-edge]
 
 [live-edge]: /docs/player/api/live#live-edge
 
+## `changeDuration`
+
+Dispatch a `media-duration-change-request` event to update the length of the media in seconds.
+
+::code[./change-duration]
+
+## `changeClipStart`
+
+Dispatch a `media-clip-start-change-request` event to update the clip start time. This is the time
+at which media playback should start at.
+
+::code[./change-clip-start]
+
+## `changeClipEnd`
+
+Dispatch a `media-clip-end-change-request` event to update the clip end time. This is the time
+at which media playback should end.
+
+::code[./change-clip-end]
+
 ## `changeVolume`
 
 Dispatch a `media-volume-change-request` event to update the media volume to the given level which
