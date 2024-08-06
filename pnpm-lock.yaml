@@ -24,8 +24,8 @@ dependencies:
     specifier: ^0.5.1
     version: 0.5.1
   '@vidstack/react':
-    specifier: ^1.12.0
-    version: 1.12.0(@types/react@18.3.3)(react@18.3.1)
+    specifier: ^1.12.1
+    version: 1.12.1(@types/react@18.3.3)(react@18.3.1)
   astro:
     specifier: ^4.10.0
     version: 4.13.1(@types/node@20.14.14)(typescript@5.5.4)
@@ -57,8 +57,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0
   vidstack:
-    specifier: ^1.12.0
-    version: 1.12.0
+    specifier: ^1.12.1
+    version: 1.12.1
 
 devDependencies:
   '@algolia/client-search':
@@ -2357,10 +2357,10 @@ packages:
       ws: 8.14.2(bufferutil@4.0.8)(utf-8-validate@6.0.3)
     dev: false
 
-  /@vidstack/react@1.12.0(@types/react@18.3.3)(react@18.3.1):
+  /@vidstack/react@1.12.1(@types/react@18.3.3)(react@18.3.1):
     resolution:
       {
-        integrity: sha512-yKkXSboCW/jzcua5gYFvUIIE20vUHpOo/B6YkOwst5B2Oz5L/D0S/NlNOR8xrkECUiQdJF5A45DWFm2T6GpNYw==,
+        integrity: sha512-g05yXJ1nt2pTZHLYvUnSEPu9eBfN62lUtGZvzpQtfZGKnyIGrKL4WJd85gLezVV4PMPU93tUFXU/dXwkK3epJg==,
       }
     engines: { node: '>=18' }
     peerDependencies:
@@ -8649,10 +8649,10 @@ packages:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  /vidstack@1.12.0:
+  /vidstack@1.12.1:
     resolution:
       {
-        integrity: sha512-yEAkXTt6Q1u/BrQEbWw1wKK0V4FNCrqHxCZKhE+UFfwlykVA1/ZNAY6cK1undv57+fJX0qbZZjqQJ16ZyV6paA==,
+        integrity: sha512-LERo2onikWaeO82D35RjFAexOKwnvit1JiabThrppE4z2XDFlbUPyHyK6kxCNV0tyvBnJvbCJaSfvIldGx4AOw==,
       }
     engines: { node: '>=18' }
     dependencies:

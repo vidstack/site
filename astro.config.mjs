@@ -29,7 +29,7 @@ const isLocal = !process.env.VERCEL;
 
 export default defineConfig({
   site: 'https://vidstack.io',
-  output: 'server',
+  output: 'hybrid',
   adapter: isLocal ? node({ mode: 'standalone' }) : vercel({ edgeMiddleware: true }),
   vite: {
     resolve: {
