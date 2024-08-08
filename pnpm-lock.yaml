@@ -24,8 +24,8 @@ dependencies:
     specifier: ^0.5.1
     version: 0.5.1
   '@vidstack/react':
-    specifier: ^1.12.1
-    version: 1.12.1(@types/react@18.3.3)(react@18.3.1)
+    specifier: ^1.12.5
+    version: 1.12.5(@types/react@18.3.3)(react@18.3.1)
   astro:
     specifier: ^4.10.0
     version: 4.13.1(@types/node@20.14.14)(typescript@5.5.4)
@@ -57,8 +57,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0
   vidstack:
-    specifier: ^1.12.1
-    version: 1.12.1
+    specifier: ^1.12.5
+    version: 1.12.5
 
 devDependencies:
   '@algolia/client-search':
@@ -1241,6 +1241,16 @@ packages:
       '@floating-ui/utils': 0.2.5
     dev: false
 
+  /@floating-ui/dom@1.6.10:
+    resolution:
+      {
+        integrity: sha512-fskgCFv8J8OamCmyun8MfjB1Olfn+uZKjOKZ0vhYF3gRmEUXcGOjxWL8bBr7i4kIuPZ2KD2S3EUIOxnjC8kl2A==,
+      }
+    dependencies:
+      '@floating-ui/core': 1.6.5
+      '@floating-ui/utils': 0.2.7
+    dev: false
+
   /@floating-ui/dom@1.6.8:
     resolution:
       {
@@ -1255,6 +1265,13 @@ packages:
     resolution:
       {
         integrity: sha512-sTcG+QZ6fdEUObICavU+aB3Mp8HY4n14wYHdxK4fXjPmv3PXZZeY5RaguJmGyeH/CJQhX3fqKUtS4qc1LoHwhQ==,
+      }
+    dev: false
+
+  /@floating-ui/utils@0.2.7:
+    resolution:
+      {
+        integrity: sha512-X8R8Oj771YRl/w+c1HqAC1szL8zWQRwFvgDwT129k9ACdBoud/+/rX9V0qiMl6LWUdP9voC2nDVZYPMQQsb6eA==,
       }
     dev: false
 
@@ -2357,17 +2374,17 @@ packages:
       ws: 8.14.2(bufferutil@4.0.8)(utf-8-validate@6.0.3)
     dev: false
 
-  /@vidstack/react@1.12.1(@types/react@18.3.3)(react@18.3.1):
+  /@vidstack/react@1.12.5(@types/react@18.3.3)(react@18.3.1):
     resolution:
       {
-        integrity: sha512-g05yXJ1nt2pTZHLYvUnSEPu9eBfN62lUtGZvzpQtfZGKnyIGrKL4WJd85gLezVV4PMPU93tUFXU/dXwkK3epJg==,
+        integrity: sha512-yK0IRGoyUuckdE6MexYHDLeb34h59xzkurgc5HxfaKugUc56dXHTjk41DeogJhfDSUJNGNPwk57yKnz1iY/zRg==,
       }
     engines: { node: '>=18' }
     peerDependencies:
       '@types/react': ^18.0.0
       react: ^18.0.0
     dependencies:
-      '@floating-ui/dom': 1.6.8
+      '@floating-ui/dom': 1.6.10
       '@types/react': 18.3.3
       media-captions: 1.0.4
       react: 18.3.1
@@ -8649,14 +8666,14 @@ packages:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  /vidstack@1.12.1:
+  /vidstack@1.12.5:
     resolution:
       {
-        integrity: sha512-LERo2onikWaeO82D35RjFAexOKwnvit1JiabThrppE4z2XDFlbUPyHyK6kxCNV0tyvBnJvbCJaSfvIldGx4AOw==,
+        integrity: sha512-aqQLPYvnu/eIhk+DMcuF0RyUWat4gRTLBjFbJPexyxAMgAqalxfqMknwIZtK39uyfeG6q4To+X8QAgU6f5NQOA==,
       }
     engines: { node: '>=18' }
     dependencies:
-      '@floating-ui/dom': 1.6.8
+      '@floating-ui/dom': 1.6.10
       lit-html: 2.8.0
       media-captions: 1.0.4
       unplugin: 1.12.0
