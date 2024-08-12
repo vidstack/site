@@ -3,9 +3,10 @@
 
   import { selections, videoProviders } from '../selection/selection-stores';
 
-  const { js, provider, css } = selections;
+  const { bundler, js, provider, css } = selections;
 
-  $: dir = $js === 'react' ? 'react' : 'wc';
+  $: dir = $js === 'react' ? 'react' : $bundler === 'nuxt' ? 'nuxt' : $js === 'vue' ? 'vue' : 'wc';
+
   $: basePath = `docs/player/getting-started/installation/markup/${dir}`;
 
   $: importId =
