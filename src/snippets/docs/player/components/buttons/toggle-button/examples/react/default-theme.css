@@ -20,6 +20,6 @@
 }
 
 .vds-button[data-pressed] .not-pressed-icon,
-.vds-button:not([data-pressed]) .presses-icon {
+.vds-button:not([data-pressed]) .pressed-icon {
   display: none;
 }

@@ -38,6 +38,6 @@
 }
 
 .media-button[data-pressed] .not-pressed-icon,
-.media-button:not([data-pressed]) .presses-icon {
+.media-button:not([data-pressed]) .pressed-icon {
   display: none;
 }
