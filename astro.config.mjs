@@ -1,9 +1,9 @@
+import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
 import AutoImport from 'astro-auto-import';
 import { defineConfig } from 'astro/config';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -25,12 +25,12 @@ import { autolinkConfig } from './plugins/mdx/rehype-autolink-config';
 import { externalLinksConfig } from './plugins/mdx/rehype-external-links-config';
 import { rehypeOptimizeStatic } from './plugins/mdx/rehype-optimize-static';
 
-const isLocal = !process.env.VERCEL;
+const isLocal = !process.env.CLOUDFLARE;
 
 export default defineConfig({
   site: 'https://vidstack.io',
-  output: 'hybrid',
-  adapter: isLocal ? node({ mode: 'standalone' }) : vercel({ edgeMiddleware: true }),
+  output: 'static',
+  // adapter: isLocal ? node({ mode: 'standalone' }) : cloudflare(),
   vite: {
     resolve: {
       alias: {
