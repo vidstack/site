@@ -15,11 +15,11 @@ respond to the request by satisfying or rejecting it.
 <PlayerArchitectureDiagram />
 
 Anything we "ask" the player (more precisely the current provider) to do is simply a
-request as we can't guarantee success or failure, at least from the requestors perspective.
+request as we can't guarantee success or failure, at least from the requestor's perspective.
 Requests are dispatched from child player components via DOM events to the `MediaRequestManager` which
 performs the appropriate actions on the current media provider. The `MediaProviderAdapter` ensures we can
 speak a common language across various providers as the API might differ. After the
-`MediaRequestManager` performs it's tasks, a request is now pending and put into queue. The
+`MediaRequestManager` performs its tasks, a request is now pending and put into queue. The
 media provider will asynchronously notify the `MediaStateManager` that the request was either satisfied
 or rejected. Finally, the state manager will satisfy the request by attaching
 it as a trigger to the media event (e.g., `media-play-request` will be attached to the media `play`
