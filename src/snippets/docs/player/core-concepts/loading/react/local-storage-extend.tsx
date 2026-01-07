@@ -5,4 +5,4 @@ class CustomLocalMediaStorage extends LocalMediaStorage {
 }
 
 // Provide storage to player.
-<MediaPlayer storage={CustomLocalMediaStorage}>
+<MediaPlayer storage={new CustomLocalMediaStorage()}>
