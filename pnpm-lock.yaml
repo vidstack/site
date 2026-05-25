@@ -24,8 +24,8 @@ dependencies:
     specifier: ^0.5.1
     version: 0.5.1
   '@vidstack/react':
-    specifier: ^1.12.11
-    version: 1.12.12(@types/react@18.3.12)(react@18.3.1)
+    specifier: ^1.13.0
+    version: 1.13.0(@types/react@18.3.12)(react@18.3.1)
   astro:
     specifier: ^4.10.0
     version: 4.16.13(@types/node@20.17.6)(typescript@5.6.3)
@@ -57,8 +57,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0
   vidstack:
-    specifier: ^1.12.11
-    version: 1.12.12
+    specifier: ^1.13.0
+    version: 1.13.0
 
 devDependencies:
   '@algolia/client-search':
@@ -2758,15 +2758,15 @@ packages:
       ws: 8.14.2(bufferutil@4.0.8)(utf-8-validate@6.0.3)
     dev: false
 
-  /@vidstack/react@1.12.12(@types/react@18.3.12)(react@18.3.1):
+  /@vidstack/react@1.13.0(@types/react@18.3.12)(react@18.3.1):
     resolution:
       {
-        integrity: sha512-rEwCkZdp/K0FopUU76lgYJqzOZa3AGM2FumQnTPPSCP9jwShYReY9mXgl4/UP5CH3v7MkaVl5ZT67rhfjPxx9Q==,
+        integrity: sha512-gLITjW0prge5stf8DVCTdZusDL/CZHvZKG70DZ+9u2AJWQi2DMJ5CK7LsC6sTxhbB9udDdPRGt6tbIwxzwSPMw==,
       }
     engines: { node: '>=18' }
     peerDependencies:
-      '@types/react': ^18.0.0
-      react: ^18.0.0
+      '@types/react': ^18.0.0 || ^19.0.0
+      react: ^18.0.0 || ^19.0.0
     dependencies:
       '@floating-ui/dom': 1.6.12
       '@types/react': 18.3.12
@@ -9142,10 +9142,10 @@ packages:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  /vidstack@1.12.12:
+  /vidstack@1.13.0:
     resolution:
       {
-        integrity: sha512-7413cfsyk6F0TtjiAA1QK1uyxgiTb6i0YFJSsQlXSJQaQQ/ZeQ/Fa4KDfC6EFCLPHoHPyW0Ejs5a6HFF64JXLQ==,
+        integrity: sha512-6IzResGsoY3UdTBI6dCKxYHzRBlaHSPbfGhvJ148N1e2T4DcMo4cREdcCodqgTjwzMyX7h+RHZX1rskVuHIfrw==,
       }
     engines: { node: '>=18' }
     dependencies:
