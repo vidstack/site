@@ -1,8 +1,9 @@
 import DASH from 'dashjs';
+import {isDASHProvider} from 'vidstack'
 
 player.addEventListener('provider-change', (event) => {
   const provider = event.detail;
-  if (provider?.type === 'dash') {
+  if (isDASHProvider(provider)) {
     // Static import
     provider.library = DASH;
     // Or, dynamic import
