@@ -1,5 +1,13 @@
 # Vidstack Site
 
+> [!IMPORTANT]
+> **Vidstack Player is in security-only maintenance.** It gets priority security fixes until January 2028, and nothing else, so this site only changes to keep those docs accurate. The teams behind Vidstack, Plyr, Media Chrome, and Video.js now work on [Video.js 10](https://videojs.org?utm_source=vidstack).
+>
+> - **Migrate:** [React guide](https://videojs.org/docs/framework/react/guides/migrate-from-vidstack?utm_source=vidstack) · [Web components and other frameworks](https://videojs.org/docs/framework/html/guides/migrate-from-vidstack?utm_source=vidstack)
+> - **With a coding agent:** paste the prompt from the guide's AI Quickstart section: [React](https://videojs.org/docs/framework/react/guides/migrate-from-vidstack?utm_source=vidstack#ai-quickstart) · [Web components and other frameworks](https://videojs.org/docs/framework/html/guides/migrate-from-vidstack?utm_source=vidstack#ai-quickstart)
+> - **Security reports:** [vidstack/player SECURITY.md](https://github.com/vidstack/player/blob/main/SECURITY.md)
+> - **More:** [the pinned maintenance issue](https://github.com/vidstack/player/issues/1868) and [a thank-you note](https://github.com/vidstack/player/discussions/1869)
+
 This is the main Vidstack site and docs hosted at [vidstack.io][vidstack]. The site is built with
 [Astro][astro], see their docs to get familiar with the framework.
 
